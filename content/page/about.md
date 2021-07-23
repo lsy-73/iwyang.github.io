@@ -1,5 +1,6 @@
 ---
 title: 关于
+slug: "about"
 description: 
 date: '2020-04-25'
 aliases:
