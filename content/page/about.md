@@ -3,11 +3,6 @@ title: 关于
 slug: "about"
 description: 
 date: '2020-04-25'
-aliases:
-  - about-us
-  - about-hugo
-  - contact
-license: CC BY-NC-ND
 lastmod: '2020-10-09'
 toc: false
 menu:
