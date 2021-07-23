@@ -55,7 +55,7 @@ params:
         utterances:
             repo: iwyang/comment
             issueTerm: title
-            label:
+            label: utterances
 
         remark42:
             host:
