@@ -54,7 +54,7 @@ params:
 
         utterances:
             repo: iwyang/comment
-            issueTerm: title
+            issueTerm: pathname
             label: utterances
 
         remark42:
