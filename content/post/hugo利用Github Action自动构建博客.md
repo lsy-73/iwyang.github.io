@@ -258,9 +258,44 @@ git push origin develop --force
 ```
 git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog
 ```
+错如果使用` Submodule`管理主题，还要：
+
+```
+git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+```
+
+执行这步会报错：
+
+```
+'themes/hugo-theme-stack' already exists in the index
+```
+
+解决方法：
+
+```
+git rm -r --cached themes/hugo-theme-stack
+```
+
+再下载，依然报错：
+
+```
+'themes/hugo-theme-stack' already exists and is not a valid git repo
+```
+
+直接删除主题文件夹，即可下载主题。
+
+---
+
+同步更新源文件：
 
 ```
 git pull
+```
+
+同步主题文件：
+
+```
+git submodule update --init --force
 ```
 
 ## 总结
