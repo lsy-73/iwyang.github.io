@@ -56,6 +56,7 @@ params:
             repo: iwyang/comment
             issueTerm: pathname
             label: utterances
+            theme: dark-orange
 
         remark42:
             host:
