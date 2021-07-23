@@ -53,8 +53,8 @@ params:
         provider: utterances
 
         utterances:
-            repo: iwyang/comment
-            issueTerm: pathname
+            repo: iwyang/comments
+            issueTerm: title
             label: utterances
             theme: dark-orange
 
