@@ -20,7 +20,7 @@ jobs:
           extended: true
 
       - name: Build Hugo
-        run: hugo --minify && npm install atomic-algolia --save && npm run algolia
+        run: hugo --minify
 
       - name: Deploy Hugo to gh-pages
         uses: peaceiris/actions-gh-pages@v3
