@@ -258,7 +258,7 @@ git push origin develop --force
 ```
 git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog
 ```
-错如果使用` Submodule`管理主题，还要：
+如果使用` Submodule`管理主题，还要：
 
 ```
 git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
