@@ -37,7 +37,7 @@ params:
         emoji: 🍥
         subtitle: 博观而约取，厚积而薄发
         avatar:
-            enabled: true
+            enabled: false
             local: true
             src: img/avatar.jpg
 
