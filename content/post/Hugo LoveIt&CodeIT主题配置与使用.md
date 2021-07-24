@@ -1,6 +1,6 @@
 ---
 title: "Hugo LoveIt&CodeIT主题配置与使用"
-slug: "hugo-theme-LoveIt"
+slug: "hugo-theme-loveit"
 date: 2020-06-03T22:44:25+08:00
 lastmod: 2021-07-18T22:44:25+08:00
 draft: false

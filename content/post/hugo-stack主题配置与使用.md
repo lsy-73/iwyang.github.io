@@ -202,6 +202,30 @@ tags: [""]
 
 ## 魔改(未测试)
 
+### 给文章加上思源宋体
+
+在站点根目录新建文件 `layouts/partials/head/custom.html`， 内容如下：
+
+```html
+<style>
+    :root {
+        --article-font-family: "Noto Serif SC", var(--base-font-family);
+    }
+</style>
+
+<script>
+		(function () {
+		    const customFont = document.createElement('link');
+		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
+		
+		    customFont.type = "text/css";
+		    customFont.rel = "stylesheet";
+		
+		    document.head.appendChild(customFont);
+		}());
+</script>
+```
+
 ### 回到顶部按钮
 
 编辑 `themes\stack\layouts\partials\footer\components\custom-font.html`
