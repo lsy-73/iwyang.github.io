@@ -270,7 +270,7 @@ git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-them
 'themes/hugo-theme-stack' already exists in the index
 ```
 
-#### 解决方法1：
+#### 解决方法1
 
 ```
 git rm -r --cached themes/hugo-theme-stack
@@ -284,19 +284,19 @@ git rm -r --cached themes/hugo-theme-stack
 
 直接删除主题文件夹，即可下载主题。
 
-#### 解决方法2：
+#### 解决方法2
 
 也可以在任意一空白文件夹下利用`git submodule`下载好主题文件再复制过来。（未测试，不知道`git pull`是否正常。）
 
 ---
 
-同步更新源文件：
+#### 同步更新源文件
 
 ```
 git pull
 ```
 
-同步主题文件：
+#### 同步主题文件
 
 ```
 git submodule update --init --force
