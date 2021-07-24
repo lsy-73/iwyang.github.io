@@ -70,6 +70,7 @@ params:
     article:
         math: false
         toc: true
+        readingTime: false 
         license:
             enabled: false
             default: Licensed under CC BY-NC-SA 4.0
