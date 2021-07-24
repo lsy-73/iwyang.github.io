@@ -183,5 +183,26 @@ markup:
         noClasses: false
 ```
 
-+ 使用文档：[Hugo 主题 Stack](https://docs.stack.jimmycai.com/zh/)
+## 魔改(未测试)
+
+### 回到顶部按钮
+
+编辑 `themes\stack\layouts\partials\footer\components\custom-font.html`
+
+```
+    //back to top
+    $.goup({
+        trigger: 300,
+        bottomOffset: 20,
+        locationOffset: 20,
+        title:  'Back to TOP',
+        titleAsText: false
+    });
+
+```
+
+## 参考链接
+
++ [Hugo 主题 Stack文档](https://docs.stack.jimmycai.com/zh/)
++ [hugo主题stack](https://yinhe.co/archives/20210401_hugo_theme_stack.html)
 
