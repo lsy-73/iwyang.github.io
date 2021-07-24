@@ -184,6 +184,22 @@ markup:
         noClasses: false
 ```
 
+## `archetypes`默认模板
+
+```yaml
+title: "{{ replace .TranslationBaseName "-" " " | title }}"
+slug: ""
+description: ""
+date: {{ .Date }}
+lastmod: {{ .Date }}
+draft: false
+toc: true
+weight: false
+image: ""
+categories: [""]
+tags: [""]
+```
+
 ## 魔改(未测试)
 
 ### 回到顶部按钮
