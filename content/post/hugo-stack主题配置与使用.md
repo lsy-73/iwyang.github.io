@@ -5,7 +5,7 @@ description: ""
 date: 2021-07-24T09:15:26+08:00
 lastmod: 2021-07-24T09:15:26+08:00
 draft: false
-toc: false
+toc: true
 weight: false
 image: ""
 categories: ["建站笔记"]
@@ -204,5 +204,5 @@ markup:
 ## 参考链接
 
 + [Hugo 主题 Stack文档](https://docs.stack.jimmycai.com/zh/)
-+ [hugo主题stack](https://yinhe.co/archives/20210401_hugo_theme_stack.html)
++ [hugo主题stack - 银河小筑](https://yinhe.co/archives/20210401_hugo_theme_stack.html)
 
