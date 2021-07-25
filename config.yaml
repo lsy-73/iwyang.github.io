@@ -83,7 +83,7 @@ params:
             requiredMeta:
                 - nick
                 - mail
-            placeholder:
+            placeholder: 欢迎评论（昵称、邮箱必填，网址选填）
             locale:
                 admin: 博主
 
