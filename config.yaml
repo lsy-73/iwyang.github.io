@@ -74,7 +74,7 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/client.html
         waline:
-            serverURL: https://waline-six-chi.vercel.app/
+            serverURL: https://m.bore.vip/
             lang: zh-CN
             visitor: false
             avatar: mp
