@@ -77,7 +77,7 @@ params:
 
     comments:
         enabled: true
-        provider: utterances
+        provider: waline
 
         utterances:
             repo: iwyang/comments
@@ -100,19 +100,18 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/client.html
         waline:
-            serverURL:
-            lang:
-            visitor:
-            avatar:
+            serverURL: https://m.bore.vip/
+            lang: zh-CN
+            visitor: false
+            avatar: mp
             emoji:
                 - https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo
             requiredMeta:
-                - name
-                - email
-                - url
+                - nick
+                - mail
             placeholder:
             locale:
-                admin: Admin
+                admin: 博主
 
     widgets:
         enabled:
