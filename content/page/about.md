@@ -16,18 +16,5 @@ menu:
 
 ## 关于我
 
-......
 
-## 友情链接
-
-+ [ConstOwn](https://blog.juanertu.com/)
-+ [小丁的个人博客](https://tding.top/)
-+ [Xu’s Blog](https://hasaik.com/)
-+ [知行志](https://baozi.fun/)
-+ [Takagi](https://lixingyong.com/)
-+ [千与千寻](https://www.chihiro.org.cn/)
-+ [Bill Yang's Blog](https://blog.bill.moe/)
-+ [Sanarous's Blog](https://bestzuo.cn/)
-+ [ACK小桔子的小屋](https://jackxjz.top/)
-+ [若只如初见](https://joyli.net.cn/)
 
