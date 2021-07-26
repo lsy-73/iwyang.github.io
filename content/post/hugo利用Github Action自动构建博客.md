@@ -2,7 +2,7 @@
 title: "hugo利用Github Action自动构建博客"
 slug: "hugo-github-action"
 date: 2020-07-06T17:19:19+08:00
-lastmod: 2021-07-17T17:19:19+08:00
+lastmod: 2021-07-26T17:19:19+08:00
 draft: false
 toc: true
 weight: false
@@ -299,7 +299,7 @@ git pull
 #### 同步主题文件
 
 ```
-git submodule update --init --force
+git submodule update --remote
 ```
 
 ## 总结
