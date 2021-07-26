@@ -256,37 +256,9 @@ git push origin develop --force
 ### 本地操作
 
 ```
-git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog
+git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
 ```
-如果使用` Submodule`管理主题，还要：
-
-```
-git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
-```
-
-执行这步会报错：
-
-```
-'themes/hugo-theme-stack' already exists in the index
-```
-
-#### 解决方法1
-
-```
-git rm -r --cached themes/hugo-theme-stack
-```
-
-再下载，依然报错：
-
-```
-'themes/hugo-theme-stack' already exists and is not a valid git repo
-```
-
-直接删除主题文件夹，即可下载主题。
-
-#### 解决方法2
-
-也可以在任意一空白文件夹下利用`git submodule`下载好主题文件再复制过来。（未测试，不知道`git pull`是否正常。）
+因为使用`Submodule`管理主题，所以最后要加上 `--recursive`，因为使用 git clone 命令默认不会拉取项目中的子模块，你会发现主题文件是空的。（另外一种方法：`git submodule init && git submodule update`）
 
 ---
 
@@ -301,6 +273,8 @@ git pull
 ```
 git submodule update --remote
 ```
+
+运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。
 
 ## 总结
 
