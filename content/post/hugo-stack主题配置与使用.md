@@ -27,6 +27,15 @@ git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-them
 git submodule update --remote
 ```
 
+## 查看主题版本号
+
+```
+git show 查看当前版本
+----------------------------------------------------------------
+git tag　列出所有版本号
+git checkout　+某版本号　(你当前文件夹下的源码会变成这个版本号的源码)
+```
+
 ## `config.yaml`配置文件
 
 ```yaml
@@ -246,6 +255,34 @@ tags: [""]
     });
 
 ```
+
+## 附：使用Git Submodule管理Hugo主题
+
++ 如果克隆库的时候要初始化子模块，请加上 `--recursive` 参数，如：
+
+```
+git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+```
+
++ 如果已经克隆了主库但没初始化子模块，则用：
+
+```
+git submodule update --init --recursive
+```
+
++ 如果已经克隆并初始化子模块，而需要从子模块的源更新这个子模块，则：
+
+```
+git submodule update --recursive --remote
+```
+
+更新之后主库的 git 差异中会显示新的 SHA 码，把这个差异选中提交即可。
+
+---
+
++ 其他命令：在主仓库更新所有子模块：`git submodule foreach git pull origin master`
+
+---
 
 ## 参考链接
 
