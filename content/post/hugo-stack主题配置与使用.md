@@ -303,7 +303,8 @@ Date:   Mon Jul 26 05:50:52 2021 +1200
 
     Co-authored-by: Jimmy Cai <github@jimmycai.com>
 
-diff --git a/assets/scss/partials/layout/article.scss b/assets/scss/partials/layout/article.scss
+--- a/assets/scss/partials/layout/article.scss 
++++ b/assets/scss/partials/layout/article.scss
 index ebf94a7..5331a61 100644
 --- a/assets/scss/partials/layout/article.scss
 +++ b/assets/scss/partials/layout/article.scss
