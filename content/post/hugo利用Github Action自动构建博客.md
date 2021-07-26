@@ -178,8 +178,6 @@ git push --force origin develop
 
 echo -e "\033[0;32mDeploying updates to gitee...\033[0m"
 
-# update theme
-git submodule update --remote
 # backup
 git config --global core.autocrlf false
 git add .
