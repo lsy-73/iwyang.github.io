@@ -284,6 +284,31 @@ git submodule update --recursive --remote
 
 ---
 
+## Hugo Stack主题更新记录
+
+2021.7.26 地址：[44e3d20](https://github.com/CaiJimmy/hugo-theme-stack/commit/44e3d20bad845a515657308d38692e7f431b4d05)
+
+```diff
+commit 44e3d20bad845a515657308d38692e7f431b4d05 (HEAD, origin/master, origin/HEAD)
+Author: Simon Guest <simon.guest@tesujimath.org>
+Date:   Mon Jul 26 05:50:52 2021 +1200
+
+    feat(article): use `markdownify` for licence in article (#273)
+
+    * Use markdownify for licence in article
+
+    So we can use links, e.g. to credits for main photo.
+
+    * refactor: move .article-copyright style to partials/layout/article
+
+    Co-authored-by: Jimmy Cai <github@jimmycai.com>
+
+diff --git a/assets/scss/partials/layout/article.scss b/assets/scss/partials/layout/article.scss
+index ebf94a7..5331a61 100644
+--- a/assets/scss/partials/layout/article.scss
++++ b/assets/scss/partials/layout/article.scss
+```
+
 ## 参考链接
 
 + [Hugo 主题 Stack文档](https://docs.stack.jimmycai.com/zh/)
