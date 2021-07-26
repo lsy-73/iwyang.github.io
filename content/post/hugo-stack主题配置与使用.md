@@ -430,6 +430,12 @@ git submodule update --recursive --remote
 
 ## Hugo Stack主题更新记录
 
++ 2021.7.27 地址：[d86b857](https://github.com/CaiJimmy/hugo-theme-stack/commit/d86b857635de302d7cceb64112e68a573e17b4de)
+
+```
+chore: update KaTeX to 0.13.13 (#275)
+```
+
 + 2021.7.26 地址：[44e3d20](https://github.com/CaiJimmy/hugo-theme-stack/commit/44e3d20bad845a515657308d38692e7f431b4d05)
 
 ```diff
