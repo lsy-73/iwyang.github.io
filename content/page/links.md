@@ -1,18 +1,17 @@
 ---
 title: "友情链接"
 slug: "links"
-comment: true
 layout: links
 menu: 
     main:
         name: 友链
         pre: link
         weight: -60
-license: false
 edit: false
+comment: true
 ---
 
-欢迎交换友情链接，本站信息：
+### 欢迎交换友情链接，本站信息：
 
 > 网站名称：Bore's Notes
 >
