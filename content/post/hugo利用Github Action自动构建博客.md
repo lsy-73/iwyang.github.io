@@ -171,6 +171,21 @@ git commit -m "备份源码"
 git push --force origin develop
 ```
 
+ ### 最终部署脚本如下：
+
+```bash
+#!/bin/bash
+
+echo -e "\033[0;32mDeploying updates to gitee...\033[0m"
+
+# backup
+git submodule update --remote
+git config --global core.autocrlf false
+git add .
+git commit -m "site backup"
+git push origin develop --force
+```
+
 ## 服务器操作
 
 ### 克隆仓库
@@ -239,19 +254,9 @@ crontab -e
 */5 * * * * git -C /var/www/hexo pull
 ```
 
-这样只要提交源码给github，`github action`就会帮你部署博客到`github page`，服务器通过`git pull`定时拉取更新。换台电脑不用再搭建环境，直接在gtihub新建或者修改文章，剩下的工作就交给`github action`。注意回本地电脑先`git pull`拉取更新，再提交源码，最终部署脚本如下：
+这样只要提交源码给github，`github action`就会帮你部署博客到`github page`，服务器通过`git pull`定时拉取更新。换台电脑不用再搭建环境，直接在gtihub新建或者修改文章，剩下的工作就交给`github action`。注意回本地电脑先`git pull`拉取更新，再提交源码。
 
-```
-#!/bin/bash
-echo -e "\033[0;32mDeploying updates to gitee...\033[0m"
-git pull
-git config --global core.autocrlf false
-git add .
-git commit -m "site backup"
-git push origin develop --force
-```
-
-**注意：好像先要从源码仓库clone一份源码到本地，才能利用`git pull`拉取github已有的更新。只有先拉取github已有的更新，再在本地提交源码，github上的更新才不会被删除**
+**注意：好像先要从源码仓库clone一份源码到本地，才能利用`git pull`拉取github已有的更新。只有先拉取github已有的更新，再在本地提交源码，github上的更新才不会被删除**。
 
 ### 本地操作
 
