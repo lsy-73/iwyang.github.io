@@ -12,7 +12,7 @@ license: false
 edit: false
 ---
 
-欢迎交换友情链接，友情链接格式：
+欢迎交换友情链接，本站信息：
 
 > 网站名称：Bore's Notes
 >
