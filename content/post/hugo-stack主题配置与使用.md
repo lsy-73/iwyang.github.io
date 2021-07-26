@@ -218,51 +218,51 @@ tags: [""]
 
 1. 网站根目录新建文件`layouts\page\links.html`：
 
-```html
-{{ define "body-class" }}article-page keep-sidebar{{ end }}
-{{ define "main" }}
-    {{ partial "article/article.html" . }}
-    
-    <div class="article-list--compact links">
-        {{ $siteResources := resources }}
-        {{ range $i, $link :=  $.Site.Data.links }}
-            <article>
-                <a href="{{ $link.website }}" target="_blank" rel="noopener">
-                    <div class="article-details">
-                        <h2 class="article-title">
-                            {{- $link.title -}}
-                        </h2>
-                        <footer class="article-time">
-                            {{ with $link.description }}
-                                {{ . }}
-                            {{ else }}
-                                {{ $link.website }}
-                            {{ end }}
-                        </footer>
-                    </div>
-            
-                    {{ if $link.image }}
-                        {{ $image := $siteResources.Get (delimit (slice "link-img/" $link.image) "") | resources.Fingerprint "md5" }}
-                        {{ $imageResized := $image.Resize "120x120" }}
-                        <div class="article-image">
-                            <img src="{{ $imageResized.RelPermalink }}" width="{{ $imageResized.Width }}" height="{{ $imageResized.Height }}"
-                                loading="lazy" data-key="links-{{ $link.website }}" data-hash="{{ $image.Data.Integrity }}">
-                        </div>
-                    {{ end }}
-                </a>
-            </article>
-        {{ end }}
-    </div>
-
-    {{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
-        {{ partial "comments/include" . }}
-    {{ end }}
-
-    {{ partialCached "footer/footer" . }}
-
-    {{ partialCached "article/components/photoswipe" . }}
-{{ end }}
-```
+   ```html
+   {{ define "body-class" }}article-page keep-sidebar{{ end }}
+   {{ define "main" }}
+       {{ partial "article/article.html" . }}
+       
+       <div class="article-list--compact links">
+           {{ $siteResources := resources }}
+           {{ range $i, $link :=  $.Site.Data.links }}
+               <article>
+                   <a href="{{ $link.website }}" target="_blank" rel="noopener">
+                       <div class="article-details">
+                           <h2 class="article-title">
+                               {{- $link.title -}}
+                           </h2>
+                           <footer class="article-time">
+                               {{ with $link.description }}
+                                   {{ . }}
+                               {{ else }}
+                                   {{ $link.website }}
+                               {{ end }}
+                           </footer>
+                       </div>
+               
+                       {{ if $link.image }}
+                           {{ $image := $siteResources.Get (delimit (slice "link-img/" $link.image) "") | resources.Fingerprint "md5" }}
+                           {{ $imageResized := $image.Resize "120x120" }}
+                           <div class="article-image">
+                               <img src="{{ $imageResized.RelPermalink }}" width="{{ $imageResized.Width }}" height="{{ $imageResized.Height }}"
+                                   loading="lazy" data-key="links-{{ $link.website }}" data-hash="{{ $image.Data.Integrity }}">
+                           </div>
+                       {{ end }}
+                   </a>
+               </article>
+           {{ end }}
+       </div>
+   
+       {{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
+           {{ partial "comments/include" . }}
+       {{ end }}
+   
+       {{ partialCached "footer/footer" . }}
+   
+       {{ partialCached "article/components/photoswipe" . }}
+   {{ end }}
+   ```
 
 2. 网站根目录新建文件`\layouts\shortcodes\link.html`：
 
@@ -290,7 +290,7 @@ tags: [""]
    {{ end }}
    ```
 
-   3. `网站图像`放在网站根目录`\assets\link-img\文件夹下`。
+   3. `网站图像`放在网站根目录`\assets\link-img\`文件夹下。
    4. 网站根目录新建文件`\data\links.json`：
 
    ```json
