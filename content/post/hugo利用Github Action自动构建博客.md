@@ -276,9 +276,31 @@ git submodule update --remote
 
 运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。
 
-## 总结
+## 附：使用Git Submodule管理Hugo主题
 
-整个部署过程可能比本地部署还要花时间，不过这种方法方便异地更新部署。对我来说目前还是本地部署吧。
++ 如果克隆库的时候要初始化子模块，请加上 `--recursive` 参数，如：
+
+```
+git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+```
+
++ 如果已经克隆了主库但没初始化子模块，则用：
+
+```
+git submodule update --init --recursive
+```
+
++ 如果已经克隆并初始化子模块，而需要从子模块的源更新这个子模块，则：
+
+```
+git submodule update --recursive --remote
+```
+
+更新之后主库的 git 差异中会显示新的 SHA 码，把这个差异选中提交即可。
+
+---
+
++ 其他命令：在主仓库更新所有子模块：`git submodule foreach git pull origin master`
 
 ---
 
@@ -439,4 +461,6 @@ jobs:
 + [3.使用 GitHub Action 自动部署博客到远程服务器](https://blog.lunawen.com/posts/20200628-luna-tech-github-action-blog-autodeployment/)
 + [4.使用 GitHub Actions 实现博客自动化部署](https://frostming.com/2020/04-26/github-actions-deploy)
 + [5.解决git@github.com: Permission denied (publickey). Could not read from remote repository](https://blog.csdn.net/ywl470812087/article/details/104459288)
++ [6.GIT 子模块](https://yihui.org/cn/2017/03/git-submodule/)
++ [7.子模块](https://zj-git-guide.readthedocs.io/zh_CN/stable/basic/%E5%AD%90%E6%A8%A1%E5%9D%97.html)
 
