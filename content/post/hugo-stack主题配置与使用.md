@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-07-26T09:15:26+08:00
+lastmod: 2021-07-27T09:15:26+08:00
 draft: false
 toc: true
 weight: false
