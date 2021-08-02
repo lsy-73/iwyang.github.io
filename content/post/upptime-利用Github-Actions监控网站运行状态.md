@@ -46,15 +46,15 @@ sites:
     url: https://bore.vip
   - name: ConstOwn
     url: https://blog.juanertu.com
-  - name: 小丁的个人博客
+  - name: 01小丁的个人博客
     url: https://tding.top
   - name: Xu's Blog
     url: https://hasaik.com
-  - name: 知行志
+  - name: 02知行志
     url: https://baozi.fun
   - name: Takagi
     url: https://lixingyong.com
-  - name: 千与千寻
+  - name: 03千与千寻
     url: https://www.chihiro.org.cn
   - name: Bill Yang's Blog
     url: https://blog.bill.moe
@@ -62,9 +62,9 @@ sites:
     url: https://bestzuo.cn
   - name: JACK小桔子的小屋
     url: https://jackxjz.top
-  - name: 若只如初见
+  - name: 04若只如初见
     url: https://joyli.net.cn
-  - name: 大大的小蜗牛
+  - name: 05大大的小蜗牛
     url: https://eallion.com
 
 status-website:
