@@ -39,7 +39,7 @@ tags: ["github actions"]
 ```yaml
 # Change these first
 owner: iwyang # Your GitHub organization or username, where this repository lives(更改用户名)
-repo: check # The name of this repository
+repo: check # The name of this repository（更改仓库名）
 
 sites:
   - name: Bore's Notes
