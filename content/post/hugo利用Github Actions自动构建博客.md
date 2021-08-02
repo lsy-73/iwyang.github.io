@@ -1,13 +1,13 @@
 ---
-title: "hugo利用Github Action自动构建博客"
-slug: "hugo-github-action"
+title: "hugo利用Github Actions自动构建博客"
+slug: "hugo-github-actions"
 date: 2020-07-06T17:19:19+08:00
 lastmod: 2021-07-26T17:19:19+08:00
 draft: false
 toc: true
 weight: false
 categories: ["建站笔记"]
-tags: ["hugo"]
+tags: ["hugo","github actions"]
 ---
 
 ## 初始化 GitHub 仓库

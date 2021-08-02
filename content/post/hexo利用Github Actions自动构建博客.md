@@ -1,13 +1,13 @@
 ---
-title: "hexo利用Github Action自动构建博客"
-slug: "hexo-github-action"
+title: "hexo利用Github Actions自动构建博客"
+slug: "hexo-github-actions"
 date: 2020-07-07T19:11:25+08:00
 lastmod: 2020-07-07T19:11:25+08:00
 draft: false
 toc: true
 weight: false
 categories: ["建站笔记"]
-tags: ["hexo"]
+tags: ["hexo","github actions"]
 ---
 
 ## 准备两个仓库
