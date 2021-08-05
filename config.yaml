@@ -44,7 +44,7 @@ params:
     article:
         math: false
         toc: true
-        readingTime: false 
+        readingTime: true 
         license:
             enabled: false
             default: Licensed under CC BY-NC-SA 4.0
@@ -86,6 +86,12 @@ params:
             placeholder: 欢迎评论（昵称、邮箱必填，网址选填）
             locale:
                 admin: 博主
+   
+        twikoo:
+            envId: https://twikoo-lake.vercel.app/
+            region:
+            path:
+            lang:
 
     widgets:
         enabled:
