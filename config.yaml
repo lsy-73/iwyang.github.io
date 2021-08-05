@@ -88,7 +88,7 @@ params:
                 admin: 博主
    
         twikoo:
-            envId: https://twikoo-lake.vercel.app/
+            envId: https://twikoo-lake.vercel.app
             region:
             path:
             lang:
