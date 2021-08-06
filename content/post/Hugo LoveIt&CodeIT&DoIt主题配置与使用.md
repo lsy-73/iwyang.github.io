@@ -1,8 +1,8 @@
 ---
-title: "Hugo LoveIt&CodeIT主题配置与使用"
+title: "Hugo LoveIt&CodeIT&DoIt主题配置与使用"
 slug: "hugo-theme-loveit"
 date: 2020-06-03T22:44:25+08:00
-lastmod: 2021-07-18T22:44:25+08:00
+lastmod: 2021-08-06T22:44:25+08:00
 draft: false
 toc: true
 weight: false
@@ -1089,4 +1089,6 @@ seo:
 
 + [1.Hugo 篇四：添加友链卡片 shortcodes](https://blog.233so.com/2020/04/friend-link-shortcodes-for-hugo-loveit/)
 + [2.Hugo 添加友情链接页面](https://reb.mallotec.com/post/9e9c31ab/)
++ [Doit主题文档 - 基本概念](https://hugodoit.pages.dev/zh-cn/theme-documentation-basics/)
++ [Codeit主题文档 - 基本概念](https://codeit.suntprogramator.dev/zh-cn/theme-documentation-basics/)
 
