@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-07-30T09:15:26+08:00
+lastmod: 2021-08-08T09:15:26+08:00
 draft: false
 toc: true
 weight: false
@@ -430,6 +430,7 @@ git submodule update --recursive --remote
 
 ## Hugo Stack主题更新记录
 
++ 2021.8.8 地址：[61c021d](https://github.com/CaiJimmy/hugo-theme-stack/commit/61c021dae2e60668103d4d0ec93e82135810a3df)
 + 2021.7.30 地址：[910d93b](https://github.com/CaiJimmy/hugo-theme-stack/commit/910d93b4ceb8a74e223fb4f34ab2021f67246eaf)
 + 2021.7.27 地址：[d86b857](https://github.com/CaiJimmy/hugo-theme-stack/commit/d86b857635de302d7cceb64112e68a573e17b4de)、[4bba258](https://github.com/CaiJimmy/hugo-theme-stack/commit/8d0c65c374bba25861930125b58b2675cdade32d)、[99c4c89](https://github.com/CaiJimmy/hugo-theme-stack/commit/99c4c89f0afcb22b62523e6c18d317d695aabde0)
 + 2021.7.26 地址：[44e3d20](https://github.com/CaiJimmy/hugo-theme-stack/commit/44e3d20bad845a515657308d38692e7f431b4d05)
