@@ -76,7 +76,7 @@ deploy:
 
 #### 多线部署
 
-```
+```yaml
 deploy:
   type: git
   repo:
