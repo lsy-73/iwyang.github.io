@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-08-08T09:15:26+08:00
+lastmod: 2021-08-09T09:15:26+08:00
 draft: false
 toc: true
 weight: false
@@ -357,6 +357,24 @@ tags: [""]
        }
    ]
    ```
+
+## 更改分类、标签显示中文
+
+1. `content`目录下新建`categories\_index.md`:
+
+```yaml
+---
+title: "分类"
+---
+```
+
+2. `content`目录下新建`tags\_index.md`:
+
+```yaml
+---
+title: "标签"
+---
+```
 
 ## 魔改(未测试)
 
