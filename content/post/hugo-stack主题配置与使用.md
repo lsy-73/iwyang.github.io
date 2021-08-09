@@ -52,7 +52,7 @@ title: Bore's Notes
 googleAnalytics:
 
 # Theme i18n support
-# Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl
+# Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it
 DefaultContentLanguage: zh-cn
 
 permalinks:
@@ -124,16 +124,22 @@ params:
             requiredMeta:
                 - nick
                 - mail
-            placeholder:
+            placeholder: 欢迎评论（昵称、邮箱必填，网址选填）
             locale:
                 admin: 博主
+   
+        twikoo:
+            envId: https://twikoo-lake.vercel.app
+            region:
+            path:
+            lang:
 
     widgets:
         enabled:
             - search
-            - archives
             - tag-cloud
-
+            - archives
+           
         archives:
             limit: 10000
 
@@ -177,6 +183,9 @@ menu:
           url: /
           weight: -100
           pre: home
+          params:
+            ### For demonstration purpose, the home link will be open in a new tab
+            newTab: false
 
 related:
     includeNewer: true

@@ -96,9 +96,9 @@ params:
     widgets:
         enabled:
             - search
-            - archives
             - tag-cloud
-
+            - archives
+           
         archives:
             limit: 10000
 
