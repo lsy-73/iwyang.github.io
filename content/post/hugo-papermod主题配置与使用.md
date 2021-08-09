@@ -483,7 +483,7 @@ editPost:
 {{- end -}}
 ```
 
-## 其他操作
+## 更改分类、标签中文
 
 1. `content`目录下新建`categories\_index.md`:
 
