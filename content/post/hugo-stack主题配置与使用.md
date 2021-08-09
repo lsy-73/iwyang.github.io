@@ -535,4 +535,5 @@ git submodule update --recursive --remote
 + [Hugo 主题 Stack文档](https://docs.stack.jimmycai.com/zh/)
 + [hugo主题stack - 银河小筑](https://yinhe.co/archives/20210401_hugo_theme_stack.html)
 + [树洞](https://blog.jimmycai.com/links/)
++ [Adding the widget tag-cloud for "categories", on the right content region on Homepage](https://github.com/CaiJimmy/hugo-theme-stack/issues/169)
 
