@@ -1,0 +1,9 @@
+list:
+    page:
+        one: "{{ .Count }} 页面"
+        other: "{{ .Count }} 页面"
+
+widget:
+    categoriesCloud:
+        title: 
+            other: 分类

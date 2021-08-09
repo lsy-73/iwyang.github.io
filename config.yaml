@@ -96,6 +96,7 @@ params:
     widgets:
         enabled:
             - search
+            - categories
             - tag-cloud
             - archives
            
@@ -103,6 +104,9 @@ params:
             limit: 10000
 
         tagCloud:
+            limit: 10000
+            
+        categoriesCloud:
             limit: 10000
 
     opengraph:
