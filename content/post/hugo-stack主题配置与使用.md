@@ -223,6 +223,53 @@ categories: [""]
 tags: [""]
 ```
 
+## 显示右侧工具栏分类目录
+
+参考 https://github.com/CaiJimmy/hugo-theme-stack/issues/169
+
+1. Create `categories.html` in layouts/partials/widget
+
+```html
+<section class="widget tagCloud">
+  <div class="widget-icon">
+      {{ partial "helper/icon" "categories" }}
+  </div>
+  <h2 class="widget-title section-title">{{ T "widget.categoriesCloud.title" }}</h2>
+
+  <div class="tagCloud-tags">
+      {{ range first .Site.Params.widgets.categoriesCloud.limit .Site.Taxonomies.categories.ByCount }}
+          <a href="{{ .Page.RelPermalink }}" class="font_size_{{ .Count }}">
+              {{ .Page.Title }}
+          </a>
+      {{ end }}
+  </div>
+</section>
+```
+
+2. 修改 `config.yaml`
+
+```yaml
+widgets:
+        enabled:
+            - categories
+        
+        categoriesCloud:
+            limit: 20
+```
+
+3. 网站根目录新建`\i18n\zh-CN.yaml`
+
+```yaml
+widget:
+    categoriesCloud:
+        title: 
+            other: 分类
+```
+
+5. Download categories.svg paste to `assets/icons`, from [here](https://github.com/rmdhnreza/rmdhnreza.my.id/tree/main/assets/icons)
+
+> **注意**：可以按需删除图标。
+
 ## 添加友情链接 shortcodes
 
 1. 网站根目录新建文件`layouts\page\links.html`：
@@ -367,7 +414,7 @@ tags: [""]
    ]
    ```
 
-## 更改分类、标签显示中文
+## 更改分类、标签、页面显示中文
 
 1. `content`目录下新建`categories\_index.md`:
 
@@ -385,9 +432,30 @@ title: "标签"
 ---
 ```
 
-## 魔改(未测试)
+3. 根目录`\i18n\zh-CN.yaml`输入：
 
-### 给文章加上思源宋体
+```yaml
+list:
+    page:
+        one: "{{ .Count }} 页面"
+        other: "{{ .Count }} 页面"
+```
+
+最终根目录`\i18n\zh-CN.yaml`
+
+```yaml
+list:
+    page:
+        one: "{{ .Count }} 页面"
+        other: "{{ .Count }} 页面"
+
+widget:
+    categoriesCloud:
+        title: 
+            other: 分类
+```
+
+## 给文章加上思源宋体
 
 在站点根目录新建文件 `layouts/partials/head/custom.html`， 内容如下：
 
@@ -411,7 +479,7 @@ title: "标签"
 </script>
 ```
 
-### 回到顶部按钮
+## 回到顶部按钮
 
 编辑 `themes\stack\layouts\partials\footer\components\custom-font.html`
 
