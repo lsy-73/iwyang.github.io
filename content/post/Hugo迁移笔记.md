@@ -33,7 +33,7 @@ tags: ["hugo"]
 
 服务器上输入：
 
-```
+```bash
 su git
 cd ~/.ssh
 rm -rf authorized_keys

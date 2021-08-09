@@ -17,7 +17,7 @@ tags: ["hugo"]
 本地需要安装 [Git](https://git-scm.com/) ，安装过程略。安装完git后还要配置环境变量：
 右键我的电脑 --> 属性，然后点击高级系统设置 --> 环境变量 --> 选择用户变量或系统变量中的Path,点击编辑；找到Git安装目录,添加以下地址:
 
-```
+```bash
 D:\Program Files\Git\bin
 D:\Program Files\Git\mingw64\libexec\git-core
 D:\Program Files\Git\mingw64\bin
@@ -27,12 +27,12 @@ D:\Program Files\Git\mingw64\bin
 
 Windows 上安装 [Git for Windows](https://git-for-windows.github.io/) 之后在开始菜单里打开 Git Bash 输入：
 
-```
+```bash
 git config --global user.name "你的用户名"
 git config --global user.email "你的电子邮箱"
 ```
 
-```
+```bash
 cd ~
 mkdir .ssh
 cd .ssh
@@ -57,13 +57,13 @@ windows10下安装hugo，可以参照Hugo官方手册的方法，这里讲一个
 + 添加用户环境变量，依此：点击环境变量，找到用户变量中的path，点击编辑，然后点击新建，在使用浏览按钮选中文件夹，即可使用hugo。（选中到hugo.exe所在的文件夹即可，不需要选中hugo.exe，貌似添加完系统变量，要重启电脑才能在Git Bash里运行hugo）
 + 接下来，为了万无一失，还是要检查一下hugo是否安装完成。以管理员方式打开cmd命令窗口，然后输入以下指令：
 
-```
+```bash
 hugo version
 ```
 
 如果得到如下响应，（即显示版本信息），说明安装成功，接下来就可以玩转hugo了。
 
-```
+```bash
 Hugo Static Site Generator v0.70.0/extended windows/amd64 BuildDate: unknown
 ```
 
@@ -73,19 +73,19 @@ Hugo Static Site Generator v0.70.0/extended windows/amd64 BuildDate: unknown
 
 进入你想存放 Hugo 网站文件夹的目录，执行以下命令：
 
-```
+```bash
 hugo new site blog  
 ```
 
 #### 添加主题
 
-```
+```bash
 git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
 附更新主题命令：
 
-```
+```bash
 cd ./themes/LoveIt/
 git pull
 ```
@@ -96,7 +96,7 @@ git pull
 
 #### 配置config.toml
 
-```
+```yaml
 baseURL = "https://bore.vip"
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"
@@ -697,7 +697,7 @@ enableEmoji = true
 为了更好的使用附加功能，我们提前修改一下模板。这样，每次使用新建一篇文档时候就省去很多麻烦事。
 使用Typora文档工具打开themes/tranquilpeak/archetypes中的post.md直接替换为以下的模板：
 
-```
+```yaml
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
@@ -710,19 +710,19 @@ tags: [""]
 
 　接下来在根目录下使用以下命令生成一篇文档吧：
 
-```
+```bash
 hugo new post/XXXX.md
 ```
 
 #### 新建“关于”页面
 
-```
+```bash
 hugo new about.md
 ```
 
 `config.toml`相应位置添加：
 
-```
+```yaml
 [[menu.main]]
   name = "关于"
   weight = 50
@@ -734,7 +734,7 @@ hugo new about.md
 
 建议在配置文件中设置好主题，或者使用 –t指令指定主题，在站点的根目录下使用命令进行本地启动，本地启动的命令如下：
 
-```
+```bash
 hugo server -D
 ```
 
@@ -755,7 +755,7 @@ hugo server -D
 
 ### 提交本地仓库
 
-```
+```bash
 rm -rf public/*
 hugo
 cd public
@@ -775,7 +775,7 @@ git push --force origin master
 
 为了后续更新方便起见，可以在根目录新建一个一键自动部署脚本，命名为`deploy.sh`（如果对配置不做大的改动（例如：更换主题等），后续的更新可以使用以下脚本）
 
-```
+```bash
 #!/bin/bash
 
 echo -e "\033[0;32mDeploying updates to gitee...\033[0m"
@@ -804,7 +804,7 @@ cd ..
 
 创建完脚本以后，不要忘了加权限
 
-```
+```bash
 chmod 777 xxx
 ```
 
@@ -814,7 +814,7 @@ chmod 777 xxx
 
 官方脚本：
 
-```
+```bash
 #!/bin/bash
 
 echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
@@ -845,7 +845,7 @@ cd ..
 
 （如果用上面的自动部署脚本出现问题，可以试试这个，不过这个脚本部署时经常会导致部分页面丢失，还不知道原因）
 
-```
+```bash
 #!/bin/bash
 
 echo -e "\033[0;32mDeploying updates to Coding...\033[0m"
@@ -889,7 +889,7 @@ cd ..
 
 ### 提交本地仓库
 
-```
+```bash
 rm -rf public/*
 hugo
 cd public
@@ -903,7 +903,7 @@ git push origin master --force
 
 ### 备份hugo源码
 
-```
+```bash
 git remote rm origin
 git init
 git checkout -b backup
@@ -919,7 +919,7 @@ git push origin backup --force
 
 在gitee上新建一个backup的分支，然后把下面代码加到`deploy.sh`末尾，这种方法有个问题，那就是themes等几个文件夹无法备份，因为这几个关联的仓库不一样，不过content文件夹备份了就行。
 
-```
+```bash
 git remote rm origin
 git init
 git checkout -b backup
@@ -933,7 +933,7 @@ git push --force origin backup
 
 PS: **如果执行第三步`git checkout -b backup`后，提示`fatal: A branch named 'backup' already exists.`，则执行以下操作：**
 
-```
+```bash
 git branch -D backup    #删除分支:必须切换到其他的分之下才可操作
 git checkout -b backup  #切换分支
 ```
@@ -942,7 +942,7 @@ git checkout -b backup  #切换分支
 
 按理说备份到私人仓库为好，可为了`GitInfo`以及`lastmod`生效，需要新建一个公共仓库。（注意要先备份源码到github上，再部署public里的网页到服务器上，为了方便，需要在自动部署脚本里作相应设置）
 
-```
+```bash
 git remote rm origin
 git init
 git add .
@@ -955,13 +955,13 @@ git push --force origin master
 
 > PS:这里`Git Bash`开头会报错：`warning: LF will be replaced by CRLF`，解决方法：在`git add .`前面添加：
 
-```
+```bash
 git config --global core.autocrlf false
 ```
 
  最终效果：
 
-```
+```bash
 # backup
 git config --global core.autocrlf false
 git add .
@@ -976,7 +976,7 @@ git push origin master --force
 
 然后在`config.toml`里作如下修改
 
-```
+```bash
 enableGitInfo = true
 gitRepo = "https://github.com/iwyang/hugo-backup"
 ```
@@ -985,7 +985,7 @@ gitRepo = "https://github.com/iwyang/hugo-backup"
 
 最好不要反复切换部署仓库，否则git会出现以下错误提示：
 
-```
+```bash
 remote: error: The last gc run reported the following. Please correct the root cause
 remote: and remove gc.log.
 remote: Automatic cleanup will not be performed until the file is removed.

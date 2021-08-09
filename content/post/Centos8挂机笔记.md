@@ -16,7 +16,7 @@ tags: ["服务器"]
 
 ### 安装firefox
 
-```
+```bash
 yum install firefox -y
 ```
 
@@ -28,7 +28,7 @@ yum install firefox -y
 
 解压后会生成一个 firefox 子目录，里面有最新版本的 firefox 的二进制可执行文件，以及各种扩展模块，插件等等。
 
-```
+```bash
 yum install tar -y
 yum install bzip2 -y
 tar -xjvf Firefox-latest-x86_64.tar.bz2
@@ -37,33 +37,33 @@ tar -xjvf Firefox-latest-x86_64.tar.bz2
 4. 由于有时解压后出来的文件缺少文件（原因不明），可以采用在外部解压好后，直接拷贝出firefox文件夹的方式。
 5. 删除系统默认安装的旧版 firefox ，通常位于 /usr/lib64 目录下。
 
-```
+```bash
 rm -rf /usr/lib64/firefox
 ```
 
 6. 将当前目录下的新版 firefox 子目录复制到 /usr/lib64 目录下。
 
-```
+```bash
 mv firefox /usr/lib64
 ```
 
 7. 进入 /usr/bin 目录，删除其下的 firefox 脚本。
 
-```
+```bash
 cd /usr/bin
 rm firefox
 ```
 
 8. 回到主目录或根目录，创建一个软链接，指向/usr/lib64/firefox/firefox。
 
-```
+```bash
 cd
 ln -s /usr/lib64/firefox/firefox /usr/bin/firefox
 ```
 
 9. 查看下最新版本
 
-```
+```bash
 firefox -v
 ```
 
@@ -125,12 +125,12 @@ firefox -v
 
 ## 设置定时任务
 
-```
+```bash
 cd /var/spool/cron 
 vi root
 ```
 
-```
+```bash
 00 00 * * * rm -rf /root/.vnc/*.log
 01 00 * * * /sbin/reboot
 00 06 * * * rm -rf /root/.vnc/*.log

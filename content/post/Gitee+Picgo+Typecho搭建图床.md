@@ -32,7 +32,7 @@ tags: ["图床"]
 
 在PicGo设置里作如下修改：
 
-```
+```bash
 设置日志文件：日志记录等级选择"错误-Error"和"提醒-Warn"
 时间戳重命名：开
 开启上传提示：开
@@ -44,7 +44,7 @@ tags: ["图床"]
 
 由于PicGo的插件需要使用npm进行安装，如果你的电脑上没有安装npm，那么你是无法安装PicGo插件的，而我们接下来要使用一个额外的插件获得gitee支持，所以在此之前先完成npm的安装。访问node.js的[官网](https://nodejs.org/en/)，根据官网的指导下载并安装node.js。安装为了解决npm速度过慢问题，需更换镜像源：
 
-```
+```bash
 npm config set registry https://registry.npm.taobao.org
 ```
 
@@ -54,7 +54,7 @@ npm config set registry https://registry.npm.taobao.org
 
 ### 配置ithub-plus插件
 
-```
+```yaml
 repo: iwyang/pics
 branch: master
 token: 输入私人令牌

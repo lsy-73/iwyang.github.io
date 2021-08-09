@@ -41,7 +41,7 @@ tags: ["hugo"]
 
 + 安装 atomic-algolia 包
 
-```
+```bash
 npm init  // 初始化，不懂的就一直回车就好了
 npm install atomic-algolia --save
 ```
@@ -50,7 +50,7 @@ npm install atomic-algolia --save
 
 + 修改根目录下的 `package.json` 文件，在 `scripts` 下添加 `"algolia": "atomic-algolia"`
 
-```
+```bash
 "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "algolia": "atomic-algolia"
@@ -61,7 +61,7 @@ npm install atomic-algolia --save
 
 + 根目录下新建 `.env` 文件，内容如下：
 
-```
+```bash
 ALGOLIA_APP_ID=你的Application ID
 ALGOLIA_INDEX_NAME=你的索引名字
 ALGOLIA_INDEX_FILE=public/index.json
@@ -72,13 +72,13 @@ ALGOLIA_ADMIN_KEY=你的Admin API Key
 
 你可以本地执行 `npm run algolia` 查看运行效果。后续就是把下面的命令加到你的自动部署脚本即可：
 
-```
+```bash
 npm run algolia // 在hugo命令后面执行
 ```
 
 如果出现问题，试下以下命令：
 
-```
+```bash
 npm install
 npm run algolia // 在hugo命令后面执行
 ```
@@ -87,7 +87,7 @@ npm run algolia // 在hugo命令后面执行
 
 自动部署脚本改成这样：
 
-```
+```bash
 #!/bin/bash
 
 echo -e "\033[0;32mDeploying updates to gitee...\033[0m"

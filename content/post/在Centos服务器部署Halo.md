@@ -364,7 +364,7 @@ sudo certbot renew --dry-run
 
 可以利用前面《Nginx配置ssl证书》的方法申请证书，然后更改：
 
-```
+```bash
 server {
     listen 80;
     server_name blog.bore.vip;
@@ -534,19 +534,19 @@ https://www.ryanc.cc {
 
 首先进入后台，依次点击：`系统`—`博客设置`—`评论设置`，更改`评论模块JS`。系统默认（halo 1.3.2）`评论模块JS`为：
 
-```
+```bash
 //cdn.jsdelivr.net/npm/halo-comment@latest/dist/halo-comment.min.js
 ```
 
 更改为[halo-comment-fly](https://github.com/halo-dev/halo-comment-fly)评论模块JS：
 
-```
+```bash
 https://cdn.jsdelivr.net/gh/hshanx/halo-comment-fly@latest/dist/halo-comment.min.js
 ```
 
 或者：
 
-```
+```bash
 https://cdn.jsdelivr.net/gh/hshanx/halo-comment-hshan@2.0.6/dist/halo-comment.min.js
 ```
 
@@ -554,11 +554,11 @@ https://cdn.jsdelivr.net/gh/hshanx/halo-comment-hshan@2.0.6/dist/halo-comment.mi
 
 ## 定时删除halo日志
 
-```
+```bash
 crontab -e
 ```
 
-```
+```bash
 0 0 * * * rm -rf /root/.halo/logs/*
 ```
 

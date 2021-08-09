@@ -23,7 +23,7 @@ tags: ["nginx"]
 
 1.在nginx根目录（默认为/etc/nginx）下创建目录cert。
 
-```
+```bash
 cd /etc/nginx
 mkdir cert
 ```
@@ -32,7 +32,7 @@ mkdir cert
 
 3.修改nginx配置文件。`vi /etc/nginx/conf.d/hexo.conf`
 
-```js
+```bash
 server {
     listen 80;
     server_name bore.vip www.bore.vip;
@@ -91,7 +91,7 @@ ubuntu、centos 6
 
 centos 7、8
 
-```
+```bash
 systemctl restart nginx
 ```
 
@@ -134,7 +134,7 @@ Let’s Encrypt 的证书有效期为 90 天，不过我们可以通过 crontab 
 
 如果一切正常，就可以编辑 crontab 定期运行以下命令：
 
-```java
+```bash
 crontab -e
 * 2 * * * service nginx stop & letsencrypt renew & service nginx start
 ```
@@ -143,11 +143,11 @@ crontab -e
 
 修改 Nginx 配置文件中关于证书的配置：
 
-```
+```bash
 vi /etc/nginx/conf.d/hexo.conf
 ```
 
-```
+```bash
 server {
     listen 80;
     server_name iwyang.top www.iwyang.top;
@@ -196,14 +196,14 @@ server {
 
 #### 安装Certbot
 
-```
+```bash
 yum install epel-release -y
 yum install certbot -y
 ```
 
 然后执行：
 
-```
+```bash
 certbot certonly --webroot -w /var/www/hexo -d bore.vip -m 455343442@qq.com --agree-tos
 ```
 
@@ -211,12 +211,12 @@ certbot certonly --webroot -w /var/www/hexo -d bore.vip -m 455343442@qq.com --ag
 
 顶级域名参考上面Ubuntu Nginx的配置，二级域名操作如下：
 
-```
+```bash
 vi /etc/nginx/conf.d/hexo.conf
 ```
 
 
-```
+```bash
 server {
     listen 80;
     server_name bore.vip www.bore.vip;
@@ -261,7 +261,7 @@ server {
 
 重启Nginx生效：
 
-```
+```bash
 systemctl restart nginx
 ```
 
@@ -269,13 +269,13 @@ systemctl restart nginx
 
 由于这个证书的时效只有 90 天，我们需要设置自动更新的功能，帮我们自动更新证书的时效。首先先在命令行模拟证书更新：
 
-```
+```bash
 certbot renew --dry-run
 ```
 
 模拟更新成功的效果如下：
 
-```
+```bash
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ** DRY RUN: simulating 'certbot renew' close to cert expiry
 **          (The test certificates below have not been saved.)
@@ -293,19 +293,19 @@ The following certs could not be renewed:
 
 在无法确认你的 nginx 配置是否正确时，一定要运行模拟更新命令，确保certbot和服务器通讯正常。使用 crontab -e 的命令来启用自动任务，命令行：
 
-```
+```bash
 crontab -e
 ```
 
 添加配置：（每隔两个月凌晨2:30自动执行证书更新操作）后保存退出。
 
-```
+```bash
 30 2 * */2 * /usr/bin/certbot renew --quiet && /bin/systemctl restart nginx
 ```
 
 查看证书有效期的命令：
 
-```
+```bash
 openssl x509 -noout -dates -in /etc/letsencrypt/live/bore.vip/cert.pem
 ```
 

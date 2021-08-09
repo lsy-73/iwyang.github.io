@@ -19,7 +19,7 @@ tags: ["hexo"]
 安装完git后还要配置环境变量：
 右键我的电脑 –> 属性，然后点击高级系统设置 –> 环境变量 –> 选择用户变量或系统变量中的Path,点击编辑；找到Git安装目录,添加以下地址:
 
-```
+```bash
 D:\Program Files\Git\bin
 D:\Program Files\Git\mingw64\libexec\git-core
 D:\Program Files\Git\mingw64\bin
@@ -29,12 +29,12 @@ D:\Program Files\Git\mingw64\bin
 
 Windows 上安装 [Git for Windows](https://git-for-windows.github.io/) 之后在开始菜单里打开 Git Bash 输入：
 
-```
+```bash
 git config --global user.name "你的用户名"
 git config --global user.email "你的电子邮箱"
 ```
 
-```
+```bash
 cd ~
 mkdir .ssh
 cd .ssh
@@ -47,7 +47,7 @@ ssh-keygen -t rsa
 
 在电脑任意目录新建一个文件夹 `hexo`，进入文件夹，在空白处点击右键选择 Git Bash，输入：
 
-```
+```bash
 npm install -g hexo-cli
 hexo init
 npm install
@@ -67,7 +67,7 @@ hexo serve
 
 #### 单线部署
 
-```
+```bash
 deploy:
  type: git
  repo: git@blog.yizhilee.com:hexo.git
@@ -150,7 +150,7 @@ skip_render:
 
 在根目录新建`deploy.sh`，输入以下内容：
 
-```
+```bash
 #!/bin/bash
 echo -e "\033[0;32mDeploying updates to gitee...\033[0m"
 hexo clean

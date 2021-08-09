@@ -25,7 +25,7 @@ tags: ["hexo"]
 
 Hexo博客站点的必要文件：
 
-```
+```yaml
 .
 ├── scaffolds    # 文章模板
 ├── source       # 用户源文件：页面，文章markdown文件
@@ -39,7 +39,7 @@ Hexo博客站点的必要文件：
 
 使git上传远程git服务器（这里是coding）时可忽略不必要的文件，做法是编辑**站点根目录**下的`.gitignore`文件，复制粘贴一下内容到`.gitignore`文件中。
 
-```
+```yaml
 .DS_Store
 Thumbs.db
 db.json
@@ -59,7 +59,7 @@ public/
 
 2020.7.8 现在没用这种备份方法
 
-```
+```yaml
 git init                  
 git checkout -b backup  	 
 git add .				 	  
@@ -72,7 +72,7 @@ git push --force origin backup
 
 2020.7.8 目前采用这种备份方法
 
-```
+```bash
 git init
 git remote add origin git@github.com:iwyang/hexo.git
 git add .
@@ -84,14 +84,14 @@ git push --force origin master
 
 **PS**: 如果执行第二步`git checkout -b backup`后，提示`fatal: A branch named 'backup' already exists.`，则执行以下操作
 
-```
+```bash
 git remote rm origin
 git checkout -b backup
 ```
 
 实在不行先执行下面命令：
 
-```
+```bash
 git branch -D backup #删除分支:必须切换到其他的分之下才可操作
 ```
 
@@ -105,7 +105,7 @@ git branch -D backup #删除分支:必须切换到其他的分之下才可操作
 
 ### hexo源码还原
 
-```
+```bash
 $ git clone git@github.com:iwyang/hexo.git	# 克隆master分支到本地，私有仓库需要输入用户名和密码
 $ cd hexo-master		     # 进入hexo-master文件夹
 $ npm install -g hexo-cli	 # 全局安装hexo
@@ -118,19 +118,19 @@ $ npm install				 # 安装所有依赖(hexo以及插件的依赖)，根据packag
 
 1.设置用户名
 
-```
+```bash
 git config --global user.name '这里填写自己的用户名'
 ```
 
 2.设置用户名邮箱
 
-```
+```bash
 git config --global user.email '这里填写自己的用户邮箱'
 ```
 
 3.查看配置信息
 
-```
+```bash
 git config --list
 ```
 
@@ -142,7 +142,7 @@ SSH协议，长期部署推荐SSH，一劳永逸。
 
 1.SSH秘钥：
 
-```
+```bash
 $ ssh-keygen -t rsa -C "youremail@example.com"		# 生成rsa秘钥
 $ cd ~/.ssh		 		# 进入虚拟目录ssh文件中
 $ cat id_rsa.pub		# 显示id_rsa.pub文件内容
@@ -152,14 +152,14 @@ $ cat id_rsa.pub		# 显示id_rsa.pub文件内容
 
 3.验证是否添加成功
 
-```
+```bash
 $ ssh -T git@github.com  # 验证github是否添加成功
 $ ssh -T git@git.coding.net  # 验证coding是否添加成功
 ```
 
 4.编辑**站点配置文件**`_config.yml`
 
-```
+```bash
 deploy:
     type: git
     repo: 
@@ -172,7 +172,7 @@ deploy:
 
 发表文章、更新文章、修改源码，要及时更新hexo源码到coding。
 
-```
+```bash
 git add .
 git commit -m "更新"
 git push --force origin master

@@ -12,26 +12,26 @@ tags: ["服务器"]
 
 ## 安装vsftpd
 
-```
+```bash
 sudo yum install vsftpd -y
 ```
 
 安装软件包后，启动vsftpd，并使其能够在引导时自动启动：
 
-```
+```bash
 sudo systemctl start vsftpd
 sudo systemctl enable vsftpd
 ```
 
 ## 配置vsftpd
 
-```
+```bash
 vi /etc/vsftpd/vsftpd.conf
 ```
 
 要仅允许某些用户登录FTP服务器，需要在`userlist_enable=YES`下面，加上：
 
-```
+```bash
 userlist_file=/etc/vsftpd/user_list
 userlist_deny=NO
 ```
@@ -40,7 +40,7 @@ userlist_deny=NO
 
 完成编辑后，vsftpd配置文件应如下所示：
 
-```
+```bash
 anonymous_enable=NO
 local_enable=YES
 write_enable=YES
@@ -79,7 +79,7 @@ userlist_deny=NO
 
 保存文件并重新启动vsftpd服务，以使更改生效：
 
-```
+```bash
 sudo systemctl restart vsftpd
 ```
 
@@ -91,27 +91,27 @@ sudo systemctl restart vsftpd
 
 创建一个新用户，名为admin:
 
-```
+```bash
 sudo adduser admin
 sudo passwd admin
 ```
 
 将用户添加到允许的FTP用户列表中：
 
-```
+```bash
 echo "admin" | sudo tee -a /etc/vsftpd/user_list
 ```
 
 设置正确的权限：
 
-```
+```bash
 sudo chmod 750 /home/admin
 sudo chown -R admin: /home/admin
 ```
 
 如果遇到文件无法下载，可能需要更改文件所属用户组，例如：
 
-```
+```bash
 chown admin 文件名
 ```
 

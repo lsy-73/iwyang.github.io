@@ -16,13 +16,13 @@ tags: ["nginx"]
 
 Nginx主要配置文件：`/etc/nginx/nginx.conf`
 
-```
+```bash
 vi /etc/nginx/nginx.conf
 ```
 
 将下面几行配置文件加入nginx配置的server段内：
 
-```
+```bash
 autoindex on;                        
 autoindex_exact_size off;            
 autoindex_localtime on;              
@@ -31,7 +31,7 @@ charset utf-8,gbk;
 
 重启nginx服务：
 
-```
+```bash
 systemctl restart nginx
 ```
 

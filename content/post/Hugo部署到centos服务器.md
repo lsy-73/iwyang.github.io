@@ -24,7 +24,7 @@ tags: ["hugo","服务器"]
 
 准备工作：如果服务器端口不是22，先要更改SSH端口，
 
-```
+```bash
 vi /etc/ssh/sshd_config
 port 22
 ```
@@ -35,7 +35,7 @@ port 22
 
 <div class="note primary">2021.5.27 注意最好不要执行下面第一步升级操作，不然升级到最后一步会卡死，最后导致后面无法启动nginx。</div>
 
-```
+```bash
 yum update -y
 yum install git-core nginx -y
 ```
@@ -44,14 +44,14 @@ yum install git-core nginx -y
 
 Nginx 安装完成后需要手动启动，启动Nginx并设置开机自启：
 
-```
+```bash
 systemctl start nginx
 systemctl enable nginx
 ```
 
 如果开启了防火墙，记得添加 HTTP 和 HTTPS 端口到防火墙允许列表。
 
-```
+```bash
 firewall-cmd --permanent --zone=public --add-service=http 
 firewall-cmd --permanent --zone=public --add-service=https
 firewall-cmd --reload
@@ -64,27 +64,27 @@ systemctl restart firewalld.service
 
 然后新增一个名为 git 的用户，过程中需要设置登录密码，输入两次密码即可。
 
-```
+```bash
 adduser git
 passwd git
 ```
 
 给用户 `git` 赋予无需密码操作的权限（否则到后面 Hexo 部署的时候会提示无权限）
 
-```
+```bash
 chmod 740 /etc/sudoers
 vi /etc/sudoers
 ```
 
 在图示位置`root ALL=(ALL:ALL) ALL`的下方添加
 
-```
+```bash
 git ALL=(ALL:ALL) ALL
 ```
 
 然后保存。然后更改读写权限。
 
-```
+```bash
 chmod 440 /etc/sudoers
 ```
 
@@ -92,7 +92,7 @@ chmod 440 /etc/sudoers
 
 接下来要把本地的 ssh 公钥上传到服务器 。执行
 
-```
+```bash
 su git
 cd ~
 mkdir .ssh && cd .ssh
@@ -104,14 +104,14 @@ vi authorized_keys
 
 接着把ssh目录设置为只有属主有读、写、执行权限。代码如下：
 
-```
+```bash
 chmod 600 ~/.ssh/authorized_keys
 chmod 700 ~/.ssh
 ```
 
 然后建立放部署的网页的 Git 库。
 
-```
+```bash
 cd ~
 mkdir hexo.git && cd hexo.git
 git init --bare
@@ -123,7 +123,7 @@ git init --bare
 
 ps: 如果配置完成还是提示要输入密码，可以使用 `ssh-copy-id`，在本地打开 Git Bash 输入：
 
-```
+```bash
 ssh-copy-id -i ~/.ssh/id_rsa.pub git@服务器ip地址
 ```
 
@@ -133,11 +133,11 @@ ssh-copy-id -i ~/.ssh/id_rsa.pub git@服务器ip地址
 
 接下来要给用户 git 授予操作 nginx 放网页的地方的权限：
 
-```
+```bash
 su
 ```
 
-```
+```bash
 mkdir -p /var/www/hexo
 chown git:git -R /var/www/hexo
 ```
@@ -146,7 +146,7 @@ chown git:git -R /var/www/hexo
 
 现在就要向 Git Hooks 操作，配置好钩子：
 
-```
+```bash
 su git
 cd /home/git/hexo.git/hooks
 vi post-receive
@@ -154,7 +154,7 @@ vi post-receive
 
 输入内容并保存：（里面的路径看着换吧，上面的命令没改的话也不用换）
 
-```
+```bash
 #!/bin/bash
 GIT_REPO=/home/git/hexo.git
 TMP_GIT_CLONE=/tmp/hexo
@@ -167,7 +167,7 @@ cp -rf ${TMP_GIT_CLONE}/* ${PUBLIC_WWW}
 
 赋予可执行权限：
 
-```
+```bash
 chmod +x post-receive
 ```
 
@@ -175,15 +175,15 @@ chmod +x post-receive
 
 然后是配置 nginx。执行
 
-```
+```bash
 su
 ```
 
-```
+```bash
 vi /etc/nginx/conf.d/hexo.conf
 ```
 
-```
+```bash
 server {
   listen  80 ;
   listen [::]:80;
@@ -218,7 +218,7 @@ server {
 因为放中文进去会乱码所以就不在里面注释了。代码里面配置了默认的根目录，绑定了域名，并且自定义了 404 页面的路径。
 最后就重启 nginx 服务器：
 
-```
+```bash
 systemctl restart nginx
 ```
 
@@ -226,13 +226,13 @@ systemctl restart nginx
 
 如果上传网页后，Nginx 出现 403 Forbidden，执行：
 
-```
+```bash
 vi /etc/selinux/config
 ```
 
 将SELINUX=enforcing 修改为 SELINUX=disabled 状态。
 
-```
+```bash
 SELINUX=disabled
 ```
 
@@ -242,7 +242,7 @@ SELINUX=disabled
 
 ps: 最好做一个301跳转，把bore.vip和`www.bore.vip`合并，并把之前的域名也一并合并. 有两种实现方法,第一种方法是判断nginx核心变量host(老版本是http_host)：
 
-```
+```bash
 server {
 server_name bore.vip www.bore.vip ;
 if ($host != 'bore.vip' ) {
@@ -254,7 +254,7 @@ rewrite ^/(.*)$ http://bore.vip/$1 permanent;
 
 ### 修改自动部署脚本
 
-```
+```bash
 #!/bin/bash
 
 echo -e "\033[0;32mDeploying updates to Coding...\033[0m"
@@ -286,7 +286,7 @@ cd ..
 
 或直接在`Git Bash`中手动运行以下代码：
 
-```
+```bash
 rm -rf public/*
 hugo
 cd public
@@ -302,7 +302,7 @@ git push origin master --force
 
 最好不要反复切换部署仓库，否则git会出现以下错误提示：
 
-```
+```bash
 remote: error: The last gc run reported the following. Please correct the root cause
 remote: and remove gc.log.
 remote: Automatic cleanup will not be performed until the file is removed.

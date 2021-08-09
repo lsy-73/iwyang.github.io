@@ -12,7 +12,7 @@ tags: ["win10"]
 
  2020.5.26　已升级安装最新bios版本：
 
-```
+```bash
 2018/9/3  版本：BIOS Version: E5CN63WW,EC Version:E5IT23WW
 ```
 

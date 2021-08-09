@@ -12,13 +12,13 @@ tags: ["linux"]
 
 ## 查看定时任务
 
-```
+```bash
 crontab -l
 ```
 
 ## 编辑定时任务
 
-```
+```bash
 crontab -e
 ```
 

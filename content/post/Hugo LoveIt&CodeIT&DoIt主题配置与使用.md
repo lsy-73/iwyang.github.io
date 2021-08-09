@@ -14,7 +14,7 @@ tags: ["hugo"]
 
 把这个主题克隆到 `themes` 目录:
 
-```
+```bash
 git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 ```
 
@@ -24,7 +24,7 @@ git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
 
 将`根目录\themes\LoveIt\exampleSite`路径下的`config.toml`文件复制到根目录下，覆盖掉根目录下的`config.toml`文件。然后，我们在notepad++中打开并对其作一定的修改就可以直接使用，具体可以修改的内容如下：
 
-```
+```yaml
 baseURL = "https://bore.vip/"
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"

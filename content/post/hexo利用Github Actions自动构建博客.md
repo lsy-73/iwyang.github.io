@@ -20,12 +20,12 @@ tags: ["hexo","github actions"]
 
 Windows 上安装 [Git for Windows](https://git-for-windows.github.io/) 之后在开始菜单里打开 Git Bash 输入：
 
-```
+```bash
 git config --global user.name "你的用户名"
 git config --global user.email "你的电子邮箱"
 ```
 
-```
+```bash
 cd ~
 mkdir .ssh
 cd .ssh
@@ -46,7 +46,7 @@ ssh-keygen -t rsa
 
 在博客根目录新建`.github/workflows/gh_pages.yml`文件。代码如下：
 
-```
+```bash
 name: Deploy Blog
 
 on: [push] # 当有新push时运行
@@ -91,7 +91,7 @@ jobs:
 
 ### 配置Hexo的_config.yml
 
-```
+```bash
 deploy:
   type: git
   repo:
@@ -107,7 +107,7 @@ deploy:
 
 今后只需备份源码到`hexo`源码分支，`gitbub action`就会自动部署博客到`iwyang.github.io`仓库。
 
-```
+```bash
 git init
 git remote add origin git@github.com:iwyang/hexo.git
 git add .
@@ -119,7 +119,7 @@ git push --force origin master
 
 也可以只准备一个仓库`iwyang.github.io`，利用两个分支来备份。例如利用`hexo`分支备份源码，`github action`利用`master`分支部署博客。`workflows`做相应调整：
 
-```
+```bash
 name: CI
 on:
   push:

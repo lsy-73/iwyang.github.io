@@ -12,20 +12,20 @@ tags: ["服务器"]
 
 ##  安装 Xfce 桌面环境
 
-```
+```bash
 yum install epel-release -y
 yum groupinstall xfce -y
 ```
 
 ## 安装 VNC 服务器
 
-```
+```bash
 yum install tigervnc-server -y
 ```
 
 现在安装了 VNC 服务器，下一步是运行 vncserver 命令，该命令将创建初始配置并设置密码。
 
-```
+```bash
 vncserver
 ```
 
@@ -40,7 +40,7 @@ vncserver
 
 在继续下一步之前，首先使用 vncserver 带有 -kill 选项和服务器编号作为参数的命令停止 VNC 实例。在我们的例子中，服务器在端口 5901 (:1)中运行，因此我们将使用以下命令停止它：
 
-```
+```bash
 vncserver -kill :1
 ```
 
@@ -48,13 +48,13 @@ vncserver -kill :1
 
 现在我们的 CentOS 服务器上安装了 Xfce 和 TigerVNC ，下一步是配置 TigerVNC 使用 Xfce 。为此，请打开以下文件：
 
-```
+```bash
 vi ~/.vnc/xstartup
 ```
 
 并将默认内容改为以下内容：
 
-```
+```bash
 #!/bin/sh
 unset SESSION_MANAGER
 unset DBUS_SESSION_BUS_ADDRESS
@@ -65,7 +65,7 @@ exec startxfce4
 
 如果需要将  [附加选项](http://tigervnc.org/doc/vncserver.html) 传递给 VNC 服务器，则可以打开 `~/.vnc/config` 文件并在每行添加一个选项。最常见的选项列在文件中。取消注释并根据自己的喜好进行修改。这是一个例子：
 
-```
+```bash
 # securitytypes=vncauth,tlsvnc
 # desktop=sandbox
 geometry=1024x768
@@ -78,17 +78,17 @@ dpi=96
 
 我们将创建一个 systemd 单元文件，使我们能够根据需要轻松启动，停止和重新启动 VNC 服务，与任何其他 systemd 服务相同。
 
-```
+```bash
 sudo cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service
 ```
 
 使用文本编辑器打开文件，并替换为以下内容（本例用户名为root）。
 
-```
+```bash
 vi /etc/systemd/system/vncserver@\:1.service
 ```
 
-```
+```bash
 [Unit]
 Description=Remote desktop service (VNC)
 After=syslog.target network.target
@@ -108,13 +108,13 @@ WantedBy=multi-user.target
 
 保存并关闭文件。通知 systemd 我们创建了一个新的单元文件，让其重新加载：
 
-```
+```bash
 sudo systemctl daemon-reload
 ```
 
 下一步是使用以下命令启用单元文件：
 
-```
+```bash
 sudo systemctl enable vncserver@:1.service
 ```
 
@@ -122,13 +122,13 @@ sudo systemctl enable vncserver@:1.service
 
 执行以下命令启动 VNC 服务：
 
-```
+```bash
 sudo systemctl start vncserver@:1.service
 ```
 
 验证服务是否已成功启动：
 
-```
+```bash
 sudo systemctl status vncserver@:1.service
 ```
 

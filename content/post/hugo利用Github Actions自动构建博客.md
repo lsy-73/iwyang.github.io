@@ -20,12 +20,12 @@ Github上新建一个名为`iwyang.github.io`的仓库。
 
 Windows 上安装 [Git for Windows](https://git-for-windows.github.io/) 之后在开始菜单里打开 Git Bash 输入：
 
-```
+```bash
 git config --global user.name "你的用户名"
 git config --global user.email "你的电子邮箱"
 ```
 
-```
+```bash
 cd ~
 mkdir .ssh
 cd .ssh
@@ -79,7 +79,7 @@ jobs:
 
 如果使用的是`loveit主题`并且使用algolia搜索，则还要配置自动更新索引，需在`gh_pages.yml`里作相应修改：
 
-```
+```bash
 name: GitHub Page Deploy
 
 on:
@@ -154,7 +154,7 @@ jobs:
 
 ### 修改根目录`.gitignore`文件
 
-```
+```bash
 /public
 ```
 
@@ -162,7 +162,7 @@ jobs:
 
 初始化git，新建并切换到`develop`分支，将源码提交到`develop`分支。稍等片刻，github action会自动部署blog到`master`分支。
 
-```
+```bash
 git init
 git checkout -b develop
 git remote add origin git@github.com:iwyang/iwyang.github.io.git
@@ -189,7 +189,7 @@ git push origin develop --force
 
 ### 克隆仓库
 
-```
+```bash
 rm -rf /var/www/hexo
 git clone git@github.com:iwyang/iwyang.github.io.git /var/www/hexo
 ```
@@ -202,33 +202,33 @@ git clone git@github.com:iwyang/iwyang.github.io.git /var/www/hexo
 
 #### 服务器生成ssh key
 
-```
+```bash
 yum install rsync -y
 ssh-keygen -t rsa -C "455343442@qq.com"
 ```
 
 一路回车即可，会生成你的ssh key。然后再终端下执行命令：
 
-```
+```bash
 ssh -v git@github.com
 ```
 
 这时会报错，最后两句是：
 
-```
+```bash
 No more authentication methods to try.  
 　　Permission denied (publickey).
 ```
 
 在终端再执行以下命令：
 
-```
+```bash
 ssh-agent -s 
 ```
 
 接着在执行:
 
-```
+```bash
 ssh-add ~/.ssh/id_rsa
 ```
 
@@ -242,13 +242,13 @@ ssh-add ~/.ssh/id_rsa
 
 #### 验证Key
 
-```
+```bash
 ssh -T git@github.com 
 ```
 
 ### 设置crontab定时任务：
 
-```
+```bash
 crontab -e
 */5 * * * * git -C /var/www/hexo pull
 ```
@@ -259,7 +259,7 @@ crontab -e
 
 ### 本地操作
 
-```
+```bash
 git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
 ```
 因为使用`Submodule`管理主题，所以最后要加上 `--recursive`，因为使用 git clone 命令默认不会拉取项目中的子模块，你会发现主题文件是空的。（另外一种方法：`git submodule init && git submodule update`）
@@ -268,13 +268,13 @@ git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
 
 #### 同步更新源文件
 
-```
+```bash
 git pull
 ```
 
 #### 同步主题文件
 
-```
+```bash
 git submodule update --remote
 ```
 
@@ -284,19 +284,19 @@ git submodule update --remote
 
 + 如果克隆库的时候要初始化子模块，请加上 `--recursive` 参数，如：
 
-```
+```bash
 git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
 ```
 
 + 如果已经克隆了主库但没初始化子模块，则用：
 
-```
+```bash
 git submodule update --init --recursive
 ```
 
 + 如果已经克隆并初始化子模块，而需要从子模块的源更新这个子模块，则：
 
-```
+```bash
 git submodule update --recursive --remote
 ```
 
@@ -316,7 +316,7 @@ git submodule update --recursive --remote
 
 安装`rsync`：
 
-```
+```bash
 yum install rsync -y
 ```
 
@@ -335,7 +335,7 @@ ssh-keygen -t rsa -f mysite
 
 将公钥`mysite.pub`的内容贴到目标服务器的`~/.ssh/authorized_keys`中，如果上一步你直接是在服务器中执行，则只要：
 
-```
+```bash
 cat mysite.pub >> authorized_keys
 ```
 
@@ -351,7 +351,7 @@ chmod 600 -R ~/.ssh
 
 ### 设置 ssh 配置文件，打开密钥登录功能
 
-```
+```bash
 vi /etc/ssh/sshd_config
 ```
 
@@ -363,7 +363,7 @@ vi /etc/ssh/sshd_config
 
 ### 重启 ssh 服务
 
-```
+```bash
 service sshd restart
 ```
 
@@ -371,7 +371,7 @@ service sshd restart
 
 将`private key` 复制到 `GitHub repo -> setttings -> secrets`里，并且命名为`DEPLOY_KEY`。顺便在`secrets`里设置一下`SSH_HOST`和`SSH_USERNAME`。
 
-```
+```bash
 SSH_HOST：服务器IP
 SSH_USERNAME：root
 ```

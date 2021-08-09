@@ -16,20 +16,20 @@ tags: ["hugo"]
 
 ## 下载主题
 
-```
+```bash
 git init
 git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
 ```
 
 ## 更新主题
 
-```
+```bash
 git submodule update --remote
 ```
 
 ## 查看主题版本号
 
-```
+```bash
 git show 查看当前版本
 ----------------------------------------------------------------
 git tag　列出所有版本号
@@ -388,7 +388,7 @@ tags: [""]
 
 编辑 `themes\stack\layouts\partials\footer\components\custom-font.html`
 
-```
+```bash
     //back to top
     $.goup({
         trigger: 300,
@@ -404,19 +404,19 @@ tags: [""]
 
 + 如果克隆库的时候要初始化子模块，请加上 `--recursive` 参数，如：
 
-```
+```bash
 git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
 ```
 
 + 如果已经克隆了主库但没初始化子模块，则用：
 
-```
+```bash
 git submodule update --init --recursive
 ```
 
 + 如果已经克隆并初始化子模块，而需要从子模块的源更新这个子模块，则：
 
-```
+```bash
 git submodule update --recursive --remote
 ```
 

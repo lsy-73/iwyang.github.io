@@ -18,7 +18,7 @@ tags: ["halo"]
 
 #### Centos 7
 
-```
+```bash
 yum install sendmail mailx -y
 ```
 
@@ -34,7 +34,7 @@ sudo systemctl enable postfix
 
 看下现在邮件的大小限制：
 
-```
+```bash
 sudo postconf message_size_limit
 ```
 
@@ -42,13 +42,13 @@ sudo postconf message_size_limit
 
 差不多是10M，放大10倍，应该差不多了。
 
-```
+```bash
 sudo postconf -e "message_size_limit = 102400000"
 ```
 
 ### 获得&编辑备份脚本
 
-```
+```bash
 wget https://raw.githubusercontent.com/iwyang/scripts/master/halo_email_backup.sh
 ```
 
@@ -56,7 +56,7 @@ wget https://raw.githubusercontent.com/iwyang/scripts/master/halo_email_backup.s
 
 <div class="note primary">如果选择将文件备份到临时目录的话，这步可跳过，直接修改脚本即可。我直接跳过了这一步。</div>
 
-```
+```bash
 mkdir -p /home/back
 ```
 
@@ -110,7 +110,7 @@ rm -f web_$(date +"%Y%m%d").tar.gz
 
 #### 赋予文件执行权限
 
-```
+```bash
 chmod +x /root/halo_email_backup.sh
 ```
 
@@ -118,11 +118,11 @@ chmod +x /root/halo_email_backup.sh
 
 #### 设定自动任务
 
-```
+```bash
 crontab -e
 ```
 
-```
+```bash
 01 00 * * * /root/halo_email_backup.sh
 ```
 
@@ -140,19 +140,19 @@ crontab -e
 
 [dropbox_uploader](https://github.com/andreafabrizi/Dropbox-Uploader/) 是一个第三方Dropbox备份脚本，首先下载脚本：
 
-```
+```bash
 curl "https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh" -o dropbox_uploader.sh
 ```
 
 然后，为该脚本添加执行权限：
 
-```
+```bash
 chmod +x dropbox_uploader.sh
 ```
 
 执行该脚本，绑定APP：
 
-```
+```bash
 ./dropbox_uploader.sh
 ```
 
@@ -160,7 +160,7 @@ chmod +x dropbox_uploader.sh
 
 之后可以执行下面的命令测试上传，提示Done就是绑定成功了：
 
-```
+```bash
 ./dropbox_uploader.sh upload /etc/passwd /backup/passwd.old
 ```
 
@@ -168,7 +168,7 @@ chmod +x dropbox_uploader.sh
 
 编写定时备份脚本，取名为`backup.sh`。代码原来模样如下：
 
-```
+```bash
 vi backup.sh
 ```
 
@@ -277,7 +277,7 @@ echo -e "Backup Done!"
 
 ### 赋予文件执行权限
 
-```
+```bash
 chmod +x backup.sh
 ```
 
@@ -285,11 +285,11 @@ chmod +x backup.sh
 
 ### 设置定时任务
 
-```
+```bash
 crontab -e
 ```
 
-```
+```bash
 02 00 * * * /root/backup.sh
 ```
 
@@ -299,13 +299,13 @@ crontab -e
 
 如果你不知道服务器当前时间，可以使用下面的命令，查看当前时间：
 
-```
+```bash
 date -R
 ```
 
 修改当前时区为上海（这步未进行）：
 
-```
+```bash
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 ```
 
@@ -317,7 +317,7 @@ cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 ### 初始化仓库
 
-```
+```bash
 cd /root/.halo
 git init
 git remote add origin git@github.com:iwyang/halo.git
@@ -330,7 +330,7 @@ git push --force origin master
 
 注意要删除主题文件夹下的`.git`文件夹，不然的话就无法备份主题了。当然也可以不备份主题，因为主题所有配置选项都在数据库里。如果这样的话，命令要作如下调整：
 
-```
+```bash
 git add application.yaml upload/ db/
 ```
 
@@ -340,7 +340,7 @@ git add application.yaml upload/ db/
 
 #### 编写备份脚本
 
-```
+```bash
 cd /root
 vi github.sh
 ```
@@ -386,13 +386,13 @@ rm -rf .git
 
 #### 赋予文件执行权限
 
-```
+```bash
 chmod +x /root/github.sh
 ```
 
 #### 设定自动任务
 
-```
+```bash
 crontab -e
 ```
 
@@ -404,7 +404,7 @@ crontab -e
 
 ### 还原博客
 
-```
+```bash
 git clone git@github.com:iwyang/halo.git .halo
 ```
 
