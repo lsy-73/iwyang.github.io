@@ -14,7 +14,7 @@ tags: ["hugo"]
 
 最近一两天又在折腾主题，这回是[Hugo-PaperMod](https://git.io/hugopapermod)主题，虽然还没打算换，但还是记录一下吧。
 
-## 下载与更新主题
+## 基本操作
 
 查看文档：**[PaperMod - Features](https://github.com/adityatelange/hugo-PaperMod/wiki/Features)**
 
