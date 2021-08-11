@@ -21,11 +21,14 @@ tags: ["hugo"]
 ## `config.yml`配置
 
 ```yaml
-baseURL: "http://localhost:1313"
+baseURL: "https://bore.vip"
 title: Bore's Notes
 paginate: 10
 theme: PaperMod
 defaultContentLanguage: zh
+
+permalinks:
+    posts: /archives/:slug/
 
 enableInlineShortcodes: true
 enableRobotsTXT: true
@@ -35,31 +38,36 @@ buildExpired: false
 enableEmoji: true
 # googleAnalytics: UA-123-45
 
-permalinks:
-  posts: /archives/:slug/
-
 minify:
     disableXML: true
     minifyOutput: false
 
-languages:
-    zh:
-        languageName: "中文"
-        weight: 1
-        menu:
-            main:
-                - name: 归档
-                  url: archives
-                  weight: 5
-                - name: 搜索
-                  url: search/
-                  weight: 10
-                - name: 标签
-                  url: /tags/
-                  weight: 10
-                - name: 分类
-                  url: categories/
-                  weight: 10
+menu:
+    main:
+        - identifier: home
+          name: 首页
+          url: /
+          weight: 10
+        - identifier: archives
+          name: 归档
+          url: /archives/
+          weight: 20
+        - identifier: categories
+          name: 分类
+          url: /categories/
+          weight: 30
+        - identifier: tags
+          name: 标签
+          url: /tags/
+          weight: 40
+        - identifier: about
+          name: 关于
+          url: /about/
+          weight: 50
+        - identifier: search
+          name: 搜索
+          url: /search/
+          weight: 60
 
 outputs:
     home:
@@ -69,23 +77,25 @@ outputs:
 
 params:
     env: production # to enable google analytics, opengraph, twitter-cards and schema.
-    description: "Theme PaperMod - https://github.com/adityatelange/hugo-PaperMod"
+    description: "本站主要用来收集整理资料、记录笔记，方便自己查询使用。"
     author: 
     # author: ["Me", "You"] # multiple authors
 
     defaultTheme: auto
     disableThemeToggle: false
+    DateFormat: "2006-01-02"
     ShowShareButtons: false
     ShowReadingTime: false
     disableSpecial1stPost: true
-    displayFullLangName: false
+    displayFullLangName: true
     ShowPostNavLinks: true
     ShowBreadCrumbs: true
     ShowCodeCopyButtons: true
     ShowToc: true
     comments: true
     images: ["papermod-cover.png"]
-    DateFormat: "2006-01-02"
+    mainSections:
+        - posts
 
     profileMode:
         enabled: false
@@ -120,7 +130,7 @@ params:
           url: "index.xml"
 
     editPost:
-        URL: "https://github.com/iwyang/hugo/tree/master/content"
+        URL: "https://github.com/iwyang/iwyang.github.io/tree/develop/content"
         Text: "在 GitHub 上编辑此页" # edit text
         appendFilePath: true # to append file path to Edit link
 
@@ -134,16 +144,16 @@ params:
     #         SiteVerificationTag: "XYZabc"
 
     assets:
-         favicon: "/images/favicon.png"
-         favicon16x16: "/images/favicon.png"
-         favicon32x32: "/images/favicon.png"
-    #     apple_touch_icon: "<link / abs url>"
-    #     safari_pinned_tab: "<link / abs url>"
+        favicon: "/images/favicon.png"
+        favicon16x16: "/images/favicon.png"
+        favicon32x32: "/images/favicon.png"
+        apple_touch_icon: "/images/favicon.png"
+        safari_pinned_tab: "/images/favicon.png"
 
-    # cover:
-    #     hidden: true # hide everywhere but not in structured data
-    #     hiddenInList: true # hide on list pages and home
-    #     hiddenInSingle: true # hide on single page
+    cover:
+        hidden: true # hide everywhere but not in structured data
+        hiddenInList: true # hide on list pages and home
+        hiddenInSingle: true # hide on single page
 
     fuseOpts:
         isCaseSensitive: false
@@ -196,97 +206,6 @@ services:
         disableInlineCSS: true
 ```
 
-网上别人的配置：
-
-```yaml
-baseURL: "https://404gle.cn/"
-defaultContentLanguage: zh
-title: ĀKURAI's
-paginate: 5
-theme: PaperMod
-
-enableRobotsTXT: true
-enableEmoji: true
-buildDrafts: false
-buildFuture: false
-buildExpired: false
-googleAnalytics: UA-163991976-1
-relativeurls: true
-
-permalinks:
-  posts: essay/:filename
-
-minify:
-  disableXML: true
-  minifyOutput: true
-
-params:
-  env: production
-  title: ĀKURAI's
-  description: "互联网是一座坟墓"
-  author: Akuraito
-  images: ["images/og.png"]
-  DateFormat: "January 2, 2006"
-  defaultTheme: auto
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: true
-  comments: true
-  hidemeta: false
-
-  assets:
-    favicon: "/images/favicon.svg"
-    favicon16x16: "/images/favicon.svg"
-    favicon32x32: "/images/favicon.svg"
-    apple_touch_icon: "/images/favicon.svg"
-    safari_pinned_tab: "/images/favicon.svg"
-
-  label:
-    text: "ĀKURAI's"
-
-  profileMode:
-    enabled: true
-    title: "ĀKURAI&#39;s"
-    subtitle: "互联网是一座坟墓"
-    imageUrl: "/images/avatar.webp"
-    imageWidth: 120
-    imageHeight: 120
-    imageTitle: avatar
-    buttons:
-      - name: 友人
-        url: /friends/
-      - name: 关于
-        url: /about/
-
-  cover:
-    hidden: true
-    hiddenInList: true
-    hiddenInSingle: true
-
-menu:
-  main:
-    - identifier: posts
-      name: 文章
-      url: /posts/
-      weight: 10
-    - identifier: archives
-      name: 归档
-      url: /archives/
-      weight: 20
-    - identifier: search
-      name: 搜索
-      url: https://www.google.com/search?q=site%3A404gle.cn
-      weight: 30
-
-privacy:
-  googleAnalytics:
-    anonymizeIP: true
-    respectDoNotTrack: true
-
-  youtube:
-    privacyEnhanced: true
-```
-
 ## `archetypes`默认模板
 
 ```yaml
@@ -324,6 +243,21 @@ editPost:
     Text: "Suggest Changes" # edit text
     appendFilePath: true # to append file path to Edit link
 ---
+```
+
+自定义：
+
+```yaml
+title: "{{ replace .TranslationBaseName "-" " " | title }}"
+slug: ""
+description: ""
+date: {{ .Date }}
+lastmod: {{ .Date }}
+draft: false
+showToc: true
+weight: false
+categories: [""]
+tags: [""]
 ```
 
 ## 加入`Waline`评论系统
