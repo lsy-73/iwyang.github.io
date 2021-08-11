@@ -21,7 +21,7 @@ tags: ["hugo"]
 ## `config.yml`配置
 
 ```yaml
-baseURL: "https://bore.vip"
+baseURL: "/"
 title: Bore's Notes
 paginate: 10
 theme: PaperMod
