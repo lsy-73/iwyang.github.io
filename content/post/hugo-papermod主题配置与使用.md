@@ -20,6 +20,8 @@ tags: ["hugo"]
 
 ## `config.yml`配置
 
+**注意**：如果把`baseURL`设置成`"/"`，页面顶部导航失效，如果要用顶部导航，就设置为`baseURL: "https://bore.vip"`
+
 ```yaml
 baseURL: "/"
 title: Bore's Notes
