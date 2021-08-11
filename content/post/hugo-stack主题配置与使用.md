@@ -39,7 +39,7 @@ git checkout　+某版本号　(你当前文件夹下的源码会变成这个版
 ## `config.yaml`配置文件
 
 ```yaml
-baseurl: https://bore.vip
+baseurl: /
 languageCode: en-us
 theme: hugo-theme-stack
 paginate: 10
@@ -137,6 +137,7 @@ params:
     widgets:
         enabled:
             - search
+            - categories
             - tag-cloud
             - archives
            
@@ -144,6 +145,9 @@ params:
             limit: 10000
 
         tagCloud:
+            limit: 10000
+            
+        categoriesCloud:
             limit: 10000
 
     opengraph:
