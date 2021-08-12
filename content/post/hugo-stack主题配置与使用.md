@@ -282,6 +282,8 @@ widget:
 
 1. 拷贝主题目录`/layouts/partials/article/components/footer.html`到网站根目录，修改为：
 
+**注意：**这里我将`Edit this post`改成`在 GitHub 上编辑此页`
+
 ```html
 <footer class="article-footer">
     {{ partial "article/components/tags" . }}
@@ -296,7 +298,7 @@ widget:
 	{{ if and (.Site.Params.article.edit.enabled) (not (eq .Params.edit false)) }}
     <section class="article-edit">
         {{ partial "helper/icon" "edit" }}
-        <span><a href="https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path "\\" "/" }}" target="_blank">Edit this post</a></span>
+        <span><a href="https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path "\\" "/" }}" target="_blank">在 GitHub 上编辑此页</a></span>
     </section>
     {{ end }}
 
