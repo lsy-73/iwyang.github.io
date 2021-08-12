@@ -1,5 +1,5 @@
 baseurl: /
-languageCode: en-us
+languageCode: zh-CN
 theme: hugo-theme-stack
 paginate: 10
 title: Bore's Notes
