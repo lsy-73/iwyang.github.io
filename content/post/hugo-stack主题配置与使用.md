@@ -91,6 +91,8 @@ params:
         license:
             enabled: false
             default: Licensed under CC BY-NC-SA 4.0
+        edit:
+            enabled: true
 
     comments:
         enabled: true
