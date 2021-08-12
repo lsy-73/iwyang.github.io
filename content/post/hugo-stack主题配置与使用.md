@@ -278,7 +278,7 @@ widget:
 
 ## 文章底部添加`Edit this post`
 
-1. 拷贝主题目录`/layouts/partials/article/components/footer.html/`到网站根目录，修改为：
+1. 拷贝主题目录`/layouts/partials/article/components/footer.html`到网站根目录，修改为：
 
 ```html
 <footer class="article-footer">
@@ -311,7 +311,7 @@ widget:
 
 2. 编辑`config.yaml`：
 
-```diff
+```yaml
     article:
         math: false
         toc: true
@@ -319,13 +319,13 @@ widget:
         license:
             enabled: false
             default: Licensed under CC BY-NC-SA 4.0
-+        edit:
-+            enabled: true
+        edit:
+            enabled: true
 ```
 
 以后只要在Frontmatter添加`edit: false`来关闭。
 
-3. 拷贝`edit.svg`图标到网站根目录`/assets/icons`下。
+3. 拷贝`edit.svg`图标到网站根目录`/assets/icons`下。图标地址：[点击直达](https://github.com/iwyang/iwyang.github.io/tree/develop/assets/icons)
 
 ## 添加友情链接 shortcodes
 
