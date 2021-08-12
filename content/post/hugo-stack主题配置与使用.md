@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-08-09T09:15:26+08:00
+lastmod: 2021-08-12T09:15:26+08:00
 draft: false
 toc: true
 weight: false
@@ -40,7 +40,7 @@ git checkout　+某版本号　(你当前文件夹下的源码会变成这个版
 
 ```yaml
 baseurl: /
-languageCode: en-us
+languageCode: zh-CN
 theme: hugo-theme-stack
 paginate: 10
 title: Bore's Notes
