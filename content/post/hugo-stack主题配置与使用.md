@@ -14,14 +14,16 @@ tags: ["hugo"]
 
 又换主题了，这回使用的是[hugo-theme-stack](https://github.com/CaiJimmy/hugo-theme-stack)，无意发现这款主题，正合我意，够简单，最重要的是支持本地搜索，再不用弄哪个`Alogia`了。
 
-## 下载主题
+## 下载主题&更新主题
+
+1. 下载主题
 
 ```bash
 git init
 git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
 ```
 
-## 更新主题
+2. 更新主题
 
 ```bash
 git submodule update --remote
@@ -508,30 +510,6 @@ widget:
     categoriesCloud:
         title: 
             other: 分类
-```
-
-## 给文章加上思源宋体
-
-在站点根目录新建文件 `layouts/partials/head/custom.html`， 内容如下：
-
-```html
-<style>
-    :root {
-        --article-font-family: "Noto Serif SC", var(--base-font-family);
-    }
-</style>
-
-<script>
-		(function () {
-		    const customFont = document.createElement('link');
-		    customFont.href = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&display=swap";
-		
-		    customFont.type = "text/css";
-		    customFont.rel = "stylesheet";
-		
-		    document.head.appendChild(customFont);
-		}());
-</script>
 ```
 
 ## 回到顶部按钮
