@@ -8,7 +8,7 @@ menu:
     main: 
         weight: -80
         pre: user
-edit: false
+edit: true
 ---
 
 ### 关于本站
