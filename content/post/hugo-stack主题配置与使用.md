@@ -274,6 +274,57 @@ widget:
 
 > **注意**：可以按需删除图标。
 
+## 文章底部添加`Edit this post`
+
+1. 拷贝主题目录`/layouts/partials/article/components/footer.html/`到网站根目录，修改为：
+
+```html
+<footer class="article-footer">
+    {{ partial "article/components/tags" . }}
+
+    {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+    <section class="article-copyright">
+        {{ partial "helper/icon" "copyright" }}
+        <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+    </section>
+    {{ end }}
+	
+	{{ if and (.Site.Params.article.edit.enabled) (not (eq .Params.edit false)) }}
+    <section class="article-edit">
+        {{ partial "helper/icon" "edit" }}
+        <span><a href="https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path "\\" "/" }}" target="_blank">Edit this post</a></span>
+    </section>
+    {{ end }}
+
+    {{- if ne .Lastmod .Date -}}
+    <section class="article-time">
+        {{ partial "helper/icon" "clock" }}
+        <span class="article-time--modified">
+            {{ T "article.lastUpdatedOn" }} {{ .Lastmod.Format ( or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
+        </span>
+    </section>
+    {{- end -}}
+</footer>
+```
+
+2. 编辑`config.yaml`：
+
+```diff
+    article:
+        math: false
+        toc: true
+        readingTime: true 
+        license:
+            enabled: false
+            default: Licensed under CC BY-NC-SA 4.0
++        edit:
++            enabled: true
+```
+
+以后只要在Frontmatter添加`edit: false`来关闭。
+
+3. 拷贝`edit.svg`图标到网站根目录`/assets/icons`下。
+
 ## 添加友情链接 shortcodes
 
 1. 网站根目录新建文件`layouts\page\links.html`：
@@ -540,4 +591,5 @@ git submodule update --recursive --remote
 + [hugo主题stack - 银河小筑](https://yinhe.co/archives/20210401_hugo_theme_stack.html)
 + [树洞](https://blog.jimmycai.com/links/)
 + [Adding the widget tag-cloud for "categories", on the right content region on Homepage](https://github.com/CaiJimmy/hugo-theme-stack/issues/169)
++ [vinceying/Vince-blog-https://i.vince.pub/](https://github.com/vinceying/Vince-blog)
 
