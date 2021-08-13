@@ -495,20 +495,20 @@ widget:
             other: 分类
 ```
 
-## 回到顶部按钮
+## `最后更新于`前面空格太长了
 
-编辑 `themes\stack\layouts\partials\footer\components\custom-font.html`
+更新3.0出现以下问题：“最后更新于”前面空格太长了，如下图。
 
-```bash
-    //back to top
-    $.goup({
-        trigger: 300,
-        bottomOffset: 20,
-        locationOffset: 20,
-        title:  'Back to TOP',
-        titleAsText: false
-    });
+![空格太长了](https://cdn.jsdelivr.net/gh/iwyang/pic/202108121555733.png)
 
+解决方法：
+
+网站根目录新建`assets/scss/custom.scss`
+
+```scss
+.article-footer > .article-time {
+    gap: 0px;
+}
 ```
 
 ## 附：使用Git Submodule管理Hugo主题
@@ -544,4 +544,5 @@ git submodule update --recursive --remote
 + [树洞](https://blog.jimmycai.com/links/)
 + [Adding the widget tag-cloud for "categories", on the right content region on Homepage](https://github.com/CaiJimmy/hugo-theme-stack/issues/169)
 + [vinceying/Vince-blog-https://i.vince.pub/](https://github.com/vinceying/Vince-blog)
++ [“最后更新于”前面空格太长了](https://github.com/CaiJimmy/hugo-theme-stack/issues/300)
 
