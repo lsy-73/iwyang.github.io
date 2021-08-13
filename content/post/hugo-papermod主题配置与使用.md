@@ -133,7 +133,7 @@ params:
 
     editPost:
         URL: "https://github.com/iwyang/iwyang.github.io/tree/develop/content"
-        Text: "在 GitHub 上编辑此页" # edit text
+        Text: "Suggest Changes" # edit text
         appendFilePath: true # to append file path to Edit link
 
     # label:
