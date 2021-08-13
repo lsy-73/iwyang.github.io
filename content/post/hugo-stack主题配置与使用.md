@@ -278,11 +278,9 @@ widget:
 
 > **注意**：可以按需删除图标。
 
-## 文章底部添加`Edit this post`
+## 文章底部添加`在 GitHub 上编辑此页`
 
 1. 拷贝主题目录`/layouts/partials/article/components/footer.html`到网站根目录，修改为：
-
-**注意：**这里我将`Edit this post`改成`在 GitHub 上编辑此页`
 
 ```html
 <footer class="article-footer">
@@ -366,8 +364,6 @@ widget:
    
 2. 网站根目录新建文件`\layouts\shortcodes\link.html`：
 
-   
-
    ```html
    {{$URL := .Get 0}}
    {{ with .Site.GetPage $URL }}
@@ -389,10 +385,10 @@ widget:
    </div>
    {{ end }}
    ```
-
+   
    3. `网站图像`放在网站根目录`\assets\link-img\`文件夹下。
    4. 网站根目录新建文件`\data\links.json`：
-
+   
    ```json
    [
        {
