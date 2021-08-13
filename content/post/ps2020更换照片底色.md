@@ -8,7 +8,7 @@ draft: false
 toc: false
 weight: false
 image: ""
-categories: ["学习笔记"]
+categories: ["技术"]
 tags: ["ps"]
 ---
 
