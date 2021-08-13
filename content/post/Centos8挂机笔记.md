@@ -6,7 +6,7 @@ lastmod: 2020-05-18T15:33:25+08:00
 draft: false
 toc: true
 weight: false
-categories: ["建站笔记"]
+categories: ["技术"]
 tags: ["服务器"]
 ---
 

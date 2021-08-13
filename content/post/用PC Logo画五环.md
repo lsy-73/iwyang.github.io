@@ -6,7 +6,7 @@ lastmod: 2020-07-12T09:16:25+08:00
 draft: false
 toc: false
 weight: false
-categories: ["学习笔记"]
+categories: ["技术"]
 tags: ["tips"]
 ---
 

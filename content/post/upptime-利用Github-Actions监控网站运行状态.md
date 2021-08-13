@@ -8,7 +8,7 @@ draft: false
 toc: true
 weight: false
 image: ""
-categories: ["建站笔记"]
+categories: ["技术"]
 tags: ["github actions"]
 ---
 

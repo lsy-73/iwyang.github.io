@@ -6,7 +6,7 @@ lastmod: 2021-08-06T22:44:25+08:00
 draft: false
 toc: true
 weight: false
-categories: ["建站笔记"]
+categories: ["技术"]
 tags: ["hugo"]
 ---
 

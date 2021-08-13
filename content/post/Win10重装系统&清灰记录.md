@@ -6,7 +6,7 @@ lastmod: 2020-05-24T14:36:25+08:00
 draft: false
 toc: true
 weight: false
-categories: ["学习笔记"]
+categories: ["技术"]
 tags: ["win10"]
 ---
 

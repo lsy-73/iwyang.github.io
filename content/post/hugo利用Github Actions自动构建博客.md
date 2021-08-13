@@ -6,7 +6,7 @@ lastmod: 2021-07-26T17:19:19+08:00
 draft: false
 toc: true
 weight: false
-categories: ["建站笔记"]
+categories: ["技术"]
 tags: ["hugo","github actions"]
 ---
 

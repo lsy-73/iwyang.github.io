@@ -6,7 +6,7 @@ lastmod: 2020-05-24T19:51:25+08:00
 draft: false
 toc: false
 weight: false
-categories: ["建站笔记"]
+categories: ["技术"]
 tags: ["nginx"]
 ---
 

@@ -6,7 +6,7 @@ lastmod: 2020-06-29T13:54:25+08:00
 draft: false
 toc: false
 weight: false
-categories: ["学习笔记"]
+categories: ["技术"]
 tags: ["excel"]
 ---
 

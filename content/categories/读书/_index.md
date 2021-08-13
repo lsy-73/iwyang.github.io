@@ -1,6 +1,6 @@
 ---
-title: "读书笔记"
+title: "读书"
 description: "主要是一些摘录"
-slug: "reading-notes"
+slug: "reading"
 image: "reading.jpg"
 ---

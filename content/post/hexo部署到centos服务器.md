@@ -6,7 +6,7 @@ lastmod: 2020-04-25T18:37:25+08:00
 draft: false
 toc: true
 weight: false
-categories: ["建站笔记"]
+categories: ["技术"]
 tags: ["hexo","服务器"]
 ---
 
