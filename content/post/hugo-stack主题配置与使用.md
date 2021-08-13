@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-08-12T09:15:26+08:00
+lastmod: 2021-08-13T09:15:26+08:00
 draft: false
 toc: true
 weight: false
@@ -329,58 +329,41 @@ widget:
 
 以后只要在Frontmatter添加`edit: false`来关闭。
 
-3. 拷贝`edit.svg`图标到网站根目录`/assets/icons`下。图标地址：[点击直达](https://github.com/iwyang/iwyang.github.io/tree/develop/assets/icons)
+3. 拷贝`external-link.svg`图标到网站根目录`/assets/icons`下。图标地址：[点击直达](https://github.com/iwyang/iwyang.github.io/tree/develop/assets/icons)
 
 ## 添加友情链接 shortcodes
 
 1. 网站根目录新建文件`layouts\page\links.html`：
 
    ```html
-   {{ define "body-class" }}article-page keep-sidebar{{ end }}
-   {{ define "main" }}
-       {{ partial "article/article.html" . }}
-       
-       <div class="article-list--compact links">
-           {{ $siteResources := resources }}
-           {{ range $i, $link :=  $.Site.Data.links }}
-               <article>
-                   <a href="{{ $link.website }}" target="_blank" rel="noopener">
-                       <div class="article-details">
-                           <h2 class="article-title">
-                               {{- $link.title -}}
-                           </h2>
-                           <footer class="article-time">
-                               {{ with $link.description }}
-                                   {{ . }}
-                               {{ else }}
-                                   {{ $link.website }}
-                               {{ end }}
-                           </footer>
-                       </div>
-               
-                       {{ if $link.image }}
-                           {{ $image := $siteResources.Get (delimit (slice "link-img/" $link.image) "") | resources.Fingerprint "md5" }}
-                           {{ $imageResized := $image.Resize "120x120" }}
-                           <div class="article-image">
-                               <img src="{{ $imageResized.RelPermalink }}" width="{{ $imageResized.Width }}" height="{{ $imageResized.Height }}"
-                                   loading="lazy" data-key="links-{{ $link.website }}" data-hash="{{ $image.Data.Integrity }}">
-                           </div>
-                       {{ end }}
-                   </a>
-               </article>
-           {{ end }}
-       </div>
+   <footer class="article-footer">
+       {{ partial "article/components/tags" . }}
    
-       {{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
-           {{ partial "comments/include" . }}
+       {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+       <section class="article-copyright">
+           {{ partial "helper/icon" "copyright" }}
+           <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
+       </section>
+       {{ end }}
+   	
+   	{{ if and (.Site.Params.article.edit.enabled) (not (eq .Params.edit false)) }}
+       <section class="article-edit">
+           {{ partial "helper/icon" "external-link" }}
+           <span><a href="https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path "\\" "/" }}" target="_blank">在 GitHub 上编辑此页</a></span>
+       </section>
        {{ end }}
    
-       {{ partialCached "footer/footer" . }}
-   
-       {{ partialCached "article/components/photoswipe" . }}
-   {{ end }}
+       {{- if ne .Lastmod .Date -}}
+       <section class="article-time">
+           {{ partial "helper/icon" "clock" }}
+           <span class="article-time--modified">
+               {{ T "article.lastUpdatedOn" }} {{ .Lastmod.Format ( or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
+           </span>
+       </section>
+       {{- end -}}
+   </footer>
    ```
-
+   
 2. 网站根目录新建文件`\layouts\shortcodes\link.html`：
 
    
