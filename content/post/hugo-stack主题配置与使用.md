@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-08-13T09:15:26+08:00
+lastmod: 2021-08-14T09:15:26+08:00
 draft: false
 toc: true
 weight: false
@@ -48,7 +48,7 @@ paginate: 10
 title: Bore's Notes
 
 # Change it to your Disqus shortname before using
-# disqusShortname: hugo-theme-stack
+# disqusShortname: 
 
 # GA Tracking ID
 googleAnalytics:
@@ -60,6 +60,9 @@ DefaultContentLanguage: zh-cn
 permalinks:
     post: /archives/:slug/
     page: /:slug/
+    
+# whether to use emoji code
+enableEmoji: true
 
 params:
     mainSections:

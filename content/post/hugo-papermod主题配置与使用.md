@@ -3,7 +3,7 @@ title: "Hugo Papermod主题配置与使用"
 slug: "hugo-papermod-theme"
 description: ""
 date: 2021-08-09T08:54:56+08:00
-lastmod: 2021-08-09T08:54:56+08:00
+lastmod: 2021-08-14T08:54:56+08:00
 draft: false
 toc: true
 weight: false

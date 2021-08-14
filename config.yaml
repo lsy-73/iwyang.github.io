@@ -5,7 +5,7 @@ paginate: 10
 title: Bore's Notes
 
 # Change it to your Disqus shortname before using
-# disqusShortname: hugo-theme-stack
+# disqusShortname: 
 
 # GA Tracking ID
 googleAnalytics:
@@ -17,6 +17,9 @@ DefaultContentLanguage: zh-cn
 permalinks:
     post: /archives/:slug/
     page: /:slug/
+    
+# whether to use emoji code
+enableEmoji: true
 
 params:
     mainSections:
