@@ -4,7 +4,7 @@ slug: "ps-compress-pics"
 date: 2020-08-11T09:59:25+08:00
 lastmod: 2020-08-11T09:59:25+08:00
 draft: false
-toc: true
+toc: false
 weight: false
 categories: ["技术"]
 tags: ["ps"]
