@@ -1,5 +1,5 @@
 ---
-title: "利用FTP Deploy GitHub Actions自动部署hugo到Centos8服务器"
+title: "GitHub Actions利用FTP自动部署hugo到Centos 8"
 slug: "FTP-Deploy-GitHub-Actions-hugo"
 description: ""
 date: 2021-08-15T16:39:34+08:00
@@ -9,7 +9,7 @@ toc: true
 weight: false
 image: ""
 categories: ["技术"]
-tags: ["hugo","github actions"]
+tags: ["hugo","github actions","服务器"]
 ---
 
 部署hugo到服务器，网上一般方法是利用`git hook`。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服务器。今后只要提交源码到`github`仓库，剩下的事就交给`GitHub Actions`了。
