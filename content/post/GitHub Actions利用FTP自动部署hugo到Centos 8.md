@@ -49,7 +49,7 @@ systemctl start nginx
 systemctl enable nginx
 ```
 
-如果开启了防火墙，记得添加 HTTP 和 HTTPS 端口到防火墙允许列表。
+如果开启了防火墙，记得添加 HTTP 和 HTTPS 端口到防火墙允许列表。(最好关闭防火墙)
 
 ```bash
 firewall-cmd --permanent --zone=public --add-service=http 
@@ -262,23 +262,11 @@ sudo chmod 755 /var/www/blog
 sudo chown -R admin: /var/www/blog
 ```
 
-
-
-### 打开防火墙
-
-如果你正在运行 FTP 服务器，你需要允许 FTP 流量通过防火墙。
-
-打开`21`端口(FTP 命令端口),`20`端口（FTP 数据端口） 和 `30000-31000`(被动模式端口范围)，在你的防火墙中，输入下面的命令：
+### 关闭防火墙
 
 ```bash
-sudo firewall-cmd --permanent --add-port=20-21/tcp
-sudo firewall-cmd --permanent --add-port=30000-31000/tcp
-```
-
-输入下面的命令，重新加载防火墙规则：
-
-```bash
-firewall-cmd --reload
+systemctl stop firewalld.service
+systemctl disable firewalld.service 
 ```
 
 ### 重启vsftpd服务
