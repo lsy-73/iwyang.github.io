@@ -76,24 +76,34 @@ userlist_deny=NO
 
 ### 创建FTP用户
 
-创建一个新用户，名为admin:
++ 创建一个新用户，名为git:
 
 ```bash
 sudo adduser git
 sudo passwd git
 ```
 
-将用户添加到允许的FTP用户列表中：
++ 将用户添加到允许的FTP用户列表中：
 
 ```bash
 echo "git" | sudo tee -a /etc/vsftpd/user_list
 ```
 
-设置正确的权限（使ftp用户可以上传网站文件到相应目录）：
++ 设置正确的权限
+
+为了使ftp用户可以上传网站文件到相应目录：
 
 ```bash
 sudo chmod 755 /var/www/hexo
 sudo chown -R git: /var/www/hexo
+```
+
++ 重启vsftpd服务。
+
+保存文件并重新启动vsftpd服务，以使更改生效：
+
+```bash
+sudo systemctl restart vsftpd
 ```
 
 ## 配置`FTP_MIRROR_PASSWORD`
