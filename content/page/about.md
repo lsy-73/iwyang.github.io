@@ -17,4 +17,4 @@ edit: true
 
 ### :wave: 关于我
 
-用ftp把
+没什么好说的
