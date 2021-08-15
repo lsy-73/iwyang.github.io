@@ -17,4 +17,3 @@ edit: true
 
 ### :wave: 关于我
 
-还差一个gitee，感觉没必要。
