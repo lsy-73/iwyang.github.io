@@ -1,0 +1,31 @@
+name: GitHub Page Deploy
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build Hugo
+        run: hugo --minify
+
+      - name: Deploy Hugo to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
+        # cname:
