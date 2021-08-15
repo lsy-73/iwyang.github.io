@@ -97,6 +97,17 @@ params:
             region:
             path:
             lang:
+            
+        giscus:
+            repo:
+            repoID:
+            category:
+            categoryID:
+            mapping:
+            lightTheme:
+            darkTheme:
+            reactionsEnabled: 1
+            emitMetadata: 0
 
     widgets:
         enabled:
@@ -152,8 +163,8 @@ menu:
           weight: -100
           pre: home
           params:
-            ### For demonstration purpose, the home link will be open in a new tab
-            newTab: false
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: true
 
 related:
     includeNewer: true

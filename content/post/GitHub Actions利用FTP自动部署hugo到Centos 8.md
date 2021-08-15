@@ -49,13 +49,11 @@ systemctl start nginx
 systemctl enable nginx
 ```
 
-如果开启了防火墙，记得添加 HTTP 和 HTTPS 端口到防火墙允许列表。(最好关闭防火墙)
+关闭防火墙：
 
 ```bash
-firewall-cmd --permanent --zone=public --add-service=http 
-firewall-cmd --permanent --zone=public --add-service=https
-firewall-cmd --reload
-systemctl restart firewalld.service
+systemctl stop firewalld.service
+systemctl disable firewalld.service 
 ```
 
 配置完成后，访问使用浏览器服务器 ip ，如果能看到以下界面，表示运行成功。
