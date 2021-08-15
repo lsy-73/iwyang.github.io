@@ -2,7 +2,7 @@
 title: "hugo利用Github Actions自动构建博客"
 slug: "hugo-github-actions"
 date: 2020-07-06T17:19:19+08:00
-lastmod: 2021-07-26T17:19:19+08:00
+lastmod: 2021-08-15T17:19:19+08:00
 draft: false
 toc: true
 weight: false
@@ -42,6 +42,64 @@ ssh-keygen -t rsa
 
 点击博客仓库的Settings->Secrets->Add a new secret，Name填写`ACTIONS_DEPLOY_KEY`，Value填写`id_rsa`文件的内容。
 
+## 利用`FTP-Deploy-Action`上传文件
+
+这里在`Github actions`里利用`FTP-Deploy-Action`上传文件到服务器。项目地址：[SamKirkland](https://github.com/SamKirkland)/[FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action)
+
+首先是搭建ftp服务器。
+
+### 安装vsftpd
+
+```bash
+sudo yum install vsftpd -y
+```
+
+安装软件包后，启动vsftpd，并使其能够在引导时自动启动：
+
+```bash
+sudo systemctl start vsftpd
+sudo systemctl enable vsftpd
+```
+
+### 配置vsftpd
+
+```bash
+vi /etc/vsftpd/vsftpd.conf
+```
+
+在`userlist_enable=YES`下面，加上：
+
+```bash
+userlist_file=/etc/vsftpd/user_list
+userlist_deny=NO
+```
+
+### 创建FTP用户
+
+创建一个新用户，名为admin:
+
+```bash
+sudo adduser git
+sudo passwd git
+```
+
+将用户添加到允许的FTP用户列表中：
+
+```bash
+echo "git" | sudo tee -a /etc/vsftpd/user_list
+```
+
+设置正确的权限（使ftp用户可以上传网站文件到相应目录）：
+
+```bash
+sudo chmod 755 /var/www/hexo
+sudo chown -R git: /var/www/hexo
+```
+
+## 配置`FTP_MIRROR_PASSWORD`
+
+点击博客仓库的Settings->Secrets->Add a new secret，Name填写`FTP_MIRROR_PASSWORD`，Value填写用户密码。
+
 ## 配置 Github actions
 
 在博客根目录新建`.github/workflows/gh_pages.yml`文件。代码如下：
@@ -58,76 +116,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout master
-        uses: actions/checkout@v1
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Build Hugo
-        run: |
-          hugo
-
-      - name: Deploy Hugo to gh-pages
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: master
-          PUBLISH_DIR: ./public
-```
-
-如果使用的是`loveit主题`并且使用algolia搜索，则还要配置自动更新索引，需在`gh_pages.yml`里作相应修改：
-
-```bash
-name: GitHub Page Deploy
-
-on:
-  push:
-    branches:
-      - develop
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout master
-        uses: actions/checkout@v1
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: 'latest'
-          extended: true
-
-      - name: Build Hugo
-        run: |
-          hugo && npm install atomic-algolia --save && npm run algolia
-
-      - name: Deploy Hugo to gh-pages
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-          PUBLISH_BRANCH: master
-          PUBLISH_DIR: ./public
-```
-
-2021.7.17：目前使用下面的：
-
-```yaml
-name: GitHub Page Deploy
-
-on:
-  push:
-    branches:
-      - develop
-jobs:
-  build-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout master
         uses: actions/checkout@v2
-      # with:
-      # submodules: true  # Fetch Hugo themes (true OR recursive)
-      # fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
@@ -135,7 +127,7 @@ jobs:
           extended: true
 
       - name: Build Hugo
-        run: hugo --minify && npm install atomic-algolia --save && npm run algolia
+        run: hugo --minify
 
       - name: Deploy Hugo to gh-pages
         uses: peaceiris/actions-gh-pages@v3
@@ -144,19 +136,18 @@ jobs:
           PUBLISH_BRANCH: master
           PUBLISH_DIR: ./public
         # cname:
+        
+      - name: Deploy Hugo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: 104.224.191.88
+          username: git
+          password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /var/www/hexo/
 ```
 
-## 推送到远端
 
-### 修改主题文件夹
-
-将主题文件夹里的`.git`、`gitignore`、`.github`等文件夹都删除。
-
-### 修改根目录`.gitignore`文件
-
-```bash
-/public
-```
 
 ### 提交源码
 
@@ -171,7 +162,7 @@ git commit -m "备份源码"
 git push --force origin develop
 ```
 
- ### 最终部署脚本如下：
+ ### 最终部署脚本
 
 ```bash
 #!/bin/bash
@@ -185,7 +176,30 @@ git commit -m "site backup"
 git push origin develop --force
 ```
 
-## 服务器操作
+## 本地操作
+
+```bash
+git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+```
+因为使用`Submodule`管理主题，所以最后要加上 `--recursive`，因为使用 git clone 命令默认不会拉取项目中的子模块，你会发现主题文件是空的。（另外一种方法：`git submodule init && git submodule update`）
+
+### 同步更新源文件
+
+```bash
+git pull
+```
+
+### 同步主题文件
+
+```bash
+git submodule update --remote
+```
+
+运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。
+
+## 服务器通过git拉取更新
+
+2021.8.15 已经不用此方法，现在直接在`Github actions`利用`FTP-Deploy-Action`上传文件到服务器。
 
 ### 克隆仓库
 
@@ -257,28 +271,6 @@ crontab -e
 
 **注意：好像先要从源码仓库clone一份源码到本地，才能利用`git pull`拉取github已有的更新。只有先拉取github已有的更新，再在本地提交源码，github上的更新才不会被删除**。
 
-## 本地操作
-
-```bash
-git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
-```
-因为使用`Submodule`管理主题，所以最后要加上 `--recursive`，因为使用 git clone 命令默认不会拉取项目中的子模块，你会发现主题文件是空的。（另外一种方法：`git submodule init && git submodule update`）
-
----
-
-#### 同步更新源文件
-
-```bash
-git pull
-```
-
-#### 同步主题文件
-
-```bash
-git submodule update --remote
-```
-
-运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。
 
 ## 附：使用Git Submodule管理Hugo主题
 
