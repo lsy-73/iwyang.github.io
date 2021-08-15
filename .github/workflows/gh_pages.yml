@@ -29,3 +29,12 @@ jobs:
           PUBLISH_BRANCH: master
           PUBLISH_DIR: ./public
         # cname:
+        
+      - name: Deploy files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: 104.224.191.88
+          username: git
+          password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+          local-dir: ./public/
+ 
