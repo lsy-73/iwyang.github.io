@@ -498,22 +498,6 @@ widget:
             other: 分类
 ```
 
-## `最后更新于`前面空格太长了
-
-更新3.0出现以下问题：“最后更新于”前面空格太长了，如下图。
-
-![空格太长了](https://cdn.jsdelivr.net/gh/iwyang/pic/202108121555733.png)
-
-解决方法：
-
-网站根目录新建`assets/scss/custom.scss`
-
-```scss
-.article-footer > .article-time {
-    gap: 0px;
-}
-```
-
 ## 附：使用Git Submodule管理Hugo主题
 
 + 如果克隆库的时候要初始化子模块，请加上 `--recursive` 参数，如：
