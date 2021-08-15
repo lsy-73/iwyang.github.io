@@ -37,4 +37,5 @@ jobs:
           username: git
           password: ${{ secrets.FTP_MIRROR_PASSWORD }}
           local-dir: ./public/
+          server-dir: /var/www/hexo/
  
