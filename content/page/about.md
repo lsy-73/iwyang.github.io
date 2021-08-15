@@ -17,6 +17,3 @@ edit: true
 
 ### :wave: 关于我
 
-Hi there！没什么好说的！
-
-不用git，用Ftp上=上传到服务器。完美了。666

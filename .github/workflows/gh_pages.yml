@@ -30,7 +30,7 @@ jobs:
           PUBLISH_DIR: ./public
         # cname:
         
-      - name: Deploy files
+      - name: Deploy Hugo to Server
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: 104.224.191.88
