@@ -75,7 +75,7 @@ userlist_file=/etc/vsftpd/user_list
 userlist_deny=NO
 ```
 
-## 重启vsftpd服
+## 重启vsftpd服务
 
 保存文件并重新启动vsftpd服务，以使更改生效：
 
@@ -114,6 +114,29 @@ sudo chown -R admin: /home/admin
 ```bash
 chown admin 文件名
 ```
+
+## 修改vsftpd的默认根目录
+
+```bash
+vi /etc/vsftpd/vsftpd.conf
+```
+
+加入如下几行：
+
+```bash
+local_root=/var/www/html
+anon_root=/var/www/html
+```
+
+**注**：`local_root` 针对系统用户；`anon_root` 针对匿名用户，如果禁止匿名登录，不用加此项。网上说还要加上`chroot_local_user=YES`，加上此项后根本无法登陆。
+
+重新启动服务：
+
+```bash
+sudo systemctl restart vsftpd
+```
+
+任何一个用户ftp登录到这个服务器上都会chroot到/var/www/html目录下。
 
 ## 参考链接
 

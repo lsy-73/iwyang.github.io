@@ -275,6 +275,8 @@ systemctl disable firewalld.service
 sudo systemctl restart vsftpd
 ```
 
+更多有关ftp部分可查看：[centos8搭建ftp服务器](/archives/centos8-enable-ftp/)
+
 ## Github操作
 
 ### 配置`FTP_MIRROR_PASSWORD`

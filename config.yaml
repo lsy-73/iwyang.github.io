@@ -57,6 +57,13 @@ params:
     comments:
         enabled: true
         provider: waline
+        
+        disqusjs:
+            shortname:
+            apiUrl:
+            apiKey:
+            admin:
+            adminLabel:
 
         utterances:
             repo: iwyang/comments
