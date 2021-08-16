@@ -60,6 +60,8 @@ systemctl disable firewalld.service
 
 ### 创建新的网站目录
 
+**2021.8.16 为了避免出现上传文件出现错误，最好将网站目录改为FTP家目录。**
+
 Nginx 默认把网页文件存在 `/var/www/html` 目录。为了方便期间，我们在 `/var/www/` 目录下为每个站点创建一个文件夹。
 
 ```bash
@@ -327,7 +329,6 @@ jobs:
           username: admin
           password: ${{ secrets.FTP_MIRROR_PASSWORD }}
           local-dir: ./public/
-          server-dir: /var/www/blog/
 ```
 
 ## 提交源码

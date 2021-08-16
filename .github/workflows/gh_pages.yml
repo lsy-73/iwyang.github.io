@@ -37,5 +37,5 @@ jobs:
           username: admin
           password: ${{ secrets.FTP_MIRROR_PASSWORD }}
           local-dir: ./public/
-          # server-dir: /var/www/blog/
+          
  
