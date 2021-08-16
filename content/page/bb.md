@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "哔哔点啥"
 slug: "bb"
 toc: false
 menu:
