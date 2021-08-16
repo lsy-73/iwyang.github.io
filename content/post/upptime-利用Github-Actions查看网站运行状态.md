@@ -1,5 +1,5 @@
 ---
-title: "upptime-利用Github-Actions监控网站运行状态"
+title: "upptime-利用Github-Actions查看网站运行状态"
 slug: "upptime-github-actions"
 description: ""
 date: 2021-08-02T08:05:13+08:00
@@ -100,7 +100,7 @@ status-website:
 
 ## 参考链接
 
-+ [upptime – 利用 Github Actions 监控网站运行状态](https://azhuge233.com/upptime-%E5%88%A9%E7%94%A8-github-actions-%E7%9B%91%E6%8E%A7%E7%BD%91%E7%AB%99%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/)
++ [upptime – 利用 Github Actions 查看网站运行状态](https://azhuge233.com/upptime-%E5%88%A9%E7%94%A8-github-actions-%E7%9B%91%E6%8E%A7%E7%BD%91%E7%AB%99%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81/)
 
 + [upptime – GitHub](https://github.com/upptime/upptime)
 
