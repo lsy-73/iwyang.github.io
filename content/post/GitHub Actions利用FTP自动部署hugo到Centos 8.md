@@ -3,7 +3,7 @@ title: "GitHub Actions利用FTP自动部署hugo到Centos 8"
 slug: "FTP-Deploy-GitHub-Actions-hugo"
 description: ""
 date: 2021-08-15T16:39:34+08:00
-lastmod: 2021-08-15T16:39:34+08:00
+lastmod: 2021-08-16T16:39:34+08:00
 draft: false
 toc: true
 weight: false
