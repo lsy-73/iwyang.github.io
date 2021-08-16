@@ -1,6 +1,6 @@
 ---
-title: "hugo部署到coding&gitee&备份源码"
-slug: "hugo-install-on-coding-and-gitee"
+title: "hugo部署到coding&备份源码"
+slug: "hugo-install-on-coding"
 date: 2020-05-13T09:42:25+08:00
 lastmod: 2020-05-13T09:42:25+08:00
 draft: false
@@ -148,16 +148,7 @@ hugo server -D
 
 ## 部署到coding
 
-### coding上的操作
-
-操作和部署到github大同小异，首先要在coding上开通pages静态网站服务，注意以下几点：
-
-- 配置SSH公钥时要勾选启用推送权限。
-- 开启Coding Pages 服务，要先在`项目设置—功能开关`里开启持续集成和持续部署。然后进行实名认证：右上角—团队管理—团队设置—高级设置。
-- 删除项目，点左下角—项目设置—更多。
-- 添加自定义域名，添加cname记录，指向给你的网址。线路选默认。这样就保证国内线路走coding。
-- 注意：一定要选首选的域名，并且非首选域名要勾选跳转至首选域名，不然有些第三方服务数据会统计不到一起。
-- 开启 HTTPS，要先去域名 DNS 把 GitHub 的解析暂停掉，然后再重新申请 SSL 证书，然后开启强制 HTTPS 访问。（不然会申请失败）
+略
 
 ### 提交本地仓库
 
@@ -173,13 +164,9 @@ git commit -m "Add a new post"
 git push --force origin master
 ```
 
-### 解决404错误
+### 备份脚本
 
-可是当你push完hugo生成的静态页面源码到你的repo中后点Coding给你分配的访问地址后却返回的是404页面，其实解决这个问题也很简单，就是点一下上图中的立即部署就行了。
-
-### 自动备份脚本
-
-为了后续更新方便起见，可以在根目录新建一个一键自动部署脚本，命名为`deploy.sh`（如果对配置不做大的改动（例如：更换主题等），后续的更新可以使用以下脚本）
+为了后续更新方便起见，可以在根目录新建一个一键部署脚本，命名为`deploy.sh`（如果对配置不做大的改动（例如：更换主题等），后续的更新可以使用以下脚本）
 
 ```bash
 #!/bin/bash
@@ -214,76 +201,7 @@ cd ..
 chmod 777 xxx
 ```
 
----
 
-附网上找到的另外两个部署脚本：
-
-官方脚本：
-
-```bash
-#!/bin/bash
-
-echo -e "\033[0;32mDeploying updates to GitHub...\033[0m"
-
-# Build the project.
-hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
-
-# Go To Public folder
-cd public
-# Add changes to git.
-git add .
-
-# Commit changes.
-msg="rebuilding site `date`"
-if [ $# -eq 1 ]
-  then msg="$1"
-fi
-git commit -m "$msg"
-
-# Push source and build repos.
-git push origin master --force
-
-# Come Back up to the Project Root
-cd ..
-```
-
-另外一个脚本：
-
-```bash
-#!/bin/bash
-
-echo -e "\033[0;32mDeploying updates to Coding...\033[0m"
-
-# Removing existing files
-rm -rf public/*
-# Build the project
-hugo
-# Go To Public folder
-cd public
-git remote rm origin
-git init
-git remote add origin git@e.coding.net:iwyang/hugo.git
-git add .
-
-# Commit changes.
-msg="rebuilding site `date`"
-if [ $# -eq 1 ]
-  then msg="$1"
-fi
-git commit -m "$msg"
-
-# Push source and build repos.
-git push origin master --force
-
-# Come Back up to the Project Root
-cd ..
-```
-
----
-
-## 部署到gitee
-
-略
 
 ### 提交本地仓库
 
@@ -313,22 +231,6 @@ git push origin backup --force
 
 ## 备份hugo源码
 
-### 备份到gitee backup分支
-
-在gitee上新建一个backup的分支，然后把下面代码加到`deploy.sh`末尾，这种方法有个问题，那就是themes等几个文件夹无法备份，因为这几个关联的仓库不一样，不过content文件夹备份了就行。
-
-```bash
-git remote rm origin
-git init
-git checkout -b backup
-git add .
-git commit -m "备份源码"
-git remote add origin git@gitee.com:iwyang/iwyang.git
-git push --force origin backup
-```
-
----
-
 PS: **如果执行第三步`git checkout -b backup`后，提示`fatal: A branch named 'backup' already exists.`，则执行以下操作：**
 
 ```bash
@@ -337,8 +239,6 @@ git checkout -b backup  #切换分支
 ```
 
 ### 备份到github master分支
-
-按理说备份到私人仓库为好，可为了`GitInfo`以及`lastmod`生效，需要新建一个公共仓库。（注意要先备份源码到github上，再部署public里的网页到服务器上，为了方便，需要在自动部署脚本里作相应设置）
 
 ```bash
 git remote rm origin
@@ -368,16 +268,7 @@ git remote add origin git@github.com:iwyang/hugo-backup.git
 git push origin master --force
 ```
 
-在自动部署脚本里也要作相应修改。
-
----
-
-然后在`config.toml`里作如下修改
-
-```bash
-enableGitInfo = true
-gitRepo = "https://github.com/iwyang/hugo-backup"
-```
+在部署脚本里也要作相应修改。
 
 ## 总结
 
@@ -398,10 +289,6 @@ remote: warning: There are too many unreachable loose objects; run 'git prune' t
 1.输入命令：`git fsck --lost-found`，可以看到好多“dangling commit”
 
 2.清空他们：`git gc --prune=now`，完成
-
----
-
-**其他**：如果将文章由hexo换成hugo，部署在`github`时，有5篇文章会导致报错：《Hexo Next主题进阶写作技巧 》、《Hexo-NexT (v7.7.2) 主题配置》、《Hexo-NexT 新建友链页面》、《hexo版本升级》、《markdown基本语法》。
 
 ## 参考链接
 
