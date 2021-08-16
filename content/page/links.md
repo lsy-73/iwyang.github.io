@@ -6,7 +6,7 @@ menu:
     main:
         name: 友链
         pre: link
-        weight: -60
+        weight: -50
 edit: false
 comment: true
 ---
