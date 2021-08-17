@@ -1,10 +1,10 @@
 ---
-title: "哔哔点啥"
-slug: "bb"
+title: "碎碎念"
+slug: " "
 toc: false
 menu:
     main:
-        name: 哔哔 
+        name: 说说 
         weight: -80
         pre: say
 edit: false
