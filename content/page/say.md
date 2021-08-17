@@ -1,6 +1,6 @@
 ---
 title: "碎碎念"
-slug: " "
+slug: "say"
 toc: false
 menu:
     main:
