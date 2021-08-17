@@ -145,6 +145,18 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 
 右上角，保存这个快捷方式，然后长按发送到桌面，搞定！
 
+## 附：隐藏页面标题
+
+将以下代码放在文章正文最上方。
+
+```css
+<style>
+.article-header {
+    display: none;
+  }
+</style>
+```
+
 ## 参考链接
 
 [「哔哔点啥」微信公众号 2.0](https://immmmm.com/bb-by-wechat-pro/)
