@@ -1,5 +1,5 @@
 ---
-title: "碎碎念"
+title: "闲言碎语"
 slug: "say"
 toc: false
 menu:
