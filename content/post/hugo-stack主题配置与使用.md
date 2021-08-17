@@ -395,6 +395,12 @@ widget:
    ```json
    [
        {
+           "title": "Upptime",
+           "website": "https://iwyang.github.io/check",
+           "image": "upptime.jpg",
+   		"description": "利用Github Actions查看网站运行状态。"
+       },
+   	{
            "title": "ConstOwn",
            "website": "https://blog.juanertu.com",
            "image": "constown.jpg",
@@ -453,6 +459,12 @@ widget:
            "website": "https://joyli.net.cn/",
            "image": "ruo.jpg",
    		"description": "世间所有的相遇，都是久别重逢。"
+       },
+   		{
+           "title": "大大的小蜗牛",
+           "website": "https://eallion.com/",
+           "image": "eallion.jpg",
+   		"description": "机会总是垂青于有准备的人。"
        }
    ]
    ```
