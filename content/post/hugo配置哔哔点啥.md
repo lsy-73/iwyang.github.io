@@ -161,5 +161,5 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 
 [Hexo-Butterfly说说朋友圈适配（哔哔 for 腾讯云）自用](https://blog.zhheo.com/p/a6947667.html)
 
-[继续折腾Hugo](https://iamlm.com/archives/keep-learning-hugo/)
+[继续折腾Hugo—看评论](https://iamlm.com/archives/keep-learning-hugo/)
 
