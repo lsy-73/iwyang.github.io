@@ -145,7 +145,7 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 
 右上角，保存这个快捷方式，然后长按发送到桌面，搞定！
 
-## 附：隐藏页面标题
+## 隐藏页面标题
 
 将以下代码放在文章正文最上方。
 
@@ -156,6 +156,18 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
   }
 </style>
 ```
+
+## 修改`ispeak-bber`样式
+
+自己胡乱改的，居然起了作用。不管了先用再说。
+
+1.首先下载：[ispeak-bber-md.min.js](https://cdn.jsdelivr.net/npm/ispeak-bber/ispeak-bber-md.min.js)
+
+2.用`Notepad++`打开，搜索`My BiBi`改成`我的说说`。
+
+3.按F12，打开浏览器控制台，定位标题。可以发现`color: #49b1f5`前面就是标题字体大小，搜索`color: #49b1f5`，将前面的字体改成22px：`font-size: 22px`
+
+4.接着改图标大小，一样方法定位图标，可以发现`color: black`后面就是图标大小，搜索`color: black`，将后面图标大小改成22px：`font-size: 22px`
 
 ## 参考链接
 
