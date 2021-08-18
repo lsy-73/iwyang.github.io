@@ -9,7 +9,7 @@ toc: true
 weight: false
 image: ""
 categories: ["技术"]
-tags: ["github actions"]
+tags: ["github"]
 ---
 
 ## 安装GIt

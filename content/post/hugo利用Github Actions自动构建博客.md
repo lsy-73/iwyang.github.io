@@ -7,7 +7,7 @@ draft: false
 toc: true
 weight: false
 categories: ["技术"]
-tags: ["hugo","github actions"]
+tags: ["hugo","github"]
 ---
 
 ## 初始化 GitHub 仓库

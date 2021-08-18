@@ -7,7 +7,7 @@ draft: false
 toc: true
 weight: false
 categories: ["技术"]
-tags: ["hexo","github actions"]
+tags: ["hexo","github"]
 ---
 
 ## 准备两个仓库
