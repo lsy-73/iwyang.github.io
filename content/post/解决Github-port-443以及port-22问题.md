@@ -1,6 +1,6 @@
 ---
-title: "解决Github Port 443以及port 22问题"
-slug: ""
+title: "解决Github Port 443以及Port 22问题"
+slug: "github-port-443-and-22"
 description: ""
 date: 2021-08-18T11:56:29+08:00
 lastmod: 2021-08-18T11:56:29+08:00
@@ -42,7 +42,7 @@ git config --global https.proxy http://127.0.0.1:10808
 
 **二、解决`port 22`问题**
 
-1.进入.ssh的目录，使用命令`touch config`创建一个配置文件，并写入你github的配置信息。
+1.进入.ssh的目录，使用命令`touch config`创建一个配置文件，并写入你github的配置信息。（`xxxxx@xx.com`是你github的注册邮箱）
 
 ```bash
 Host github.com  
