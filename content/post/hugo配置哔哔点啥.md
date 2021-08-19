@@ -3,7 +3,7 @@ title: "hugo配置哔哔点啥"
 slug: "hugo bber"
 description: ""
 date: 2021-08-17T13:45:30+08:00
-lastmod: 2021-08-17T13:45:30+08:00
+lastmod: 2021-08-19T13:45:30+08:00
 draft: false
 toc: true
 weight: false
@@ -103,6 +103,62 @@ ispeakBber
     })
 </script>
 ```
+## 部署BBer-weixin公众号
+
+点击[部署到云开发](https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Flmm214%2Fbber-weixin&branch=main)将 BBer-weixin 微信公众号后端，一键部署到云开发。
+
+对接的微信公众号简要流程：
+
+1.点击 [bber-weixin](https://console.cloud.tencent.com/tcb/scf/index) 云函数，右上角**【编辑】**，开启**【固定IP】**，留存**公网固定IP**。
+
+2.进入[环境-HTTP访问服务](https://console.cloud.tencent.com/tcb/env/access)，获取`触发路径链接`并留存，如以下格式：
+
+```bash
+https://bb-f5c0f-222222.ap-shanghai.app.tcloudbase.com/bber-weixin
+```
+
+3.打开 [微信公众平台](https://mp.weixin.qq.com/)，进入开发-基本配置，获取`AppID`和`AppSecret`留存，修改`IP白名单`为上一步的公网固定IP。继续服务器配置：
+
+> 消息加密方式选择`兼容模式`
+
+一个`URL`，即第2步留存的触发链接；
+
+一个`Token`，预设为 `weixin`
+
+**!!!先不点，不点，不点，不点提交！！！**
+
+4.回 [bber-weixin](https://console.cloud.tencent.com/tcb/scf/index) 云函数，填入`微信公众号appid`、`微信公众号appsecret` 保存。
+
+```bash
+const token = 'weixin' // 微信公众号的服务器验证用的令牌 token
+//填入自己的微信公众号appid和appsecret
+var wxappid = '微信公众号appid',
+    wxappsecret = '微信公众号appsecret',
+```
+
+5.回 [微信公众平台](https://mp.weixin.qq.com/)，提交，验证成功！
+
+6.回 [bber-weixin](https://console.cloud.tencent.com/tcb/scf/index) 云函数，注释第44行代码，保存。
+
+```bash
+   if(tmpStr == signature){
+        //请求来源鉴权
+        //成功后注释下行代码
+        //return event.queryStringParameters.echostr //成功后注释本行代码
+        //成功后注释上行代码
+```
+
+7.手动配置或更新代码： https://github.com/lmm214/bber-weixin/tree/main/bber-weixin
+
+## 公众号发布说说
+
+接上面，部署好自己的公众号就可以用公众号发布了。这里注意利用公众号发图片。
+
+1.先在公众号发一张图片
+
+2.接着输入`/a <br>文字说明`
+
+(输入`<br>`是为了使图片和文字不处于同一行)
 
 ## Chrome + Edge 发布说说
 
@@ -122,7 +178,7 @@ Chrome 安装本地插件：
 
 本地插件`from`默认为`🌈 Chrome`
 
-## Android 捷径发布
+## Android 捷径发布说说
 
 从 Github 下载安装这款 “HTTP 快捷方式” apk，安装后继续下文操作。
 
