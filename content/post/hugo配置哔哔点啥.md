@@ -202,7 +202,9 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 
 右上角，保存这个快捷方式，然后长按发送到桌面，搞定！
 
-## 隐藏页面标题
+## 修改`ispeak-bber`样式
+
+### 隐藏页面标题
 
 将以下代码放在文章正文最上方。
 
@@ -214,7 +216,7 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 </style>
 ```
 
-## 修改`ispeak-bber`样式
+### 修改顶部文字
 
 自己胡乱改的，居然起了作用。不管了先用再说。
 
