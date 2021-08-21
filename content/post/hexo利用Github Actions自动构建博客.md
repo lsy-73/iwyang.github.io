@@ -10,12 +10,6 @@ categories: ["技术"]
 tags: ["hexo","github"]
 ---
 
-## 准备两个仓库
-
-建立两个GitHub仓库，分别叫`hexo`（私有的）和`你的GitHub用户名.github.io`（公有的）。前者用来存储博客源文件，后者用于挂载GitHub Pages。
-
-## 准备秘钥
-
 ### 生成公钥
 
 Windows 上安装 [Git for Windows](https://git-for-windows.github.io/) 之后在开始菜单里打开 Git Bash 输入：
@@ -40,128 +34,245 @@ ssh-keygen -t rsa
 
 ### 上传id_rsa
 
-在`hexo`源码仓库的`Settings`->`Secrets`里添加刚刚生成的私钥，名称为 `ACTION_DEPLOY_KEY`。
+然后在 Settings > Secrets 中新增一个 secret，命名为 `DEPLOY_KEY`，把私钥 `id_rsa` 的内容复制进去，供后续使用。
 
 ## 配置 GitHub Actions
 
 在博客根目录新建`.github/workflows/gh_pages.yml`文件。代码如下：
 
-```bash
-name: Deploy Blog
+```yaml
+name: Hexo Deploy
 
-on: [push] # 当有新push时运行
+# 只监听 source 分支的改动
+on:
+  push:
+    branches:
+      - develop
+
+# 自定义环境变量
+env:
+  POST_ASSET_IMAGE_CDN: true
 
 jobs:
-  build: # 一项叫做build的任务
+  build-and-deploy:
+    runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest # 在最新版的Ubuntu系统下运行
-    
     steps:
-    - name: Checkout # 将仓库内master分支的内容下载到工作目录
-      uses: actions/checkout@v1 # 脚本来自 https://github.com/actions/checkout
-      
-    - name: Use Node.js 10.x # 配置Node环境
-      uses: actions/setup-node@v1 # 配置脚本来自 https://github.com/actions/setup-node
-      with:
-        node-version: "10.x"
-    
-    - name: Setup Hexo env
-      env:
-        ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
-      run: |
-        # set up private key for deploy
-        mkdir -p ~/.ssh/
-        echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # 配置秘钥
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        # set git infomation
-        git config --global user.name 'iwyang' # 换成你自己的邮箱和名字
-        git config --global user.email '455343442@qq.com'
-        # install dependencies
-        npm i -g hexo-cli # 安装hexo
-        npm i
-  
-    - name: Deploy
-      run: |
-        # publish
-        hexo generate && hexo deploy # 执行部署程序
+      # 获取博客源码和主题
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Checkout theme repo
+        uses: actions/checkout@v2.3.4
+        with:
+          repository: jerryc127/hexo-theme-butterfly
+          ref: master
+          path: themes/butterfly
+
+      # 这里用的是 Node.js 14.x
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # 设置 yarn 缓存，npm 的话可以看 actions/cache@v2 的文档示例
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Use yarn cache
+        uses: actions/cache@v2.1.6
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # 安装依赖
+      - name: Install dependencies
+        run: |
+          yarn install --prefer-offline --frozen-lockfile
+
+      # 从之前设置的 secret 获取部署私钥
+      - name: Set up environment
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # 生成并部署
+      - name: Deploy
+        run: |
+          npx hexo deploy --generate
+          
+      - name: Deploy Hexo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: 104.224.191.88
+          username: admin
+          password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /var/www/blog/
 ```
+
+## github、gitee、服务器三线部署
+
+```yaml
+name: Hexo Deploy
+
+# 只监听 source 分支的改动
+on:
+  push:
+    branches:
+      - develop
+
+# 自定义环境变量
+env:
+  POST_ASSET_IMAGE_CDN: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 获取博客源码和主题
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Checkout theme repo
+        uses: actions/checkout@v2.3.4
+        with:
+          repository: jerryc127/hexo-theme-butterfly
+          ref: master
+          path: themes/butterfly
+
+      # 这里用的是 Node.js 14.x
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # 设置 yarn 缓存，npm 的话可以看 actions/cache@v2 的文档示例
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Use yarn cache
+        uses: actions/cache@v2.1.6
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # 安装依赖
+      - name: Install dependencies
+        run: |
+          yarn install --prefer-offline --frozen-lockfile
+
+      # 从之前设置的 secret 获取部署私钥
+      - name: Set up environment
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # 生成并部署
+      - name: Deploy
+        run: |
+          npx hexo deploy --generate
+          
+      - name: Deploy Hexo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: 104.224.191.88
+          username: admin
+          password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /var/www/blog/
+          
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          # 注意替换为你的 GitHub 源仓库地址
+          source-repo: git@github.com:iwyang/iwyang.github.io.git
+          # 注意替换为你的 Gitee 目标仓库地址
+          destination-repo: git@gitee.com:iwyang/iwyang.git
+
+      - name: Build Gitee Pages
+        uses: yanglbme/gitee-pages-action@main
+        with:
+          # 注意替换为你的 Gitee 用户名
+          gitee-username: iwyang
+          # 注意在 Settings->Secrets 配置 GITEE_PASSWORD
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          # 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错
+          gitee-repo: iwyang/iwyang
+          # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
+          branch: master
+```
+
+将hexo三线部署（由于部署hexo较慢，如果单独为`gitee`建立一个`workflows`，gitee会先部署完成，这样无法同步；hugo可以单独为`gitee`建立一个`workflows`，因为`hugo`部署到服务器会先于部署到`gitee`）
 
 ## 推送到远端
 
 ### 配置Hexo的_config.yml
 
-```bash
+```yaml
 deploy:
   type: git
   repo:
-    gitee: git@github.com:iwyang/iwyang.github.io.git
+    github: git@github.com:iwyang/iwyang.github.io.git
   branch: master
+  name: iwyang
+  email: 455343442@qq.com
 ```
 
-### 修改主题文件夹
-
-将主题文件夹里的`.git`、`gitignore`、`.github`等文件夹都删除。
+当然，具体步骤还是得根据自己的需求进行相应的修改。
 
 ### 提交源码
 
-今后只需备份源码到`hexo`源码分支，`gitbub action`就会自动部署博客到`iwyang.github.io`仓库。
+今后只需备份源码到`develop`分支，`gitbub action`就会自动部署博客到`iwyang.github.io`仓库。
 
-```bash
+```yaml
 git init
-git remote add origin git@github.com:iwyang/hexo.git
+git checkout -b develop
+git remote add origin git@github.com:iwyang/iwyang.github.io.git
 git add .
 git commit -m "备份源码"
-git push --force origin master
+git push --force origin develop
 ```
 
-## 总结
+### 最终部署脚本
 
-也可以只准备一个仓库`iwyang.github.io`，利用两个分支来备份。例如利用`hexo`分支备份源码，`github action`利用`master`分支部署博客。`workflows`做相应调整：
+`deploy.sh`内容：
 
 ```bash
-name: CI
-on:
-  push:
-    branches:
-      - hexo
-jobs:
-  build:
-    runs-on: ubuntu-latest
+#!/bin/bash
 
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v1
-        with:
-          ref: hexo
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          version: ${{ matrix.node_version }}
-      - name: Setup hexo
-        env:
-          ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
-        run: |
-          mkdir -p ~/.ssh/
-          echo "$ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          git config --global user.email "455343442@qq.com"
-          git config --global user.name "iwyang"
-          npm install hexo-cli -g
-          npm install
-      - name: Hexo deploy
-        run: |
-          hexo clean
-          hexo d
+echo -e "\033[0;32mDeploying updates to gitee...\033[0m"
+
+# backup
+git config --global core.autocrlf false
+git add .
+git commit -m "site backup"
+git push origin develop --force
 ```
-
-网上还有通过webhook来自动部署到服务器，不过还是觉得用`git hook`部署到服务器较好。
 
 ## 参考链接
 
-+ [1.用 GitHub Actions 自动化发布Hexo网站到 GitHub Pages](https://juejin.im/post/5da03d5e6fb9a04e046bc3a2)
-+ [2.GitHub Actions 自动部署 Hexo](https://segmentfault.com/a/1190000022360769)
-+ [3使用 webhook 自动更新博客](https://blog.cugxuan.cn/2019/03/23/Git/Use-Webhook-To-Update-Blog/)
-+ [4.Hexo使用Webhooks构建自动部署程序](https://jsonpop.cn/posts/27f296b8/)
-+ [5.WebHooks](http://devgou.com/article/Git-WebHooks/)
++ [使用 GitHub Actions 自动部署 Hexo 博客](https://printempw.github.io/use-github-actions-to-deploy-hexo-blog/)
+

@@ -381,6 +381,199 @@ git submodule update --remote
 
 运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。
 
+## github、gitee、服务器三线部署hexo
+
+将hexo三线部署（由于部署hexo较慢，如果单独为`gitee`建立一个`workflows`，gitee会先部署完成，这样无法同步；hugo可以单独为`gitee`建立一个`workflows`，因为`hugo`部署到服务器会先于部署到`gitee`）：
+
+```yaml
+name: Hexo Deploy
+
+# 只监听 source 分支的改动
+on:
+  push:
+    branches:
+      - develop
+
+# 自定义环境变量
+env:
+  POST_ASSET_IMAGE_CDN: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 获取博客源码和主题
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+
+      - name: Checkout theme repo
+        uses: actions/checkout@v2.3.4
+        with:
+          repository: jerryc127/hexo-theme-butterfly
+          ref: master
+          path: themes/butterfly
+
+      # 这里用的是 Node.js 14.x
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      # 设置 yarn 缓存，npm 的话可以看 actions/cache@v2 的文档示例
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Use yarn cache
+        uses: actions/cache@v2.1.6
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      # 安装依赖
+      - name: Install dependencies
+        run: |
+          yarn install --prefer-offline --frozen-lockfile
+
+      # 从之前设置的 secret 获取部署私钥
+      - name: Set up environment
+        env:
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
+        run: |
+          sudo timedatectl set-timezone "Asia/Shanghai"
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+      # 生成并部署
+      - name: Deploy
+        run: |
+          npx hexo deploy --generate
+          
+      - name: Deploy Hexo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: 104.224.191.88
+          username: admin
+          password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /var/www/blog/
+          
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          # 注意替换为你的 GitHub 源仓库地址
+          source-repo: git@github.com:iwyang/iwyang.github.io.git
+          # 注意替换为你的 Gitee 目标仓库地址
+          destination-repo: git@gitee.com:iwyang/iwyang.git
+
+      - name: Build Gitee Pages
+        uses: yanglbme/gitee-pages-action@main
+        with:
+          # 注意替换为你的 Gitee 用户名
+          gitee-username: iwyang
+          # 注意在 Settings->Secrets 配置 GITEE_PASSWORD
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          # 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错
+          gitee-repo: iwyang/iwyang
+          # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
+          branch: master
+```
+
+## github、gitee、服务器三线部署hugo
+
+由于部署到`github`和服务器先于`gitee`，所有可以建立两个`workflows`。
+
+1. 根目录新建`.github/workflows/deploy.yml`（用于部署到`github`和服务器）
+
+```bash
+name: GitHub Page Deploy
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2.3.4
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.5.0
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Build Hugo
+        run: hugo --minify
+
+      - name: Deploy Hugo to gh-pages
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
+        # cname:
+        
+      - name: Deploy Hugo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: 104.224.191.88
+          username: admin
+          password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /var/www/blog/
+```
+
+2. 根目录新建`.github/workflows/Sync to Gitee.yml`（用于部署到`gitee`）
+
+```yaml
+name: Sync to Gitee
+
+on:
+  push:
+    branches: develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          # 注意替换为你的 GitHub 源仓库地址
+          source-repo: git@github.com:iwyang/iwyang.github.io.git
+          # 注意替换为你的 Gitee 目标仓库地址
+          destination-repo: git@gitee.com:iwyang/iwyang.git
+
+      - name: Build Gitee Pages
+        uses: yanglbme/gitee-pages-action@main
+        with:
+          # 注意替换为你的 Gitee 用户名
+          gitee-username: iwyang
+          # 注意在 Settings->Secrets 配置 GITEE_PASSWORD
+          gitee-password: ${{ secrets.GITEE_PASSWORD }}
+          # 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错
+          gitee-repo: iwyang/iwyang
+          # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
+          branch: master
+```
+
 ## 参考链接
 
 [1.从 0 开始搭建 hexo 博客](https://eliyar.biz/how_to_build_hexo_blog/)

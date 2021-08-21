@@ -111,6 +111,8 @@ ispeakBber
 
 1.点击 [bber-weixin](https://console.cloud.tencent.com/tcb/scf/index) 云函数，右上角**【编辑】**，开启**【固定IP】**，留存**公网固定IP**。
 
+> 我将from `微信公众号`改成了`💎 WeChat`
+
 2.进入[环境-HTTP访问服务](https://console.cloud.tencent.com/tcb/env/access)，获取`触发路径链接`并留存，如以下格式：
 
 ```bash
@@ -152,13 +154,15 @@ var wxappid = '微信公众号appid',
 
 ## 公众号发布说说
 
-接上面，部署好自己的公众号就可以用公众号发布了。这里注意利用公众号发图片。
+~~接上面，部署好自己的公众号就可以用公众号发布了。这里注意利用公众号发图片。~~
 
 1.先在公众号发一张图片
 
 2.接着输入`/a <br>文字说明`
 
 (输入`<br>`是为了使图片和文字不处于同一行)
+
+注意：用公众号发图片会一连发几张，不知道是什么原因，以后就用浏览器插件发图片，注意**比例 16:9，长度568px**
 
 ## Chrome + Edge 发布说说
 
@@ -192,7 +196,7 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key=
 
 至于 key、from，我们设置为常量，text 则设置为变量 content，每次发布的时候填写说说内容。
 
-点击 URL 右侧的 {}，选择添加变量。常量 key 为你云函数里的 key，如果没有特别设置就是 bber。from 我们设置一个好玩的如`📱 Android 11`。添加一个变量 content。
+点击 URL 右侧的 {}，选择添加变量。常量 key 为你云函数里的 key，如果没有特别设置就是 bber。from 我们设置一个好玩的如`📱 Android 11`。添加一个变量 content。（个人觉得from直接设置为`Android`就行，不然免得以后安卓升级版本，还要跟着修改。）
 
 接着回到 URL 页面，补充完刚才添加的常量和变量，如以下格式：
 
@@ -228,6 +232,19 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 
 4.接着改图标大小，一样方法定位图标，可以发现`color: black`后面就是图标大小，搜索`color: black`，将后面图标大小改成22px：`font-size: 22px`
 
+### 修复说说出现图片时，顶部空白过大问题
+
+搜索`white-space`作如下修改
+
+```diff
+- {\n  padding: 10px 0;\n  white-space: pre-wrap;\n}
++ {\n  padding: 0.8rem 0;\n}
+```
+
+~~注意：利用微信公众号发图片后追加文字说明，前面要加个换行符，要不然图片和文字处在同一行。~~
+
+注意：用公众号发图片会一连发几张，不知道是什么原因，以后就用浏览器插件发图片，注意**比例 16:9，长度568px**
+
 ## 参考链接
 
 [「哔哔点啥」微信公众号 2.0](https://immmmm.com/bb-by-wechat-pro/)
@@ -240,9 +257,9 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 
 [给 bber 换个皮肤](https://www.antmoe.com/posts/7ec820ee/)
 
-[ispeak-bber](https://gitlab.com/DreamyTZK/ispeak-bber)
-
 [Hexo-Butterfly说说朋友圈适配（哔哔 for 腾讯云）自用](https://blog.zhheo.com/p/a6947667.html)
 
 [继续折腾Hugo—看评论](https://iamlm.com/archives/keep-learning-hugo/)
+
+[ispeak-bber](https://gitlab.com/DreamyTZK/ispeak-bber)
 
