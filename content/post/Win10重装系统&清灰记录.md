@@ -4,7 +4,7 @@ slug: "win10-reinstall-system"
 date: 2020-05-24T14:36:25+08:00
 lastmod: 2021-08-29T14:36:25+08:00
 draft: false
-toc: true
+toc: false
 weight: false
 categories: ["技术"]
 tags: ["win10"]
