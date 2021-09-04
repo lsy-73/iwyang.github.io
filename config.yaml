@@ -185,12 +185,13 @@ related:
           weight: 200
 
 markup:
+    goldmark:
+        renderer:
+            ## Set to true if you have HTML content inside Markdown
+            unsafe: true
     tableOfContents:
         endLevel: 4
         ordered: true
         startLevel: 2
     highlight:
         noClasses: false
-    goldmark:
-        renderer:
-            unsafe: true
