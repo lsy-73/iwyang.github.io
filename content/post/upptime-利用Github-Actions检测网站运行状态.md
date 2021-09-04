@@ -1,5 +1,5 @@
 ---
-title: "upptime-利用Github-Actions查看网站运行状态"
+title: "upptime-利用Github-Actions检测网站运行状态"
 slug: "upptime-github-actions"
 description: ""
 date: 2021-08-02T08:05:13+08:00
