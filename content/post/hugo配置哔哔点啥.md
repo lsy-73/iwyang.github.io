@@ -3,7 +3,7 @@ title: "hugo配置哔哔点啥"
 slug: "hugo bber"
 description: ""
 date: 2021-08-17T13:45:30+08:00
-lastmod: 2021-08-19T13:45:30+08:00
+lastmod: 2021-09-12T13:45:30+08:00
 draft: false
 toc: true
 weight: false
@@ -244,6 +244,30 @@ https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key={key}&from={f
 ~~注意：利用微信公众号发图片后追加文字说明，前面要加个换行符，要不然图片和文字处在同一行。~~
 
 注意：用公众号发图片会一连发几张，不知道是什么原因，以后就用浏览器插件发图片，注意**比例 16:9，长度568px**
+
+### 解决公众号连续发多张图片
+
+云函数代码问题，改成下面这样即可（**还未测试**）：
+
+```bash
+104行
+let res = await cloudRequest(cloudHttpUrl,cloudKey,createTime,content)
+
+124行
+let res = await cloudRequest(cloudHttpUrl,cloudKey,createTime,content)
+
+160行
+function cloudRequest(cloudHttpUrl,cloudKey,createTime,content){
+```
+
+中，删掉 “createTime,”，接着
+
+```bash
+162行
+var param1 = {'key': cloudKey,'time': createTime,'text': content,'from':'微信公众号'}
+```
+
+删掉 “’time’: createTime,” 就解决了。
 
 ## 参考链接
 
