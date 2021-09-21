@@ -115,6 +115,13 @@ params:
             darkTheme:
             reactionsEnabled: 1
             emitMetadata: 0
+            
+        gitalk:
+            owner: 
+            admin:  
+            repo: 
+            clientID: 
+            clientSecret: 
 
     widgets:
         enabled:
