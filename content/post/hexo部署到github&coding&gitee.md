@@ -48,11 +48,11 @@ ssh-keygen -t rsa
 在电脑任意目录新建一个文件夹 `hexo`，进入文件夹，在空白处点击右键选择 Git Bash，输入：
 
 ```bash
-npm install -g hexo-cli
-hexo init
+npm install hexo-cli -g
+hexo init blog
+cd blog
 npm install
-hexo d -fg
-hexo serve
+hexo server
 ```
 
 这样便在本地初始化了 Hexo 文件夹，然后输入：
