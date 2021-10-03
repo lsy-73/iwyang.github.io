@@ -337,32 +337,49 @@ widget:
 1. 网站根目录新建文件`layouts\page\links.html`：
 
    ```html
-   <footer class="article-footer">
-       {{ partial "article/components/tags" . }}
+   {{ define "body-class" }}article-page keep-sidebar{{ end }}
+   {{ define "main" }}
+       {{ partial "article/article.html" . }}
+       
+       <div class="article-list--compact links">
+           {{ $siteResources := resources }}
+           {{ range $i, $link :=  $.Site.Data.links }}
+               <article>
+                   <a href="{{ $link.website }}" target="_blank" rel="noopener">
+                       <div class="article-details">
+                           <h2 class="article-title">
+                               {{- $link.title -}}
+                           </h2>
+                           <footer class="article-time">
+                               {{ with $link.description }}
+                                   {{ . }}
+                               {{ else }}
+                                   {{ $link.website }}
+                               {{ end }}
+                           </footer>
+                       </div>
+               
+                       {{ if $link.image }}
+                           {{ $image := $siteResources.Get (delimit (slice "link-img/" $link.image) "") | resources.Fingerprint "md5" }}
+                           {{ $imageResized := $image.Resize "120x120" }}
+                           <div class="article-image">
+                               <img src="{{ $imageResized.RelPermalink }}" width="{{ $imageResized.Width }}" height="{{ $imageResized.Height }}"
+                                   loading="lazy" data-key="links-{{ $link.website }}" data-hash="{{ $image.Data.Integrity }}">
+                           </div>
+                       {{ end }}
+                   </a>
+               </article>
+           {{ end }}
+       </div>
    
-       {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
-       <section class="article-copyright">
-           {{ partial "helper/icon" "copyright" }}
-           <span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}</span>
-       </section>
-       {{ end }}
-   	
-   	{{ if and (.Site.Params.article.edit.enabled) (not (eq .Params.edit false)) }}
-       <section class="article-edit">
-           {{ partial "helper/icon" "external-link" }}
-           <span><a href="https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path "\\" "/" }}" target="_blank">在 GitHub 上编辑此页</a></span>
-       </section>
+       {{ if or (not (isset .Params "comments")) (eq .Params.comments "true")}} 
+           {{ partial "comments/include" . }}
        {{ end }}
    
-       {{- if ne .Lastmod .Date -}}
-       <section class="article-time">
-           {{ partial "helper/icon" "clock" }}
-           <span class="article-time--modified">
-               {{ T "article.lastUpdatedOn" }} {{ .Lastmod.Format ( or .Site.Params.dateFormat.lastUpdated "Jan 02, 2006 15:04 MST" ) }}
-           </span>
-       </section>
-       {{- end -}}
-   </footer>
+       {{ partialCached "footer/footer" . }}
+   
+       {{ partialCached "article/components/photoswipe" . }}
+   {{ end }}
    ```
    
 2. 网站根目录新建文件`\layouts\shortcodes\link.html`：

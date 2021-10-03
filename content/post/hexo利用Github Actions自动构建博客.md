@@ -10,7 +10,7 @@ categories: ["技术"]
 tags: ["hexo","github"]
 ---
 
-### 生成公钥
+## 生成公钥
 
 Windows 上安装 [Git for Windows](https://git-for-windows.github.io/) 之后在开始菜单里打开 Git Bash 输入：
 
