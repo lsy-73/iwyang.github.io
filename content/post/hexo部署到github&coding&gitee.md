@@ -163,9 +163,17 @@ hexo g -d
 
 使用Cloudflare，encryption mode选 Full，在Edge Certificates选项卡开启Always Use Https
 
-## 总结
+## hexo配置
 
-Cloudflare+github太慢，不用多线部署，在github上绑定域名，做cname解析后，会出现问题：**即使后来github解绑域名，域名也会跳转到github 404**，直接部署到coding就好。github作镜像，不用绑定域名，不用做cname记录。
+### 修改`_config.yml`中`updated_option`
+
+```yaml
+updated_option: 'date'
+```
+
+>`updated_option: 'date'`: 使用 date 作为 updated 的值。可被用于 Git 工作流之中，因为使用 Git 管理站点时，文件的最后修改日期常常会发生改变
+>`updated_option: 'mtime'`: 使用文件的最后修改时间。这是从 Hexo 3.0.0 开始的默认行为。
+>`updated_option: 'empty'`: 直接删除 updated。使用这一选项可能会导致大部分主题和插件无法正常工作。
 
 ## 参考链接
 
