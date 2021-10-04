@@ -166,7 +166,7 @@ params:
         toggle: true
 
         # Available values: auto, light, dark
-        default: dark
+        default: auto
 
     imageProcessing:
         cover:
