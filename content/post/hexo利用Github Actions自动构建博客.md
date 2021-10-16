@@ -38,6 +38,8 @@ ssh-keygen -t rsa
 
 ## 配置 GitHub Actions
 
+### 第一种
+
 在博客根目录新建`.github/workflows/gh_pages.yml`文件。代码如下：
 
 ```yaml
@@ -119,6 +121,88 @@ jobs:
           local-dir: ./public/
           server-dir: /var/www/blog/
 ```
+
+---
+
+### 第二种
+
+PS：第二种比第一种慢。
+
+首先确认` _config.yml` 文件中有类似如下的 GitHub Pages 配置：
+
+```yaml
+deploy:
+  type: git
+  repo:
+    github: git@github.com:iwyang/hexo.git
+  branch: gh-pages
+```
+
+#### 配置私钥
+
+- 首先在 GitHub 上打开保存 Hexo 的仓库，访问 Settings -> Secrets，然后选择 New secret;
+- 名字部分填写：HEXO_DEPLOY_KEY，注意大小写，这个后面的 GitHub Actions Workflow 要用到;
+- 在 Value 的部分填入 github-deploy-key 中的内容。
+
+#### 添加公钥
+
+- 接下来我们需要访问存放网页的仓库，也就是 Hexo 部署以后的仓库，访问 Settings -> Deploy keys;
+- 按 Add deploy key 来添加一个新的公钥；
+- 在 Title中输入：HEXO_DEPLOY_PUB 字样，当然也可以填写其它自定义的名字;
+- 在 Key 中粘贴 github-deploy-key.pub文件的内容。
+
+#### 创建 Workflow
+
+**在 Hexo 的仓库中创建一个新文件：.github/workflows/auto_deploy.yml，文件的内容如下:**
+
+```yaml
+name: auto deploy # workflow name
+
+# 只监听 source 分支的改动
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  build: # job1 id
+    runs-on: ubuntu-latest # 运行环境为最新版 Ubuntu
+    name: auto deploy
+    steps:
+    - name: Checkout # step1 获取源码
+      uses: actions/checkout@v1 # 使用 actions/checkout@v1
+      with: # 条件
+        submodules: true # Checkout private submodules(themes or something else). 当有子模块时切换分支？
+    - name: Setup Node.js 12.x
+      uses: actions/setup-node@master
+      with:
+        node-version: "12.x"
+    - name: Generate Public Files
+      run: |
+        npm i
+        npm install hexo-cli -g
+        hexo clean && hexo generate
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        deploy_key: ${{ secrets.HEXO_DEPLOY_KEY }}
+        external_repository: iwyang/hexo
+        publish_branch: public
+        publish_dir: ./public
+        commit_message: ${{ github.event.head_commit.message }}
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+    - name: Deploy Hexo to Server
+      uses: SamKirkland/FTP-Deploy-Action@4.1.0
+      with:
+        server: 104.224.191.88
+        username: hexo
+        password: ${{ secrets.FTP_MIRROR_PASSWORD }}
+        local-dir: ./public/
+        server-dir: /var/www/hexo/
+```
+
+
 
 ## github、gitee、服务器三线部署
 
@@ -275,4 +359,5 @@ git push origin develop --force
 ## 参考链接
 
 + [使用 GitHub Actions 自动部署 Hexo 博客](https://printempw.github.io/use-github-actions-to-deploy-hexo-blog/)
++ [GitHub Actions 实现 Hexo 自动部署](https://weijiajin.com/1f41c35f3517/)
 
