@@ -1,5 +1,5 @@
 ---
-title: "GitHub Actions利用FTP自动部署hugo到Centos 8"
+title: "GitHub Actions利用FTP自动部署hugo-hexo到Centos 8"
 slug: "FTP-Deploy-GitHub-Actions-hugo"
 description: ""
 date: 2021-08-15T16:39:34+08:00
@@ -572,6 +572,23 @@ jobs:
           gitee-repo: iwyang/iwyang
           # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
           branch: master
+```
+
+## 解决问题
+
+1.**Error: FTPError: 550 Remove directory operation failed**
+
+```yaml
+rm -rf /var/www/blog
+
+sudo mkdir -p /var/www/blog
+sudo chown -R $USER:$USER /var/www/blog
+sudo chmod -R 755 /var/www
+
+sudo chmod 755 /var/www/blog
+sudo chown -R admin: /var/www/blog
+
+sudo systemctl restart vsftpd
 ```
 
 ## 参考链接
