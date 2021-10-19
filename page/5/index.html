@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>汪洋的博客</title><meta name="keywords" content="个人博客,个人网站,hexo"><meta name="author" content="太和小学汪洋"><meta name="copyright" content="太和小学汪洋"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
+<meta property="og:title" content="汪洋的博客">
+<meta property="og:url" content="https://iwyang.gitee.io/page/5/index.html">
+<meta property="og:site_name" content="汪洋的博客">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg">
+<meta property="article:author" content="太和小学汪洋">
+<meta property="article:tag" content="个人博客,个人网站,hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iwyang/pic/favicon.ico"><link rel="canonical" href="https://iwyang.gitee.io/page/5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"距离上次更新已经过了","messageNext":"天，文章所描述的內容可能已经发生变化，请留意。"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '汪洋的博客',
+  isPost: false,
+  isHome: true,
+  isHighlightShrink: false,
+  isToc: false,
+  postUpdate: '2021-10-19 20:58:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/say/"><i class="fa-fw far fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="full_page" id="page-header" style="background-image: url('https://cdn.jsdelivr.net/gh/iwyang/pic/ok.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">汪洋的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/say/"><i class="fa-fw far fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="site-info"><h1 id="site-title">汪洋的博客</h1><div id="site_social_icons"><a class="social-icon" href="https://github.com/iwyang" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:iwyang@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div id="scroll-down"><i class="fas fa-angle-down scroll-down-effects"></i></div></header><main class="layout" id="content-inner"><div class="recent-posts" id="recent-posts"><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/b156363c/" title="一年级数学括号最大能填几">一年级数学括号最大能填几</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-06-01T18:02:25.000Z" title="发表于 2020-06-02 02:02:25">2020-06-02</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E5%AD%A6/">教学</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%B8%80%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/">一年级数学</a></span></div><div class="content">求“括号最大能填几”，分两步计算。例如：
+(1)  39-(   )＞14
+
+第一步，先想比14大1的数是几？14+1=15；
+
+第二步，再想39减几等于15，39-(   )=15，答案是24。
+
+
+(2)  84＞(   )+12
+
+第一步，先想比84小1的数是几，84-1=83；
+
+第二步，再想几加12等于83，答案是71。
+
+
+(3)  29+(  )＜46
+
+第一步，先想比46小1的数是几，46-1=45，是45。 
+第二步，再想29加几等于45，45-29=16，答案是16。
+
+更多有关“括号最大能填几”内容，可查看：括号里最大能填几？
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/96ae2461/" title="一年级数学一图四式问题">一年级数学一图四式问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-27T23:20:25.000Z" title="发表于 2020-05-28 07:20:25">2020-05-28</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E5%AD%A6/">教学</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%B8%80%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/">一年级数学</a></span></div><div class="content">
+什么是“一图四式”呢？
+给出一个图，写出四个算式，两道加法算式，两道减法算式。这类数学题的目的，是为了训练一年级小学生看图的能力，以及对加减法意义的理解。
+
+口诀：
+12345一图四式题，先来数左边，再来数右边，两道加法题，左边加右边，右边加左边。两位减法题，先来数总数，总数减左边，就等于右边。总数减右边，就等于左边。
+
+参考链接：一年级数学“一图四式”
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/92094531/" title="提高搜索效率的7个小技巧">提高搜索效率的7个小技巧</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-27T00:54:25.000Z" title="发表于 2020-05-27 08:54:25">2020-05-27</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/tips/">tips</a></span></div><div class="content">排除关键词方法是：减号+关键词
+功能是：排除一些  不想要的关键词
+例如：锤子 -锤子手机
+精确搜索方法是：给关键词加引号
+功能是：只搜索引号里的字
+指定网站内搜索方法是：site:域名+关键词（此处加号代表空格）
+功能是：在指定网站内搜索
+指定文件格式方法是：filetype:文件格式+关键词（此处加号代表关键词）
+功能是：指定文件格式
+指定标题搜索方法是：intitle:关键词
+功能是：搜索结果必须在标题中
+两种指定范围搜索锤子 intext:苹果:要求搜索结果中有这个关键词。
+allintext:认知心理学 发展心理学 积极心理学 ：要求三个关键词都包括在搜索结果中。
+inurl:关键字：要求在网页url中包含关键词。
+叠加使用site:douban.com 亲密关系 intext:罗兰米勒
+注意事项
+所有的冒号都是半角，也就是英文的冒号而不是中文的冒号。
+
+空格很重要，关键词之间一定要有空格。
+
+提取关键词很重要。
+
+
+参考链接
+搜索效率提升200%！8个小技巧助你快速查资料
+
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/bb464c3c/" title="联想笔记本电脑升级bios">联想笔记本电脑升级bios</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-26T02:25:25.000Z" title="发表于 2020-05-26 10:25:25">2020-05-26</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/win10/">win10</a></span></div><div class="content"> 2020.5.26　已升级安装最新bios版本：
+12018/9/3  版本：BIOS Version: E5CN63WW,EC Version:E5IT23WW
+
+
+Fn+F2进入bios，Fn+F12选择启动顺序。
+
+1.打开联想服务的驱动与下载网页：查找驱动程序及工具软件，选择在站内查找设备驱动， 输入你的电脑主机编号（可以在电脑背面的标签上找到，也可以安装联想电脑管家，会自动检测你的主机编号），确定后进入驱动下载界面。联想小新700（主机编号：R90JZRF4）直接点击：小新 700-15ISK
+2.在驱动列表中找到bios驱动，下载安装即可，当然，这个界面的所有驱动你都可以下载安装。
+总结：如果升级完bios，每回重启完电脑声音总是静音的话，下载驱动人生，重新安装声卡驱动。此外升级bios后，可解决小新700无故自动休眠问题。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/88857f5f/" title="Win10重装系统&amp;清灰记录">Win10重装系统&amp;清灰记录</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-23T22:36:25.000Z" title="发表于 2020-05-24 06:36:25">2020-05-24</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/win10/">win10</a></span></div><div class="content">Fn+F2进入bios，Fn+F12选择启动顺序。
+
+原版系统
+备份E盘文件到移动硬盘。
+
+进PE，这里使用微pe工具箱。
+
+将系统iso文件装载到虚拟光驱，然后运行setup.exe
+
+先删掉所有分区，然后给C盘分区，大小为：82703M（80*1024+100+16+567+100=82703）
+
+安装完系统再用系统自带磁盘管理给D盘和E盘分区，D盘大小为：71780M（70*1024+100=71780），剩下的给E盘。
+
+
+
+
+精简系统
+备份E盘文件到移动硬盘。
+进PE，这里使用微pe工具箱。
+用DiskGenius分区，C盘80G，D盘70G，剩余给E盘。注意给C盘分区时，勾选建立ESP分区和建立MSR分区，勾选对齐到此扇区的整数倍，选择2048扇区。给D盘和E盘分区时也要勾选对齐到2048扇区。
+用windows安装器安装系统。注意选择安装磁盘为C盘，还有选择相应的安装版本。
+
+系统安装记录
+
+
+序号
+日期
+版本
+
+
+
+1
+2020.5.24
+win10 2004
+
+
+2
+2021.8.29
+win10 21H1
+
+
+笔记本清灰记录
+
+
+序号
+日期
+备注
+
+
+
+1
+2020 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/9cf7845/" title="一年级数学上册大括号问题">一年级数学上册大括号问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-23T06:49:25.000Z" title="发表于 2020-05-23 14:49:25">2020-05-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E5%AD%A6/">教学</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%B8%80%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/">一年级数学</a></span></div><div class="content"> 大括号问题，是一年级数学一个必考题目，只有两种做法：加法或者减法。尽管很简单，我们依然要让孩子分清题目的不同表示方法，下面列出三种加法的表示：
+
+大括号表示什么意思？表示两部分合起来！问号表示什么意思？表示需要求的问题！这里必须要注意的地方，是问题的答案必须写在等号的右边，这也是很多孩子容易犯的错误之一。就是把算式写错了，尽管知道正确的结果，但是写的位置不对！
+
+用 口诀加强理解：
+
+大括号，小问号，
+在一起，我会算。
+小问号，在中间
+求一共，用加法。
+小问号，在一边，
+求部分，用减法。
+
+用这个口诀，可以加深孩子的印象。之后，我们就慢慢要给孩子用整体和部分来理解，因为这是理解加法和减法关系的基础。
+解题步骤：
+
+看？在哪儿
+求什么
+加还是减
+
+参考链接：一年级数学上册《大括号问题》
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/23bfda28/" title="Excel如何随机排">Excel如何随机排</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-22T19:38:25.000Z" title="发表于 2020-05-23 03:38:25">2020-05-23</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/excel/">excel</a></span></div><div class="content">
+首先打开需要操作的知excel表格。
+然后在E2单元个中输入“=”号，添加辅助函数rand。
+在E2单元格回车，专在E2单元格右下角下拉复制函数。
+选择属排序和筛选升序、降序都可以。
+最后可看到随机排序完成。
+
+参考：excel如何随机排序
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/bdfef9ea/" title="一年级数学下册估算问题">一年级数学下册估算问题</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-20T01:32:25.000Z" title="发表于 2020-05-20 09:32:25">2020-05-20</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%95%99%E5%AD%A6/">教学</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%B8%80%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/">一年级数学</a></span></div><div class="content"> 估算是数学里一种很重要的能力，一年级数学下册有关估算这部分内容出现在课本71页，主要讲的是两位数加两位数的进位加法的估算。首先来了解一下什么是估算，对于两位数加两位数的进位加法的估算，可以把其中一个加数看作与它最接近的“整十数”，也可以把两个加数分别看作与它们接近的“整十数”，再口算出得数。我们拿书上例题为例。淘气摘了17个苹果，笑笑摘了38个苹果，箱子能装60个苹果，让你估一估，这个箱子能装得下吗？
+12345678910111213141516171819202122这里有三种估法，如下：方法一：把17看作20             20+38=58(个)            58＜60      答：这个箱子装得下。方法二：把38看作40             17+40=57(个)            57＜60      答：这个箱子装得下。方法三：把17看作20，把38看作40            20+40=60(个)            60=60      答：这个箱子装得下。总结：三种估法都是往大了估。往大了估，可以装下，实际比估计的少，所以也能装下。 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/fd9d6b5b/" title="Excel表格调整分页打印内容">Excel表格调整分页打印内容</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-18T05:31:25.000Z" title="发表于 2020-05-18 13:31:25">2020-05-18</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/excel/">excel</a></span></div><div class="content">依次选择视图—分页预览，单击选中后，我们看到文档多出了几条蓝色的实线，分出了第1页、第2页。如果我们想要调整打印的内容，只需要按住鼠标左键，拖动蓝色实线，上下左右移动到合适位置即可，最后查看打印预览，作最后的调整。
+</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/archives/a88a84c4/" title="Flash小技巧">Flash小技巧</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2020-05-16T20:32:25.000Z" title="发表于 2020-05-17 04:32:25">2020-05-17</time></span><span class="article-meta"><span class="article-meta__separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%8A%80%E6%9C%AF/">技术</a></span><span class="article-meta tags"><span class="article-meta__separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/flash/">flash</a><span class="article-meta__link">•</span><a class="article-meta__tags" href="/tags/tips/">tips</a></span></div><div class="content">1.按住alt键，拖动直线，会拉出一个尖点。
+2.Ctrl+g 将绘图对象变成组，就不会覆盖；Ctrl+b将组打散。
+3.flash中只有两种绘画对象：线条、填充。所有绘画对象都是由线条和填充组成的。
+</div></div></div><nav id="pagination"><div class="pagination"><a class="extend prev" rel="prev" href="/page/4/#content-inner"><i class="fas fa-chevron-left fa-fw"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/#content-inner">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/#content-inner">6</a><a class="extend next" rel="next" href="/page/6/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">太和小学汪洋</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/iwyang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/iwyang" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:iwyang@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎访问我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/7273e00a/" title="三年级数学上册册第四单元《小树有多少棵》教学反思">三年级数学上册册第四单元《小树有多少棵》教学反思</a><time datetime="2021-10-09T12:09:52.000Z" title="发表于 2021-10-09 20:09:52">2021-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/fe24fa8e/" title="三年级数学上册册第四单元《小树有多少棵》教学设计">三年级数学上册册第四单元《小树有多少棵》教学设计</a><time datetime="2021-10-02T12:38:51.000Z" title="发表于 2021-10-02 20:38:51">2021-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/415c867f/" title="怎样才能把A3文档打印到A4纸上">怎样才能把A3文档打印到A4纸上</a><time datetime="2021-08-26T03:34:14.000Z" title="发表于 2021-08-26 11:34:14">2021-08-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/5f14ae6/" title="PS竖屏图片转横屏">PS竖屏图片转横屏</a><time datetime="2021-08-07T19:42:17.000Z" title="发表于 2021-08-08 03:42:17">2021-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/c327291f/" title="Ps2020更换照片底色">Ps2020更换照片底色</a><time datetime="2021-08-05T17:38:02.000Z" title="发表于 2021-08-06 01:38:02">2021-08-06</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+            <i class="fas fa-folder-open"></i>
+            <span>分类</span>
+            
+            </div>
+            <ul class="card-category-list" id="aside-cat-list">
+            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">技术</span><span class="card-category-list-count">22</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E5%AD%A6/"><span class="card-category-list-name">教学</span><span class="card-category-list-count">32</span></a></li>
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E4%B8%80%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/" style="font-size: 1.45em; color: rgb(113, 63, 163)">一年级数学</a><a href="/tags/%E7%BB%83%E4%B9%A0%E9%A2%98/" style="font-size: 1.19em; color: rgb(151, 147, 168)">练习题</a><a href="/tags/AE/" style="font-size: 1.15em; color: rgb(51, 97, 129)">AE</a><a href="/tags/excel/" style="font-size: 1.28em; color: rgb(80, 142, 91)">excel</a><a href="/tags/flash/" style="font-size: 1.15em; color: rgb(97, 105, 184)">flash</a><a href="/tags/tips/" style="font-size: 1.41em; color: rgb(16, 166, 113)">tips</a><a href="/tags/ps/" style="font-size: 1.28em; color: rgb(103, 1, 69)">ps</a><a href="/tags/win10/" style="font-size: 1.24em; color: rgb(156, 16, 110)">win10</a><a href="/tags/%E9%94%99%E9%A2%98%E9%9B%86/" style="font-size: 1.32em; color: rgb(13, 161, 90)">错题集</a><a href="/tags/%E4%B8%89%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/" style="font-size: 1.28em; color: rgb(0, 156, 33)">三年级数学</a><a href="/tags/%E6%95%99%E5%AD%A6%E5%8F%8D%E6%80%9D/" style="font-size: 1.24em; color: rgb(192, 70, 59)">教学反思</a><a href="/tags/%E6%95%99%E5%AD%A6%E8%AE%BE%E8%AE%A1/" style="font-size: 1.24em; color: rgb(103, 6, 89)">教学设计</a><a href="/tags/%E4%BA%8C%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/" style="font-size: 1.36em; color: rgb(80, 155, 169)">二年级数学</a><a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 1.19em; color: rgb(87, 165, 68)">论文</a><a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 1.24em; color: rgb(58, 152, 137)">视频</a><a href="/tags/pr/" style="font-size: 1.15em; color: rgb(158, 115, 64)">pr</a><a href="/tags/%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C/" style="font-size: 1.15em; color: rgb(151, 25, 33)">电子相册</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/10/"><span class="card-archive-list-date">2021年10月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">2021年08月</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">2021年07月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">2021年06月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">2021年04月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">2021年03月</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">2021年01月</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">2020年11月</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">54</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2020-04-24T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">30.8k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-10-19T12:58:10.004Z"></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://cdn.jsdelivr.net/gh/iwyang/pic/ok.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 太和小学汪洋</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
+  if (typeof pangu === 'object') pangu.autoSpacingPage()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
+      .then(() => {
+        pangu.autoSpacingPage()
+      })
+  }
+}
+
+function panguInit () {
+  if (false){
+    GLOBAL_CONFIG_SITE.isPost && panguFn()
+  } else {
+    panguFn()
+  }
+}
+
+document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script src="/js/custom.js"></script></div></body></html>
