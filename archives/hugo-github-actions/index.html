@@ -1,0 +1,390 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="初始化 GitHub 仓库 Github上新建一个名为iwyang.github.io的仓库。 配置ACTIONS_DEPLOY_KEY 生成公钥 Windows 上安装 Git for Windows"><title>hugo利用Github Actions自动构建博客</title>
+<link rel=canonical href=/archives/hugo-github-actions/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="hugo利用Github Actions自动构建博客">
+<meta property="og:description" content="初始化 GitHub 仓库 Github上新建一个名为iwyang.github.io的仓库。 配置ACTIONS_DEPLOY_KEY 生成公钥 Windows 上安装 Git for Windows">
+<meta property="og:url" content="/archives/hugo-github-actions/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:tag" content="github"><meta property="article:published_time" content="2020-07-06T17:19:19+08:00"><meta property="article:modified_time" content="2021-08-15T17:19:19+08:00">
+<meta name=twitter:title content="hugo利用Github Actions自动构建博客">
+<meta name=twitter:description content="初始化 GitHub 仓库 Github上新建一个名为iwyang.github.io的仓库。 配置ACTIONS_DEPLOY_KEY 生成公钥 Windows 上安装 Git for Windows">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/hugo-github-actions/>hugo利用Github Actions自动构建博客</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-07-06</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=初始化-github-仓库>初始化 GitHub 仓库</h2>
+<p>Github上新建一个名为<code>iwyang.github.io</code>的仓库。</p>
+<h2 id=配置actions_deploy_key>配置<code>ACTIONS_DEPLOY_KEY</code></h2>
+<h3 id=生成公钥>生成公钥</h3>
+<p>Windows 上安装 <a class=link href=https://git-for-windows.github.io/ target=_blank rel=noopener>Git for Windows</a> 之后在开始菜单里打开 Git Bash 输入：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git config --global user.name <span class=s2>&#34;你的用户名&#34;</span>
+git config --global user.email <span class=s2>&#34;你的电子邮箱&#34;</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>cd</span> ~
+mkdir .ssh
+<span class=nb>cd</span> .ssh
+ssh-keygen -t rsa
+</code></pre></div><p>在系统当前用户文件夹下生成了私钥 <code>id_rsa</code> 和公钥 <code>id_rsa.pub</code>。</p>
+<h3 id=上传id_rsapub>上传id_rsa.pub</h3>
+<p>点击博客仓库的Settings->Deploy keys->add deploy key，Title填写<code>ACTIONS_DEPLOY_KEY</code>，Key填写<code>id_rsa.pub</code>文件的内容。</p>
+<h3 id=上传id_rsa>上传id_rsa</h3>
+<p>点击博客仓库的Settings->Secrets->Add a new secret，Name填写<code>ACTIONS_DEPLOY_KEY</code>，Value填写<code>id_rsa</code>文件的内容。</p>
+<h2 id=利用ftp-deploy-action上传文件>利用<code>FTP-Deploy-Action</code>上传文件</h2>
+<p>这里在<code>Github actions</code>里利用<code>FTP-Deploy-Action</code>上传文件到服务器。项目地址：<a class=link href=https://github.com/SamKirkland target=_blank rel=noopener>SamKirkland</a>/<a class=link href=https://github.com/SamKirkland/FTP-Deploy-Action target=_blank rel=noopener>FTP-Deploy-Action</a></p>
+<p>首先是搭建ftp服务器。</p>
+<h3 id=安装vsftpd>安装vsftpd</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo yum install vsftpd -y
+</code></pre></div><p>安装软件包后，启动vsftpd，并使其能够在引导时自动启动：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl start vsftpd
+sudo systemctl <span class=nb>enable</span> vsftpd
+</code></pre></div><h3 id=配置vsftpd>配置vsftpd</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/vsftpd/vsftpd.conf
+</code></pre></div><p>在<code>userlist_enable=YES</code>下面，加上：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>userlist_file</span><span class=o>=</span>/etc/vsftpd/user_list
+<span class=nv>userlist_deny</span><span class=o>=</span>NO
+</code></pre></div><h3 id=创建ftp用户>创建FTP用户</h3>
+<ul>
+<li>创建一个新用户，名为git:</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo adduser git
+sudo passwd git
+</code></pre></div><ul>
+<li>将用户添加到允许的FTP用户列表中：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>echo</span> <span class=s2>&#34;git&#34;</span> <span class=p>|</span> sudo tee -a /etc/vsftpd/user_list
+</code></pre></div><ul>
+<li>设置正确的权限</li>
+</ul>
+<p>为了使ftp用户可以上传网站文件到相应目录：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo chmod <span class=m>755</span> /var/www/hexo
+sudo chown -R git: /var/www/hexo
+</code></pre></div><ul>
+<li>重启vsftpd服务。</li>
+</ul>
+<p>保存文件并重新启动vsftpd服务，以使更改生效：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl restart vsftpd
+</code></pre></div><h2 id=配置ftp_mirror_password>配置<code>FTP_MIRROR_PASSWORD</code></h2>
+<p>点击博客仓库的Settings->Secrets->Add a new secret，Name填写<code>FTP_MIRROR_PASSWORD</code>，Value填写用户密码。</p>
+<h2 id=配置-github-actions>配置 Github actions</h2>
+<p>在博客根目录新建<code>.github/workflows/gh_pages.yml</code>文件。代码如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>GitHub Page Deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>develop</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout master</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes (true OR recursive)</span><span class=w>
+</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2.5.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
+</span><span class=w>          </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build Hugo</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hugo to gh-pages</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3.8.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>github_token</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITHUB_TOKEN }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>PUBLISH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>          </span><span class=nt>PUBLISH_DIR</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span><span class=w>        </span><span class=c># cname:</span><span class=w>
+</span><span class=w>        
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hugo to Server</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>SamKirkland/FTP-Deploy-Action@4.1.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>104.224.191.88</span><span class=w>
+</span><span class=w>          </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>git</span><span class=w>
+</span><span class=w>          </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.FTP_MIRROR_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>local-dir</span><span class=p>:</span><span class=w> </span><span class=l>./public/</span><span class=w>
+</span><span class=w>          </span><span class=nt>server-dir</span><span class=p>:</span><span class=w> </span><span class=l>/var/www/hexo/</span><span class=w>
+</span></code></pre></div><h3 id=提交源码>提交源码</h3>
+<p>初始化git，新建并切换到<code>develop</code>分支，将源码提交到<code>develop</code>分支。稍等片刻，github action会自动部署blog到<code>master</code>分支。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git init
+git checkout -b develop
+git remote add origin git@github.com:iwyang/iwyang.github.io.git
+git add .
+git commit -m <span class=s2>&#34;备份源码&#34;</span>
+git push --force origin develop
+</code></pre></div><h3 id=最终部署脚本>最终部署脚本</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> -e <span class=s2>&#34;\033[0;32mDeploying updates to gitee...\033[0m&#34;</span>
+
+<span class=c1># backup</span>
+git config --global core.autocrlf <span class=nb>false</span>
+git add .
+git commit -m <span class=s2>&#34;site backup&#34;</span>
+git push origin develop --force
+</code></pre></div><h2 id=本地操作>本地操作</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+</code></pre></div><p>因为使用<code>Submodule</code>管理主题，所以最后要加上 <code>--recursive</code>，因为使用 git clone 命令默认不会拉取项目中的子模块，你会发现主题文件是空的。（另外一种方法：<code>git submodule init && git submodule update</code>）</p>
+<h3 id=同步更新源文件>同步更新源文件</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git pull
+</code></pre></div><h3 id=同步主题文件>同步主题文件</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --remote
+</code></pre></div><p>运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。</p>
+<h2 id=服务器通过git拉取更新>服务器通过git拉取更新</h2>
+<p>2021.8.15 已经不用此方法，现在直接在<code>Github actions</code>利用<code>FTP-Deploy-Action</code>上传文件到服务器。</p>
+<h3 id=克隆仓库>克隆仓库</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>rm -rf /var/www/hexo
+git clone git@github.com:iwyang/iwyang.github.io.git /var/www/hexo
+</code></pre></div><h3 id=出现问题>出现问题</h3>
+<p>执行上一步可能会出现问题：<code> Permission denied (publickey). Could not read from remote repository</code>。</p>
+<p>解决方法：</p>
+<h4 id=服务器生成ssh-key>服务器生成ssh key</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install rsync -y
+ssh-keygen -t rsa -C <span class=s2>&#34;455343442@qq.com&#34;</span>
+</code></pre></div><p>一路回车即可，会生成你的ssh key。然后再终端下执行命令：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ssh -v git@github.com
+</code></pre></div><p>这时会报错，最后两句是：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>No more authentication methods to try.  
+　　Permission denied <span class=o>(</span>publickey<span class=o>)</span>.
+</code></pre></div><p>在终端再执行以下命令：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ssh-agent -s 
+</code></pre></div><p>接着在执行:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ssh-add ~/.ssh/id_rsa
+</code></pre></div><p>出现问题：<code>Could not open a connection to your authentication agent.</code></p>
+<p>解决方法：使用：<code>ssh-agent bash</code> 命令，然后再次使用<code>ssh-add ~/.ssh/id_rsa_name</code>这个命令就没问题了。(<strong>注意</strong>：Identity added: &mldr;这是ssh key文件路径的信息，如<code>/.ssh/id_rsa</code>)</p>
+<h4 id=配置github>配置github</h4>
+<p>打开你刚刚生成的<code>id_rsa.pub</code>，将里面的内容复制，进入你的github账号，在settings下，SSH and GPG keys下new SSH key，然后将id_rsa.pub里的内容复制到Key中，完成后Add SSH Key。</p>
+<h4 id=验证key>验证Key</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ssh -T git@github.com 
+</code></pre></div><h3 id=设置crontab定时任务>设置crontab定时任务：</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+*/5 * * * * git -C /var/www/hexo pull
+</code></pre></div><p>这样只要提交源码给github，<code>github action</code>就会帮你部署博客到<code>github page</code>，服务器通过<code>git pull</code>定时拉取更新。换台电脑不用再搭建环境，直接在gtihub新建或者修改文章，剩下的工作就交给<code>github action</code>。注意回本地电脑先<code>git pull</code>拉取更新，再提交源码。</p>
+<p><strong>注意：好像先要从源码仓库clone一份源码到本地，才能利用<code>git pull</code>拉取github已有的更新。只有先拉取github已有的更新，再在本地提交源码，github上的更新才不会被删除</strong>。</p>
+<h2 id=附使用git-submodule管理hugo主题>附：使用Git Submodule管理Hugo主题</h2>
+<ul>
+<li>如果克隆库的时候要初始化子模块，请加上 <code>--recursive</code> 参数，如：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+</code></pre></div><ul>
+<li>如果已经克隆了主库但没初始化子模块，则用：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --init --recursive
+</code></pre></div><ul>
+<li>如果已经克隆并初始化子模块，而需要从子模块的源更新这个子模块，则：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --recursive --remote
+</code></pre></div><p>更新之后主库的 git 差异中会显示新的 SHA 码，把这个差异选中提交即可。</p>
+<hr>
+<ul>
+<li>其他命令：在主仓库更新所有子模块：<code>git submodule foreach git pull origin master</code></li>
+</ul>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://yanlong.me/post/deploy-blog-use-github-actions/ target=_blank rel=noopener>1.使用Github Actions自动编译部署基于hugo的博客</a></li>
+<li><a class=link href=https://juejin.im/post/5e0d9f61f265da5d0d435a24 target=_blank rel=noopener>2.用 Hugo 自动构建 搭建 GitHub Pages</a></li>
+<li><a class=link href=https://blog.lunawen.com/posts/20200628-luna-tech-github-action-blog-autodeployment/ target=_blank rel=noopener>3.使用 GitHub Action 自动部署博客到远程服务器</a></li>
+<li><a class=link href=https://frostming.com/2020/04-26/github-actions-deploy target=_blank rel=noopener>4.使用 GitHub Actions 实现博客自动化部署</a></li>
+<li><a class=link href=https://blog.csdn.net/ywl470812087/article/details/104459288 target=_blank rel=noopener>5.解决git@github.com: Permission denied (publickey). Could not read from remote repository</a></li>
+<li><a class=link href=https://yihui.org/cn/2017/03/git-submodule/ target=_blank rel=noopener>6.GIT 子模块</a></li>
+<li><a class=link href=https://zj-git-guide.readthedocs.io/zh_CN/stable/basic/%E5%AD%90%E6%A8%A1%E5%9D%97.html target=_blank rel=noopener>7.子模块</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hugo/>hugo</a>
+<a href=/tags/github/>github</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/hugo%e5%88%a9%e7%94%a8Github%20Actions%e8%87%aa%e5%8a%a8%e6%9e%84%e5%bb%ba%e5%8d%9a%e5%ae%a2.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-08-15
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-papermod-theme/>
+<div class=article-details>
+<h2 class=article-title>Hugo Papermod主题配置与使用</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#初始化-github-仓库>初始化 GitHub 仓库</a></li>
+<li><a href=#配置actions_deploy_key>配置<code>ACTIONS_DEPLOY_KEY</code></a>
+<ol>
+<li><a href=#生成公钥>生成公钥</a></li>
+<li><a href=#上传id_rsapub>上传id_rsa.pub</a></li>
+<li><a href=#上传id_rsa>上传id_rsa</a></li>
+</ol>
+</li>
+<li><a href=#利用ftp-deploy-action上传文件>利用<code>FTP-Deploy-Action</code>上传文件</a>
+<ol>
+<li><a href=#安装vsftpd>安装vsftpd</a></li>
+<li><a href=#配置vsftpd>配置vsftpd</a></li>
+<li><a href=#创建ftp用户>创建FTP用户</a></li>
+</ol>
+</li>
+<li><a href=#配置ftp_mirror_password>配置<code>FTP_MIRROR_PASSWORD</code></a></li>
+<li><a href=#配置-github-actions>配置 Github actions</a>
+<ol>
+<li><a href=#提交源码>提交源码</a></li>
+<li><a href=#最终部署脚本>最终部署脚本</a></li>
+</ol>
+</li>
+<li><a href=#本地操作>本地操作</a>
+<ol>
+<li><a href=#同步更新源文件>同步更新源文件</a></li>
+<li><a href=#同步主题文件>同步主题文件</a></li>
+</ol>
+</li>
+<li><a href=#服务器通过git拉取更新>服务器通过git拉取更新</a>
+<ol>
+<li><a href=#克隆仓库>克隆仓库</a></li>
+<li><a href=#出现问题>出现问题</a>
+<ol>
+<li><a href=#服务器生成ssh-key>服务器生成ssh key</a></li>
+<li><a href=#配置github>配置github</a></li>
+<li><a href=#验证key>验证Key</a></li>
+</ol>
+</li>
+<li><a href=#设置crontab定时任务>设置crontab定时任务：</a></li>
+</ol>
+</li>
+<li><a href=#附使用git-submodule管理hugo主题>附：使用Git Submodule管理Hugo主题</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

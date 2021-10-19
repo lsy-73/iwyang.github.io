@@ -1,0 +1,247 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="安装 Xfce 桌面环境 yum install epel-release -y yum groupinstall xfce -y 安装 VNC 服务器 yum install tigervnc-server -y 现在安装了 VNC 服务器，下一步是运行 vncserver 命令，该命令将创建初始配置并设置密码。 vncserver 系统将提示您输入"><title>Centos8安装xfce&vnc</title>
+<link rel=canonical href=/archives/centos8-xfce-vnc/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Centos8安装xfce&vnc">
+<meta property="og:description" content="安装 Xfce 桌面环境 yum install epel-release -y yum groupinstall xfce -y 安装 VNC 服务器 yum install tigervnc-server -y 现在安装了 VNC 服务器，下一步是运行 vncserver 命令，该命令将创建初始配置并设置密码。 vncserver 系统将提示您输入">
+<meta property="og:url" content="/archives/centos8-xfce-vnc/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="服务器"><meta property="article:published_time" content="2020-05-18T14:06:25+08:00"><meta property="article:modified_time" content="2020-05-18T14:06:25+08:00">
+<meta name=twitter:title content="Centos8安装xfce&vnc">
+<meta name=twitter:description content="安装 Xfce 桌面环境 yum install epel-release -y yum groupinstall xfce -y 安装 VNC 服务器 yum install tigervnc-server -y 现在安装了 VNC 服务器，下一步是运行 vncserver 命令，该命令将创建初始配置并设置密码。 vncserver 系统将提示您输入">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/centos8-xfce-vnc/>Centos8安装xfce&vnc</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-05-18</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=安装-xfce-桌面环境>安装 Xfce 桌面环境</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install epel-release -y
+yum groupinstall xfce -y
+</code></pre></div><h2 id=安装-vnc-服务器>安装 VNC 服务器</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install tigervnc-server -y
+</code></pre></div><p>现在安装了 VNC 服务器，下一步是运行 vncserver 命令，该命令将创建初始配置并设置密码。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vncserver
+</code></pre></div><p>系统将提示您输入并确认密码，以及是否将其设置为仅查看密码。如果您选择设置仅查看密码，则用户将无法使用鼠标和键盘与 VNC 实例进行交互。<strong>所以这里要选择n</strong>。</p>
+<blockquote>
+<p>You will require a password to access your desktops.</p>
+<p>Password:
+Verify:
+Would you like to enter a view-only password (y/n)? n
+/usr/bin/xauth: file /root/.Xauthority does not exist</p>
+</blockquote>
+<p>在继续下一步之前，首先使用 vncserver 带有 -kill 选项和服务器编号作为参数的命令停止 VNC 实例。在我们的例子中，服务器在端口 5901 (:1)中运行，因此我们将使用以下命令停止它：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vncserver -kill :1
+</code></pre></div><h2 id=配置-vnc-服务器>配置 VNC 服务器</h2>
+<p>现在我们的 CentOS 服务器上安装了 Xfce 和 TigerVNC ，下一步是配置 TigerVNC 使用 Xfce 。为此，请打开以下文件：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi ~/.vnc/xstartup
+</code></pre></div><p>并将默认内容改为以下内容：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/sh
+</span><span class=cp></span><span class=nb>unset</span> SESSION_MANAGER
+<span class=nb>unset</span> DBUS_SESSION_BUS_ADDRESS
+<span class=nb>exec</span> startxfce4 
+</code></pre></div><p>保存并关闭文件。无论何时启动或重新启动 TigerVNC 服务器，都将自动执行上述脚本。</p>
+<p>如果需要将 <a class=link href=http://tigervnc.org/doc/vncserver.html target=_blank rel=noopener>附加选项</a> 传递给 VNC 服务器，则可以打开 <code>~/.vnc/config</code> 文件并在每行添加一个选项。最常见的选项列在文件中。取消注释并根据自己的喜好进行修改。这是一个例子：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=c1># securitytypes=vncauth,tlsvnc</span>
+<span class=c1># desktop=sandbox</span>
+<span class=nv>geometry</span><span class=o>=</span>1024x768
+<span class=c1># localhost</span>
+<span class=c1># alwaysshared</span>
+<span class=nv>dpi</span><span class=o>=</span><span class=m>96</span>
+</code></pre></div><h2 id=创建-systemd-单元文件>创建 Systemd 单元文件</h2>
+<p>我们将创建一个 systemd 单元文件，使我们能够根据需要轻松启动，停止和重新启动 VNC 服务，与任何其他 systemd 服务相同。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo cp /usr/lib/systemd/system/vncserver@.service /etc/systemd/system/vncserver@:1.service
+</code></pre></div><p>使用文本编辑器打开文件，并替换为以下内容（本例用户名为root）。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/systemd/system/vncserver@<span class=se>\:</span>1.service
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=o>[</span>Unit<span class=o>]</span>
+<span class=nv>Description</span><span class=o>=</span>Remote desktop service <span class=o>(</span>VNC<span class=o>)</span>
+<span class=nv>After</span><span class=o>=</span>syslog.target network.target
+
+<span class=o>[</span>Service<span class=o>]</span>
+<span class=nv>Type</span><span class=o>=</span>forking
+
+<span class=c1># Clean any existing files in /tmp/.X11-unix environment</span>
+<span class=nv>ExecStartPre</span><span class=o>=</span>/bin/sh -c <span class=s1>&#39;/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :&#39;</span>
+<span class=nv>ExecStart</span><span class=o>=</span>/usr/sbin/runuser -l root -c <span class=s2>&#34;/usr/bin/vncserver %i&#34;</span>
+<span class=nv>PIDFile</span><span class=o>=</span>/root/.vnc/%H%i.pid
+<span class=nv>ExecStop</span><span class=o>=</span>/bin/sh -c <span class=s1>&#39;/usr/bin/vncserver -kill %i &gt; /dev/null 2&gt;&amp;1 || :&#39;</span>
+
+<span class=o>[</span>Install<span class=o>]</span>
+<span class=nv>WantedBy</span><span class=o>=</span>multi-user.target
+</code></pre></div><p>保存并关闭文件。通知 systemd 我们创建了一个新的单元文件，让其重新加载：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl daemon-reload
+</code></pre></div><p>下一步是使用以下命令启用单元文件：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl <span class=nb>enable</span> vncserver@:1.service
+</code></pre></div><p>符号 <code>1</code> 后面的数字 <code>@</code> 定义了 VNC 服务将在其上运行的显示端口，在我们的情况下，这是默认设置 <code>1</code> ， VNC 服务器将在端口上侦听， <code>5901</code> 如我们在上一节中讨论的那样。</p>
+<p>执行以下命令启动 VNC 服务：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl start vncserver@:1.service
+</code></pre></div><p>验证服务是否已成功启动：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl status vncserver@:1.service
+</code></pre></div><blockquote>
+<p>● vncserver@:1.service - Remote desktop service (VNC)
+Loaded: loaded (/etc/systemd/system/vncserver@:1.service; enabled; vendor pr>
+Active: active (running) since Mon 2020-05-18 14:00:12 CST; 23min ago
+Process: 806 ExecStart=/usr/sbin/runuser -l root -c /usr/bin/vncserver :1 (co>
+Process: 767 ExecStartPre=/bin/sh -c /usr/bin/vncserver -kill :1 > /dev/null >
+Main PID: 1018 (Xvnc)
+Tasks: 0 (limit: 6193)
+Memory: 716.0K</p>
+</blockquote>
+<h2 id=连接到-vnc-服务器>连接到 VNC 服务器</h2>
+<p>下载<a class=link href=https://www.realvnc.com/en/connect/download/viewer/windows/ target=_blank rel=noopener>vnc viewer</a>，输入<code>ip:1</code>登录。</p>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://www.gobeta.net/linux/how-to-install-and-configure-vnc-on-centos-7/ target=_blank rel=noopener>如何在 CentOS 7 上安装和配置 VNC</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/>服务器</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/Centos8%e5%ae%89%e8%a3%85xfce&vnc.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos-halo/>
+<div class=article-details>
+<h2 class=article-title>在Centos服务器部署Halo</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos8-enable-ftp/>
+<div class=article-details>
+<h2 class=article-title>centos8搭建ftp服务器</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos8-gua-ji/>
+<div class=article-details>
+<h2 class=article-title>Centos8挂机笔记</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-install-on-centos/>
+<div class=article-details>
+<h2 class=article-title>Hugo部署到centos服务器</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#安装-xfce-桌面环境>安装 Xfce 桌面环境</a></li>
+<li><a href=#安装-vnc-服务器>安装 VNC 服务器</a></li>
+<li><a href=#配置-vnc-服务器>配置 VNC 服务器</a></li>
+<li><a href=#创建-systemd-单元文件>创建 Systemd 单元文件</a></li>
+<li><a href=#连接到-vnc-服务器>连接到 VNC 服务器</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

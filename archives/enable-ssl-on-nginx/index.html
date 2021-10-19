@@ -1,0 +1,406 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="启用阿里免费证书 申请证书 查看：申请免费DV试用证书 安装证书 基本操作参考：在Nginx/Tengine服务器上安装证书，这里具体讲下Nginx"><title>Nginx配置ssl证书</title>
+<link rel=canonical href=/archives/enable-ssl-on-nginx/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Nginx配置ssl证书">
+<meta property="og:description" content="启用阿里免费证书 申请证书 查看：申请免费DV试用证书 安装证书 基本操作参考：在Nginx/Tengine服务器上安装证书，这里具体讲下Nginx">
+<meta property="og:url" content="/archives/enable-ssl-on-nginx/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="nginx"><meta property="article:published_time" content="2020-05-14T10:07:25+08:00"><meta property="article:modified_time" content="2021-07-18T10:07:25+08:00">
+<meta name=twitter:title content="Nginx配置ssl证书">
+<meta name=twitter:description content="启用阿里免费证书 申请证书 查看：申请免费DV试用证书 安装证书 基本操作参考：在Nginx/Tengine服务器上安装证书，这里具体讲下Nginx">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/enable-ssl-on-nginx/>Nginx配置ssl证书</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-05-14</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=启用阿里免费证书>启用阿里免费证书</h2>
+<h3 id=申请证书>申请证书</h3>
+<p>查看：<a class=link href=https://help.aliyun.com/document_detail/156645.html target=_blank rel=noopener>申请免费DV试用证书</a></p>
+<h3 id=安装证书>安装证书</h3>
+<p>基本操作参考：<a class=link href="https://help.aliyun.com/document_detail/98728.html?spm=5176.2020520163.cas.13.6053jBDQjBDQPD" target=_blank rel=noopener>在Nginx/Tengine服务器上安装证书</a>，这里具体讲下Nginx上的配置。</p>
+<p>1.在nginx根目录（默认为/etc/nginx）下创建目录cert。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>cd</span> /etc/nginx
+mkdir cert
+</code></pre></div><p>2.把下载的证书两个文件.pem和.key上传到目录cert中。</p>
+<p>3.修改nginx配置文件。<code>vi /etc/nginx/conf.d/hexo.conf</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+    listen 80<span class=p>;</span>
+    server_name bore.vip www.bore.vip<span class=p>;</span>
+    rewrite ^<span class=o>(</span>.*<span class=o>)</span>$ https://<span class=nv>$server_name$1</span> permanent<span class=p>;</span>
+<span class=o>}</span>
+server <span class=o>{</span>
+   listen 443<span class=p>;</span>
+  root /var/www/hexo<span class=p>;</span>
+  server_name bore.vip www.bore.vip<span class=p>;</span>
+  ssl on<span class=p>;</span>
+  ssl_certificate /etc/nginx/cert/xxxx.pem<span class=p>;</span>
+  ssl_certificate_key /etc/nginx/cert/xxxx.key<span class=p>;</span>
+  ssl_session_timeout 5m<span class=p>;</span>
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2<span class=p>;</span>
+  ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<span class=p>;</span>
+  ssl_prefer_server_ciphers on<span class=p>;</span>
+  access_log  /var/log/nginx/hexo_access.log<span class=p>;</span>
+  error_log   /var/log/nginx/hexo_error.log<span class=p>;</span>
+  error_page <span class=nv>404</span> <span class=o>=</span>  /404.html<span class=p>;</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>ico<span class=p>|</span>gif<span class=p>|</span>jpg<span class=p>|</span>jpeg<span class=p>|</span>png<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      1d<span class=p>;</span>
+  <span class=o>}</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>css<span class=p>|</span>js<span class=p>|</span>txt<span class=p>|</span>xml<span class=p>|</span>swf<span class=p>|</span>wav<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      10m<span class=p>;</span>
+  <span class=o>}</span>
+  location / <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    <span class=k>if</span> <span class=o>(</span>-f <span class=nv>$request_filename</span><span class=o>)</span> <span class=o>{</span>
+    rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$  /<span class=nv>$1</span> break<span class=p>;</span>
+    <span class=o>}</span>
+  <span class=o>}</span>
+  location /nginx_status <span class=o>{</span>
+    stub_status on<span class=p>;</span>
+    access_log off<span class=p>;</span>
+ <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>4.修改hugo站点配置文件_config.toml</p>
+<p><code>baseURL = "https://bore.vip/"</code></p>
+<p>5.开启负载均衡</p>
+<p>在阿里云<a class=link href="https://yundunnext.console.aliyun.com/?spm=a2c4g.11186623.2.13.775345eav2PxV4&p=cas#/overview/cn-hangzhou" target=_blank rel=noopener>SSl证书控制台</a>，依次选择<code>部署—负载均衡—选择所有区域</code>，然后部署。</p>
+<p>6.重启nginx服务。</p>
+<p>ubuntu、centos 6</p>
+<p><code>/etc/init.d/nginx restart</code></p>
+<p>centos 7、8</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl restart nginx
+</code></pre></div><h2 id=添加-lets-encrypt-免费证书>添加 Let&rsquo;s Encrypt 免费证书</h2>
+<h3 id=ubuntu上的操作>Ubuntu上的操作</h3>
+<h4 id=安装-certbot>安装 Certbot</h4>
+<p>在 Ubuntu 上只需要简单的一行命令：</p>
+<p><code>sudo apt-get install letsencrypt</code></p>
+<p>其他的发行版可以在<a class=link href=https://certbot.eff.org/ target=_blank rel=noopener>这里</a>选择。</p>
+<h4 id=使用-webroot-自动生成证书>使用 webroot 自动生成证书</h4>
+<p>Certbot 支持多种不同的「插件」来获取证书，这里选择使用 <a class=link href=https://certbot.eff.org/docs/using.html#webroot target=_blank rel=noopener>webroot</a> 插件，它可以在不停止 Web 服务器的前提下自动生成证书，使用 <code>--webroot</code> 参数指定网站的根目录。</p>
+<p><code>letsencrypt certonly --webroot -w /var/www/hexo -d iwyang.top</code></p>
+<p>这样，在 /var/www/hexo 目录下创建临时文件 .well-known/acme-challenge ，通过这个文件来证明对域名 iwyang.top 的控制权，然后 Let’s Encrypt 验证服务器发出 HTTP 请求，验证每个请求的域的 DNS 解析，验证成功即颁发证书。</p>
+<p>生成的 pem 和 key 在 <code>/etc/letsencrypt/live/</code> 目录下</p>
+<blockquote>
+<p>cert.pem 用户证书
+chain.pem 中间证书
+fullchain.pem 证书链, chain.pem + cert.pem
+privkey.pem 证书私钥</p>
+</blockquote>
+<p>`</p>
+<h4 id=自动续期>自动续期</h4>
+<p>Let’s Encrypt 的证书有效期为 90 天，不过我们可以通过 crontab 定时运行命令更新证书。</p>
+<p>先运行以下命令来测试证书的自动更新：</p>
+<p><code>letsencrypt renew --dry-run --agree-tos</code></p>
+<p>如果一切正常，就可以编辑 crontab 定期运行以下命令：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+* <span class=m>2</span> * * * service nginx stop <span class=p>&amp;</span> letsencrypt renew <span class=p>&amp;</span> service nginx start
+</code></pre></div><h4 id=配置-nginx>配置 Nginx</h4>
+<p>修改 Nginx 配置文件中关于证书的配置：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/nginx/conf.d/hexo.conf
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+    listen 80<span class=p>;</span>
+    server_name iwyang.top www.iwyang.top<span class=p>;</span>
+    rewrite ^<span class=o>(</span>.*<span class=o>)</span>$ https://<span class=nv>$server_name$1</span> permanent<span class=p>;</span>
+<span class=o>}</span>
+server <span class=o>{</span>
+   listen 443<span class=p>;</span>
+  root /var/www/hexo<span class=p>;</span>
+  server_name iwyang.top www.iwyang.top<span class=p>;</span>
+  ssl on<span class=p>;</span>
+  ssl_certificate /etc/letsencrypt/live/iwyang.top/fullchain.pem<span class=p>;</span>
+  ssl_certificate_key /etc/letsencrypt/live/iwyang.top/privkey.pem<span class=p>;</span>
+  ssl_session_timeout 5m<span class=p>;</span>
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2<span class=p>;</span>
+  ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<span class=p>;</span>
+  ssl_prefer_server_ciphers on<span class=p>;</span>
+  access_log  /var/log/nginx/hexo_access.log<span class=p>;</span>
+  error_log   /var/log/nginx/hexo_error.log<span class=p>;</span>
+  error_page <span class=nv>404</span> <span class=o>=</span>  /404.html<span class=p>;</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>ico<span class=p>|</span>gif<span class=p>|</span>jpg<span class=p>|</span>jpeg<span class=p>|</span>png<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      1d<span class=p>;</span>
+  <span class=o>}</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>css<span class=p>|</span>js<span class=p>|</span>txt<span class=p>|</span>xml<span class=p>|</span>swf<span class=p>|</span>wav<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      10m<span class=p>;</span>
+  <span class=o>}</span>
+  location / <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    <span class=k>if</span> <span class=o>(</span>-f <span class=nv>$request_filename</span><span class=o>)</span> <span class=o>{</span>
+    rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$  /<span class=nv>$1</span> break<span class=p>;</span>
+    <span class=o>}</span>
+  <span class=o>}</span>
+  location /nginx_status <span class=o>{</span>
+    stub_status on<span class=p>;</span>
+    access_log off<span class=p>;</span>
+ <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>然后重启 Nginx ，应该就可以看到小绿标了。<code>/etc/init.d/nginx restart</code></p>
+<h3 id=centos-8上的操作>Centos 8上的操作</h3>
+<h4 id=安装certbot>安装Certbot</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install epel-release -y
+yum install certbot -y
+</code></pre></div><p>然后执行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>certbot certonly --webroot -w /var/www/hexo -d bore.vip -m 455343442@qq.com --agree-tos
+</code></pre></div><h4 id=配置nginx>配置Nginx</h4>
+<p>顶级域名参考上面Ubuntu Nginx的配置，二级域名操作如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/nginx/conf.d/hexo.conf
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+    listen 80<span class=p>;</span>
+    server_name bore.vip www.bore.vip<span class=p>;</span>
+    rewrite ^<span class=o>(</span>.*<span class=o>)</span>$ https://<span class=nv>$server_name$1</span> permanent<span class=p>;</span>
+<span class=o>}</span>
+server <span class=o>{</span>
+  listen 443<span class=p>;</span>
+  root /var/www/hexo<span class=p>;</span>
+  server_name bore.vip www.bore.vip<span class=p>;</span>
+  ssl on<span class=p>;</span>
+  ssl_certificate /etc/letsencrypt/live/bore.vip/fullchain.pem<span class=p>;</span>
+  ssl_certificate_key /etc/letsencrypt/live/bore.vip/privkey.pem<span class=p>;</span>
+  ssl_session_timeout 5m<span class=p>;</span>
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2<span class=p>;</span>
+  ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<span class=p>;</span>
+  ssl_prefer_server_ciphers on<span class=p>;</span>
+  access_log  /var/log/nginx/hexo_access.log<span class=p>;</span>
+  error_log   /var/log/nginx/hexo_error.log<span class=p>;</span>
+  error_page <span class=nv>404</span> <span class=o>=</span>  /404.html<span class=p>;</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>ico<span class=p>|</span>gif<span class=p>|</span>jpg<span class=p>|</span>jpeg<span class=p>|</span>png<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      1d<span class=p>;</span>
+  <span class=o>}</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>css<span class=p>|</span>js<span class=p>|</span>txt<span class=p>|</span>xml<span class=p>|</span>swf<span class=p>|</span>wav<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      10m<span class=p>;</span>
+  <span class=o>}</span>
+  location / <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    <span class=k>if</span> <span class=o>(</span>-f <span class=nv>$request_filename</span><span class=o>)</span> <span class=o>{</span>
+    rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$  /<span class=nv>$1</span> break<span class=p>;</span>
+    <span class=o>}</span>
+  <span class=o>}</span>
+  location /nginx_status <span class=o>{</span>
+    stub_status on<span class=p>;</span>
+    access_log off<span class=p>;</span>
+ <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>重启Nginx生效：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl restart nginx
+</code></pre></div><h4 id=证书自动更新>证书自动更新</h4>
+<p>由于这个证书的时效只有 90 天，我们需要设置自动更新的功能，帮我们自动更新证书的时效。首先先在命令行模拟证书更新：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>certbot renew --dry-run
+</code></pre></div><p>模拟更新成功的效果如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+** DRY RUN: simulating <span class=s1>&#39;certbot renew&#39;</span> close to cert expiry
+**          <span class=o>(</span>The <span class=nb>test</span> certificates below have not been saved.<span class=o>)</span>
+<span class=c1>## 可以看到两个域名续期成功</span>
+The following certs were successfully renewed:
+  /etc/letsencrypt/live/blog.bore.vip/fullchain.pem <span class=o>(</span>success<span class=o>)</span>
+  /etc/letsencrypt/live/f.bore.vip/fullchain.pem <span class=o>(</span>success<span class=o>)</span>
+<span class=c1>## 以下失败的一个域名不用管</span>
+The following certs could not be renewed:
+  /etc/letsencrypt/live/novel.bore.vip/fullchain.pem <span class=o>(</span>failure<span class=o>)</span>
+** DRY RUN: simulating <span class=s1>&#39;certbot renew&#39;</span> close to cert expiry
+**          <span class=o>(</span>The <span class=nb>test</span> certificates above have not been saved.<span class=o>)</span>
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</code></pre></div><p>在无法确认你的 nginx 配置是否正确时，一定要运行模拟更新命令，确保certbot和服务器通讯正常。使用 crontab -e 的命令来启用自动任务，命令行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+</code></pre></div><p>添加配置：（每隔两个月凌晨2:30自动执行证书更新操作）后保存退出。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=m>30</span> <span class=m>2</span> * */2 * /usr/bin/certbot renew --quiet <span class=o>&amp;&amp;</span> /bin/systemctl restart nginx
+</code></pre></div><p>查看证书有效期的命令：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>openssl x509 -noout -dates -in /etc/letsencrypt/live/bore.vip/cert.pem
+</code></pre></div><h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href="https://help.aliyun.com/document_detail/98728.html?spm=5176.2020520163.cas.13.6053jBDQjBDQPD" target=_blank rel=noopener>1.在Nginx/Tengine服务器上安装证书</a></li>
+<li><a class=link href=https://www.ratel.net.cn/2019/07/18/%E9%98%BF%E9%87%8C%E4%BA%91hexo%E7%AB%99%E7%82%B9https%E4%B9%8Bnginx%E9%85%8D%E7%BD%AE/ target=_blank rel=noopener>2.阿里云hexo站点https之nginx配置</a></li>
+<li><a class=link href=https://blog.yizhilee.com/post/letsencrypt-certificate/ target=_blank rel=noopener>3.为博客添加 Let&rsquo;s Encrypt 免费证书 </a></li>
+<li><a class=link href=https://www.cnblogs.com/gabin/p/6844481.html target=_blank rel=noopener>4.ubuntu 生成https证书 for let&rsquo;s encrypt</a></li>
+<li><a class=link href=https://blog.csdn.net/a295277302/article/details/78143010 target=_blank rel=noopener>5.Ubuntu 16设置定时任务</a></li>
+<li><a class=link href=https://blog.csdn.net/zhuangtim1987/article/details/52280409 target=_blank rel=noopener>6.Ubuntu查看crontab运行日志</a></li>
+<li><a class=link href=https://blog.csdn.net/shasharoman/article/details/80915222 target=_blank rel=noopener>7.Let&rsquo;s Encrypt证书自动更新</a></li>
+<li><a class=link href=https://juejin.im/entry/5b59c3f26fb9a04fda4e2238 target=_blank rel=noopener>8.CentOS 7 Nginx配置Let&rsquo;s Encrypt SSL证书</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/nginx/>nginx</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/Nginx%e9%85%8d%e7%bd%aessl%e8%af%81%e4%b9%a6.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-07-18
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/nginx-mu-lu/>
+<div class=article-details>
+<h2 class=article-title>Nginx开启目录浏览</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/a3-to-a4/>
+<div class=article-details>
+<h2 class=article-title>怎样才能把A3文档打印到A4纸上</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#启用阿里免费证书>启用阿里免费证书</a>
+<ol>
+<li><a href=#申请证书>申请证书</a></li>
+<li><a href=#安装证书>安装证书</a></li>
+</ol>
+</li>
+<li><a href=#添加-lets-encrypt-免费证书>添加 Let&rsquo;s Encrypt 免费证书</a>
+<ol>
+<li><a href=#ubuntu上的操作>Ubuntu上的操作</a>
+<ol>
+<li><a href=#安装-certbot>安装 Certbot</a></li>
+<li><a href=#使用-webroot-自动生成证书>使用 webroot 自动生成证书</a></li>
+<li><a href=#自动续期>自动续期</a></li>
+<li><a href=#配置-nginx>配置 Nginx</a></li>
+</ol>
+</li>
+<li><a href=#centos-8上的操作>Centos 8上的操作</a>
+<ol>
+<li><a href=#安装certbot>安装Certbot</a></li>
+<li><a href=#配置nginx>配置Nginx</a></li>
+<li><a href=#证书自动更新>证书自动更新</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

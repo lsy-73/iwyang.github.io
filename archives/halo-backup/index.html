@@ -1,0 +1,497 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="在网上查询了一下halo定时备份有三种方案：邮箱和Dropbox，以及github。 备份到QQ邮箱 安装邮件发送依赖组件 Centos 7 yum install sendmail mailx -y Centos 8 yum -y"><title>halo定时备份的方法</title>
+<link rel=canonical href=/archives/halo-backup/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="halo定时备份的方法">
+<meta property="og:description" content="在网上查询了一下halo定时备份有三种方案：邮箱和Dropbox，以及github。 备份到QQ邮箱 安装邮件发送依赖组件 Centos 7 yum install sendmail mailx -y Centos 8 yum -y">
+<meta property="og:url" content="/archives/halo-backup/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="halo"><meta property="article:published_time" content="2020-07-26T21:49:25+08:00"><meta property="article:modified_time" content="2020-07-26T21:49:25+08:00">
+<meta name=twitter:title content="halo定时备份的方法">
+<meta name=twitter:description content="在网上查询了一下halo定时备份有三种方案：邮箱和Dropbox，以及github。 备份到QQ邮箱 安装邮件发送依赖组件 Centos 7 yum install sendmail mailx -y Centos 8 yum -y">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/halo-backup/>halo定时备份的方法</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-07-26</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<p>在网上查询了一下halo定时备份有三种方案：邮箱和Dropbox，以及github。</p>
+<h2 id=备份到qq邮箱>备份到QQ邮箱</h2>
+<h3 id=安装邮件发送依赖组件><strong>安装邮件发送依赖组件</strong></h3>
+<h4 id=centos-7>Centos 7</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install sendmail mailx -y
+</code></pre></div><h4 id=centos-8>Centos 8</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum -y install postfix sendmail-cf mailx
+service postfix start
+sudo systemctl <span class=nb>enable</span> postfix
+</code></pre></div><h3 id=修改附件发送大小限制>修改附件发送大小限制</h3>
+<p>看下现在邮件的大小限制：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo postconf message_size_limit
+</code></pre></div><div class="note info">message_size_limit = 10240000</div>
+<p>差不多是10M，放大10倍，应该差不多了。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo postconf -e <span class=s2>&#34;message_size_limit = 102400000&#34;</span>
+</code></pre></div><h3 id=获得编辑备份脚本>获得&编辑备份脚本</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>wget https://raw.githubusercontent.com/iwyang/scripts/master/halo_email_backup.sh
+</code></pre></div><h4 id=创建备份文件夹>创建备份文件夹</h4>
+<div class="note primary">如果选择将文件备份到临时目录的话，这步可跳过，直接修改脚本即可。我直接跳过了这一步。</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir -p /home/back
+</code></pre></div><h4 id=修改脚本>修改脚本</h4>
+<p>脚本原来模样：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=err>#</span> <span class=nx>进入到备份文件夹</span>
+<span class=nx>cd</span> <span class=o>/</span><span class=nx>home</span><span class=o>/</span><span class=nx>back</span>
+<span class=err>#</span><span class=nx>压缩网站数据</span>
+<span class=nx>tar</span> <span class=nx>zcvf</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span> <span class=nx>网站目录</span>
+<span class=err>#</span> <span class=nx>导出数据库到备份文件夹内</span>
+<span class=nx>mysqldump</span> <span class=o>-</span><span class=nx>uroot</span> <span class=o>-</span><span class=nx>p数据库密码</span> <span class=nx>数据库名称</span> <span class=o>&gt;</span> <span class=nx>web_data_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>sql</span>
+<span class=err>#</span> <span class=nx>以附件形式发送数据库到指定邮箱</span>
+<span class=nx>echo</span> <span class=s2>&#34;Blog date&#34;</span><span class=o>|</span><span class=nx>mail</span> <span class=o>-</span><span class=nx>s</span> <span class=s2>&#34;Backup$(date +%Y-%m-%d)&#34;</span> <span class=o>-</span><span class=nx>a</span> <span class=nx>web_data_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>sql</span> <span class=nx>收件人邮箱</span>
+<span class=err>#</span> <span class=nx>删除本地3天前的数据</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>rf</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>3</span><span class=nx>day</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span> <span class=nx>web_data_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>3</span><span class=nx>day</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>sql</span>
+<span class=err>#</span> <span class=nx>登录FTP</span>
+<span class=nx>lftp</span> <span class=nx>ftp地址</span> <span class=o>-</span><span class=nx>u</span> <span class=nx>ftp用户名</span><span class=p>,</span><span class=nx>ftp密码</span> <span class=o>&lt;&lt;</span> <span class=nx>EOF</span>
+<span class=err>#</span> <span class=nx>进入FTP根目录</span>
+<span class=nx>cd</span> <span class=nx>ftp根目录文件夹</span>
+<span class=err>#</span> <span class=nx>删除3天前备份文件</span>
+<span class=nx>mrm</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>3</span><span class=nx>day</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+<span class=nx>mrm</span> <span class=nx>web_data_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>3</span><span class=nx>day</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>sql</span>
+<span class=err>#</span> <span class=nx>上传当天备份文件</span>
+<span class=nx>mput</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+<span class=nx>mput</span> <span class=nx>web_data_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>3</span><span class=nx>day</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>sql</span>
+<span class=nx>bye</span>
+<span class=nx>EOF</span>
+</code></pre></div><p>根据实际需求，改成下面模样：</p>
+<pre tabindex=0><code>vi halo_email_backup.sh
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=nx>cd</span> <span class=o>/</span><span class=nx>tmp</span>
+<span class=nx>tar</span> <span class=nx>zcvf</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span> <span class=o>/</span><span class=nx>root</span><span class=o>/</span><span class=p>.</span><span class=nx>halo</span>
+<span class=nx>echo</span> <span class=s2>&#34;Blog date&#34;</span><span class=o>|</span><span class=nx>mail</span> <span class=o>-</span><span class=nx>s</span> <span class=s2>&#34;Backup$(date +%Y-%m-%d)&#34;</span> <span class=o>-</span><span class=nx>a</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span> <span class=mi>455343442</span><span class=err>@</span><span class=nx>qq</span><span class=p>.</span><span class=nx>com</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>f</span> <span class=nx>web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y%m%d&#34;</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+</code></pre></div><p>上面代码中最后的<code>rm -f web_$(date +"%Y%m%d").tar.gz</code>，表示删除本地的临时文件。</p>
+<h3 id=设置定时任务>设置定时任务</h3>
+<h4 id=赋予文件执行权限>赋予文件执行权限</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod +x /root/halo_email_backup.sh
+</code></pre></div><p>运行的时候就输入下面的代码即可：<code>./halo_email_backup.sh</code></p>
+<h4 id=设定自动任务>设定自动任务</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=m>01</span> <span class=m>00</span> * * * /root/halo_email_backup.sh
+</code></pre></div><p>意思是每天凌晨0:01运行这个脚本。</p>
+<h2 id=备份到dropbox>备份到Dropbox</h2>
+<h3 id=创建dropbox应用>创建Dropbox应用</h3>
+<p>首先，需要创建一个Dropbox应用，可以从该网址进行创建：https://www.dropbox.com/developers/apps/create</p>
+<p>在这里，应用类型选择<code>Dropbox API</code>，数据存储类型选择<code>App folder</code>，然后<code>命名</code>创建。然后记录下<code>App key</code>，<code>App secret</code>，<code>token</code>，下面要用。</p>
+<h3 id=下载dropbox_uploadersh>下载dropbox_uploader.sh</h3>
+<p><a class=link href=https://github.com/andreafabrizi/Dropbox-Uploader/ target=_blank rel=noopener>dropbox_uploader</a> 是一个第三方Dropbox备份脚本，首先下载脚本：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>curl <span class=s2>&#34;https://raw.githubusercontent.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh&#34;</span> -o dropbox_uploader.sh
+</code></pre></div><p>然后，为该脚本添加执行权限：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod +x dropbox_uploader.sh
+</code></pre></div><p>执行该脚本，绑定APP：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>./dropbox_uploader.sh
+</code></pre></div><p>根据提示输入Dropbox应用中的<code>token</code>，然后输入<code>y</code>确认。</p>
+<p>之后可以执行下面的命令测试上传，提示Done就是绑定成功了：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>./dropbox_uploader.sh upload /etc/passwd /backup/passwd.old
+</code></pre></div><h3 id=编写备份脚本>编写备份脚本</h3>
+<p>编写定时备份脚本，取名为<code>backup.sh</code>。代码原来模样如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi backup.sh
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=nx>SCRIPT_DIR</span><span class=o>=</span><span class=s2>&#34;/root&#34;</span> <span class=err>#</span><span class=nx>这个改成你存放刚刚下载下来的dropbox_uploader</span><span class=p>.</span><span class=nx>sh的文件夹位置</span>
+<span class=nx>DROPBOX_DIR</span><span class=o>=</span><span class=s2>&#34;/backup&#34;</span> <span class=err>#</span><span class=nx>这个改成你的备份文件想要放在Dropbox下面的文件夹名称</span><span class=err>，</span><span class=nx>如果不存在</span><span class=err>，</span><span class=nx>脚本会自动创建</span>
+<span class=nx>BACKUP_SRC</span><span class=o>=</span><span class=s2>&#34;/home/wwwroot /usr/local/nginx/conf&#34;</span> <span class=err>#</span><span class=nx>这个是你想要备份的本地服务器上的文件</span><span class=err>，</span><span class=nx>不同的目录用空格分开</span>
+<span class=nx>BACKUP_DST</span><span class=o>=</span><span class=s2>&#34;/tmp&#34;</span> <span class=err>#</span><span class=nx>这个是你暂时存放备份压缩文件的地方</span><span class=err>，</span><span class=nx>一般用</span><span class=o>/</span><span class=nx>tmp即可</span>
+<span class=nx>MYSQL_SERVER</span><span class=o>=</span><span class=s2>&#34;localhost&#34;</span> <span class=err>#</span><span class=nx>这个是你mysql服务器的地址</span><span class=err>，</span><span class=nx>一般填这个本地地址即可</span>
+<span class=nx>MYSQL_USER</span><span class=o>=</span><span class=s2>&#34;mysqluser&#34;</span> <span class=err>#</span><span class=nx>这个是你mysql的用户名名称</span><span class=err>，</span><span class=nx>比如root或admin之类的</span>
+<span class=nx>MYSQL_PASS</span><span class=o>=</span><span class=s2>&#34;password&#34;</span> <span class=err>#</span><span class=nx>这个是你mysql用户的密码</span>
+<span class=err>#</span> <span class=nx>下面的一般不用改了</span>
+<span class=nx>NOW</span><span class=o>=</span><span class=nx>$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y.%m.%d&#34;</span><span class=p>)</span>
+<span class=nx>DESTFILE</span><span class=o>=</span><span class=s2>&#34;$BACKUP_DST/$NOW.tar.gz&#34;</span>
+<span class=err>#</span> <span class=nx>备份mysql数据库并和其它备份文件一起压缩成一个文件</span>
+<span class=nx>mysqldump</span> <span class=o>-</span><span class=nx>u</span> <span class=nx>$MYSQL_USER</span> <span class=o>-</span><span class=nx>h</span> <span class=nx>$MYSQL_SERVER</span> <span class=o>-</span><span class=nx>p$MYSQL_PASS</span> <span class=o>--</span><span class=nx>all</span><span class=o>-</span><span class=nx>databases</span> <span class=o>&gt;</span> <span class=s2>&#34;$NOW-Databases.sql&#34;</span>
+<span class=nx>echo</span> <span class=s2>&#34;数据库备份完成，打包网站数据中...&#34;</span>
+<span class=nx>tar</span> <span class=nx>cfzP</span> <span class=s2>&#34;$DESTFILE&#34;</span> <span class=nx>$BACKUP_SRC</span> <span class=s2>&#34;$NOW-Databases.sql&#34;</span>
+<span class=nx>echo</span> <span class=s2>&#34;所有数据打包完成，准备上传...&#34;</span>
+<span class=err>#</span> <span class=nx>用脚本上传到dropbox</span>
+<span class=nx>$SCRIPT_DIR</span><span class=o>/</span><span class=nx>dropbox_uploader</span><span class=p>.</span><span class=nx>sh</span> <span class=nx>upload</span> <span class=s2>&#34;$DESTFILE&#34;</span> <span class=s2>&#34;$DROPBOX_DIR/$NOW.tar.gz&#34;</span>
+<span class=k>if</span> <span class=p>[</span> <span class=nx>$</span><span class=o>?</span> <span class=o>-</span><span class=nx>eq</span> <span class=mi>0</span> <span class=p>];</span><span class=nx>then</span>
+     <span class=nx>echo</span> <span class=s2>&#34;上传完成&#34;</span>
+<span class=k>else</span>
+     <span class=nx>echo</span> <span class=s2>&#34;上传失败，重新尝试&#34;</span>
+<span class=nx>fi</span>
+<span class=err>#</span> <span class=nx>删除本地的临时文件</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>f</span> <span class=s2>&#34;$NOW-Databases.sql&#34;</span> <span class=s2>&#34;$DESTFILE&#34;</span>
+</code></pre></div><p>根据实际情况改成下面模样：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=nx>SCRIPT_DIR</span><span class=o>=</span><span class=s2>&#34;/root&#34;</span> 
+<span class=nx>DROPBOX_DIR</span><span class=o>=</span><span class=s2>&#34;/backup&#34;</span> 
+<span class=nx>BACKUP_SRC</span><span class=o>=</span><span class=s2>&#34;/root/.halo&#34;</span> 
+<span class=nx>BACKUP_DST</span><span class=o>=</span><span class=s2>&#34;/tmp&#34;</span>
+<span class=nx>NOW</span><span class=o>=</span><span class=nx>$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+</span><span class=s2>&#34;%Y.%m.%d&#34;</span><span class=p>)</span>
+<span class=nx>DESTFILE</span><span class=o>=</span><span class=s2>&#34;$BACKUP_DST/$NOW.tar.gz&#34;</span>
+<span class=nx>echo</span> <span class=s2>&#34;打包网站数据中...&#34;</span>
+<span class=nx>tar</span> <span class=nx>cfzP</span> <span class=s2>&#34;$DESTFILE&#34;</span> <span class=nx>$BACKUP_SRC</span>
+<span class=nx>echo</span> <span class=s2>&#34;所有数据打包完成，准备上传...&#34;</span>
+<span class=nx>$SCRIPT_DIR</span><span class=o>/</span><span class=nx>dropbox_uploader</span><span class=p>.</span><span class=nx>sh</span> <span class=k>delete</span> <span class=s2>&#34;$DROPBOX_DIR&#34;</span>
+<span class=nx>$SCRIPT_DIR</span><span class=o>/</span><span class=nx>dropbox_uploader</span><span class=p>.</span><span class=nx>sh</span> <span class=nx>upload</span> <span class=s2>&#34;$DESTFILE&#34;</span> <span class=s2>&#34;$DROPBOX_DIR/$NOW.tar.gz&#34;</span>
+<span class=k>if</span> <span class=p>[</span> <span class=nx>$</span><span class=o>?</span> <span class=o>-</span><span class=nx>eq</span> <span class=mi>0</span> <span class=p>];</span><span class=nx>then</span>
+     <span class=nx>echo</span> <span class=s2>&#34;上传完成&#34;</span>
+<span class=k>else</span>
+     <span class=nx>echo</span> <span class=s2>&#34;上传失败，重新尝试&#34;</span>
+<span class=nx>fi</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>f</span> <span class=s2>&#34;$DESTFILE&#34;</span>
+</code></pre></div><p><strong>先用<code>$SCRIPT_DIR/dropbox_uploader.sh delete "$DROPBOX_DIR"</code>删除<code>Dropbox</code>备份文件夹，再上传文件。这样就保证<code>Dropbox</code>永远只有一个最新的备份文件，不用手动删除多余的备份文件了</strong>。</p>
+<hr>
+<p>当然也可以通过脚本设置保留旧数据的时长。如下面一个脚本就是让旧数据在Dropbox保留7天，本地保留10天。（不过觉得没有必要，还是上面的方法简单，下面方法尝试过，老是出现问题，旧数据删除不了，不想折腾了）</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span> 
+<span class=err>#</span> <span class=nx>定义需要备份的目录</span>
+<span class=nx>WEB_DIR</span><span class=o>=</span><span class=err>/home/www # 网站数据存放目录</span>
+ 
+<span class=err>#</span> <span class=nx>定义备份存放目录</span>
+<span class=nx>DROPBOX_DIR</span><span class=o>=</span><span class=err>/$(date +%Y-%m-%d) # Dropbox上的备份目录</span>
+<span class=nx>LOCAL_BAK_DIR</span><span class=o>=</span><span class=err>/home/backup # 本地备份文件存放目录</span>
+ 
+<span class=err>#</span> <span class=nx>定义备份文件名称</span>
+<span class=nx>DBBakName</span><span class=o>=</span><span class=nx>DB_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+%</span><span class=nx>Y</span><span class=o>%</span><span class=nx>m</span><span class=o>%</span><span class=nx>d</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+<span class=nx>WebBakName</span><span class=o>=</span><span class=nx>Web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>+%</span><span class=nx>Y</span><span class=o>%</span><span class=nx>m</span><span class=o>%</span><span class=nx>d</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+ 
+<span class=err>#</span> <span class=nx>定义旧数据名称</span>
+<span class=nx>Old_DROPBOX_DIR</span><span class=o>=</span><span class=err>/$(date -d -7day +%Y-%m-%d)</span>
+<span class=nx>OldDBBakName</span><span class=o>=</span><span class=nx>DB_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>10</span><span class=nx>day</span> <span class=o>+%</span><span class=nx>Y</span><span class=o>%</span><span class=nx>m</span><span class=o>%</span><span class=nx>d</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+<span class=nx>OldWebBakName</span><span class=o>=</span><span class=nx>Web_$</span><span class=p>(</span><span class=nx>date</span> <span class=o>-</span><span class=nx>d</span> <span class=o>-</span><span class=mi>10</span><span class=nx>day</span> <span class=o>+%</span><span class=nx>Y</span><span class=o>%</span><span class=nx>m</span><span class=o>%</span><span class=nx>d</span><span class=p>).</span><span class=nx>tar</span><span class=p>.</span><span class=nx>gz</span>
+ 
+<span class=nx>cd</span> <span class=nx>$LOCAL_BAK_DIR</span>
+ 
+<span class=err>#</span><span class=nx>使用命令导出数据库</span>
+<span class=nx>mongodump</span> <span class=o>--</span><span class=nx>out</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>mongodb</span><span class=o>/</span> <span class=o>--</span><span class=nx>db</span> <span class=nx>bastogne</span>
+ 
+<span class=err>#</span><span class=nx>压缩数据库文件合并为一个压缩文件</span>
+<span class=nx>tar</span> <span class=nx>zcf</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>$DBBakName</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>mongodb</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>rf</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>mongodb</span>
+ 
+<span class=err>#</span><span class=nx>压缩网站数据</span>
+<span class=nx>cd</span> <span class=nx>$WEB_DIR</span>
+<span class=nx>tar</span> <span class=nx>zcf</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>$WebBakName</span> <span class=p>.</span><span class=o>/*</span>
+ 
+<span class=nx>cd</span> <span class=o>~</span>
+<span class=err>#</span><span class=nx>开始上传</span>
+<span class=p>.</span><span class=o>/</span><span class=nx>dropbox_uploader</span><span class=p>.</span><span class=nx>sh</span> <span class=nx>upload</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>$DBBakName</span> <span class=nx>$DROPBOX_DIR</span><span class=o>/</span><span class=nx>$DBBakName</span>
+<span class=p>.</span><span class=o>/</span><span class=nx>dropbox_uploader</span><span class=p>.</span><span class=nx>sh</span> <span class=nx>upload</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>$WebBakName</span> <span class=nx>$DROPBOX_DIR</span><span class=o>/</span><span class=nx>$WebBakName</span>
+ 
+<span class=err>#</span><span class=nx>删除旧数据</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>rf</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>$OldDBBakName</span> <span class=nx>$LOCAL_BAK_DIR</span><span class=o>/</span><span class=nx>$OldWebBakName</span>
+<span class=p>.</span><span class=o>/</span><span class=nx>dropbox_uploader</span><span class=p>.</span><span class=nx>sh</span> <span class=k>delete</span> <span class=nx>$Old_DROPBOX_DIR</span><span class=o>/</span>
+ 
+<span class=nx>echo</span> <span class=o>-</span><span class=nx>e</span> <span class=s2>&#34;Backup Done!&#34;</span>
+</code></pre></div><hr>
+<h3 id=赋予文件执行权限-1>赋予文件执行权限</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod +x backup.sh
+</code></pre></div><p>运行的时候就输入下面的代码即可：<code>./backup.sh</code></p>
+<h3 id=设置定时任务-1>设置定时任务</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=m>02</span> <span class=m>00</span> * * * /root/backup.sh
+</code></pre></div><p>这样，就可以每天凌晨00:02自动备份到Dropbox了。</p>
+<h3 id=修改时区>修改时区</h3>
+<p>如果你不知道服务器当前时间，可以使用下面的命令，查看当前时间：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>date -R
+</code></pre></div><p>修改当前时区为上海（这步未进行）：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+</code></pre></div><h2 id=备份到github>备份到github</h2>
+<h3 id=准备工作>准备工作</h3>
+<p>首先当然是在服务器上安装<code>GIt</code>，配置<code>ssh公钥</code>，并且在<code>github</code>上添加服务器<code>ssh公钥</code>。具体过程略。</p>
+<h3 id=初始化仓库>初始化仓库</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>cd</span> /root/.halo
+git init
+git remote add origin git@github.com:iwyang/halo.git
+git add .
+git commit -m <span class=s2>&#34;site backup&#34;</span>
+git push --force origin master
+</code></pre></div><hr>
+<p>注意要删除主题文件夹下的<code>.git</code>文件夹，不然的话就无法备份主题了。当然也可以不备份主题，因为主题所有配置选项都在数据库里。如果这样的话，命令要作如下调整：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git add application.yaml upload/ db/
+</code></pre></div><hr>
+<h3 id=设置定时任务-2>设置定时任务</h3>
+<h4 id=编写备份脚本-1>编写备份脚本</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>cd</span> /root
+vi github.sh
+</code></pre></div><p>脚本原来模样：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=err>#</span><span class=nx>进入到网站根目录</span><span class=err>，</span><span class=nx>记得修改为自己的站点</span>
+<span class=nx>cd</span> <span class=o>/</span><span class=nx>home</span><span class=o>/</span><span class=nx>xxx</span><span class=p>.</span><span class=nx>com</span>
+<span class=err>#</span><span class=nx>将数据库导入到该目录</span><span class=err>，</span><span class=nx>这里以mysql为例</span><span class=err>，</span><span class=nx>passwd为数据库密码</span><span class=err>，</span><span class=nx>typecho为数据库名称</span><span class=err>，</span><span class=nx>typecho</span><span class=p>.</span><span class=nx>sql为备份的数据库文件</span>
+<span class=nx>mysqldump</span> <span class=o>-</span><span class=nx>uroot</span> <span class=o>-</span><span class=nx>ppasswd</span> <span class=nx>typecho</span> <span class=o>&gt;</span> <span class=nx>typecho</span><span class=p>.</span><span class=nx>sql</span>
+<span class=nx>git</span> <span class=nx>add</span> <span class=o>-</span><span class=nx>A</span>
+<span class=nx>git</span> <span class=nx>commit</span> <span class=o>-</span><span class=nx>m</span> <span class=s2>&#34;backsite&#34;</span>
+<span class=nx>git</span> <span class=nx>push</span> <span class=o>-</span><span class=nx>u</span> <span class=nx>origin</span> <span class=nx>master</span>
+</code></pre></div><p>根据实际情况修改如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=nx>echo</span> <span class=o>-</span><span class=nx>e</span> <span class=s2>&#34;\033[0;32mDeploying updates to github...\033[0m&#34;</span>
+<span class=nx>cd</span> <span class=o>/</span><span class=nx>root</span><span class=o>/</span><span class=p>.</span><span class=nx>halo</span>
+<span class=nx>git</span> <span class=nx>add</span> <span class=p>.</span>	
+<span class=nx>git</span> <span class=nx>commit</span> <span class=o>-</span><span class=nx>m</span> <span class=s2>&#34;site backup&#34;</span>
+<span class=nx>git</span> <span class=nx>push</span> <span class=o>--</span><span class=nx>force</span> <span class=nx>origin</span> <span class=nx>master</span>
+</code></pre></div><p>为了防止服务器里<code>.git</code>文件夹过大，脚本可以作如下调整：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=ch>#!/bin/bash
+</span><span class=ch></span><span class=nx>echo</span> <span class=o>-</span><span class=nx>e</span> <span class=s2>&#34;\033[0;32mDeploying updates to github...\033[0m&#34;</span>
+<span class=nx>cd</span> <span class=o>/</span><span class=nx>root</span><span class=o>/</span><span class=p>.</span><span class=nx>halo</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>rf</span> <span class=p>.</span><span class=nx>git</span>
+<span class=nx>git</span> <span class=nx>init</span>
+<span class=nx>git</span> <span class=nx>remote</span> <span class=nx>add</span> <span class=nx>origin</span> <span class=nx>git</span><span class=err>@</span><span class=nx>github</span><span class=p>.</span><span class=nx>com</span><span class=o>:</span><span class=nx>iwyang</span><span class=o>/</span><span class=nx>halo</span><span class=p>.</span><span class=nx>git</span>
+<span class=nx>git</span> <span class=nx>add</span> <span class=p>.</span>    
+<span class=nx>git</span> <span class=nx>commit</span> <span class=o>-</span><span class=nx>m</span> <span class=s2>&#34;site backup&#34;</span>
+<span class=nx>git</span> <span class=nx>push</span> <span class=o>--</span><span class=nx>force</span> <span class=nx>origin</span> <span class=nx>master</span>
+<span class=nx>rm</span> <span class=o>-</span><span class=nx>rf</span> <span class=p>.</span><span class=nx>git</span>
+</code></pre></div><h4 id=赋予文件执行权限-2>赋予文件执行权限</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod +x /root/github.sh
+</code></pre></div><h4 id=设定自动任务-1>设定自动任务</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=mi>03</span> <span class=mi>00</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=err>/root/github.sh</span>
+</code></pre></div><p>意思是每天凌晨0:03运行这个脚本。</p>
+<h3 id=还原博客>还原博客</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone git@github.com:iwyang/halo.git .halo
+</code></pre></div><p>接下来就是配置个 Java 环境，下载个 Halo 运行包，配置域名访问。具体可参考<a class=link href=https://halo.run/ target=_blank rel=noopener>官方文档</a>。</p>
+<h2 id=总结>总结</h2>
+<p><code>halo</code>博客迁移后，最好删除<code>logs</code>文件夹下的日志文件。</p>
+<hr>
+<h2 id=scp命令>SCP命令</h2>
+<h3 id=下载文件>下载文件</h3>
+<p>从服务器下载文件到本地，在<code>Git Bash</code>执行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>scp root@104.224.191.88:/root/.ssh/mysite ssh
+</code></pre></div><p>意思是将服务器<code>/root/.ssh</code>目录下的mysite文件复制到当前路径下<code>ssh</code>文件夹下。</p>
+<h3 id=上传文件>上传文件</h3>
+<p>从本地上传文件到服务器，在<code>Git Bash</code>执行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>scp .halo.zip root@137.220.43.191:/root/
+</code></pre></div><p>意思是将当前目录下<code>.halo.ip</code>文件上传到服务器<code>/root/目录下</code>。</p>
+<h2 id=wordpress常用命令>wordpress常用命令</h2>
+<div class="note primary">附录：wordpress常用mysql命令</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=c># 1.删除数据库</span><span class=w>
+</span><span class=w></span><span class=l>mysqladmin -u root -p drop wordpress</span><span class=w>
+</span><span class=w></span><span class=c># 2.新建一个空数据库</span><span class=w>
+</span><span class=w></span><span class=l>mysqladmin -u root -p create wordpress</span><span class=w>
+</span><span class=w></span><span class=c># 3.导入数据</span><span class=w>
+</span><span class=w></span><span class=l>mysql -uroot -p”你的密码” wordpress &lt; 你的数据sql文件</span><span class=w>
+</span><span class=w></span><span class=c># 4.更新Url</span><span class=w>
+</span><span class=w></span><span class=c># 4.1.连接数据库</span><span class=w>
+</span><span class=w></span><span class=l>mysql -u root -p</span><span class=w>
+</span><span class=w></span><span class=c># 4.2. 选择数据库</span><span class=w>
+</span><span class=w></span><span class=l>use wordpress</span><span class=w>
+</span><span class=w></span><span class=c># 4.3.更新URL</span><span class=w>
+</span><span class=w></span><span class=l>SELECT * FROM wp_options WHERE option_name = &#39;home&#39;;</span><span class=w>
+</span><span class=w></span><span class=l>UPDATE wp_options SET option_value=&#34;https://new_url/&#34; WHERE option_name = &#34;home&#34;;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=l>SELECT * FROM wp_options WHERE option_name = &#39;siteurl&#39;;</span><span class=w>
+</span><span class=w></span><span class=l>UPDATE wp_options SET option_value=&#34;https://new_url/&#34; WHERE option_name = &#34;siteurl&#34;;</span><span class=w>
+</span></code></pre></div><hr>
+<h2 id=nginx-command-not-found-解决方案><code>nginx</code>: command not found 解决方案</h2>
+<p>只需要输入<code>source /etc/profile</code> ，让配置文件重新生效一下即可。</p>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://www.moerats.com/archives/69/ target=_blank rel=noopener>1.Linux 每日自动备份到FTP及数据库通过邮箱发送方法</a></li>
+<li><a class=link href=http://blog.sina.com.cn/s/blog_7edf8b9f0100to4p.html target=_blank rel=noopener>2.fetchmail: SMTP error: 552 5.3.4 Message size exceeds fixed limit</a></li>
+<li><a class=link href="http://sufaming.com/?p=189" target=_blank rel=noopener>3.如何将服务器上的网站数据定时自动备份到Dropbox</a></li>
+<li><a class=link href=https://www.moerats.com/archives/858/ target=_blank rel=noopener>4.Linux 定时备份服务器/网站数据到Github私人仓库</a></li>
+<li><a class=link href=https://www.runoob.com/mysql/mysql-tutorial.html target=_blank rel=noopener>5.MySQL 教程</a></li>
+<li><a class=link href=https://precisionsec.com/changing-the-wordpress-site-url-using-the-mysql-command-line/ target=_blank rel=noopener>6.Changing the WordPress site URL using the MySQL command line</a></li>
+<li><a class=link href=https://blog.csdn.net/jia12216/article/details/106098267 target=_blank rel=noopener>7.CentOs8系统安装mailx发邮件</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/halo/>halo</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/halo%e5%ae%9a%e6%97%b6%e5%a4%87%e4%bb%bd%e7%9a%84%e6%96%b9%e6%b3%95.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/centos-halo/>
+<div class=article-details>
+<h2 class=article-title>在Centos服务器部署Halo</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/a3-to-a4/>
+<div class=article-details>
+<h2 class=article-title>怎样才能把A3文档打印到A4纸上</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#备份到qq邮箱>备份到QQ邮箱</a>
+<ol>
+<li><a href=#安装邮件发送依赖组件><strong>安装邮件发送依赖组件</strong></a>
+<ol>
+<li><a href=#centos-7>Centos 7</a></li>
+<li><a href=#centos-8>Centos 8</a></li>
+</ol>
+</li>
+<li><a href=#修改附件发送大小限制>修改附件发送大小限制</a></li>
+<li><a href=#获得编辑备份脚本>获得&编辑备份脚本</a>
+<ol>
+<li><a href=#创建备份文件夹>创建备份文件夹</a></li>
+<li><a href=#修改脚本>修改脚本</a></li>
+</ol>
+</li>
+<li><a href=#设置定时任务>设置定时任务</a>
+<ol>
+<li><a href=#赋予文件执行权限>赋予文件执行权限</a></li>
+<li><a href=#设定自动任务>设定自动任务</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#备份到dropbox>备份到Dropbox</a>
+<ol>
+<li><a href=#创建dropbox应用>创建Dropbox应用</a></li>
+<li><a href=#下载dropbox_uploadersh>下载dropbox_uploader.sh</a></li>
+<li><a href=#编写备份脚本>编写备份脚本</a></li>
+<li><a href=#赋予文件执行权限-1>赋予文件执行权限</a></li>
+<li><a href=#设置定时任务-1>设置定时任务</a></li>
+<li><a href=#修改时区>修改时区</a></li>
+</ol>
+</li>
+<li><a href=#备份到github>备份到github</a>
+<ol>
+<li><a href=#准备工作>准备工作</a></li>
+<li><a href=#初始化仓库>初始化仓库</a></li>
+<li><a href=#设置定时任务-2>设置定时任务</a>
+<ol>
+<li><a href=#编写备份脚本-1>编写备份脚本</a></li>
+<li><a href=#赋予文件执行权限-2>赋予文件执行权限</a></li>
+<li><a href=#设定自动任务-1>设定自动任务</a></li>
+</ol>
+</li>
+<li><a href=#还原博客>还原博客</a></li>
+</ol>
+</li>
+<li><a href=#总结>总结</a></li>
+<li><a href=#scp命令>SCP命令</a>
+<ol>
+<li><a href=#下载文件>下载文件</a></li>
+<li><a href=#上传文件>上传文件</a></li>
+</ol>
+</li>
+<li><a href=#wordpress常用命令>wordpress常用命令</a></li>
+<li><a href=#nginx-command-not-found-解决方案><code>nginx</code>: command not found 解决方案</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

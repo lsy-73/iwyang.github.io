@@ -1,0 +1,1310 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="安装主题 把这个主题克隆到 themes 目录: git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt 配置主题 站点配置文件的修改 将根目录\themes\LoveIt\exampleSite路径下的con"><title>Hugo LoveIt&CodeIT&DoIt主题配置与使用</title>
+<link rel=canonical href=/archives/hugo-theme-loveit/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Hugo LoveIt&CodeIT&DoIt主题配置与使用">
+<meta property="og:description" content="安装主题 把这个主题克隆到 themes 目录: git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt 配置主题 站点配置文件的修改 将根目录\themes\LoveIt\exampleSite路径下的con">
+<meta property="og:url" content="/archives/hugo-theme-loveit/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:published_time" content="2020-06-03T22:44:25+08:00"><meta property="article:modified_time" content="2021-08-06T22:44:25+08:00">
+<meta name=twitter:title content="Hugo LoveIt&CodeIT&DoIt主题配置与使用">
+<meta name=twitter:description content="安装主题 把这个主题克隆到 themes 目录: git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt 配置主题 站点配置文件的修改 将根目录\themes\LoveIt\exampleSite路径下的con">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/hugo-theme-loveit/>Hugo LoveIt&CodeIT&DoIt主题配置与使用</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-06-03</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=安装主题>安装主题</h2>
+<p>把这个主题克隆到 <code>themes</code> 目录:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone https://github.com/dillonzq/LoveIt.git themes/LoveIt
+</code></pre></div><h2 id=配置主题>配置主题</h2>
+<h3 id=站点配置文件的修改>站点配置文件的修改</h3>
+<p>将<code>根目录\themes\LoveIt\exampleSite</code>路径下的<code>config.toml</code>文件复制到根目录下，覆盖掉根目录下的<code>config.toml</code>文件。然后，我们在notepad++中打开并对其作一定的修改就可以直接使用，具体可以修改的内容如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=l>baseURL = &#34;https://bore.vip/&#34;</span><span class=w>
+</span><span class=w></span><span class=c># [en, zh-cn, fr, ...] 设置默认的语言</span><span class=w>
+</span><span class=w></span><span class=l>defaultContentLanguage = &#34;zh-cn&#34;</span><span class=w>
+</span><span class=w></span><span class=c># 网站语言, 仅在这里 CN 大写</span><span class=w>
+</span><span class=w></span><span class=l>languageCode = &#34;zh-CN&#34;</span><span class=w>
+</span><span class=w></span><span class=c># 是否包括中日韩文字</span><span class=w>
+</span><span class=w></span><span class=l>hasCJKLanguage = true</span><span class=w>
+</span><span class=w></span><span class=c># 主题</span><span class=w>
+</span><span class=w></span><span class=l>theme = &#34;CodeIT&#34;</span><span class=w>
+</span><span class=w></span><span class=c># 网站标题</span><span class=w>
+</span><span class=w></span><span class=l>title = &#34;Bore&#39;s Notes&#34;</span><span class=w>
+</span><span class=w></span><span class=c># 是否使用 robots.txt</span><span class=w>
+</span><span class=w></span><span class=l>enableRobotsTXT = true</span><span class=w>
+</span><span class=w></span><span class=c># 是否使用 git 信息</span><span class=w>
+</span><span class=w></span><span class=l>enableGitInfo = true</span><span class=w>
+</span><span class=w></span><span class=c># 是否使用 emoji 代码</span><span class=w>
+</span><span class=w></span><span class=l>enableEmoji = true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 菜单配置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>menu]</span><span class=w>
+</span><span class=w>  </span><span class=p>[[</span><span class=l>menu.main]]</span><span class=w>
+</span><span class=w>    </span><span class=l>identifier = &#34;posts&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标</span><span class=w>
+</span><span class=w>    </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标</span><span class=w>
+</span><span class=w>    </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>name = &#34;归档&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>url = &#34;/posts/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 当你将鼠标悬停在此菜单链接上时, 将显示的标题</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>weight = 4</span><span class=w>
+</span><span class=w>  </span><span class=p>[[</span><span class=l>menu.main]]</span><span class=w>
+</span><span class=w>    </span><span class=l>identifier = &#34;home&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>name = &#34;首页&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>url = &#34;/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>weight = 1</span><span class=w>
+</span><span class=w>  </span><span class=p>[[</span><span class=l>menu.main]]</span><span class=w>
+</span><span class=w>    </span><span class=l>identifier = &#34;categories&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>name = &#34;分类&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>url = &#34;/categories/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>weight = 2</span><span class=w>
+</span><span class=w>  </span><span class=p>[[</span><span class=l>menu.main]]</span><span class=w>
+</span><span class=w>    </span><span class=l>identifier = &#34;tags&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>name = &#34;标签&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>url = &#34;/tags/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>weight = 3</span><span class=w>
+</span><span class=w>    </span><span class=p>[[</span><span class=l>menu.main]]</span><span class=w>
+</span><span class=w>    </span><span class=l>identifier = &#34;about&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>name = &#34;关于&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>url = &#34;/about/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>weight = 5</span><span class=w>
+</span><span class=w>  </span><span class=p>[[</span><span class=l>menu.main]]</span><span class=w>
+</span><span class=w>    </span><span class=l>identifier = &#34;links&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>name = &#34;友链&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>url = &#34;/links/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>weight = 6</span><span class=w>
+</span><span class=w>	
+</span><span class=w></span><span class=p>[</span><span class=l>params]</span><span class=w>
+</span><span class=w>  </span><span class=c># CodeIT 主题版本</span><span class=w>
+</span><span class=w>  </span><span class=l>version = &#34;0.2.X&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c># 网站描述</span><span class=w>
+</span><span class=w>  </span><span class=l>description = &#34;本站主要用来收集整理资料、记录笔记，方便自己查询使用。&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c># 网站关键词</span><span class=w>
+</span><span class=w>  </span><span class=l>keywords = [&#34;个人博客&#34;, &#34;个人网站&#34;,&#34;Bore&#39;s Note&#34;,&#34;hugo&#34;]</span><span class=w>
+</span><span class=w>  </span><span class=c># 网站默认主题样式 (&#34;light&#34;, &#34;dark&#34;, &#34;auto&#34;)</span><span class=w>
+</span><span class=w>  </span><span class=l>defaultTheme = &#34;auto&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c># 公共 git 仓库路径，仅在 enableGitInfo 设为 true 时有效</span><span class=w>
+</span><span class=w>  </span><span class=l>gitRepo = &#34;https://github.com/iwyang/iwyang.github.io&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c>#  哪种哈希函数用来 SRI, 为空时表示不使用 SRI</span><span class=w>
+</span><span class=w>  </span><span class=c># (&#34;sha256&#34;, &#34;sha384&#34;, &#34;sha512&#34;, &#34;md5&#34;)</span><span class=w>
+</span><span class=w>  </span><span class=l>fingerprint = &#34;&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c>#  日期格式</span><span class=w>
+</span><span class=w>  </span><span class=l>dateFormat = &#34;2006-01-02&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c># 网站图片, 用于 Open Graph 和 Twitter Cards</span><span class=w>
+</span><span class=w>  </span><span class=l>images = [&#34;/logo.png&#34;]</span><span class=w>
+</span><span class=w>	
+</span><span class=w> </span><span class=c>#  应用图标配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.app]</span><span class=w>
+</span><span class=w>    </span><span class=c># 当添加到 iOS 主屏幕或者 Android 启动器时的标题, 覆盖默认标题</span><span class=w>
+</span><span class=w>    </span><span class=l>title = &#34;Bore&#39;s Note&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 是否隐藏网站图标资源链接</span><span class=w>
+</span><span class=w>    </span><span class=l>noFavicon = false</span><span class=w>
+</span><span class=w>    </span><span class=c># 更现代的 SVG 网站图标, 可替代旧的 .png 和 .ico 文件</span><span class=w>
+</span><span class=w>    </span><span class=l>svgFavicon = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># Android 浏览器主题色</span><span class=w>
+</span><span class=w>    </span><span class=l>themeColor = &#34;#ffffff&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># Safari 图标颜色</span><span class=w>
+</span><span class=w>    </span><span class=l>iconColor = &#34;#5bbad5&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># Windows v8-10磁贴颜色</span><span class=w>
+</span><span class=w>    </span><span class=l>tileColor = &#34;#da532c&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  搜索配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.search]</span><span class=w>
+</span><span class=w>    </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>    </span><span class=c># 搜索引擎的类型 (&#34;lunr&#34;, &#34;algolia&#34;)</span><span class=w>
+</span><span class=w>    </span><span class=l>type = &#34;algolia&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 文章内容最长索引长度</span><span class=w>
+</span><span class=w>    </span><span class=l>contentLength = 4000</span><span class=w>
+</span><span class=w>    </span><span class=c># 搜索框的占位提示语</span><span class=w>
+</span><span class=w>    </span><span class=l>placeholder = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c>#  最大结果数目</span><span class=w>
+</span><span class=w>    </span><span class=l>maxResultLength = 10</span><span class=w>
+</span><span class=w>    </span><span class=c>#  结果内容片段长度</span><span class=w>
+</span><span class=w>    </span><span class=l>snippetLength = 50</span><span class=w>
+</span><span class=w>    </span><span class=c>#  搜索结果中高亮部分的 HTML 标签</span><span class=w>
+</span><span class=w>    </span><span class=l>highlightTag = &#34;em&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否在搜索索引中使用基于 baseURL 的绝对路径</span><span class=w>
+</span><span class=w>    </span><span class=l>absoluteURL = false</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.search.algolia]</span><span class=w>
+</span><span class=w>      </span><span class=l>index = &#34;hugo&#34;</span><span class=w>
+</span><span class=w>      </span><span class=l>appID = &#34;R7GU8Q3PGK&#34;</span><span class=w>
+</span><span class=w>      </span><span class=l>searchKey = &#34;03cd2f39cefdd4b40deed2f1222ad496&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c># 页面头部导航栏配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.header]</span><span class=w>
+</span><span class=w>    </span><span class=c># 桌面端导航栏模式 (&#34;fixed&#34;, &#34;normal&#34;, &#34;auto&#34;)</span><span class=w>
+</span><span class=w>    </span><span class=l>desktopMode = &#34;fixed&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 移动端导航栏模式 (&#34;fixed&#34;, &#34;normal&#34;, &#34;auto&#34;)</span><span class=w>
+</span><span class=w>    </span><span class=l>mobileMode = &#34;auto&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c>#  页面头部导航栏标题配置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.header.title]</span><span class=w>
+</span><span class=w>      </span><span class=c># LOGO 的 URL</span><span class=w>
+</span><span class=w>      </span><span class=l>logo = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 标题名称</span><span class=w>
+</span><span class=w>      </span><span class=l>name = &#34;Bore&#39;s Notes&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标</span><span class=w>
+</span><span class=w>      </span><span class=l>pre = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标</span><span class=w>
+</span><span class=w>      </span><span class=l>post = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c>#  是否为标题显示打字机动画</span><span class=w>
+</span><span class=w>      </span><span class=l>typeit = false</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c># 页面底部信息配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.footer]</span><span class=w>
+</span><span class=w>    </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  自定义内容 (支持 HTML 格式)</span><span class=w>
+</span><span class=w>    </span><span class=l>custom = &#39;&#39;</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否显示 Hugo 和主题信息</span><span class=w>
+</span><span class=w>    </span><span class=l>hugo = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否显示版权信息</span><span class=w>
+</span><span class=w>    </span><span class=l>copyright = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否显示作者</span><span class=w>
+</span><span class=w>    </span><span class=l>author = true</span><span class=w>
+</span><span class=w>    </span><span class=c># 网站创立年份</span><span class=w>
+</span><span class=w>    </span><span class=l>since = 2020</span><span class=w>
+</span><span class=w>    </span><span class=c># ICP 备案信息，仅在中国使用 (支持 HTML 格式)</span><span class=w>
+</span><span class=w>    </span><span class=l>icp = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 许可协议信息 (支持 HTML 格式)</span><span class=w>
+</span><span class=w>    </span><span class=l>license = &#39;&lt;a rel=&#34;license external nofollow noopener noreffer&#34; href=&#34;https://creativecommons.org/licenses/by-nc/4.0/&#34; target=&#34;_blank&#34;&gt;CC BY-NC 4.0&lt;/a&gt;&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  Section (所有文章) 页面配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.section]</span><span class=w>
+</span><span class=w>    </span><span class=c># section 页面每页显示文章数量</span><span class=w>
+</span><span class=w>    </span><span class=l>paginate = 10000</span><span class=w>
+</span><span class=w>    </span><span class=c># 日期格式 (月和日)</span><span class=w>
+</span><span class=w>    </span><span class=l>dateFormat = &#34;01-02&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># RSS 文章数目</span><span class=w>
+</span><span class=w>    </span><span class=l>rss = 10</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  List (目录或标签) 页面配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.list]</span><span class=w>
+</span><span class=w>    </span><span class=c># list 页面每页显示文章数量</span><span class=w>
+</span><span class=w>    </span><span class=l>paginate = 20</span><span class=w>
+</span><span class=w>    </span><span class=c># 日期格式 (月和日)</span><span class=w>
+</span><span class=w>    </span><span class=l>dateFormat = &#34;01-02&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># RSS 文章数目</span><span class=w>
+</span><span class=w>    </span><span class=l>rss = 10</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c># 主页配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.home]</span><span class=w>
+</span><span class=w>    </span><span class=c>#  RSS 文章数目</span><span class=w>
+</span><span class=w>    </span><span class=l>rss = 10</span><span class=w>
+</span><span class=w>    </span><span class=c># 主页个人信息</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.home.profile]</span><span class=w>
+</span><span class=w>      </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>      </span><span class=c># Gravatar 邮箱，用于优先在主页显示的头像</span><span class=w>
+</span><span class=w>      </span><span class=l>gravatarEmail = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 主页显示头像的 URL</span><span class=w>
+</span><span class=w>      </span><span class=l>avatarURL = &#34;/images/avatar.jpg&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c>#  主页显示的网站标题 (支持 HTML 格式)</span><span class=w>
+</span><span class=w>      </span><span class=l>title = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 主页显示的网站副标题</span><span class=w>
+</span><span class=w>      </span><span class=l>subtitle = &#34;博观而约取，厚积而薄发&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># CodeIT 更改 | 0.1.1 (HTML format is supported)</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否为副标题显示打字机动画</span><span class=w>
+</span><span class=w>      </span><span class=l>typeit = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否显示社交账号</span><span class=w>
+</span><span class=w>      </span><span class=l>social = false</span><span class=w>
+</span><span class=w>      </span><span class=c>#  免责声明 (支持 HTML 格式)</span><span class=w>
+</span><span class=w>      </span><span class=l>disclaimer = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 主页文章列表</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.home.posts]</span><span class=w>
+</span><span class=w>      </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 主页每页显示文章数量</span><span class=w>
+</span><span class=w>      </span><span class=l>paginate = 10</span><span class=w>
+</span><span class=w>      </span><span class=c>#  被 params.page 中的 hiddenFromHomePage 替代</span><span class=w>
+</span><span class=w>      </span><span class=c># 当你没有在文章前置参数中设置 &#34;hiddenFromHomePage&#34; 时的默认行为</span><span class=w>
+</span><span class=w>      </span><span class=l>defaultHiddenFromHomePage = false</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c># 作者的社交信息设置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.social]</span><span class=w>
+</span><span class=w>    </span><span class=l>GitHub = &#34;iwyang&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Linkedin = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Twitter = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Instagram = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Facebook = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Telegram = &#34;iwyang&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Medium = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Gitlab = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Youtubelegacy = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Youtubecustom = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Youtubechannel = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Tumblr = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Quora = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Keybase = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Pinterest = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Reddit = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Codepen = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>FreeCodeCamp = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Bitbucket = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Stackoverflow = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Weibo = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Odnoklassniki = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>VK = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Flickr = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Xing = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Snapchat = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Soundcloud = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Spotify = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Bandcamp = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Paypal = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Fivehundredpx = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Mix = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Goodreads = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Lastfm = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Foursquare = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Hackernews = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Kickstarter = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Patreon = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Steam = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Twitch = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Strava = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Skype = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Whatsapp = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Zhihu = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Douban = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Angellist = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Slidershare = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Jsfiddle = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Deviantart = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Behance = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Dribbble = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Wordpress = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Vine = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Googlescholar = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Researchgate = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Mastodon = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Thingiverse = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Devto = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Gitea = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>XMPP = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Matrix = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Bilibili = &#34;iwyang&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>Email = &#34;xxxx@xxxx.com&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>RSS = true</span><span class=w>
+</span><span class=w>    </span><span class=c># CodeIT 新增 | 0.1.2 Open Researcher and Contributor ID</span><span class=w>
+</span><span class=w>    </span><span class=l>Orcid = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  文章页面配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.page]</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否在主页隐藏一篇文章</span><span class=w>
+</span><span class=w>    </span><span class=l>hiddenFromHomePage = false</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否在搜索结果中隐藏一篇文章</span><span class=w>
+</span><span class=w>    </span><span class=l>hiddenFromSearch = false</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否使用 twemoji</span><span class=w>
+</span><span class=w>    </span><span class=l>twemoji = false</span><span class=w>
+</span><span class=w>    </span><span class=c># 是否使用 lightgallery</span><span class=w>
+</span><span class=w>    </span><span class=l>lightgallery = false</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否使用 ruby 扩展语法</span><span class=w>
+</span><span class=w>    </span><span class=l>ruby = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否使用 fraction 扩展语法</span><span class=w>
+</span><span class=w>    </span><span class=l>fraction = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否使用 fontawesome 扩展语法</span><span class=w>
+</span><span class=w>    </span><span class=l>fontawesome = true</span><span class=w>
+</span><span class=w>    </span><span class=c># 是否在文章页面显示原始 Markdown 文档链接</span><span class=w>
+</span><span class=w>    </span><span class=l>linkToMarkdown = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  是否在 RSS 中显示全文内容</span><span class=w>
+</span><span class=w>    </span><span class=l>rssFullText = false</span><span class=w>
+</span><span class=w>    </span><span class=c>#  目录配置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.toc]</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否使用目录</span><span class=w>
+</span><span class=w>      </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>      </span><span class=c>#  是否保持使用文章前面的静态目录</span><span class=w>
+</span><span class=w>      </span><span class=l>keepStatic = false</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否使侧边目录自动折叠展开</span><span class=w>
+</span><span class=w>      </span><span class=l>auto = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  代码配置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.code]</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否显示代码块的复制按钮</span><span class=w>
+</span><span class=w>      </span><span class=l>copy = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 默认展开显示的代码行数</span><span class=w>
+</span><span class=w>      </span><span class=l>maxShownLines = 10</span><span class=w>
+</span><span class=w>    </span><span class=c># KaTeX 数学公式</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.math]</span><span class=w>
+</span><span class=w>      </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 默认块定界符是 $$ ... $$ 和 \\[ ... \\]</span><span class=w>
+</span><span class=w>      </span><span class=l>blockLeftDelimiter = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=l>blockRightDelimiter = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 默认行内定界符是 $ ... $ 和 \\( ... \\)</span><span class=w>
+</span><span class=w>      </span><span class=l>inlineLeftDelimiter = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=l>inlineRightDelimiter = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># KaTeX 插件 copy_tex</span><span class=w>
+</span><span class=w>      </span><span class=l>copyTex = true</span><span class=w>
+</span><span class=w>      </span><span class=c># KaTeX 插件 mhchem</span><span class=w>
+</span><span class=w>      </span><span class=l>mhchem = true</span><span class=w>
+</span><span class=w>    </span><span class=c># Mapbox GL JS 配置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.mapbox]</span><span class=w>
+</span><span class=w>      </span><span class=c># Mapbox GL JS 的 access token</span><span class=w>
+</span><span class=w>      </span><span class=l>accessToken = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 浅色主题的地图样式</span><span class=w>
+</span><span class=w>      </span><span class=l>lightStyle = &#34;mapbox://styles/mapbox/light-v9&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 深色主题的地图样式</span><span class=w>
+</span><span class=w>      </span><span class=l>darkStyle = &#34;mapbox://styles/mapbox/dark-v9&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否添加 NavigationControl</span><span class=w>
+</span><span class=w>      </span><span class=l>navigation = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否添加 GeolocateControl</span><span class=w>
+</span><span class=w>      </span><span class=l>geolocate = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否添加 ScaleControl</span><span class=w>
+</span><span class=w>      </span><span class=l>scale = true</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否添加 FullscreenControl</span><span class=w>
+</span><span class=w>      </span><span class=l>fullscreen = true</span><span class=w>
+</span><span class=w>    </span><span class=c>#  文章页面的分享信息设置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.share]</span><span class=w>
+</span><span class=w>      </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Twitter = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Facebook = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Linkedin = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Whatsapp = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Pinterest = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Tumblr = false</span><span class=w>
+</span><span class=w>      </span><span class=l>HackerNews = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Reddit = false</span><span class=w>
+</span><span class=w>      </span><span class=l>VK = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Buffer = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Xing = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Line = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Instapaper = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Pocket = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Digg = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Stumbleupon = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Flipboard = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Weibo = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Renren = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Myspace = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Blogger = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Baidu = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Odnoklassniki = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Evernote = true</span><span class=w>
+</span><span class=w>      </span><span class=l>Skype = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Trello = false</span><span class=w>
+</span><span class=w>      </span><span class=l>Mix = false</span><span class=w>
+</span><span class=w>      </span><span class=c># CodeIT 新增 | 0.1.2</span><span class=w>
+</span><span class=w>      </span><span class=l>Telegram = false</span><span class=w>
+</span><span class=w>    </span><span class=c>#  评论系统设置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.comment]</span><span class=w>
+</span><span class=w>      </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>      </span><span class=c># Disqus 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.disqus]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>        </span><span class=c># Disqus 的 shortname，用来在文章中启用 Disqus 评论系统</span><span class=w>
+</span><span class=w>        </span><span class=l>shortname = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># Gitalk 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.gitalk]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>        </span><span class=l>owner = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>repo = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>clientId = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>clientSecret = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># Valine 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.valine]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>        </span><span class=l>appId = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>appKey = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>placeholder = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>avatar = &#34;mp&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>meta= [&#39;nick&#39;,&#39;mail&#39;]</span><span class=w>
+</span><span class=w>        </span><span class=l>pageSize = 10</span><span class=w>
+</span><span class=w>        </span><span class=l>lang = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>visitor = true</span><span class=w>
+</span><span class=w>        </span><span class=l>recordIP = true</span><span class=w>
+</span><span class=w>        </span><span class=l>highlight = true</span><span class=w>
+</span><span class=w>        </span><span class=l>enableQQ = false</span><span class=w>
+</span><span class=w>        </span><span class=l>serverURLs = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=c>#  emoji 数据文件名称, 默认是 &#34;google.yml&#34;</span><span class=w>
+</span><span class=w>        </span><span class=c># (&#34;apple.yml&#34;, &#34;google.yml&#34;, &#34;facebook.yml&#34;, &#34;twitter.yml&#34;)</span><span class=w>
+</span><span class=w>        </span><span class=c># 位于 &#34;themes/CodeIT/assets/data/emoji/&#34; 目录</span><span class=w>
+</span><span class=w>        </span><span class=c># 可以在你的项目下相同路径存放你自己的数据文件:</span><span class=w>
+</span><span class=w>        </span><span class=c># &#34;assets/data/emoji/&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>emoji = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># Facebook 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.facebook]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>        </span><span class=l>width = &#34;100%&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>numPosts = 10</span><span class=w>
+</span><span class=w>        </span><span class=l>appId = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>languageCode = &#34;zh_CN&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># Telegram Comments 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.telegram]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>        </span><span class=l>siteID = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>limit = 5</span><span class=w>
+</span><span class=w>        </span><span class=l>height = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>color = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>colorful = true</span><span class=w>
+</span><span class=w>        </span><span class=l>dislikes = false</span><span class=w>
+</span><span class=w>        </span><span class=l>outlined = false</span><span class=w>
+</span><span class=w>      </span><span class=c># Commento 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.commento]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>      </span><span class=c># Utterances 评论系统设置</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.comment.utterances]</span><span class=w>
+</span><span class=w>        </span><span class=l>enable = true</span><span class=w>
+</span><span class=w>        </span><span class=c># owner/repo</span><span class=w>
+</span><span class=w>        </span><span class=l>repo = &#34;iwyang/comments&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>issueTerm = &#34;title&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>label = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>lightTheme = &#34;github-light&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>darkTheme = &#34;github-dark&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c>#  第三方库配置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.library]</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.library.css]</span><span class=w>
+</span><span class=w>        </span><span class=c># someCSS = &#34;some.css&#34;</span><span class=w>
+</span><span class=w>        </span><span class=c># 位于 &#34;assets/&#34;</span><span class=w>
+</span><span class=w>        </span><span class=c># 或者</span><span class=w>
+</span><span class=w>        </span><span class=c># someCSS = &#34;https://cdn.example.com/some.css&#34;</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.library.js]</span><span class=w>
+</span><span class=w>        </span><span class=c># someJavascript = &#34;some.js&#34;</span><span class=w>
+</span><span class=w>        </span><span class=c># 位于 &#34;assets/&#34;</span><span class=w>
+</span><span class=w>        </span><span class=c># 或者</span><span class=w>
+</span><span class=w>        </span><span class=c># someJavascript = &#34;https://cdn.example.com/some.js&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c>#  页面 SEO 配置</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.page.seo]</span><span class=w>
+</span><span class=w>      </span><span class=c># 图片 URL</span><span class=w>
+</span><span class=w>      </span><span class=l>images = []</span><span class=w>
+</span><span class=w>      </span><span class=c># 出版者信息</span><span class=w>
+</span><span class=w>      </span><span class=p>[</span><span class=l>params.page.seo.publisher]</span><span class=w>
+</span><span class=w>        </span><span class=l>name = &#34;&#34;</span><span class=w>
+</span><span class=w>        </span><span class=l>logoUrl = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  TypeIt 配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.typeit]</span><span class=w>
+</span><span class=w>    </span><span class=c># 每一步的打字速度 (单位是毫秒)</span><span class=w>
+</span><span class=w>    </span><span class=l>speed = 100</span><span class=w>
+</span><span class=w>    </span><span class=c># 光标的闪烁速度 (单位是毫秒)</span><span class=w>
+</span><span class=w>    </span><span class=l>cursorSpeed = 1000</span><span class=w>
+</span><span class=w>    </span><span class=c># 光标的字符 (支持 HTML 格式)</span><span class=w>
+</span><span class=w>    </span><span class=l>cursorChar = &#34;|&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 打字结束之后光标的持续时间 (单位是毫秒, &#34;-1&#34; 代表无限大)</span><span class=w>
+</span><span class=w>    </span><span class=l>duration = -1</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c># 网站验证代码，用于 Google/Bing/Yandex/Pinterest/Baidu</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.verification]</span><span class=w>
+</span><span class=w>    </span><span class=l>google = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>bing = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>yandex = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>pinterest = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>baidu = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  网站 SEO 配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.seo]</span><span class=w>
+</span><span class=w>    </span><span class=c># 图片 URL</span><span class=w>
+</span><span class=w>    </span><span class=l>image = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 缩略图 URL</span><span class=w>
+</span><span class=w>    </span><span class=l>thumbnailUrl = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  网站分析配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.analytics]</span><span class=w>
+</span><span class=w>    </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>    </span><span class=c># Google Analytics</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.analytics.google]</span><span class=w>
+</span><span class=w>      </span><span class=l>id = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否匿名化用户 IP</span><span class=w>
+</span><span class=w>      </span><span class=l>anonymizeIP = true</span><span class=w>
+</span><span class=w>    </span><span class=c># Fathom Analytics</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.analytics.fathom]</span><span class=w>
+</span><span class=w>      </span><span class=l>id = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=c># 自行托管追踪器时的主机路径</span><span class=w>
+</span><span class=w>      </span><span class=l>server = &#34;&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># CodeIT 新增 | 0.1.0 Plausible Analytics</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.analytics.plausible]</span><span class=w>
+</span><span class=w>      </span><span class=l>domain = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  Cookie 许可配置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.cookieconsent]</span><span class=w>
+</span><span class=w>    </span><span class=l>enable = false</span><span class=w>
+</span><span class=w>    </span><span class=c># 用于 Cookie 许可横幅的文本字符串</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>params.cookieconsent.content]</span><span class=w>
+</span><span class=w>      </span><span class=l>message = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=l>dismiss = &#34;&#34;</span><span class=w>
+</span><span class=w>      </span><span class=l>link = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  第三方库文件的 CDN 设置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.cdn]</span><span class=w>
+</span><span class=w>    </span><span class=c># CDN 数据文件名称, 默认不启用</span><span class=w>
+</span><span class=w>    </span><span class=c># (&#34;jsdelivr.yml&#34;)</span><span class=w>
+</span><span class=w>    </span><span class=c># 位于 &#34;themes/CodeIT/assets/data/cdn/&#34; 目录</span><span class=w>
+</span><span class=w>    </span><span class=c># 可以在你的项目下相同路径存放你自己的数据文件:</span><span class=w>
+</span><span class=w>    </span><span class=c># &#34;assets/data/cdn/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=l>data = &#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>  </span><span class=c>#  兼容性设置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>params.compatibility]</span><span class=w>
+</span><span class=w>    </span><span class=c># 是否使用 Polyfill.io 来兼容旧式浏览器</span><span class=w>
+</span><span class=w>    </span><span class=l>polyfill = false</span><span class=w>
+</span><span class=w>    </span><span class=c># 是否使用 object-fit-images 来兼容旧式浏览器</span><span class=w>
+</span><span class=w>    </span><span class=l>objectFit = false</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Hugo 解析文档的配置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>markup]</span><span class=w>
+</span><span class=w>  </span><span class=c># 语法高亮设置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>markup.highlight]</span><span class=w>
+</span><span class=w>    </span><span class=l>codeFences = true</span><span class=w>
+</span><span class=w>    </span><span class=l>guessSyntax = true</span><span class=w>
+</span><span class=w>    </span><span class=l>lineNos = true</span><span class=w>
+</span><span class=w>    </span><span class=l>lineNumbersInTable = true</span><span class=w>
+</span><span class=w>    </span><span class=c># false 是必要的设置</span><span class=w>
+</span><span class=w>    </span><span class=c># (https://github.com/sunt-programator/CodeIT/issues/158)</span><span class=w>
+</span><span class=w>    </span><span class=l>noClasses = false</span><span class=w>
+</span><span class=w>  </span><span class=c># Goldmark 是 Hugo 0.60 以来的默认 Markdown 解析库</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>markup.goldmark]</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>markup.goldmark.extensions]</span><span class=w>
+</span><span class=w>      </span><span class=l>definitionList = true</span><span class=w>
+</span><span class=w>      </span><span class=l>footnote = true</span><span class=w>
+</span><span class=w>      </span><span class=l>linkify = true</span><span class=w>
+</span><span class=w>      </span><span class=l>strikethrough = true</span><span class=w>
+</span><span class=w>      </span><span class=l>table = true</span><span class=w>
+</span><span class=w>      </span><span class=l>taskList = true</span><span class=w>
+</span><span class=w>      </span><span class=l>typographer = true</span><span class=w>
+</span><span class=w>    </span><span class=p>[</span><span class=l>markup.goldmark.renderer]</span><span class=w>
+</span><span class=w>      </span><span class=c># 是否在文档中直接使用 HTML 标签</span><span class=w>
+</span><span class=w>      </span><span class=l>unsafe = true</span><span class=w>
+</span><span class=w>  </span><span class=c># 目录设置</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>markup.tableOfContents]</span><span class=w>
+</span><span class=w>    </span><span class=l>startLevel = 2</span><span class=w>
+</span><span class=w>    </span><span class=l>endLevel = 6</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 作者配置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>author]</span><span class=w>
+</span><span class=w>  </span><span class=l>name = &#34;bore&#34;</span><span class=w>
+</span><span class=w>  </span><span class=l>email = &#34;iwyang@qq.com&#34;</span><span class=w>
+</span><span class=w>  </span><span class=l>link = &#34;https://bore.vip&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 网站地图配置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>sitemap]</span><span class=w>
+</span><span class=w>  </span><span class=l>changefreq = &#34;weekly&#34;</span><span class=w>
+</span><span class=w>  </span><span class=l>filename = &#34;sitemap.xml&#34;</span><span class=w>
+</span><span class=w>  </span><span class=l>priority = 0.5</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Permalinks 配置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>Permalinks]</span><span class=w>
+</span><span class=w>  </span><span class=c># posts = &#34;:year/:month/:filename&#34;</span><span class=w>
+</span><span class=w>  </span><span class=l>posts = &#34;/posts/:slug&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 隐私信息配置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>privacy]</span><span class=w>
+</span><span class=w>  </span><span class=c>#  Google Analytics 相关隐私 (被 params.analytics.google 替代)</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>privacy.googleAnalytics]</span><span class=w>
+</span><span class=w>    </span><span class=c># ...</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>privacy.twitter]</span><span class=w>
+</span><span class=w>    </span><span class=l>enableDNT = true</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>privacy.youtube]</span><span class=w>
+</span><span class=w>    </span><span class=l>privacyEnhanced = true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 用于输出 Markdown 格式文档的设置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>mediaTypes]</span><span class=w>
+</span><span class=w>  </span><span class=p>[</span><span class=l>mediaTypes.&#34;text/plain&#34;]</span><span class=w>
+</span><span class=w>    </span><span class=l>suffixes = [&#34;md&#34;]</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 用于输出 Markdown 格式文档的设置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>outputFormats.MarkDown]</span><span class=w>
+</span><span class=w>  </span><span class=l>mediaType = &#34;text/plain&#34;</span><span class=w>
+</span><span class=w>  </span><span class=l>isPlainText = true</span><span class=w>
+</span><span class=w>  </span><span class=l>isHTML = false</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 用于 Hugo 输出文档的设置</span><span class=w>
+</span><span class=w></span><span class=p>[</span><span class=l>outputs]</span><span class=w>
+</span><span class=w>  </span><span class=l>home = [&#34;HTML&#34;, &#34;RSS&#34;, &#34;JSON&#34;]</span><span class=w>
+</span><span class=w>  </span><span class=l>page = [&#34;HTML&#34;, &#34;MarkDown&#34;]</span><span class=w>
+</span><span class=w>  </span><span class=l>section = [&#34;HTML&#34;, &#34;RSS&#34;]</span><span class=w>
+</span><span class=w>  </span><span class=l>taxonomy = [&#34;HTML&#34;, &#34;RSS&#34;]</span><span class=w>
+</span><span class=w>  </span><span class=l>taxonomyTerm = [&#34;HTML&#34;]</span><span class=w>
+</span></code></pre></div><p><strong>注意</strong>：</p>
+<ol>
+<li>如果固定链接设置为<code>posts = "/posts/:slug"</code>，文章的分类和标签都不能为空，否则会报错！</li>
+<li>如果要在菜单前面加图标，格式是<code>pre = "&lt;i class='fa fa-fw fa-home'>&lt;/i>"</code>，<code>'fa fa-fw fa-home'</code>是单引号，不是双引号。</li>
+</ol>
+<h3 id=默认文章模板的修改>默认文章模板的修改</h3>
+<p>将<code>根目录\archetypes</code>下的<code>default.md</code>修改如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ replace .TranslationBaseName &#34;</span>-<span class=s2>&#34; &#34;</span><span class=w> </span><span class=s2>&#34; | title }}&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>slug</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>date</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Date }}</span><span class=w>
+</span><span class=w></span><span class=nt>lastmod</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Date }}</span><span class=w>
+</span><span class=w></span><span class=nt>draft</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>toc</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>categories</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w></span><span class=nt>tags</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>]</span><span class=w>
+</span></code></pre></div><h3 id=loveit主题官方前置参数>LoveIt主题官方前置参数</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;我的第一篇文章&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>subtitle</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>date</span><span class=p>:</span><span class=w> </span><span class=ld>2020-03-04T15:58:26</span><span class=m>+08</span><span class=p>:</span><span class=m>00</span><span class=w>
+</span><span class=w></span><span class=nt>lastmod</span><span class=p>:</span><span class=w> </span><span class=ld>2020-03-04T15:58:26</span><span class=m>+08</span><span class=p>:</span><span class=m>00</span><span class=w>
+</span><span class=w></span><span class=nt>draft</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>author</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>authorLink</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>license</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>images</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>tags</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span><span class=w></span><span class=nt>categories</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span><span class=w></span><span class=nt>featuredImage</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>featuredImagePreview</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>hiddenFromHomePage</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>hiddenFromSearch</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>twemoji</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>lightgallery</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>ruby</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>fraction</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>fontawesome</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>linkToMarkdown</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>rssFullText</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>toc</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=nt>auto</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>code</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>copy</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=c># ...</span><span class=w>
+</span><span class=w></span><span class=nt>math</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=c># ...</span><span class=w>
+</span><span class=w></span><span class=nt>mapbox</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>accessToken</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w>  </span><span class=c># ...</span><span class=w>
+</span><span class=w></span><span class=nt>share</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=c># ...</span><span class=w>
+</span><span class=w></span><span class=nt>comment</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>enable</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>  </span><span class=c># ...</span><span class=w>
+</span><span class=w></span><span class=nt>library</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>css</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># someCSS = &#34;some.css&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 位于 &#34;assets/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 或者</span><span class=w>
+</span><span class=w>    </span><span class=c># someCSS = &#34;https://cdn.example.com/some.css&#34;</span><span class=w>
+</span><span class=w>  </span><span class=nt>js</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=c># someJS = &#34;some.js&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 位于 &#34;assets/&#34;</span><span class=w>
+</span><span class=w>    </span><span class=c># 或者</span><span class=w>
+</span><span class=w>    </span><span class=c># someJS = &#34;https://cdn.example.com/some.js&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>seo</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>images</span><span class=p>:</span><span class=w> </span><span class=p>[]</span><span class=w>
+</span><span class=w>  </span><span class=c># ...</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span></code></pre></div><ul>
+<li><strong>title</strong>: 文章标题.</li>
+<li><strong>subtitle</strong>: 文章副标题.</li>
+<li><strong>date</strong>: 这篇文章创建的日期时间. 它通常是从文章的前置参数中的 date 字段获取的, 但是也可以在 网站配置 中设置.</li>
+<li><strong>lastmod</strong>: 上次修改内容的日期时间.</li>
+<li><strong>draft</strong>: 如果设为 <code>true</code>, 除非 <code>hugo</code> 命令使用了 <code>--buildDrafts</code>/<code>-D</code> 参数, 这篇文章不会被渲染.</li>
+<li><strong>author</strong>: 文章作者.</li>
+<li><strong>authorLink</strong>: 文章作者的链接.</li>
+<li><strong>description</strong>: 文章内容的描述.</li>
+<li><strong>license</strong>: 这篇文章特殊的许可.</li>
+<li><strong>images</strong>: 页面图片, 用于 Open Graph 和 Twitter Cards.</li>
+<li><strong>tags</strong>: 文章的标签.</li>
+<li><strong>categories</strong>: 文章所属的类别.</li>
+<li><strong>featuredImage</strong>: 文章的特色图片.</li>
+<li><strong>featuredImagePreview</strong>: 用在主页预览的文章特色图片.</li>
+<li><strong>hiddenFromHomePage</strong>: 如果设为 <code>true</code>, 这篇文章将不会显示在主页上.</li>
+<li><strong>hiddenFromSearch</strong>: 如果设为 true, 这篇文章将不会显示在搜索结果中.</li>
+<li><strong>twemoji</strong>: 如果设为 true, 这篇文章会使用 twemoji.</li>
+<li><strong>lightgallery</strong>: 如果设为 <code>true</code>, 文章中的图片将可以按照画廊形式呈现.</li>
+<li><strong>ruby</strong>: 如果设为 true, 这篇文章会使用 上标注释扩展语法.</li>
+<li><strong>fraction</strong>: 如果设为 true, 这篇文章会使用 分数扩展语法.</li>
+<li>fontawesome: 如果设为 true, 这篇文章会使用 Font Awesome 扩展语法.</li>
+<li><strong>linkToMarkdown</strong>: 如果设为 <code>true</code>, 内容的页脚将显示指向原始 Markdown 文件的链接.</li>
+<li><strong>rssFullText</strong>: 如果设为 true, 在 RSS 中将会显示全文内容.</li>
+<li><strong>toc</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a> 中的 params.page.toc 部分相同.</li>
+<li><strong>code</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a> 中的 params.page.code 部分相同.</li>
+<li><strong>math</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a> 中的 params.page.math 部分相同.</li>
+<li><strong>mapbox</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a> 中的 params.page.mapbox 部分相同.</li>
+<li><strong>share</strong>: 和 <a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a> 中的 <code>params.page.share</code> 部分相同.</li>
+<li><strong>comment</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a> 中的 params.page.comment 部分相同.</li>
+<li><strong>library</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a>中的 params.page.library 部分相同.</li>
+<li><strong>seo</strong>: 和<a class=link href=https://hugoloveit.com/zh-cn/theme-documentation-basics#site-configuration target=_blank rel=noopener>网站配置</a>中的 params.page.seo 部分相同.</li>
+</ul>
+<h3 id=添加友情链接-shortcodes>添加友情链接 shortcodes</h3>
+<blockquote>
+<p>在前辈大佬的基础上，为本博客使用的主题实现友链卡片功能，并加入简单的移动页面适配。代码借鉴来自 <a class=link href=https://github.com/kkkgo/hugo-friendlinks/ target=_blank rel=noopener>kissshot</a> 和 <a class=link href=https://github.com/MatNoble/hugo-shortcodes-sets/ target=_blank rel=noopener>数学小兵儿</a> 两位大佬。</p>
+</blockquote>
+<h4 id=第一种方法>第一种方法</h4>
+<h5 id=代码部分>代码部分</h5>
+<p><code>LoveIt/layouts/shortcodes/</code> 下面新建 <code>friend.html</code> 文件：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html>{{ if .IsNamedParams }}
+<span class=p>&lt;</span><span class=nt>a</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>{{</span> <span class=err>.</span><span class=na>Get</span> <span class=err>&#34;</span><span class=na>url</span><span class=err>&#34;</span> <span class=err>}}</span> <span class=na>title</span><span class=o>=</span><span class=s>{{</span> <span class=err>.</span><span class=na>Get</span> <span class=err>&#34;</span><span class=na>name</span><span class=err>&#34;</span> <span class=err>}}</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friendurl&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;frienddiv&#34;</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;frienddivleft&#34;</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>img</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;myfriend&#34;</span> <span class=na>src</span><span class=o>=</span><span class=s>{{</span> <span class=err>.</span><span class=na>Get</span> <span class=err>&#34;</span><span class=na>logo</span><span class=err>&#34;</span> <span class=err>}}</span> <span class=p>/&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;frienddivright&#34;</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friendname&#34;</span><span class=p>&gt;</span>{{ .Get &#34;name&#34; }}<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friendinfo&#34;</span><span class=p>&gt;</span>{{ .Get &#34;word&#34; }}<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+{{ end }}
+</code></pre></div><p><code>LoveIt/assets/css/_partial/_single/</code> 下面新建 <code>_friend.scss</code> 文件：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=p>.</span><span class=nc>friendurl</span> <span class=p>{</span>
+ <span class=k>text-decoration</span><span class=p>:</span> <span class=kc>none</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>color</span><span class=p>:</span> <span class=kc>black</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>myfriend</span> <span class=p>{</span>
+ <span class=k>width</span><span class=p>:</span> <span class=mi>56</span><span class=kt>px</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>height</span><span class=p>:</span> <span class=mi>56</span><span class=kt>px</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>border-radius</span><span class=p>:</span> <span class=mi>50</span><span class=kt>%</span><span class=p>;</span>
+ <span class=k>border</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=kc>solid</span> <span class=mh>#ddd</span><span class=p>;</span>
+ <span class=k>padding</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span><span class=p>;</span>
+ <span class=k>box-shadow</span><span class=p>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=mi>1</span><span class=kt>px</span> <span class=mi>1</span><span class=kt>px</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mf>0.15</span><span class=p>);</span>
+ <span class=k>margin-top</span><span class=p>:</span> <span class=mi>14</span><span class=kt>px</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>margin-left</span><span class=p>:</span> <span class=mi>14</span><span class=kt>px</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>background-color</span><span class=p>:</span> <span class=mh>#fff</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>frienddiv</span> <span class=p>{</span>
+ <span class=k>height</span><span class=p>:</span> <span class=mi>92</span><span class=kt>px</span><span class=p>;</span>
+ <span class=k>margin-top</span><span class=p>:</span> <span class=mi>10</span><span class=kt>px</span><span class=p>;</span>
+ <span class=k>width</span><span class=p>:</span> <span class=mi>48</span><span class=kt>%</span><span class=p>;</span>
+ <span class=k>display</span><span class=p>:</span> <span class=kc>inline-block</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>border-radius</span><span class=p>:</span> <span class=mi>5</span><span class=kt>px</span><span class=p>;</span>
+ <span class=k>background</span><span class=p>:</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>255</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mf>0.2</span><span class=p>);</span>
+ <span class=k>box-shadow</span><span class=p>:</span> <span class=mi>4</span><span class=kt>px</span> <span class=mi>4</span><span class=kt>px</span> <span class=mi>2</span><span class=kt>px</span> <span class=mi>1</span><span class=kt>px</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>255</span><span class=p>,</span> <span class=mf>0.2</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>frienddiv</span><span class=p>:</span><span class=nd>hover</span> <span class=p>{</span>
+ <span class=k>background</span><span class=p>:</span> <span class=nb>rgba</span><span class=p>(</span><span class=mi>87</span><span class=p>,</span> <span class=mi>142</span><span class=p>,</span> <span class=mi>224</span><span class=p>,</span> <span class=mf>0.15</span><span class=p>);</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>frienddiv</span><span class=p>:</span><span class=nd>hover</span> <span class=p>.</span><span class=nc>frienddivleft</span> <span class=nt>img</span> <span class=p>{</span>
+ <span class=k>transition</span><span class=p>:</span> <span class=mf>0.9</span><span class=kt>s</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-webkit-</span><span class=k>transition</span><span class=p>:</span> <span class=mf>0.9</span><span class=kt>s</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-moz-</span><span class=k>transition</span><span class=p>:</span> <span class=mf>0.9</span><span class=kt>s</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-o-</span><span class=k>transition</span><span class=p>:</span> <span class=mf>0.9</span><span class=kt>s</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-ms-</span><span class=k>transition</span><span class=p>:</span> <span class=mf>0.9</span><span class=kt>s</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>)</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-webkit-</span><span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>)</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-moz-</span><span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>)</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-o-</span><span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>)</span> <span class=cp>!important</span><span class=p>;</span>
+ <span class=kp>-ms-</span><span class=k>transform</span><span class=p>:</span> <span class=nb>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>)</span> <span class=cp>!important</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>frienddivleft</span> <span class=p>{</span>
+ <span class=k>width</span><span class=p>:</span> <span class=mi>92</span><span class=kt>px</span><span class=p>;</span>
+ <span class=k>float</span><span class=p>:</span> <span class=kc>left</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>frienddivleft</span> <span class=p>{</span>
+ <span class=k>margin-right</span><span class=p>:</span> <span class=mi>2</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>frienddivright</span> <span class=p>{</span>
+ <span class=k>margin-top</span><span class=p>:</span> <span class=mi>18</span><span class=kt>px</span><span class=p>;</span>
+ <span class=k>margin-right</span><span class=p>:</span> <span class=mi>18</span><span class=kt>px</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>friendname</span> <span class=p>{</span>
+ <span class=k>text-overflow</span><span class=p>:</span> <span class=kc>ellipsis</span><span class=p>;</span>
+ <span class=k>overflow</span><span class=p>:</span> <span class=kc>hidden</span><span class=p>;</span>
+ <span class=k>white-space</span><span class=p>:</span> <span class=kc>nowrap</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>.</span><span class=nc>friendinfo</span> <span class=p>{</span>
+ <span class=k>text-overflow</span><span class=p>:</span> <span class=kc>ellipsis</span><span class=p>;</span>
+ <span class=k>overflow</span><span class=p>:</span> <span class=kc>hidden</span><span class=p>;</span>
+ <span class=k>white-space</span><span class=p>:</span> <span class=kc>nowrap</span><span class=p>;</span>
+<span class=p>}</span>
+
+<span class=p>@</span><span class=k>media</span> <span class=nt>screen</span> <span class=nt>and</span> <span class=o>(</span><span class=nt>max-width</span><span class=o>:</span> <span class=nt>600px</span><span class=o>)</span> <span class=p>{</span>
+ <span class=p>.</span><span class=nc>friendinfo</span> <span class=p>{</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>none</span><span class=p>;</span>
+ <span class=p>}</span>
+ <span class=p>.</span><span class=nc>frienddivleft</span> <span class=p>{</span>
+  <span class=k>width</span><span class=p>:</span> <span class=mi>84</span><span class=kt>px</span><span class=p>;</span>
+  <span class=k>margin</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+ <span class=p>}</span>
+ <span class=p>.</span><span class=nc>frienddivright</span> <span class=p>{</span>
+  <span class=k>height</span><span class=p>:</span> <span class=mi>100</span><span class=kt>%</span><span class=p>;</span>
+  <span class=k>margin</span><span class=p>:</span> <span class=kc>auto</span><span class=p>;</span>
+  <span class=k>display</span><span class=p>:</span> <span class=kc>flex</span><span class=p>;</span>
+  <span class=k>align-items</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+  <span class=k>justify-content</span><span class=p>:</span> <span class=kc>center</span><span class=p>;</span>
+ <span class=p>}</span>
+ <span class=p>.</span><span class=nc>friendname</span> <span class=p>{</span>
+  <span class=k>font-size</span><span class=p>:</span> <span class=mi>14</span><span class=kt>px</span><span class=p>;</span>
+ <span class=p>}</span>
+<span class=p>}</span>
+</code></pre></div><p><code>LoveIt/assets/css/_page/</code> 下面修改 <code>_single.scss</code>，引入下面一行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-scss data-lang=scss><span class=k>@import</span> <span class=s2>&#34;../_partial/_single/friend&#34;</span><span class=p>;</span>
+</code></pre></div><h5 id=展示效果>展示效果</h5>
+<p>使用示例：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown>{{<span class=p>&lt;</span> <span class=nt>friend</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;Bore&#34;</span> <span class=na>url</span><span class=o>=</span><span class=s>&#34;https://bore.vip/&#34;</span> <span class=na>logo</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/gh/iwyang/pic/avatar.jpg&#34;</span> <span class=na>word</span><span class=o>=</span><span class=s>&#34;博观而约取，厚积而薄发&#34;</span> <span class=p>&gt;</span>}} 
+</code></pre></div><p><figure>
+<a href=https://cdn.jsdelivr.net/gh/iwyang/pic/20210715233435.jpg>
+<img src=https://cdn.jsdelivr.net/gh/iwyang/pic/20210715233435.jpg loading=lazy>
+</a>
+</figure></p>
+<p><strong>注意</strong>：可以用<code>/* */</code>来阻止渲染</p>
+<p><figure>
+<a href=https://cdn.jsdelivr.net/gh/iwyang/pic/20210717161923.png>
+<img src=https://cdn.jsdelivr.net/gh/iwyang/pic/20210717161923.png loading=lazy>
+</a>
+</figure></p>
+<h4 id=第二种方法>第二种方法</h4>
+<p>2021.7.17 目前采用的就是这种方法。</p>
+<h5 id=代码>代码</h5>
+<p><strong>注意：后面说的<code>assets</code>和<code>layouts</code>目录都不是<code>themes/LoveIt/\*</code>下的，而是<code>博客根目录/*</code></strong></p>
+<ol>
+<li><code>layouts/shortcodes/</code>下面新建<code>friend.html</code>文件：</li>
+</ol>
+<p>注意这里我将原来的<code>&lt;a target="_blank" href={{ .Get "url" | safeURL }} title={{ .Get "name" }} ></code>改成了<code> &lt;a target="_blank" href={{ .Get "url" | safeURL }} title={{ .Get "word" }} ></code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html>{{ if .IsNamedParams }}
+    {{- $src := .Get &#34;logo&#34; -}}
+    {{- $small := .Get &#34;logo_small&#34; | default $src -}}
+    {{- $large := .Get &#34;logo_large&#34; | default $src -}}
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friend-div&#34;</span><span class=p>&gt;</span>
+        <span class=p>&lt;</span><span class=nt>a</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>{{</span> <span class=err>.</span><span class=na>Get</span> <span class=err>&#34;</span><span class=na>url</span><span class=err>&#34;</span>  <span class=err>|</span> <span class=na>safeURL</span> <span class=err>}}</span> <span class=na>title</span><span class=o>=</span><span class=s>{{</span> <span class=err>.</span><span class=na>Get</span> <span class=err>&#34;</span><span class=na>word</span><span class=err>&#34;</span> <span class=err>}}</span> <span class=p>&gt;</span>
+            <span class=p>&lt;</span><span class=nt>img</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;lazyload&#34;</span>
+                 <span class=na>src</span><span class=o>=</span><span class=s>&#34;/svg/loading.min.svg&#34;</span>
+                 <span class=na>data-src</span><span class=o>=</span><span class=s>{{</span> <span class=err>$</span><span class=na>src</span> <span class=err>|</span> <span class=na>safeURL</span> <span class=err>}}</span>
+                 <span class=na>alt</span><span class=o>=</span><span class=s>{{</span> <span class=err>.</span><span class=na>Get</span> <span class=err>&#34;</span><span class=na>name</span><span class=err>&#34;</span> <span class=err>}}</span>
+                 <span class=na>data-sizes</span><span class=o>=</span><span class=s>&#34;auto&#34;</span>
+                 <span class=na>data-srcset</span><span class=o>=</span><span class=s>&#34;{{ $small | safeURL }}, {{ $src | safeURL }} 1.5x, {{ $large | safeURL }} 2x&#34;</span> <span class=p>/&gt;</span>
+            <span class=p>&lt;</span><span class=nt>span</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friend-name&#34;</span><span class=p>&gt;</span>{{ .Get &#34;name&#34; }}<span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+            <span class=p>&lt;</span><span class=nt>span</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friend-info&#34;</span><span class=p>&gt;</span>{{ .Get &#34;word&#34; }}<span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+        <span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+{{ end }}
+</code></pre></div><ol start=2>
+<li><code>assets/css/_partial/_single/</code>下面新建<code>_friend.scss</code>文件：</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-scss data-lang=scss><span class=nn>#article-container</span> <span class=p>{</span>
+ <span class=na>word-wrap</span><span class=o>:</span> <span class=ni>break-word</span><span class=p>;</span>
+ <span class=na>overflow-wrap</span><span class=o>:</span> <span class=ni>break-word</span>
+<span class=p>}</span>
+   
+<span class=nn>#article-container</span> <span class=nt>a</span> <span class=p>{</span>
+ <span class=na>color</span><span class=o>:</span> <span class=mh>#49b1f5</span>
+<span class=p>}</span>
+   
+<span class=nn>#article-container</span> <span class=nt>a</span><span class=nd>:hover</span> <span class=p>{</span>
+ <span class=na>text-decoration</span><span class=o>:</span> <span class=ni>underline</span>
+<span class=p>}</span>
+   
+<span class=nn>#article-container</span> <span class=nt>img</span> <span class=p>{</span>
+ <span class=na>margin</span><span class=o>:</span> <span class=mi>0</span> <span class=ni>auto</span> <span class=mf>.8</span><span class=kt>rem</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=nt>a</span> <span class=nc>.friend-info</span><span class=o>,</span>
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=nt>a</span> <span class=nc>.friend-name</span> <span class=p>{</span>
+ <span class=na>overflow</span><span class=o>:</span> <span class=ni>hidden</span><span class=p>;</span>
+ <span class=na>-o-text-overflow</span><span class=o>:</span> <span class=ni>ellipsis</span><span class=p>;</span>
+ <span class=na>text-overflow</span><span class=o>:</span> <span class=ni>ellipsis</span><span class=p>;</span>
+ <span class=na>white-space</span><span class=o>:</span> <span class=ni>nowrap</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=p>{</span>
+ <span class=na>overflow</span><span class=o>:</span> <span class=ni>auto</span><span class=p>;</span>
+ <span class=na>padding</span><span class=o>:</span> <span class=mi>10</span><span class=kt>px</span> <span class=mi>10</span><span class=kt>px</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>text-align</span><span class=o>:</span> <span class=ni>center</span><span class=p>;</span>
+<span class=p>}</span>
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=p>{</span>
+ <span class=na>position</span><span class=o>:</span> <span class=ni>relative</span><span class=p>;</span>
+ <span class=na>float</span><span class=o>:</span> <span class=ni>left</span><span class=p>;</span>
+ <span class=na>overflow</span><span class=o>:</span> <span class=ni>hidden</span><span class=p>;</span>
+ <span class=na>margin</span><span class=o>:</span> <span class=mi>15</span><span class=kt>px</span> <span class=mi>7</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>width</span><span class=o>:</span> <span class=nf>calc</span><span class=p>(</span><span class=mi>100</span><span class=kt>%</span> <span class=o>/</span> <span class=mi>3</span> <span class=o>-</span> <span class=mi>15</span><span class=kt>px</span><span class=p>);</span>
+ <span class=na>height</span><span class=o>:</span> <span class=mi>90</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>border-radius</span><span class=o>:</span> <span class=mi>8</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>line-height</span><span class=o>:</span> <span class=mi>17</span><span class=kt>px</span><span class=p>;</span>
+ <span class=o>-</span><span class=nt>webkit-transform</span><span class=nd>:</span> <span class=nt>translateZ</span><span class=o>(</span><span class=nt>0</span><span class=o>)</span>
+<span class=p>}</span>
+   
+<span class=k>@media</span> <span class=ni>screen</span> <span class=ow>and</span> <span class=p>(</span><span class=na>max-width</span><span class=o>:</span> <span class=mi>1100</span><span class=kt>px</span><span class=p>)</span> <span class=p>{</span>
+ <span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=p>{</span>
+  <span class=na>width</span><span class=o>:</span> <span class=nf>calc</span><span class=p>(</span><span class=mi>50</span><span class=kt>%</span> <span class=o>-</span> <span class=mi>15</span><span class=kt>px</span><span class=p>)</span> <span class=k>!important</span>
+ <span class=p>}</span>
+   
+<span class=k>@media</span> <span class=ni>screen</span> <span class=ow>and</span> <span class=p>(</span><span class=na>max-width</span><span class=o>:</span> <span class=mi>600</span><span class=kt>px</span><span class=p>)</span> <span class=p>{</span>
+ <span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=p>{</span>
+  <span class=na>width</span><span class=o>:</span> <span class=nf>calc</span><span class=p>(</span><span class=mi>100</span><span class=kt>%</span> <span class=o>-</span> <span class=mi>15</span><span class=kt>px</span><span class=p>)</span> <span class=k>!important</span>
+ <span class=p>}</span>
+<span class=p>}</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span><span class=nd>:hover</span> <span class=p>{</span>
+ <span class=na>background</span><span class=o>:</span> <span class=nf>rgba</span><span class=p>(</span><span class=mi>87</span><span class=o>,</span> <span class=mi>142</span><span class=o>,</span> <span class=mi>224</span><span class=o>,</span> <span class=mi>0</span><span class=mf>.15</span><span class=p>);</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span><span class=nd>:hover</span> <span class=nt>img</span> <span class=p>{</span>
+ <span class=na>-webkit-transform</span><span class=o>:</span> <span class=nf>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>);</span>
+ <span class=na>-moz-transform</span><span class=o>:</span> <span class=nf>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>);</span>
+ <span class=na>-o-transform</span><span class=o>:</span> <span class=nf>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>);</span>
+ <span class=na>-ms-transform</span><span class=o>:</span> <span class=nf>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>);</span>
+ <span class=na>transform</span><span class=o>:</span> <span class=nf>rotate</span><span class=p>(</span><span class=mi>360</span><span class=kt>deg</span><span class=p>)</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span><span class=nd>:before</span> <span class=p>{</span>
+ <span class=na>position</span><span class=o>:</span> <span class=ni>absolute</span><span class=p>;</span>
+ <span class=na>top</span><span class=o>:</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>right</span><span class=o>:</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>bottom</span><span class=o>:</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>left</span><span class=o>:</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>z-index</span><span class=o>:</span> <span class=o>-</span><span class=mi>1</span><span class=p>;</span>
+ <span class=na>background</span><span class=o>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=ni>text</span><span class=o>-</span><span class=n>bg-hover</span><span class=p>);</span>
+ <span class=na>content</span><span class=o>:</span> <span class=s1>&#39;&#39;</span><span class=p>;</span>
+ <span class=na>-webkit-transition</span><span class=o>:</span> <span class=o>-</span><span class=n>webkit-transform</span> <span class=mf>.3</span><span class=kt>s</span> <span class=ni>ease-out</span><span class=p>;</span>
+ <span class=na>-moz-transition</span><span class=o>:</span> <span class=o>-</span><span class=n>moz-transform</span> <span class=mf>.3</span><span class=kt>s</span> <span class=ni>ease-out</span><span class=p>;</span>
+ <span class=na>-o-transition</span><span class=o>:</span> <span class=o>-</span><span class=n>o-transform</span> <span class=mf>.3</span><span class=kt>s</span> <span class=ni>ease-out</span><span class=p>;</span>
+ <span class=na>-ms-transition</span><span class=o>:</span> <span class=o>-</span><span class=n>ms-transform</span> <span class=mf>.3</span><span class=kt>s</span> <span class=ni>ease-out</span><span class=p>;</span>
+ <span class=na>transition</span><span class=o>:</span> <span class=ni>transform</span> <span class=mf>.3</span><span class=kt>s</span> <span class=ni>ease-out</span><span class=p>;</span>
+ <span class=na>-webkit-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+ <span class=na>-moz-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+ <span class=na>-o-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+ <span class=na>-ms-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+ <span class=na>transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span><span class=nd>:hover:before</span><span class=o>,</span>
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span><span class=nd>:focus:before</span><span class=o>,</span>
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span><span class=nd>:active:before</span> <span class=p>{</span>
+ <span class=na>-webkit-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+ <span class=na>-moz-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+ <span class=na>-o-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+ <span class=na>-ms-transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+ <span class=na>transform</span><span class=o>:</span> <span class=nf>scale</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span>
+<span class=p>}</span>
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=nt>a</span> <span class=p>{</span>
+ <span class=na>color</span><span class=o>:</span> <span class=nf>var</span><span class=p>(</span><span class=o>--</span><span class=n>font-color</span><span class=p>);</span>
+ <span class=na>text-decoration</span><span class=o>:</span> <span class=ni>none</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=nt>a</span> <span class=nt>img</span><span class=p>{</span>
+ <span class=na>float</span><span class=o>:</span> <span class=ni>left</span><span class=p>;</span>
+ <span class=na>margin</span><span class=o>:</span> <span class=mi>15</span><span class=kt>px</span> <span class=mi>10</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>width</span><span class=o>:</span> <span class=mi>60</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>height</span><span class=o>:</span> <span class=mi>60</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>border-radius</span><span class=o>:</span> <span class=mi>35</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>-webkit-transition</span><span class=o>:</span> <span class=ni>all</span> <span class=mf>.3</span><span class=kt>s</span><span class=p>;</span>
+ <span class=na>-moz-transition</span><span class=o>:</span> <span class=ni>all</span> <span class=mf>.3</span><span class=kt>s</span><span class=p>;</span>
+ <span class=na>-o-transition</span><span class=o>:</span> <span class=ni>all</span> <span class=mf>.3</span><span class=kt>s</span><span class=p>;</span>
+ <span class=na>-ms-transition</span><span class=o>:</span> <span class=ni>all</span> <span class=mf>.3</span><span class=kt>s</span><span class=p>;</span>
+ <span class=na>transition</span><span class=o>:</span> <span class=ni>all</span> <span class=mf>.3</span><span class=kt>s</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=nt>a</span> <span class=nc>.friend-name</span> <span class=p>{</span>
+ <span class=na>display</span><span class=o>:</span> <span class=ni>block</span><span class=p>;</span>
+ <span class=na>padding</span><span class=o>:</span> <span class=mi>16</span><span class=kt>px</span> <span class=mi>10</span><span class=kt>px</span> <span class=mi>0</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>height</span><span class=o>:</span> <span class=mi>40</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>font-weight</span><span class=o>:</span> <span class=mi>700</span><span class=p>;</span>
+ <span class=na>font-size</span><span class=o>:</span> <span class=mi>20</span><span class=kt>px</span>
+<span class=p>}</span>
+   
+<span class=nc>.flink</span><span class=nn>#article-container</span> <span class=nc>.friend-list-div</span> <span class=o>&gt;</span> <span class=nc>.friend-div</span> <span class=nt>a</span> <span class=nc>.friend-info</span> <span class=p>{</span>
+ <span class=na>display</span><span class=o>:</span> <span class=ni>block</span><span class=p>;</span>
+ <span class=na>padding</span><span class=o>:</span> <span class=mi>1</span><span class=kt>px</span> <span class=mi>10</span><span class=kt>px</span> <span class=mi>1</span><span class=kt>px</span> <span class=mi>0</span><span class=p>;</span>
+ <span class=na>height</span><span class=o>:</span> <span class=mi>50</span><span class=kt>px</span><span class=p>;</span>
+ <span class=na>font-size</span><span class=o>:</span> <span class=mi>13</span><span class=kt>px</span>
+<span class=p>}</span>
+</code></pre></div><ol start=3>
+<li>拷贝<code>themes/LoveIt/assets/css/_page/_single.scss</code>到<code>assets/css/_page/_single.scss</code>，并引入下面一行：</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-scss data-lang=scss><span class=k>@import</span> <span class=s2>&#34;../_partial/_single/friend&#34;</span><span class=p>;</span>
+</code></pre></div><h5 id=预览>预览</h5>
+<p>先自行在<code>config.toml</code>中配置友情链接，然后 md 文件中写如下代码：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;flink&#34;</span> <span class=na>id</span><span class=o>=</span><span class=s>&#34;article-container&#34;</span><span class=p>&gt;</span>
+<span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;friend-list-div&#34;</span> <span class=p>&gt;</span>
+
+{{<span class=p>&lt;</span> <span class=nt>friend</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;友链名&#34;</span> <span class=na>url</span><span class=o>=</span><span class=s>&#34;友链地址&#34;</span> <span class=na>logo</span><span class=o>=</span><span class=s>&#34;友链图标链接&#34;</span> <span class=na>word</span><span class=o>=</span><span class=s>&#34;友链描述&#34;</span> <span class=p>&gt;</span>}}
+{{<span class=p>&lt;</span> <span class=nt>friend</span> <span class=na>name</span><span class=o>=</span><span class=s>&#34;友链名&#34;</span> <span class=na>url</span><span class=o>=</span><span class=s>&#34;友链地址&#34;</span> <span class=na>logo</span><span class=o>=</span><span class=s>&#34;友链图标链接&#34;</span> <span class=na>word</span><span class=o>=</span><span class=s>&#34;友链描述&#34;</span> <span class=p>&gt;</span>}}
+...
+
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+</code></pre></div><blockquote>
+<p><strong>注意：两个 div 不能少！！</strong></p>
+</blockquote>
+<p><figure>
+<a href=https://cdn.jsdelivr.net/gh/iwyang/pic/20210717220844.jpg>
+<img src=https://cdn.jsdelivr.net/gh/iwyang/pic/20210717220844.jpg loading=lazy>
+</a>
+</figure></p>
+<h2 id=github-actions脚本>Github actions脚本</h2>
+<p>在博客根目录新建<code>.github/workflows/gh_pages.yml</code>文件。代码如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>GitHub Page Deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>develop</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout master</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v1</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;latest&#39;</span><span class=w>
+</span><span class=w>          </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build Hugo</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          </span><span class=w>          </span><span class=l>hugo</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hugo to gh-pages</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>ACTIONS_DEPLOY_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.ACTIONS_DEPLOY_KEY }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>PUBLISH_BRANCH</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>          </span><span class=nt>PUBLISH_DIR</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span></code></pre></div><p>如果使用的是<code>loveit主题</code>并且使用algolia搜索，则还要配置自动更新索引，需在<code>gh_pages.yml</code>里作相应修改：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>name: GitHub Page Deploy
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v1
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: <span class=s1>&#39;latest&#39;</span>
+          extended: <span class=nb>true</span>
+
+      - name: Build Hugo
+        run: <span class=p>|</span>
+          hugo <span class=o>&amp;&amp;</span> npm install atomic-algolia --save <span class=o>&amp;&amp;</span> npm run algolia
+
+      - name: Deploy Hugo to gh-pages
+        uses: peaceiris/actions-gh-pages@v2
+        env:
+          ACTIONS_DEPLOY_KEY: <span class=si>${</span><span class=p>{ secrets.ACTIONS_DEPLOY_KEY </span><span class=si>}</span><span class=o>}</span>
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
+</code></pre></div><p>如果要部署到腾讯CloudBase，可根据下面内容作相应修改。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy to TCB</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>main </span><span class=w> </span><span class=c># Set a branch to deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>  </span><span class=c># Fetch Hugo themes (true OR recursive)</span><span class=w>
+</span><span class=w>          </span><span class=nt>fetch-depth</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>    </span><span class=c># Fetch all history for .GitInfo and .Lastmod</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Hugo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-hugo@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>hugo-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;0.79.1&#39;</span><span class=w>
+</span><span class=w>          </span><span class=nt>extended</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>hugo --minify</span><span class=w>
+</span><span class=w>     
+</span><span class=w>      </span><span class=c># Deploy static to Tencent CloudBase</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy static to Tencent CloudBase</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>deployStatic</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>TencentCloudBase/cloudbase-action@v1.1.1</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>secretId</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.SECRET_ID }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>secretKey</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.SECRET_KEY }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>envId</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.ENV_ID }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>staticSrcPath</span><span class=p>:</span><span class=w> </span><span class=l>public</span><span class=w>
+</span></code></pre></div><h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://blog.233so.com/2020/04/friend-link-shortcodes-for-hugo-loveit/ target=_blank rel=noopener>1.Hugo 篇四：添加友链卡片 shortcodes</a></li>
+<li><a class=link href=https://reb.mallotec.com/post/9e9c31ab/ target=_blank rel=noopener>2.Hugo 添加友情链接页面</a></li>
+<li><a class=link href=https://hugodoit.pages.dev/zh-cn/theme-documentation-basics/ target=_blank rel=noopener>3.Doit主题文档 - 基本概念</a></li>
+<li><a class=link href=https://codeit.suntprogramator.dev/zh-cn/theme-documentation-basics/ target=_blank rel=noopener>4.Codeit主题文档 - 基本概念</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hugo/>hugo</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/Hugo%20LoveIt&CodeIT&DoIt%e4%b8%bb%e9%a2%98%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bd%bf%e7%94%a8.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-08-06
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-papermod-theme/>
+<div class=article-details>
+<h2 class=article-title>Hugo Papermod主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-stack/>
+<div class=article-details>
+<h2 class=article-title>Hugo Stack主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hugo利用Github Actions自动构建博客</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#安装主题>安装主题</a></li>
+<li><a href=#配置主题>配置主题</a>
+<ol>
+<li><a href=#站点配置文件的修改>站点配置文件的修改</a></li>
+<li><a href=#默认文章模板的修改>默认文章模板的修改</a></li>
+<li><a href=#loveit主题官方前置参数>LoveIt主题官方前置参数</a></li>
+<li><a href=#添加友情链接-shortcodes>添加友情链接 shortcodes</a>
+<ol>
+<li><a href=#第一种方法>第一种方法</a></li>
+<li><a href=#第二种方法>第二种方法</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#github-actions脚本>Github actions脚本</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="Fn+F2进入bios，Fn+F12选择启动顺序。 原版系统 备份E盘文件到移动硬盘。 进PE，这里使用微pe工具箱。 将系统iso文件装载到虚拟光"><title>Win10重装系统&清灰记录</title>
+<link rel=canonical href=/archives/win10-reinstall-system/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Win10重装系统&清灰记录">
+<meta property="og:description" content="Fn+F2进入bios，Fn+F12选择启动顺序。 原版系统 备份E盘文件到移动硬盘。 进PE，这里使用微pe工具箱。 将系统iso文件装载到虚拟光">
+<meta property="og:url" content="/archives/win10-reinstall-system/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="win10"><meta property="article:published_time" content="2020-05-24T14:36:25+08:00"><meta property="article:modified_time" content="2021-08-29T14:36:25+08:00">
+<meta name=twitter:title content="Win10重装系统&清灰记录">
+<meta name=twitter:description content="Fn+F2进入bios，Fn+F12选择启动顺序。 原版系统 备份E盘文件到移动硬盘。 进PE，这里使用微pe工具箱。 将系统iso文件装载到虚拟光">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class=article-page>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+on-phone--column extended">
+<aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class=site-name><a href=/>Bore's Notes</a></h1>
+<h2 class=site-description>博观而约取，厚积而薄发</h2>
+</header>
+<ol class=menu id=main-menu>
+<li>
+<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span>
+</a>
+</li>
+<li>
+<a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span>
+</a>
+</li>
+<li>
+<a href=/say/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-circle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 20l1.3-3.9A9 8 0 117.7 19L3 20"/><line x1="12" y1="12" x2="12" y2="12.01"/><line x1="8" y1="12" x2="8" y2="12.01"/><line x1="16" y1="12" x2="16" y2="12.01"/></svg>
+<span>说说</span>
+</a>
+</li>
+<li>
+<a href=/about/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span>
+</a>
+</li>
+<li>
+<a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span>
+</a>
+</li>
+<li>
+<a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友链</span>
+</a>
+</li>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span>
+</li>
+</ol>
+</aside>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/win10-reinstall-system/>Win10重装系统&清灰记录</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-05-24</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<div class="note primary">Fn+F2进入bios，Fn+F12选择启动顺序。</div>
+<h3 id=原版系统><del>原版系统</del></h3>
+<ol>
+<li>
+<p><del>备份E盘文件到移动硬盘。</del></p>
+</li>
+<li>
+<p><del>进PE，这里使用<a class=link href=http://www.wepe.com.cn/ target=_blank rel=noopener>微pe工具箱</a>。</del></p>
+</li>
+<li>
+<p><del>将系统iso文件装载到虚拟光驱，然后运行<code>setup.exe</code></del></p>
+<ul>
+<li>
+<p>先删掉所有分区，然后给C盘分区，大小为：82703M（80*1024+100+16+567+100=82703）</p>
+</li>
+<li>
+<p>安装完系统再用系统自带磁盘管理给D盘和E盘分区，D盘大小为：71780M（70*1024+100=71780），剩下的给E盘。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id=精简系统>精简系统</h3>
+<ol>
+<li>备份E盘文件到移动硬盘。</li>
+<li>进PE，这里使用<a class=link href=http://www.wepe.com.cn/ target=_blank rel=noopener>微pe工具箱</a>。</li>
+<li>用DiskGenius分区，C盘80G，D盘70G，剩余给E盘。注意给C盘分区时，勾选<code>建立ESP分区</code>和<code>建立MSR分区</code>，勾选<code>对齐到此扇区的整数倍</code>，选择<code>2048扇区</code>。给D盘和E盘分区时也要勾选对齐到<code>2048扇区</code>。</li>
+<li>用windows安装器安装系统。注意选择安装磁盘为<code>C盘</code>，还有选择相应的安装版本。</li>
+</ol>
+<h3 id=系统安装记录>系统安装记录</h3>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>序号</th>
+<th style=text-align:center>日期</th>
+<th style=text-align:center>版本</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center>1</td>
+<td style=text-align:center>2020.5.24</td>
+<td style=text-align:center>win10 2004</td>
+</tr>
+<tr>
+<td style=text-align:center>2</td>
+<td style=text-align:center>2021.8.29</td>
+<td style=text-align:center>win10 21H1</td>
+</tr>
+</tbody>
+</table>
+<h3 id=笔记本清灰记录>笔记本清灰记录</h3>
+<table>
+<thead>
+<tr>
+<th style=text-align:center>序号</th>
+<th style=text-align:center>日期</th>
+<th style=text-align:center>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style=text-align:center>1</td>
+<td style=text-align:center>2020.6.18</td>
+<td style=text-align:center>风扇都没有拆下来清理</td>
+</tr>
+<tr>
+<td style=text-align:center>2</td>
+<td style=text-align:center></td>
+<td style=text-align:center></td>
+</tr>
+</tbody>
+</table>
+<h3 id=常见问题>常见问题</h3>
+<p>办公室旧电脑安装精简版Win7，出现错误<code>Windows could not start the installation process</code>，解决方法：删除分区，重新分区。</p>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/win10/>win10</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/Win10%e9%87%8d%e8%a3%85%e7%b3%bb%e7%bb%9f&%e6%b8%85%e7%81%b0%e8%ae%b0%e5%bd%95.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-08-29
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/lenovo-update-bios/>
+<div class=article-details>
+<h2 class=article-title>联想笔记本电脑升级bios</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/win10-change-host/>
+<div class=article-details>
+<h2 class=article-title>Win10 修改host文件的方法</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/a3-to-a4/>
+<div class=article-details>
+<h2 class=article-title>怎样才能把A3文档打印到A4纸上</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

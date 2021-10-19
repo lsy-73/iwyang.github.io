@@ -1,0 +1,270 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="查看定时任务 crontab -l 编辑定时任务 crontab -e 使用实例 每天，每月，每年 定时启动: 每五分钟执行 */5 * * * * 每小时执行 0 * * * * 每天执行 0 0 * * * 每周执行 0 0 *"><title>linux利用crontab设置定时任务</title>
+<link rel=canonical href=/archives/linux-crontab/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="linux利用crontab设置定时任务">
+<meta property="og:description" content="查看定时任务 crontab -l 编辑定时任务 crontab -e 使用实例 每天，每月，每年 定时启动: 每五分钟执行 */5 * * * * 每小时执行 0 * * * * 每天执行 0 0 * * * 每周执行 0 0 *">
+<meta property="og:url" content="/archives/linux-crontab/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="linux"><meta property="article:published_time" content="2020-08-10T18:52:25+08:00"><meta property="article:modified_time" content="2020-08-10T18:52:25+08:00">
+<meta name=twitter:title content="linux利用crontab设置定时任务">
+<meta name=twitter:description content="查看定时任务 crontab -l 编辑定时任务 crontab -e 使用实例 每天，每月，每年 定时启动: 每五分钟执行 */5 * * * * 每小时执行 0 * * * * 每天执行 0 0 * * * 每周执行 0 0 *">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/linux-crontab/>linux利用crontab设置定时任务</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-08-10</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=查看定时任务>查看定时任务</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -l
+</code></pre></div><h2 id=编辑定时任务>编辑定时任务</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+</code></pre></div><h2 id=使用实例>使用实例</h2>
+<p>每天，每月，每年 定时启动:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=nx>每五分钟执行</span>  <span class=o>*</span><span class=err>/5 * * * *</span>
+
+<span class=nx>每小时执行</span>     <span class=mi>0</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span>
+
+<span class=nx>每天执行</span>        <span class=mi>0</span> <span class=mi>0</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span>
+
+<span class=nx>每周执行</span>       <span class=mi>0</span> <span class=mi>0</span> <span class=o>*</span> <span class=o>*</span> <span class=mi>0</span>
+
+<span class=nx>每月执行</span>        <span class=mi>0</span> <span class=mi>0</span> <span class=mi>1</span> <span class=o>*</span> <span class=o>*</span>
+
+<span class=nx>每年执行</span>       <span class=mi>0</span> <span class=mi>0</span> <span class=mi>1</span> <span class=mi>1</span> <span class=o>*</span>
+</code></pre></div><p>crontab时间举例：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-js data-lang=js><span class=err>#</span> <span class=nx>每天早上6点</span> 
+<span class=mi>0</span> <span class=mi>6</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>echo</span> <span class=s2>&#34;Good morning.&#34;</span> <span class=o>&gt;&gt;</span> <span class=err>/tmp/test.txt //注意单纯echo，从屏幕上看不到任何输出，因为cron把任何输出都email到root的信箱了。</span>
+
+<span class=err>#</span> <span class=nx>每两个小时</span> 
+<span class=mi>0</span> <span class=o>*</span><span class=err>/2 * * * echo &#34;Have a break now.&#34; &gt;&gt; /tmp/test.txt  </span>
+
+<span class=err>#</span> <span class=nx>晚上11点到早上8点之间每两个小时和早上八点</span> 
+<span class=mi>0</span> <span class=mi>23</span><span class=o>-</span><span class=mi>7</span><span class=o>/</span><span class=mi>2</span><span class=err>，</span><span class=mi>8</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>echo</span> <span class=s2>&#34;Have a good dream&#34;</span> <span class=o>&gt;&gt;</span> <span class=err>/tmp/test.txt</span>
+
+<span class=err>#</span> <span class=nx>每个月的4号和每个礼拜的礼拜一到礼拜三的早上11点</span> 
+<span class=mi>0</span> <span class=mi>11</span> <span class=mi>4</span> <span class=o>*</span> <span class=mi>1</span><span class=o>-</span><span class=mi>3</span> <span class=nx>command</span> <span class=nx>line</span>
+
+<span class=err>#</span> <span class=mi>1</span><span class=nx>月1日早上4点</span> 
+<span class=mi>0</span> <span class=mi>4</span> <span class=mi>1</span> <span class=mi>1</span> <span class=o>*</span> <span class=nx>command</span> <span class=nx>line</span> <span class=nx>SHELL</span><span class=o>=</span><span class=err>/bin/bash PATH=/sbin:/bin:/usr/sbin:/usr/bin MAILTO=root //如果出现错误，或者有数据输出，数据作为邮件发给这个帐号 HOME=/ </span>
+
+<span class=err>#</span> <span class=nx>每小时</span><span class=err>（</span><span class=nx>第一分钟</span><span class=err>）</span><span class=nx>执行</span><span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>hourly内的脚本</span>
+<span class=mi>01</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>root</span> <span class=nx>run</span><span class=o>-</span><span class=nx>parts</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>hourly</span>
+
+<span class=err>#</span> <span class=nx>每天</span><span class=err>（</span><span class=nx>凌晨4</span><span class=err>：</span><span class=mi>02</span><span class=err>）</span><span class=nx>执行</span><span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>daily内的脚本</span>
+<span class=mi>02</span> <span class=mi>4</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>root</span> <span class=nx>run</span><span class=o>-</span><span class=nx>parts</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>daily</span> 
+
+<span class=err>#</span> <span class=nx>每星期</span><span class=err>（</span><span class=nx>周日凌晨4</span><span class=err>：</span><span class=mi>22</span><span class=err>）</span><span class=nx>执行</span><span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>weekly内的脚本</span>
+<span class=mi>22</span> <span class=mi>4</span> <span class=o>*</span> <span class=o>*</span> <span class=mi>0</span> <span class=nx>root</span> <span class=nx>run</span><span class=o>-</span><span class=nx>parts</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>weekly</span> 
+
+<span class=err>#</span> <span class=nx>每月</span><span class=err>（</span><span class=mi>1</span><span class=nx>号凌晨4</span><span class=err>：</span><span class=mi>42</span><span class=err>）</span><span class=nx>去执行</span><span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>monthly内的脚本</span> 
+<span class=mi>42</span> <span class=mi>4</span> <span class=mi>1</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>root</span> <span class=nx>run</span><span class=o>-</span><span class=nx>parts</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>cron</span><span class=p>.</span><span class=nx>monthly</span> 
+
+<span class=err>#</span> <span class=nx>注意</span><span class=o>:</span>  <span class=s2>&#34;run-parts&#34;</span><span class=nx>这个参数了</span><span class=err>，</span><span class=nx>如果去掉这个参数的话</span><span class=err>，</span><span class=nx>后面就可以写要运行的某个脚本名</span><span class=err>，</span><span class=nx>而不是文件夹名</span><span class=err>。</span> 　 
+
+<span class=err>#</span> <span class=nx>每天的下午4点</span><span class=err>、</span><span class=mi>5</span><span class=nx>点</span><span class=err>、</span><span class=mi>6</span><span class=nx>点的5</span> <span class=nx>min</span><span class=err>、</span><span class=mi>15</span> <span class=nx>min</span><span class=err>、</span><span class=mi>25</span> <span class=nx>min</span><span class=err>、</span><span class=mi>35</span> <span class=nx>min</span><span class=err>、</span><span class=mi>45</span> <span class=nx>min</span><span class=err>、</span><span class=mi>55</span> <span class=nx>min时执行命令</span><span class=err>。</span> 
+<span class=mi>5</span><span class=err>，</span><span class=mi>15</span><span class=err>，</span><span class=mi>25</span><span class=err>，</span><span class=mi>35</span><span class=err>，</span><span class=mi>45</span><span class=err>，</span><span class=mi>55</span> <span class=mi>16</span><span class=err>，</span><span class=mi>17</span><span class=err>，</span><span class=mi>18</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>command</span>
+
+<span class=err>#</span> <span class=nx>每周一</span><span class=err>，</span><span class=nx>三</span><span class=err>，</span><span class=nx>五的下午3</span><span class=err>：</span><span class=mi>00</span><span class=nx>系统进入维护状态</span><span class=err>，</span><span class=nx>重新启动系统</span><span class=err>。</span>
+<span class=mi>00</span> <span class=mi>15</span> <span class=o>*</span> <span class=o>*</span><span class=mi>1</span><span class=err>，</span><span class=mi>3</span><span class=err>，</span><span class=mi>5</span> <span class=nx>shutdown</span> <span class=o>-</span><span class=nx>r</span> <span class=o>+</span><span class=mi>5</span>
+
+<span class=err>#</span> <span class=nx>每小时的10分</span><span class=err>，</span><span class=mi>40</span><span class=nx>分执行用户目录下的innd</span><span class=o>/</span><span class=nx>bbslin这个指令</span><span class=err>：</span> 
+<span class=mi>10</span><span class=err>，</span><span class=mi>40</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>innd</span><span class=o>/</span><span class=nx>bbslink</span> 
+
+<span class=err>#</span> <span class=nx>每小时的1分执行用户目录下的bin</span><span class=o>/</span><span class=nx>account这个指令</span><span class=err>：</span> 
+<span class=mi>1</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>bin</span><span class=o>/</span><span class=nx>account</span>
+
+<span class=err>#</span> <span class=nx>每天早晨三点二十分执行用户目录下如下所示的两个指令</span><span class=err>（</span><span class=nx>每个指令以</span><span class=p>;</span><span class=nx>分隔</span><span class=err>）：</span> 
+<span class=mi>203</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=err>（</span><span class=o>/</span><span class=nx>bin</span><span class=o>/</span><span class=nx>rm</span> <span class=o>-</span><span class=nx>f</span> <span class=nx>expire</span><span class=p>.</span><span class=nx>ls</span> <span class=nx>logins</span><span class=p>.</span><span class=nx>bad</span><span class=p>;</span><span class=nx>bin</span><span class=o>/</span><span class=nx>expire$</span><span class=err>#@</span><span class=mi>62</span><span class=p>;</span><span class=nx>expire</span><span class=p>.</span><span class=mi>1</span><span class=nx>st</span><span class=err>）</span>
+
+<span class=err>#</span> <span class=nx>每1分钟执行一次myCommand</span>
+<span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>myCommand</span>
+
+<span class=err>#</span> <span class=nx>每小时的第3和第15分钟执行</span>
+<span class=mi>3</span><span class=p>,</span><span class=mi>15</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>myCommand</span>
+
+<span class=err>#</span> <span class=nx>在上午8点到11点的第3和第15分钟执行</span>
+<span class=mi>3</span><span class=p>,</span><span class=mi>15</span> <span class=mi>8</span><span class=o>-</span><span class=mi>11</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=nx>myCommand</span>
+
+<span class=err>#</span> <span class=nx>每隔两天的上午8点到11点的第3和第15分钟执行</span>
+<span class=mi>3</span><span class=p>,</span><span class=mi>15</span> <span class=mi>8</span><span class=o>-</span><span class=mi>11</span> <span class=o>*</span><span class=err>/2  *  * myCommand</span>
+
+<span class=err>#</span> <span class=nx>每周一上午8点到11点的第3和第15分钟执行</span>
+<span class=mi>3</span><span class=p>,</span><span class=mi>15</span> <span class=mi>8</span><span class=o>-</span><span class=mi>11</span> <span class=o>*</span> <span class=o>*</span> <span class=mi>1</span> <span class=nx>myCommand</span>
+
+<span class=err>#</span> <span class=nx>每晚的21</span><span class=o>:</span><span class=mi>30</span><span class=nx>重启smb</span>
+<span class=mi>30</span> <span class=mi>21</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=err>/etc/init.d/smb restart</span>
+
+<span class=err>#</span> <span class=nx>每月1</span><span class=err>、</span><span class=mi>10</span><span class=err>、</span><span class=mi>22</span><span class=nx>日的4</span> <span class=o>:</span> <span class=mi>45</span><span class=nx>重启smb</span>
+<span class=mi>45</span> <span class=mi>4</span> <span class=mi>1</span><span class=p>,</span><span class=mi>10</span><span class=p>,</span><span class=mi>22</span> <span class=o>*</span> <span class=o>*</span> <span class=err>/etc/init.d/smb restart</span>
+
+<span class=err>#</span> <span class=nx>每周六</span><span class=err>、</span><span class=nx>周日的1</span> <span class=o>:</span> <span class=mi>10</span><span class=nx>重启smb</span>
+<span class=mi>10</span> <span class=mi>1</span> <span class=o>*</span> <span class=o>*</span> <span class=mi>6</span><span class=p>,</span><span class=mi>0</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>init</span><span class=p>.</span><span class=nx>d</span><span class=o>/</span><span class=nx>smb</span> <span class=nx>restart</span>
+
+<span class=err>#</span> <span class=nx>每天18</span> <span class=o>:</span> <span class=mi>00</span><span class=nx>至23</span> <span class=o>:</span> <span class=mi>00</span><span class=nx>之间每隔30分钟重启smb</span>
+<span class=mi>0</span><span class=p>,</span><span class=mi>30</span> <span class=mi>18</span><span class=o>-</span><span class=mi>23</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=err>/etc/init.d/smb restart</span>
+
+<span class=err>#</span> <span class=nx>每星期六的晚上11</span> <span class=o>:</span> <span class=mi>00</span> <span class=nx>pm重启smb</span>
+<span class=mi>0</span> <span class=mi>23</span> <span class=o>*</span> <span class=o>*</span> <span class=mi>6</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>init</span><span class=p>.</span><span class=nx>d</span><span class=o>/</span><span class=nx>smb</span> <span class=nx>restart</span>
+
+<span class=err>#</span> <span class=nx>每一小时重启smb</span>
+<span class=o>*</span> <span class=o>*</span><span class=err>/1 * * * /etc/init.d/smb restart</span>
+
+<span class=err>#</span> <span class=nx>晚上11点到早上7点之间</span><span class=err>，</span><span class=nx>每隔一小时重启smb</span>
+<span class=mi>0</span> <span class=mi>23</span><span class=o>-</span><span class=mi>7</span> <span class=o>*</span> <span class=o>*</span> <span class=o>*</span> <span class=err>/etc/init.d/smb restart</span>
+</code></pre></div><h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://blog.csdn.net/qq_22823581/article/details/80783835 target=_blank rel=noopener>1.Linux之crontab定时任务</a></li>
+<li><a class=link href=https://linuxtools-rst.readthedocs.io/zh_CN/latest/tool/crontab.html target=_blank rel=noopener>2.crontab 定时任务</a></li>
+<li><a class=link href=https://blog.csdn.net/qq_22823581/article/details/80783835 target=_blank rel=noopener>3.crontab 每天，每月，每年 定时启动</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/linux/>linux</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/linux%e5%88%a9%e7%94%a8crontab%e8%ae%be%e7%bd%ae%e5%ae%9a%e6%97%b6%e4%bb%bb%e5%8a%a1.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/a3-to-a4/>
+<div class=article-details>
+<h2 class=article-title>怎样才能把A3文档打印到A4纸上</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#查看定时任务>查看定时任务</a></li>
+<li><a href=#编辑定时任务>编辑定时任务</a></li>
+<li><a href=#使用实例>使用实例</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

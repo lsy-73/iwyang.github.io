@@ -1,0 +1,363 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="服务器环境：Centos 8 x64 本地环境：Win10 x64 本地操作 参考：hugo部署到coding&amp;amp;gitee-本地操作部分 服务器操作 注意："><title>Hugo部署到centos服务器</title>
+<link rel=canonical href=/archives/hugo-install-on-centos/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Hugo部署到centos服务器">
+<meta property="og:description" content="服务器环境：Centos 8 x64 本地环境：Win10 x64 本地操作 参考：hugo部署到coding&amp;amp;gitee-本地操作部分 服务器操作 注意：">
+<meta property="og:url" content="/archives/hugo-install-on-centos/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:tag" content="服务器"><meta property="article:published_time" content="2020-05-13T18:05:25+08:00"><meta property="article:modified_time" content="2020-05-13T18:05:25+08:00">
+<meta name=twitter:title content="Hugo部署到centos服务器">
+<meta name=twitter:description content="服务器环境：Centos 8 x64 本地环境：Win10 x64 本地操作 参考：hugo部署到coding&amp;amp;gitee-本地操作部分 服务器操作 注意：">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/hugo-install-on-centos/>Hugo部署到centos服务器</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-05-13</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<p>服务器环境：Centos 8 x64</p>
+<p>本地环境：Win10 x64</p>
+<h2 id=本地操作>本地操作</h2>
+<p>参考：<a class=link href=https://bore.vip/hugo-install-on-coding-and-gitee/#1-%E6%9C%AC%E5%9C%B0%E6%93%8D%E4%BD%9C target=_blank rel=noopener>hugo部署到coding&gitee-本地操作部分</a></p>
+<h2 id=服务器操作>服务器操作</h2>
+<blockquote>
+<p><strong>注意：这里是参照服务器搭建hexo，所以代码里hexo没有改成hugo，不过这没有任何影响</strong>。</p>
+</blockquote>
+<p>准备工作：如果服务器端口不是22，先要更改SSH端口，</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/ssh/sshd_config
+port <span class=m>22</span>
+</code></pre></div><p>然后重启生效。</p>
+<p>首先，在服务器上安装 Git 和 nginx。</p>
+<div class="note primary">2021.5.27 注意最好不要执行下面第一步升级操作，不然升级到最后一步会卡死，最后导致后面无法启动nginx。</div>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum update -y
+yum install git-core nginx -y
+</code></pre></div><p>如果是centos 7，先要安装安装epel：<code>yum install epel-release</code>，才能安装nginx。</p>
+<p>Nginx 安装完成后需要手动启动，启动Nginx并设置开机自启：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl start nginx
+systemctl <span class=nb>enable</span> nginx
+</code></pre></div><p>如果开启了防火墙，记得添加 HTTP 和 HTTPS 端口到防火墙允许列表。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>firewall-cmd --permanent --zone<span class=o>=</span>public --add-service<span class=o>=</span>http 
+firewall-cmd --permanent --zone<span class=o>=</span>public --add-service<span class=o>=</span>https
+firewall-cmd --reload
+systemctl restart firewalld.service
+</code></pre></div><p>配置完成后，访问使用浏览器服务器 ip ，如果能看到以下界面，表示运行成功。</p>
+<h3 id=配置用户>配置用户</h3>
+<p>然后新增一个名为 git 的用户，过程中需要设置登录密码，输入两次密码即可。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>adduser git
+passwd git
+</code></pre></div><p>给用户 <code>git</code> 赋予无需密码操作的权限（否则到后面 Hexo 部署的时候会提示无权限）</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod <span class=m>740</span> /etc/sudoers
+vi /etc/sudoers
+</code></pre></div><p>在图示位置<code>root ALL=(ALL:ALL) ALL</code>的下方添加</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git <span class=nv>ALL</span><span class=o>=(</span>ALL:ALL<span class=o>)</span> ALL
+</code></pre></div><p>然后保存。然后更改读写权限。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod <span class=m>440</span> /etc/sudoers
+</code></pre></div><h3 id=上传-ssh-公钥>上传 SSH 公钥</h3>
+<p>接下来要把本地的 ssh 公钥上传到服务器 。执行</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>su git
+<span class=nb>cd</span> ~
+mkdir .ssh <span class=o>&amp;&amp;</span> <span class=nb>cd</span> .ssh
+touch authorized_keys
+vi authorized_keys
+</code></pre></div><p>现在要打开本地的 <code>Git Bash</code>，输入<code>vi ~/.ssh/id_rsa.pub</code>，把里面的内容复制下来粘贴到上面打开的文件里。</p>
+<p>接着把ssh目录设置为只有属主有读、写、执行权限。代码如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod <span class=m>600</span> ~/.ssh/authorized_keys
+chmod <span class=m>700</span> ~/.ssh
+</code></pre></div><p>然后建立放部署的网页的 Git 库。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>cd</span> ~
+mkdir hexo.git <span class=o>&amp;&amp;</span> <span class=nb>cd</span> hexo.git
+git init --bare
+</code></pre></div><p>测试一下，如果在 Git Bash 中输入 <code>ssh git@服务器的IP地址</code> 能够远程登录的话，则表示设置成功了。如果你的服务器端口不是22。最好像开头那样更改SSH端口。也可以参考：<a class=link href=https://bore.vip/post/hugo-install-on-ubuntu-%e6%9c%8d%e5%8a%a1%e5%99%a8/#%E4%B8%8A%E4%BC%A0-ssh-%E5%85%AC%E9%92%A5 target=_blank rel=noopener>上传SSH公钥</a>。</p>
+<hr>
+<p>ps: 如果配置完成还是提示要输入密码，可以使用 <code>ssh-copy-id</code>，在本地打开 Git Bash 输入：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>ssh-copy-id -i ~/.ssh/id_rsa.pub git@服务器ip地址
+</code></pre></div><hr>
+<h3 id=用户授权>用户授权</h3>
+<p>接下来要给用户 git 授予操作 nginx 放网页的地方的权限：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>su
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>mkdir -p /var/www/hexo
+chown git:git -R /var/www/hexo
+</code></pre></div><h3 id=配置钩子>配置钩子</h3>
+<p>现在就要向 Git Hooks 操作，配置好钩子：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>su git
+<span class=nb>cd</span> /home/git/hexo.git/hooks
+vi post-receive
+</code></pre></div><p>输入内容并保存：（里面的路径看着换吧，上面的命令没改的话也不用换）</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span><span class=nv>GIT_REPO</span><span class=o>=</span>/home/git/hexo.git
+<span class=nv>TMP_GIT_CLONE</span><span class=o>=</span>/tmp/hexo
+<span class=nv>PUBLIC_WWW</span><span class=o>=</span>/var/www/hexo
+rm -rf <span class=si>${</span><span class=nv>TMP_GIT_CLONE</span><span class=si>}</span>
+git clone <span class=nv>$GIT_REPO</span> <span class=nv>$TMP_GIT_CLONE</span>
+rm -rf <span class=si>${</span><span class=nv>PUBLIC_WWW</span><span class=si>}</span>/*
+cp -rf <span class=si>${</span><span class=nv>TMP_GIT_CLONE</span><span class=si>}</span>/* <span class=si>${</span><span class=nv>PUBLIC_WWW</span><span class=si>}</span>
+</code></pre></div><p>赋予可执行权限：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>chmod +x post-receive
+</code></pre></div><h3 id=配置-nginx>配置 nginx</h3>
+<p>然后是配置 nginx。执行</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>su
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/nginx/conf.d/hexo.conf
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+  listen  <span class=m>80</span> <span class=p>;</span>
+  listen <span class=o>[</span>::<span class=o>]</span>:80<span class=p>;</span>
+  root /var/www/hexo<span class=p>;</span>
+  server_name bore.vip www.bore.vip<span class=p>;</span>
+  access_log  /var/log/nginx/hexo_access.log<span class=p>;</span>
+  error_log   /var/log/nginx/hexo_error.log<span class=p>;</span>
+  error_page <span class=nv>404</span> <span class=o>=</span>  /404.html<span class=p>;</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>ico<span class=p>|</span>gif<span class=p>|</span>jpg<span class=p>|</span>jpeg<span class=p>|</span>png<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      1d<span class=p>;</span>
+  <span class=o>}</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>css<span class=p>|</span>js<span class=p>|</span>txt<span class=p>|</span>xml<span class=p>|</span>swf<span class=p>|</span>wav<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      10m<span class=p>;</span>
+  <span class=o>}</span>
+  location / <span class=o>{</span>
+    root /var/www/hexo<span class=p>;</span>
+    <span class=k>if</span> <span class=o>(</span>-f <span class=nv>$request_filename</span><span class=o>)</span> <span class=o>{</span>
+    rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$  /<span class=nv>$1</span> break<span class=p>;</span>
+    <span class=o>}</span>
+  <span class=o>}</span>
+  location /nginx_status <span class=o>{</span>
+    stub_status on<span class=p>;</span>
+    access_log off<span class=p>;</span>
+ <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>因为放中文进去会乱码所以就不在里面注释了。代码里面配置了默认的根目录，绑定了域名，并且自定义了 404 页面的路径。
+最后就重启 nginx 服务器：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl restart nginx
+</code></pre></div><hr>
+<p>如果上传网页后，Nginx 出现 403 Forbidden，执行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/selinux/config
+</code></pre></div><p>将SELINUX=enforcing 修改为 SELINUX=disabled 状态。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>SELINUX</span><span class=o>=</span>disabled
+</code></pre></div><p>重启生效，reboot。</p>
+<hr>
+<p>ps: 最好做一个301跳转，把bore.vip和<code>www.bore.vip</code>合并，并把之前的域名也一并合并. 有两种实现方法,第一种方法是判断nginx核心变量host(老版本是http_host)：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+server_name bore.vip www.bore.vip <span class=p>;</span>
+<span class=k>if</span> <span class=o>(</span><span class=nv>$host</span> !<span class=o>=</span> <span class=s1>&#39;bore.vip&#39;</span> <span class=o>)</span> <span class=o>{</span>
+rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$ http://bore.vip/<span class=nv>$1</span> permanent<span class=p>;</span>
+<span class=o>}</span>
+...
+<span class=o>}</span>
+</code></pre></div><h3 id=修改自动部署脚本>修改自动部署脚本</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> -e <span class=s2>&#34;\033[0;32mDeploying updates to Coding...\033[0m&#34;</span>
+
+<span class=c1># Removing existing files</span>
+rm -rf public/*
+<span class=c1># Build the project</span>
+hugo
+<span class=c1># Go To Public folder</span>
+<span class=nb>cd</span> public
+git remote rm origin
+git init
+git remote add origin git@你的ip:hexo.git
+git add .
+
+<span class=c1># Commit changes.</span>
+<span class=nv>msg</span><span class=o>=</span><span class=s2>&#34;rebuilding site `date`&#34;</span>
+<span class=k>if</span> <span class=o>[</span> <span class=nv>$#</span> -eq <span class=m>1</span> <span class=o>]</span>
+  <span class=k>then</span> <span class=nv>msg</span><span class=o>=</span><span class=s2>&#34;</span><span class=nv>$1</span><span class=s2>&#34;</span>
+<span class=k>fi</span>
+git commit -m <span class=s2>&#34;</span><span class=nv>$msg</span><span class=s2>&#34;</span>
+
+<span class=c1># Push source and build repos.</span>
+git push origin master --force
+
+<span class=c1># Come Back up to the Project Root</span>
+<span class=nb>cd</span> ..
+</code></pre></div><p>或直接在<code>Git Bash</code>中手动运行以下代码：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>rm -rf public/*
+hugo
+<span class=nb>cd</span> public
+git remote rm origin
+git init
+git remote add origin git@104.224.191.88:hexo.git
+git add .
+git commit -m <span class=s2>&#34;building site&#34;</span>
+git push origin master --force
+</code></pre></div><h2 id=总结>总结</h2>
+<p>最好不要反复切换部署仓库，否则git会出现以下错误提示：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>remote: error: The last gc run reported the following. Please correct the root cause
+remote: and remove gc.log.
+remote: Automatic cleanup will not be performed <span class=k>until</span> the file is removed.
+remote:
+remote: warning: There are too many unreachable loose objects<span class=p>;</span> run <span class=s1>&#39;git prune&#39;</span> to remove them.
+</code></pre></div><p>查资料，原来是自己本地一些 “悬空对象”太多(git删除分支或者清空stash的时候，这些其实还没有真正删除，成为悬空对象，我们可以使用merge命令可以从中恢复一些文件)</p>
+<p>解决方法：</p>
+<p>1.输入命令：<code>git fsck --lost-found</code>，可以看到好多“dangling commit”</p>
+<p>2.清空他们：<code>git gc --prune=now</code>，完成</p>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://tiktoking.github.io/2016/01/26/hexo/# target=_blank rel=noopener>1.在服务器上搭建hexo博客，利用git更新</a></li>
+<li><a class=link href=https://eliyar.biz/how_to_build_hexo_blog/ target=_blank rel=noopener>2.从 0 开始搭建 hexo 博客</a></li>
+<li><a class=link href=https://segmentfault.com/a/1190000012907499 target=_blank rel=noopener>3.基于CentOS搭建Hexo博客</a></li>
+<li><a class=link href=https://blog.csdn.net/qq_35843543/article/details/81561240 target=_blank rel=noopener>4.Nginx出现403 forbidden</a></li>
+<li><a class=link href=https://blog.csdn.net/persist_xyz/article/details/88619036 target=_blank rel=noopener>5.git运行突然提示 remote: error: The last gc run reported the following</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hugo/>hugo</a>
+<a href=/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/>服务器</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/Hugo%e9%83%a8%e7%bd%b2%e5%88%b0centos%e6%9c%8d%e5%8a%a1%e5%99%a8.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-papermod-theme/>
+<div class=article-details>
+<h2 class=article-title>Hugo Papermod主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-stack/>
+<div class=article-details>
+<h2 class=article-title>Hugo Stack主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos-halo/>
+<div class=article-details>
+<h2 class=article-title>在Centos服务器部署Halo</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#本地操作>本地操作</a></li>
+<li><a href=#服务器操作>服务器操作</a>
+<ol>
+<li><a href=#配置用户>配置用户</a></li>
+<li><a href=#上传-ssh-公钥>上传 SSH 公钥</a></li>
+<li><a href=#用户授权>用户授权</a></li>
+<li><a href=#配置钩子>配置钩子</a></li>
+<li><a href=#配置-nginx>配置 nginx</a></li>
+<li><a href=#修改自动部署脚本>修改自动部署脚本</a></li>
+</ol>
+</li>
+<li><a href=#总结>总结</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

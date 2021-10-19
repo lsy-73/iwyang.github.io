@@ -1,0 +1,201 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="首先保障手机已解锁，一加5T解锁教程：一加5T解锁、root、刷机教程 准备以下6个文件 注意要先把2—6号文件放在手机根目录（如果放在文件夹里"><title>一加5T(安卓10)root&EdXposed框架</title>
+<link rel=canonical href=/archives/one-plus-5t-root/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="一加5T(安卓10)root&EdXposed框架">
+<meta property="og:description" content="首先保障手机已解锁，一加5T解锁教程：一加5T解锁、root、刷机教程 准备以下6个文件 注意要先把2—6号文件放在手机根目录（如果放在文件夹里">
+<meta property="og:url" content="/archives/one-plus-5t-root/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="tips"><meta property="article:published_time" content="2020-07-10T18:34:25+08:00"><meta property="article:modified_time" content="2020-07-10T18:34:25+08:00">
+<meta name=twitter:title content="一加5T(安卓10)root&EdXposed框架">
+<meta name=twitter:description content="首先保障手机已解锁，一加5T解锁教程：一加5T解锁、root、刷机教程 准备以下6个文件 注意要先把2—6号文件放在手机根目录（如果放在文件夹里">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/one-plus-5t-root/>一加5T(安卓10)root&EdXposed框架</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-07-10</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<p>首先保障手机已解锁，一加5T解锁教程：<a class=link href="https://www.oneplusbbs.com/forum.php?mod=viewthread&tid=3829403" target=_blank rel=noopener>一加5T解锁、root、刷机教程</a></p>
+<h2 id=准备以下6个文件>准备以下6个文件</h2>
+<p>注意要先把2—6号文件放在手机根目录（如果放在文件夹里，文件夹名不能有中文）。</p>
+<ol>
+<li>一加手机5T工具箱 _2.2.1</li>
+<li>twrp-3.3.1-0-dumpling.img （第三方recovery镜像）</li>
+<li>Magisk-v20.4(20400).zip （集root管理、模块安装等功能）</li>
+<li>MM管理器(叶子修改版)v1.8.zip</li>
+</ol>
+<div class="note info">可在TWRP下对Magisk模块进行管理、卸载。一定要先安装这个，再安装EdXposed的两个模块，防止安装模块后手机变砖无法开机，这时就可以通过MM管理器来删除安装的模块，使用方法：在第三方rec下，点击高级→终端，输入/data/media/mm，然后回车，就可以禁用该模块了。</div>
+<ol start=5>
+<li>
+<p>Riru_(Riru_-_Core)-v21.2(35).zip和Riru_-_EdXposed-v0.4.6.1_(4510)_(YAHFA)(4510).zip （EdXposed两个模块包）</p>
+</li>
+<li>
+<p>EdXposedManager.apk （EdXposed管理器）</p>
+</li>
+</ol>
+<h2 id=刷入第三方recoverroot>刷入第三方recover&root</h2>
+<ul>
+<li>打开一加手机5T工具箱，选择选项8—刷写自选Recovery，按照提示把下载好的rec拖入工具箱随后回车刷入。（如果无法拖入，直接输入rec路径即可）</li>
+<li>刷完会自动进入第三方Recovery（TWRP），这时候可以一次性选择2—5号文件刷入，当然如果只想root则只用刷入Magisk。</li>
+<li><code>root</code>后可以利用<code>link2sd</code>这个软件，冻结或者卸载系统应用，安卓10好像只能冻结，卸载不了。具体使用方法，例如：搜索更新，将自动更新冻结，以后就收不到更新了。</li>
+</ul>
+<h2 id=刷入edxposed模块>刷入EdXposed模块</h2>
+<p>选择MM管理器以及两个模块刷入。（如果模块无法刷入，可能是命名格式问题，将模块重命名为1.zip、2.zip即可，同理上面Magisk无法刷入，也重命名一下；实在不行就在<code>Magisk</code>里刷入模块）</p>
+<h2 id=安装edxposed管理器>安装EdXposed管理器</h2>
+<p>重启手机安装EdXposed管理器。之后就是安装各种使用的模块了。</p>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://www.oneplusbbs.com/thread-5460360-1.html target=_blank rel=noopener>1.OnePlus 5T Android 10 root亲测教程</a></li>
+<li><a class=link href="https://www.oneplusbbs.com/forum.php?mod=viewthread&tid=4662409" target=_blank rel=noopener>2.完美支持安卓10Xposed框架★EdXposed</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/tips/>tips</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/%e4%b8%80%e5%8a%a05T%28%e5%ae%89%e5%8d%9310%29root&EdXposed%e6%a1%86%e6%9e%b6.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/seewo-tips/>
+<div class=article-details>
+<h2 class=article-title>希沃电子白板学习笔记</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/dou-yin-ying-yue/>
+<div class=article-details>
+<h2 class=article-title>快手抖音视频中的背景音乐怎么提取下载</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/one-plus-5t-jiu-zhuan/>
+<div class=article-details>
+<h2 class=article-title>一加5T救砖备忘</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/pc-logo-wu-huan/>
+<div class=article-details>
+<h2 class=article-title>用PC Logo画五环</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/usb3-ying-pan/>
+<div class=article-details>
+<h2 class=article-title>笔记本硬盘改移动硬盘&分区安装PE</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#准备以下6个文件>准备以下6个文件</a></li>
+<li><a href=#刷入第三方recoverroot>刷入第三方recover&root</a></li>
+<li><a href=#刷入edxposed模块>刷入EdXposed模块</a></li>
+<li><a href=#安装edxposed管理器>安装EdXposed管理器</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

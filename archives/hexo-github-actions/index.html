@@ -1,0 +1,488 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="生成公钥 Windows 上安装 Git for Windows 之后在开始菜单里打开 Git Bash 输入： git config --global user.name &amp;#34;你的用户名&amp;#34; git config --global user.email &amp;#34;你的电子邮箱&amp;#34; cd ~ mkdir .ssh cd"><title>hexo利用Github Actions自动构建博客</title>
+<link rel=canonical href=/archives/hexo-github-actions/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="hexo利用Github Actions自动构建博客">
+<meta property="og:description" content="生成公钥 Windows 上安装 Git for Windows 之后在开始菜单里打开 Git Bash 输入： git config --global user.name &amp;#34;你的用户名&amp;#34; git config --global user.email &amp;#34;你的电子邮箱&amp;#34; cd ~ mkdir .ssh cd">
+<meta property="og:url" content="/archives/hexo-github-actions/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hexo"><meta property="article:tag" content="github"><meta property="article:published_time" content="2020-07-07T19:11:25+08:00"><meta property="article:modified_time" content="2020-07-07T19:11:25+08:00">
+<meta name=twitter:title content="hexo利用Github Actions自动构建博客">
+<meta name=twitter:description content="生成公钥 Windows 上安装 Git for Windows 之后在开始菜单里打开 Git Bash 输入： git config --global user.name &amp;#34;你的用户名&amp;#34; git config --global user.email &amp;#34;你的电子邮箱&amp;#34; cd ~ mkdir .ssh cd">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/hexo-github-actions/>hexo利用Github Actions自动构建博客</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-07-07</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=生成公钥>生成公钥</h2>
+<p>Windows 上安装 <a class=link href=https://git-for-windows.github.io/ target=_blank rel=noopener>Git for Windows</a> 之后在开始菜单里打开 Git Bash 输入：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git config --global user.name <span class=s2>&#34;你的用户名&#34;</span>
+git config --global user.email <span class=s2>&#34;你的电子邮箱&#34;</span>
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>cd</span> ~
+mkdir .ssh
+<span class=nb>cd</span> .ssh
+ssh-keygen -t rsa
+</code></pre></div><p>在系统当前用户文件夹下生成了私钥 <code>id_rsa</code> 和公钥 <code>id_rsa.pub</code>。</p>
+<h3 id=上传id_rsapub>上传id_rsa.pub</h3>
+<p>在右上角个人账户依次点击<code>Settings</code>-><code>SSH and GPG keys</code>添加刚刚生成的公钥，名称随意。</p>
+<h3 id=上传id_rsa>上传id_rsa</h3>
+<p>然后在 Settings > Secrets 中新增一个 secret，命名为 <code>DEPLOY_KEY</code>，把私钥 <code>id_rsa</code> 的内容复制进去，供后续使用。</p>
+<h2 id=配置-github-actions>配置 GitHub Actions</h2>
+<h3 id=第一种>第一种</h3>
+<p>在博客根目录新建<code>.github/workflows/gh_pages.yml</code>文件。代码如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Hexo Deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 只监听 source 分支的改动</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>develop</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 自定义环境变量</span><span class=w>
+</span><span class=w></span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>POST_ASSET_IMAGE_CDN</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build-and-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=c># 获取博客源码和主题</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout theme repo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>repository</span><span class=p>:</span><span class=w> </span><span class=l>jerryc127/hexo-theme-butterfly</span><span class=w>
+</span><span class=w>          </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>themes/butterfly</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 这里用的是 Node.js 14.x</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up Node.js</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-node@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>node-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;14&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 设置 yarn 缓存，npm 的话可以看 actions/cache@v2 的文档示例</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Get yarn cache directory path</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>yarn-cache-dir-path</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo &#34;::set-output name=dir::$(yarn cache dir)&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Use yarn cache</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/cache@v2.1.6</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>yarn-cache</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>${{ steps.yarn-cache-dir-path.outputs.dir }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>${{ runner.os }}-yarn-${{ hashFiles(&#39;**/yarn.lock&#39;) }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>restore-keys</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>            </span><span class=w>            </span><span class=l>${{ runner.os }}-yarn-</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 安装依赖</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install dependencies</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          </span><span class=w>          </span><span class=l>yarn install --prefer-offline --frozen-lockfile</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 从之前设置的 secret 获取部署私钥</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up environment</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>DEPLOY_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.DEPLOY_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          sudo timedatectl set-timezone &#34;Asia/Shanghai&#34;
+</span><span class=sd>          mkdir -p ~/.ssh
+</span><span class=sd>          echo &#34;$DEPLOY_KEY&#34; &gt; ~/.ssh/id_rsa
+</span><span class=sd>          chmod 600 ~/.ssh/id_rsa
+</span><span class=sd>          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><span class=w>          
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 生成并部署</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          npx hexo deploy --generate
+</span><span class=sd>          </span><span class=w>          
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hexo to Server</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>SamKirkland/FTP-Deploy-Action@4.1.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>104.224.191.88</span><span class=w>
+</span><span class=w>          </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>admin</span><span class=w>
+</span><span class=w>          </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.FTP_MIRROR_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>local-dir</span><span class=p>:</span><span class=w> </span><span class=l>./public/</span><span class=w>
+</span><span class=w>          </span><span class=nt>server-dir</span><span class=p>:</span><span class=w> </span><span class=l>/var/www/blog/</span><span class=w>
+</span></code></pre></div><hr>
+<h3 id=第二种>第二种</h3>
+<p>PS：第二种比第一种慢。</p>
+<p>首先确认<code> _config.yml</code> 文件中有类似如下的 GitHub Pages 配置：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>git</span><span class=w>
+</span><span class=w>  </span><span class=nt>repo</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>github</span><span class=p>:</span><span class=w> </span><span class=l>git@github.com:iwyang/hexo.git</span><span class=w>
+</span><span class=w>  </span><span class=nt>branch</span><span class=p>:</span><span class=w> </span><span class=l>gh-pages</span><span class=w>
+</span></code></pre></div><h4 id=配置私钥>配置私钥</h4>
+<ul>
+<li>首先在 GitHub 上打开保存 Hexo 的仓库，访问 Settings -> Secrets，然后选择 New secret;</li>
+<li>名字部分填写：HEXO_DEPLOY_KEY，注意大小写，这个后面的 GitHub Actions Workflow 要用到;</li>
+<li>在 Value 的部分填入 github-deploy-key 中的内容。</li>
+</ul>
+<h4 id=添加公钥>添加公钥</h4>
+<ul>
+<li>接下来我们需要访问存放网页的仓库，也就是 Hexo 部署以后的仓库，访问 Settings -> Deploy keys;</li>
+<li>按 Add deploy key 来添加一个新的公钥；</li>
+<li>在 Title中输入：HEXO_DEPLOY_PUB 字样，当然也可以填写其它自定义的名字;</li>
+<li>在 Key 中粘贴 github-deploy-key.pub文件的内容。</li>
+</ul>
+<h4 id=创建-workflow>创建 Workflow</h4>
+<p><strong>在 Hexo 的仓库中创建一个新文件：.github/workflows/auto_deploy.yml，文件的内容如下:</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>auto deploy</span><span class=w> </span><span class=c># workflow name</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 只监听 source 分支的改动</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>develop</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w> </span><span class=c># job1 id</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w> </span><span class=c># 运行环境为最新版 Ubuntu</span><span class=w>
+</span><span class=w>    </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>auto deploy</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w> </span><span class=c># step1 获取源码</span><span class=w>
+</span><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v1</span><span class=w> </span><span class=c># 使用 actions/checkout@v1</span><span class=w>
+</span><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w> </span><span class=c># 条件</span><span class=w>
+</span><span class=w>        </span><span class=nt>submodules</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w> </span><span class=c># Checkout private submodules(themes or something else). 当有子模块时切换分支？</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Setup Node.js 12.x</span><span class=w>
+</span><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-node@master</span><span class=w>
+</span><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>node-version</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;12.x&#34;</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Generate Public Files</span><span class=w>
+</span><span class=w>      </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>        npm i
+</span><span class=sd>        npm install hexo-cli -g
+</span><span class=sd>        hexo clean &amp;&amp; hexo generate</span><span class=w>        
+</span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>peaceiris/actions-gh-pages@v3</span><span class=w>
+</span><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>deploy_key</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.HEXO_DEPLOY_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>external_repository</span><span class=p>:</span><span class=w> </span><span class=l>iwyang/hexo</span><span class=w>
+</span><span class=w>        </span><span class=nt>publish_branch</span><span class=p>:</span><span class=w> </span><span class=l>public</span><span class=w>
+</span><span class=w>        </span><span class=nt>publish_dir</span><span class=p>:</span><span class=w> </span><span class=l>./public</span><span class=w>
+</span><span class=w>        </span><span class=nt>commit_message</span><span class=p>:</span><span class=w> </span><span class=l>${{ github.event.head_commit.message }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>user_name</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;github-actions[bot]&#39;</span><span class=w>
+</span><span class=w>        </span><span class=nt>user_email</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;github-actions[bot]@users.noreply.github.com&#39;</span><span class=w>
+</span><span class=w>    </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hexo to Server</span><span class=w>
+</span><span class=w>      </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>SamKirkland/FTP-Deploy-Action@4.1.0</span><span class=w>
+</span><span class=w>      </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>104.224.191.88</span><span class=w>
+</span><span class=w>        </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>hexo</span><span class=w>
+</span><span class=w>        </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.FTP_MIRROR_PASSWORD }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>local-dir</span><span class=p>:</span><span class=w> </span><span class=l>./public/</span><span class=w>
+</span><span class=w>        </span><span class=nt>server-dir</span><span class=p>:</span><span class=w> </span><span class=l>/var/www/hexo/</span><span class=w>
+</span></code></pre></div><h2 id=githubgitee服务器三线部署>github、gitee、服务器三线部署</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Hexo Deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 只监听 source 分支的改动</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>develop</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 自定义环境变量</span><span class=w>
+</span><span class=w></span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>POST_ASSET_IMAGE_CDN</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build-and-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=c># 获取博客源码和主题</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout theme repo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>repository</span><span class=p>:</span><span class=w> </span><span class=l>jerryc127/hexo-theme-butterfly</span><span class=w>
+</span><span class=w>          </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>themes/butterfly</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 这里用的是 Node.js 14.x</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up Node.js</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-node@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>node-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;14&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 设置 yarn 缓存，npm 的话可以看 actions/cache@v2 的文档示例</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Get yarn cache directory path</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>yarn-cache-dir-path</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo &#34;::set-output name=dir::$(yarn cache dir)&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Use yarn cache</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/cache@v2.1.6</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>yarn-cache</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>${{ steps.yarn-cache-dir-path.outputs.dir }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>${{ runner.os }}-yarn-${{ hashFiles(&#39;**/yarn.lock&#39;) }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>restore-keys</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>            </span><span class=w>            </span><span class=l>${{ runner.os }}-yarn-</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 安装依赖</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install dependencies</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          </span><span class=w>          </span><span class=l>yarn install --prefer-offline --frozen-lockfile</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 从之前设置的 secret 获取部署私钥</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up environment</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>DEPLOY_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.DEPLOY_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          sudo timedatectl set-timezone &#34;Asia/Shanghai&#34;
+</span><span class=sd>          mkdir -p ~/.ssh
+</span><span class=sd>          echo &#34;$DEPLOY_KEY&#34; &gt; ~/.ssh/id_rsa
+</span><span class=sd>          chmod 600 ~/.ssh/id_rsa
+</span><span class=sd>          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><span class=w>          
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 生成并部署</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          npx hexo deploy --generate
+</span><span class=sd>          </span><span class=w>          
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hexo to Server</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>SamKirkland/FTP-Deploy-Action@4.1.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>104.224.191.88</span><span class=w>
+</span><span class=w>          </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>admin</span><span class=w>
+</span><span class=w>          </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.FTP_MIRROR_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>local-dir</span><span class=p>:</span><span class=w> </span><span class=l>./public/</span><span class=w>
+</span><span class=w>          </span><span class=nt>server-dir</span><span class=p>:</span><span class=w> </span><span class=l>/var/www/blog/</span><span class=w>
+</span><span class=w>          
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Sync to Gitee</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>wearerequired/git-mirror-action@master</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意在 Settings-&gt;Secrets 配置 GITEE_RSA_PRIVATE_KEY</span><span class=w>
+</span><span class=w>          </span><span class=nt>SSH_PRIVATE_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITEE_RSA_PRIVATE_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 GitHub 源仓库地址</span><span class=w>
+</span><span class=w>          </span><span class=nt>source-repo</span><span class=p>:</span><span class=w> </span><span class=l>git@github.com:iwyang/iwyang.github.io.git</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 目标仓库地址</span><span class=w>
+</span><span class=w>          </span><span class=nt>destination-repo</span><span class=p>:</span><span class=w> </span><span class=l>git@gitee.com:iwyang/iwyang.git</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build Gitee Pages</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>yanglbme/gitee-pages-action@main</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 用户名</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-username</span><span class=p>:</span><span class=w> </span><span class=l>iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意在 Settings-&gt;Secrets 配置 GITEE_PASSWORD</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITEE_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-repo</span><span class=p>:</span><span class=w> </span><span class=l>iwyang/iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）</span><span class=w>
+</span><span class=w>          </span><span class=nt>branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span></code></pre></div><p>将hexo三线部署（由于部署hexo较慢，如果单独为<code>gitee</code>建立一个<code>workflows</code>，gitee会先部署完成，这样无法同步；hugo可以单独为<code>gitee</code>建立一个<code>workflows</code>，因为<code>hugo</code>部署到服务器会先于部署到<code>gitee</code>）</p>
+<h2 id=推送到远端>推送到远端</h2>
+<h3 id=配置hexo的_configyml>配置Hexo的_config.yml</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>type</span><span class=p>:</span><span class=w> </span><span class=l>git</span><span class=w>
+</span><span class=w>  </span><span class=nt>repo</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>github</span><span class=p>:</span><span class=w> </span><span class=l>git@github.com:iwyang/iwyang.github.io.git</span><span class=w>
+</span><span class=w>  </span><span class=nt>branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>  </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>iwyang</span><span class=w>
+</span><span class=w>  </span><span class=nt>email</span><span class=p>:</span><span class=w> </span><span class=m>455343442</span>@<span class=l>qq.com</span><span class=w>
+</span></code></pre></div><p>当然，具体步骤还是得根据自己的需求进行相应的修改。</p>
+<h3 id=提交源码>提交源码</h3>
+<p>今后只需备份源码到<code>develop</code>分支，<code>gitbub action</code>就会自动部署博客到<code>iwyang.github.io</code>仓库。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=l>git init</span><span class=w>
+</span><span class=w></span><span class=l>git checkout -b develop</span><span class=w>
+</span><span class=w></span><span class=l>git remote add origin git@github.com:iwyang/iwyang.github.io.git</span><span class=w>
+</span><span class=w></span><span class=l>git add .</span><span class=w>
+</span><span class=w></span><span class=l>git commit -m &#34;备份源码&#34;</span><span class=w>
+</span><span class=w></span><span class=l>git push --force origin develop</span><span class=w>
+</span></code></pre></div><h3 id=最终部署脚本>最终部署脚本</h3>
+<p><code>deploy.sh</code>内容：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> -e <span class=s2>&#34;\033[0;32mDeploying updates to gitee...\033[0m&#34;</span>
+
+<span class=c1># backup</span>
+git config --global core.autocrlf <span class=nb>false</span>
+git add .
+git commit -m <span class=s2>&#34;site backup&#34;</span>
+git push origin develop --force
+</code></pre></div><h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://printempw.github.io/use-github-actions-to-deploy-hexo-blog/ target=_blank rel=noopener>使用 GitHub Actions 自动部署 Hexo 博客</a></li>
+<li><a class=link href=https://weijiajin.com/1f41c35f3517/ target=_blank rel=noopener>GitHub Actions 实现 Hexo 自动部署</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hexo/>hexo</a>
+<a href=/tags/github/>github</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/hexo%e5%88%a9%e7%94%a8Github%20Actions%e8%87%aa%e5%8a%a8%e6%9e%84%e5%bb%ba%e5%8d%9a%e5%ae%a2.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/upptime-github-actions/>
+<div class=article-details>
+<h2 class=article-title>upptime-利用Github-Actions检测网站运行状态</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hugo利用Github Actions自动构建博客</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#生成公钥>生成公钥</a>
+<ol>
+<li><a href=#上传id_rsapub>上传id_rsa.pub</a></li>
+<li><a href=#上传id_rsa>上传id_rsa</a></li>
+</ol>
+</li>
+<li><a href=#配置-github-actions>配置 GitHub Actions</a>
+<ol>
+<li><a href=#第一种>第一种</a></li>
+<li><a href=#第二种>第二种</a>
+<ol>
+<li><a href=#配置私钥>配置私钥</a></li>
+<li><a href=#添加公钥>添加公钥</a></li>
+<li><a href=#创建-workflow>创建 Workflow</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href=#githubgitee服务器三线部署>github、gitee、服务器三线部署</a></li>
+<li><a href=#推送到远端>推送到远端</a>
+<ol>
+<li><a href=#配置hexo的_configyml>配置Hexo的_config.yml</a></li>
+<li><a href=#提交源码>提交源码</a></li>
+<li><a href=#最终部署脚本>最终部署脚本</a></li>
+</ol>
+</li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

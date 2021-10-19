@@ -1,0 +1,674 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="又换主题了，这回使用的是hugo-theme-stack，无意发现这款主题，正合我意，够简单，最重要的是支持本地搜索，再不用弄哪个Alogi"><title>Hugo Stack主题配置与使用</title>
+<link rel=canonical href=/archives/hugo-theme-stack/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="Hugo Stack主题配置与使用">
+<meta property="og:description" content="又换主题了，这回使用的是hugo-theme-stack，无意发现这款主题，正合我意，够简单，最重要的是支持本地搜索，再不用弄哪个Alogi">
+<meta property="og:url" content="/archives/hugo-theme-stack/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:published_time" content="2021-07-24T09:15:26+08:00"><meta property="article:modified_time" content="2021-08-14T09:15:26+08:00">
+<meta name=twitter:title content="Hugo Stack主题配置与使用">
+<meta name=twitter:description content="又换主题了，这回使用的是hugo-theme-stack，无意发现这款主题，正合我意，够简单，最重要的是支持本地搜索，再不用弄哪个Alogi">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/hugo-theme-stack/>Hugo Stack主题配置与使用</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2021-07-24</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<p>又换主题了，这回使用的是<a class=link href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener>hugo-theme-stack</a>，无意发现这款主题，正合我意，够简单，最重要的是支持本地搜索，再不用弄哪个<code>Alogia</code>了。</p>
+<h2 id=下载主题更新主题>下载主题&更新主题</h2>
+<ol>
+<li>下载主题</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git init
+git submodule add https://github.com/CaiJimmy/hugo-theme-stack/ themes/hugo-theme-stack
+</code></pre></div><ol start=2>
+<li>更新主题</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --remote
+</code></pre></div><h2 id=查看主题版本号>查看主题版本号</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git show 查看当前版本
+----------------------------------------------------------------
+git tag　列出所有版本号
+git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源码会变成这个版本号的源码<span class=o>)</span>
+</code></pre></div><h2 id=configyaml配置文件><code>config.yaml</code>配置文件</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>baseurl</span><span class=p>:</span><span class=w> </span><span class=l>/</span><span class=w>
+</span><span class=w></span><span class=nt>languageCode</span><span class=p>:</span><span class=w> </span><span class=l>zh-CN</span><span class=w>
+</span><span class=w></span><span class=nt>theme</span><span class=p>:</span><span class=w> </span><span class=l>hugo-theme-stack</span><span class=w>
+</span><span class=w></span><span class=nt>paginate</span><span class=p>:</span><span class=w> </span><span class=m>10</span><span class=w>
+</span><span class=w></span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=l>Bore&#39;s Notes</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Change it to your Disqus shortname before using</span><span class=w>
+</span><span class=w></span><span class=c># disqusShortname: </span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># GA Tracking ID</span><span class=w>
+</span><span class=w></span><span class=nt>googleAnalytics</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Theme i18n support</span><span class=w>
+</span><span class=w></span><span class=c># Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it</span><span class=w>
+</span><span class=w></span><span class=nt>DefaultContentLanguage</span><span class=p>:</span><span class=w> </span><span class=l>zh-cn</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>permalinks</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>post</span><span class=p>:</span><span class=w> </span><span class=l>/archives/:slug/</span><span class=w>
+</span><span class=w>    </span><span class=nt>page</span><span class=p>:</span><span class=w> </span><span class=l>/:slug/</span><span class=w>
+</span><span class=w>    
+</span><span class=w></span><span class=c># whether to use emoji code</span><span class=w>
+</span><span class=w></span><span class=nt>enableEmoji</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>params</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>mainSections</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=l>post</span><span class=w>
+</span><span class=w>    </span><span class=nt>featuredImageField</span><span class=p>:</span><span class=w> </span><span class=l>image</span><span class=w>
+</span><span class=w>    </span><span class=nt>rssFullContent</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>    </span><span class=nt>favicon</span><span class=p>:</span><span class=w> </span><span class=l>/img/favicon.png</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>footer</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>since</span><span class=p>:</span><span class=w> </span><span class=m>2020</span><span class=w>
+</span><span class=w>        </span><span class=nt>customText</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>dateFormat</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>published</span><span class=p>:</span><span class=w> </span><span class=ld>2006-01-02</span><span class=w>
+</span><span class=w>        </span><span class=nt>lastUpdated</span><span class=p>:</span><span class=w> </span><span class=ld>2006-01-02</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>sidebar</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>emoji</span><span class=p>:</span><span class=w> </span><span class=l>🍥</span><span class=w>
+</span><span class=w>        </span><span class=nt>subtitle</span><span class=p>:</span><span class=w> </span><span class=l>博观而约取，厚积而薄发</span><span class=w>
+</span><span class=w>        </span><span class=nt>avatar</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>            </span><span class=nt>local</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>            </span><span class=nt>src</span><span class=p>:</span><span class=w> </span><span class=l>img/avatar.jpg</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>article</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>math</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>        </span><span class=nt>toc</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>readingTime</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w> 
+</span><span class=w>        </span><span class=nt>license</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>            </span><span class=nt>default</span><span class=p>:</span><span class=w> </span><span class=l>Licensed under CC BY-NC-SA 4.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>edit</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>comments</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>provider</span><span class=p>:</span><span class=w> </span><span class=l>waline</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=nt>utterances</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>repo</span><span class=p>:</span><span class=w> </span><span class=l>iwyang/comments</span><span class=w>
+</span><span class=w>            </span><span class=nt>issueTerm</span><span class=p>:</span><span class=w> </span><span class=l>title</span><span class=w>
+</span><span class=w>            </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=l>utterances</span><span class=w>
+</span><span class=w>            </span><span class=nt>theme</span><span class=p>:</span><span class=w> </span><span class=l>dark-orange</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=nt>remark42</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>host</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>site</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>locale</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=nt>vssue</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>platform</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>owner</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>repo</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>clientId</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>clientSecret</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>autoCreateIssue</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=c># Waline client configuration see: https://waline.js.org/en/reference/client.html</span><span class=w>
+</span><span class=w>        </span><span class=nt>waline</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>serverURL</span><span class=p>:</span><span class=w> </span><span class=l>https://m.bore.vip/</span><span class=w>
+</span><span class=w>            </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>zh-CN</span><span class=w>
+</span><span class=w>            </span><span class=nt>visitor</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>            </span><span class=nt>avatar</span><span class=p>:</span><span class=w> </span><span class=l>mp</span><span class=w>
+</span><span class=w>            </span><span class=nt>emoji</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo</span><span class=w>
+</span><span class=w>            </span><span class=nt>requiredMeta</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span>- <span class=l>nick</span><span class=w>
+</span><span class=w>                </span>- <span class=l>mail</span><span class=w>
+</span><span class=w>            </span><span class=nt>placeholder</span><span class=p>:</span><span class=w> </span><span class=l>欢迎评论（昵称、邮箱必填，网址选填）</span><span class=w>
+</span><span class=w>            </span><span class=nt>locale</span><span class=p>:</span><span class=w>
+</span><span class=w>                </span><span class=nt>admin</span><span class=p>:</span><span class=w> </span><span class=l>博主</span><span class=w>
+</span><span class=w>   
+</span><span class=w>        </span><span class=nt>twikoo</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>envId</span><span class=p>:</span><span class=w> </span><span class=l>https://twikoo-lake.vercel.app</span><span class=w>
+</span><span class=w>            </span><span class=nt>region</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>lang</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>widgets</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span>- <span class=l>search</span><span class=w>
+</span><span class=w>            </span>- <span class=l>categories</span><span class=w>
+</span><span class=w>            </span>- <span class=l>tag-cloud</span><span class=w>
+</span><span class=w>            </span>- <span class=l>archives</span><span class=w>
+</span><span class=w>           
+</span><span class=w>        </span><span class=nt>archives</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>limit</span><span class=p>:</span><span class=w> </span><span class=m>10000</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=nt>tagCloud</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>limit</span><span class=p>:</span><span class=w> </span><span class=m>10000</span><span class=w>
+</span><span class=w>            
+</span><span class=w>        </span><span class=nt>categoriesCloud</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>limit</span><span class=p>:</span><span class=w> </span><span class=m>10000</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>opengraph</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>twitter</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=c># Your Twitter username</span><span class=w>
+</span><span class=w>            </span><span class=nt>site</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w>            </span><span class=c># Available values: summary, summary_large_image</span><span class=w>
+</span><span class=w>            </span><span class=nt>card</span><span class=p>:</span><span class=w> </span><span class=l>summary_large_image</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>defaultImage</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>opengraph</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>            </span><span class=nt>local</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>            </span><span class=nt>src</span><span class=p>:</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>colorScheme</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=c># Display toggle</span><span class=w>
+</span><span class=w>        </span><span class=nt>toggle</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span><span class=c># Available values: auto, light, dark</span><span class=w>
+</span><span class=w>        </span><span class=nt>default</span><span class=p>:</span><span class=w> </span><span class=l>auto</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>imageProcessing</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>cover</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>content</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c>### Custom menu</span><span class=w>
+</span><span class=w></span><span class=c>### See https://docs.stack.jimmycai.com/configuration/custom-menu</span><span class=w>
+</span><span class=w></span><span class=c>### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter</span><span class=w>
+</span><span class=w></span><span class=nt>menu</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>main</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>identifier</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
+</span><span class=w>          </span><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>首页</span><span class=w>
+</span><span class=w>          </span><span class=nt>url</span><span class=p>:</span><span class=w> </span><span class=l>/</span><span class=w>
+</span><span class=w>          </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span>-<span class=m>100</span><span class=w>
+</span><span class=w>          </span><span class=nt>pre</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
+</span><span class=w>          </span><span class=nt>params</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=c>### For demonstration purpose, the home link will be open in a new tab</span><span class=w>
+</span><span class=w>            </span><span class=nt>newTab</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>related</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>includeNewer</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>    </span><span class=nt>threshold</span><span class=p>:</span><span class=w> </span><span class=m>60</span><span class=w>
+</span><span class=w>    </span><span class=nt>toLower</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>    </span><span class=nt>indices</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>tags</span><span class=w>
+</span><span class=w>          </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class=m>100</span><span class=w>
+</span><span class=w>
+</span><span class=w>        </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>categories</span><span class=w>
+</span><span class=w>          </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class=m>200</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>markup</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>tableOfContents</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>endLevel</span><span class=p>:</span><span class=w> </span><span class=m>4</span><span class=w>
+</span><span class=w>        </span><span class=nt>ordered</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>startLevel</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span><span class=w>    </span><span class=nt>highlight</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>noClasses</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span></code></pre></div><h2 id=archetypes默认模板><code>archetypes</code>默认模板</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ replace .TranslationBaseName &#34;</span>-<span class=s2>&#34; &#34;</span><span class=w> </span><span class=s2>&#34; | title }}&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>slug</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>description</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>date</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Date }}</span><span class=w>
+</span><span class=w></span><span class=nt>lastmod</span><span class=p>:</span><span class=w> </span>{{<span class=w> </span><span class=l>.Date }}</span><span class=w>
+</span><span class=w></span><span class=nt>draft</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>toc</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w></span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w></span><span class=nt>image</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;&#34;</span><span class=w>
+</span><span class=w></span><span class=nt>categories</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>]</span><span class=w>
+</span><span class=w></span><span class=nt>tags</span><span class=p>:</span><span class=w> </span><span class=p>[</span><span class=s2>&#34;&#34;</span><span class=p>]</span><span class=w>
+</span></code></pre></div><h2 id=显示右侧工具栏分类目录>显示右侧工具栏分类目录</h2>
+<p>参考 <a class=link href=https://github.com/CaiJimmy/hugo-theme-stack/issues/169 target=_blank rel=noopener>https://github.com/CaiJimmy/hugo-theme-stack/issues/169</a></p>
+<ol>
+<li>Create <code>categories.html</code> in layouts/partials/widget</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;widget tagCloud&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;widget-icon&#34;</span><span class=p>&gt;</span>
+      {{ partial &#34;helper/icon&#34; &#34;categories&#34; }}
+  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>h2</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;widget-title section-title&#34;</span><span class=p>&gt;</span>{{ T &#34;widget.categoriesCloud.title&#34; }}<span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;tagCloud-tags&#34;</span><span class=p>&gt;</span>
+      {{ range first .Site.Params.widgets.categoriesCloud.limit .Site.Taxonomies.categories.ByCount }}
+          <span class=p>&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;{{ .Page.RelPermalink }}&#34;</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;font_size_{{ .Count }}&#34;</span><span class=p>&gt;</span>
+              {{ .Page.Title }}
+          <span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+      {{ end }}
+  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+</code></pre></div><ol start=2>
+<li>修改 <code>config.yaml</code></li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>widgets</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span>- <span class=l>categories</span><span class=w>
+</span><span class=w>        
+</span><span class=w>        </span><span class=nt>categoriesCloud</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>limit</span><span class=p>:</span><span class=w> </span><span class=m>20</span><span class=w>
+</span></code></pre></div><ol start=3>
+<li>网站根目录新建<code>\i18n\zh-CN.yaml</code></li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>widget</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>categoriesCloud</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>title</span><span class=p>:</span><span class=w> 
+</span><span class=w>            </span><span class=nt>other</span><span class=p>:</span><span class=w> </span><span class=l>分类</span><span class=w>
+</span></code></pre></div><ol start=5>
+<li>Download categories.svg paste to <code>assets/icons</code>, from <a class=link href=https://github.com/rmdhnreza/rmdhnreza.my.id/tree/main/assets/icons target=_blank rel=noopener>here</a></li>
+</ol>
+<blockquote>
+<p><strong>注意</strong>：可以按需删除图标。</p>
+</blockquote>
+<h2 id=文章底部添加在-github-上编辑此页>文章底部添加<code>在 GitHub 上编辑此页</code></h2>
+<ol>
+<li>拷贝主题目录<code>/layouts/partials/article/components/footer.html</code>到网站根目录，修改为：</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html><span class=p>&lt;</span><span class=nt>footer</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-footer&#34;</span><span class=p>&gt;</span>
+    {{ partial &#34;article/components/tags&#34; . }}
+
+    {{ if and (.Site.Params.article.license.enabled) (not (eq .Params.license false)) }}
+    <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-copyright&#34;</span><span class=p>&gt;</span>
+        {{ partial &#34;helper/icon&#34; &#34;copyright&#34; }}
+        <span class=p>&lt;</span><span class=nt>span</span><span class=p>&gt;</span>{{ default .Site.Params.article.license.default .Params.license | markdownify }}<span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+    {{ end }}
+	
+	{{ if and (.Site.Params.article.edit.enabled) (not (eq .Params.edit false)) }}
+    <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-edit&#34;</span><span class=p>&gt;</span>
+        {{ partial &#34;helper/icon&#34; &#34;external-link&#34; }}
+        <span class=p>&lt;</span><span class=nt>span</span><span class=p>&gt;&lt;</span><span class=nt>a</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;color: inherit;&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;https://github.com/iwyang/iwyang.github.io/edit/develop/content/{{ replace .File.Path &#34;</span><span class=err>\\&#34;</span> <span class=err>&#34;/&#34;</span> <span class=err>}}&#34;</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>rel</span><span class=o>=</span><span class=s>&#34;noopener noreferrer&#34;</span><span class=p>&gt;</span>在 GitHub 上编辑此页<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+    {{ end }}
+
+    {{- if ne .Lastmod .Date -}}
+    <span class=p>&lt;</span><span class=nt>section</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-lastmod&#34;</span><span class=p>&gt;</span>
+        {{ partial &#34;helper/icon&#34; &#34;clock&#34; }}
+        <span class=p>&lt;</span><span class=nt>span</span><span class=p>&gt;</span>
+            {{ T &#34;article.lastUpdatedOn&#34; }} {{ .Lastmod.Format ( or .Site.Params.dateFormat.lastUpdated &#34;Jan 02, 2006 15:04 MST&#34; ) }}
+        <span class=p>&lt;/</span><span class=nt>span</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+    {{- end -}}
+<span class=p>&lt;/</span><span class=nt>footer</span><span class=p>&gt;</span>
+</code></pre></div><ol start=2>
+<li>编辑<code>config.yaml</code>：</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=w>    </span><span class=nt>article</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>math</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>        </span><span class=nt>toc</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>readingTime</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w> 
+</span><span class=w>        </span><span class=nt>license</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>            </span><span class=nt>default</span><span class=p>:</span><span class=w> </span><span class=l>Licensed under CC BY-NC-SA 4.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>edit</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></code></pre></div><p>以后只要在Frontmatter添加<code>edit: false</code>来关闭。</p>
+<ol start=3>
+<li>拷贝<code>external-link.svg</code>图标到网站根目录<code>/assets/icons</code>下。图标地址：<a class=link href=https://github.com/iwyang/iwyang.github.io/tree/develop/assets/icons target=_blank rel=noopener>点击直达</a></li>
+</ol>
+<h2 id=添加友情链接-shortcodes>添加友情链接 shortcodes</h2>
+<ol>
+<li>
+<p>网站根目录新建文件<code>layouts\page\links.html</code>：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html>{{ define &#34;body-class&#34; }}article-page keep-sidebar{{ end }}
+{{ define &#34;main&#34; }}
+    {{ partial &#34;article/article.html&#34; . }}
+
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-list--compact links&#34;</span><span class=p>&gt;</span>
+        {{ $siteResources := resources }}
+        {{ range $i, $link :=  $.Site.Data.links }}
+            <span class=p>&lt;</span><span class=nt>article</span><span class=p>&gt;</span>
+                <span class=p>&lt;</span><span class=nt>a</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;{{ $link.website }}&#34;</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>rel</span><span class=o>=</span><span class=s>&#34;noopener&#34;</span><span class=p>&gt;</span>
+                    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-details&#34;</span><span class=p>&gt;</span>
+                        <span class=p>&lt;</span><span class=nt>h2</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-title&#34;</span><span class=p>&gt;</span>
+                            {{- $link.title -}}
+                        <span class=p>&lt;/</span><span class=nt>h2</span><span class=p>&gt;</span>
+                        <span class=p>&lt;</span><span class=nt>footer</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-time&#34;</span><span class=p>&gt;</span>
+                            {{ with $link.description }}
+                                {{ . }}
+                            {{ else }}
+                                {{ $link.website }}
+                            {{ end }}
+                        <span class=p>&lt;/</span><span class=nt>footer</span><span class=p>&gt;</span>
+                    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+
+                    {{ if $link.image }}
+                        {{ $image := $siteResources.Get (delimit (slice &#34;link-img/&#34; $link.image) &#34;&#34;) | resources.Fingerprint &#34;md5&#34; }}
+                        {{ $imageResized := $image.Resize &#34;120x120&#34; }}
+                        <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;article-image&#34;</span><span class=p>&gt;</span>
+                            <span class=p>&lt;</span><span class=nt>img</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;{{ $imageResized.RelPermalink }}&#34;</span> <span class=na>width</span><span class=o>=</span><span class=s>&#34;{{ $imageResized.Width }}&#34;</span> <span class=na>height</span><span class=o>=</span><span class=s>&#34;{{ $imageResized.Height }}&#34;</span>
+                                <span class=na>loading</span><span class=o>=</span><span class=s>&#34;lazy&#34;</span> <span class=na>data-key</span><span class=o>=</span><span class=s>&#34;links-{{ $link.website }}&#34;</span> <span class=na>data-hash</span><span class=o>=</span><span class=s>&#34;{{ $image.Data.Integrity }}&#34;</span><span class=p>&gt;</span>
+                        <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+                    {{ end }}
+                <span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+            <span class=p>&lt;/</span><span class=nt>article</span><span class=p>&gt;</span>
+        {{ end }}
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+
+    {{ if or (not (isset .Params &#34;comments&#34;)) (eq .Params.comments &#34;true&#34;)}} 
+        {{ partial &#34;comments/include&#34; . }}
+    {{ end }}
+
+    {{ partialCached &#34;footer/footer&#34; . }}
+
+    {{ partialCached &#34;article/components/photoswipe&#34; . }}
+{{ end }}
+</code></pre></div></li>
+<li>
+<p>网站根目录新建文件<code>\layouts\shortcodes\link.html</code>：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-html data-lang=html>{{$URL := .Get 0}}
+{{ with .Site.GetPage $URL }}
+<span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-preview&#34;</span><span class=p>&gt;</span>
+  <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-preview--meta&#34;</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;width:100%;&#34;</span><span class=p>&gt;</span>
+    <span class=p>&lt;</span><span class=nt>div</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-preview--middle&#34;</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>h4</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-preview--title&#34;</span><span class=p>&gt;</span>
+        <span class=p>&lt;</span><span class=nt>a</span> <span class=na>target</span><span class=o>=</span><span class=s>&#34;_blank&#34;</span> <span class=na>href</span><span class=o>=</span><span class=s>&#34;{{ .Permalink }}&#34;</span><span class=p>&gt;</span>{{ .Title }}<span class=p>&lt;/</span><span class=nt>a</span><span class=p>&gt;</span>
+      <span class=p>&lt;/</span><span class=nt>h4</span><span class=p>&gt;</span>
+      <span class=p>&lt;</span><span class=nt>time</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-preview--date&#34;</span><span class=p>&gt;</span>{{ .Date.Format ( default &#34;2006-01-02&#34;) }}<span class=p>&lt;/</span><span class=nt>time</span><span class=p>&gt;</span>
+      {{ if .Params.tags }}
+      <span class=p>&lt;</span><span class=nt>small</span><span class=p>&gt;</span>{{ range .Params.tags }}#{{ . }}<span class=ni>&amp;nbsp;</span>{{ end }}<span class=p>&lt;/</span><span class=nt>small</span><span class=p>&gt;</span>
+      {{ end }}
+      <span class=p>&lt;</span><span class=nt>section</span> <span class=na>style</span><span class=o>=</span><span class=s>&#34;max-height:105px;overflow:hidden;&#34;</span> <span class=na>class</span><span class=o>=</span><span class=s>&#34;post-preview--excerpt&#34;</span><span class=p>&gt;</span>
+        {{ .Summary | plainify}}
+      <span class=p>&lt;/</span><span class=nt>section</span><span class=p>&gt;</span>
+    <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+  <span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+<span class=p>&lt;/</span><span class=nt>div</span><span class=p>&gt;</span>
+{{ end }}
+</code></pre></div><ol start=3>
+<li><code>网站图像</code>放在网站根目录<code>\assets\link-img\</code>文件夹下。</li>
+<li>网站根目录新建文件<code>\data\links.json</code>：</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=p>[</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;Upptime&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://iwyang.github.io/check&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;upptime.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;利用Github Actions查看网站运行状态。&#34;</span>
+    <span class=p>},</span>
+	<span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;ConstOwn&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://blog.juanertu.com&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;constown.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;能与你一起成长，我荣幸之至。&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;小丁的个人博客&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://tding.top&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;ding.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;世间所有的相遇，都是久别重逢。&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;Xu&#39;s Blog&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://hasaik.com&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;xu.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;简单不先于复杂，而是在复杂之后。&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;知行志&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://baozi.fun&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;zhi.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Halo Theme Xue作者。&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;Takagi&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://lixingyong.com&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;takagi.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Takagi是啥呀？？当然是最喜欢的Takagi了吖ヾ(≧∇≦*)ゝ&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;千与千寻&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://www.chihiro.org.cn&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;qian.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;所以，看不到光，算是不幸吗？需要光才是真正的不幸吧。&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;Bill Yang&#39;s Blog&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://blog.bill.moe&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;bill.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;这辈子都不可能更新的 。&#34;</span>
+    <span class=p>},</span>
+    <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;Sanarous&#39;s Blog&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://bestzuo.cn&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;sanarous.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;Dream it possible, make it possible&#34;</span>
+    <span class=p>},</span>
+     <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;JACK小桔子的小屋&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://jackxjz.top/&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;jack.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;一个分享科技/日常的网站。&#34;</span>
+    <span class=p>},</span>
+	<span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;若只如初见&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://joyli.net.cn/&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;ruo.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;世间所有的相遇，都是久别重逢。&#34;</span>
+    <span class=p>},</span>
+     <span class=p>{</span>
+        <span class=nt>&#34;title&#34;</span><span class=p>:</span> <span class=s2>&#34;大大的小蜗牛&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;website&#34;</span><span class=p>:</span> <span class=s2>&#34;https://eallion.com/&#34;</span><span class=p>,</span>
+        <span class=nt>&#34;image&#34;</span><span class=p>:</span> <span class=s2>&#34;eallion.jpg&#34;</span><span class=p>,</span>
+     <span class=nt>&#34;description&#34;</span><span class=p>:</span> <span class=s2>&#34;机会总是垂青于有准备的人。&#34;</span>
+    <span class=p>}</span>
+<span class=p>]</span>
+</code></pre></div></li>
+</ol>
+<h2 id=更改分类标签页面显示中文>更改分类、标签、页面显示中文</h2>
+<ol>
+<li><code>content</code>目录下新建<code>categories\_index.md</code>:</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;分类&#34;</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span></code></pre></div><ol start=2>
+<li><code>content</code>目录下新建<code>tags\_index.md</code>:</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nn>---</span><span class=w>
+</span><span class=w></span><span class=nt>title</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;标签&#34;</span><span class=w>
+</span><span class=w></span><span class=nn>---</span><span class=w>
+</span></code></pre></div><ol start=3>
+<li>根目录<code>\i18n\zh-CN.yaml</code>输入：</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>list</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>page</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>one</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ .Count }} 页面&#34;</span><span class=w>
+</span><span class=w>        </span><span class=nt>other</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ .Count }} 页面&#34;</span><span class=w>
+</span></code></pre></div><p>最终根目录<code>\i18n\zh-CN.yaml</code></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>list</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>page</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>one</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ .Count }} 页面&#34;</span><span class=w>
+</span><span class=w>        </span><span class=nt>other</span><span class=p>:</span><span class=w> </span><span class=s2>&#34;{{ .Count }} 页面&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>widget</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>categoriesCloud</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>title</span><span class=p>:</span><span class=w> 
+</span><span class=w>            </span><span class=nt>other</span><span class=p>:</span><span class=w> </span><span class=l>分类</span><span class=w>
+</span></code></pre></div><h2 id=附使用git-submodule管理hugo主题>附：使用Git Submodule管理Hugo主题</h2>
+<ul>
+<li>如果克隆库的时候要初始化子模块，请加上 <code>--recursive</code> 参数，如：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+</code></pre></div><ul>
+<li>如果已经克隆了主库但没初始化子模块，则用：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --init --recursive
+</code></pre></div><ul>
+<li>如果已经克隆并初始化子模块，而需要从子模块的源更新这个子模块，则：</li>
+</ul>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --recursive --remote
+</code></pre></div><p>更新之后主库的 git 差异中会显示新的 SHA 码，把这个差异选中提交即可。</p>
+<hr>
+<ul>
+<li>其他命令：在主仓库更新所有子模块：<code>git submodule foreach git pull origin master</code></li>
+</ul>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://docs.stack.jimmycai.com/zh/ target=_blank rel=noopener>Hugo 主题 Stack文档</a></li>
+<li><a class=link href=https://yinhe.co/archives/20210401_hugo_theme_stack.html target=_blank rel=noopener>hugo主题stack - 银河小筑</a></li>
+<li><a class=link href=https://blog.jimmycai.com/links/ target=_blank rel=noopener>树洞</a></li>
+<li><a class=link href=https://github.com/CaiJimmy/hugo-theme-stack/issues/169 target=_blank rel=noopener>Adding the widget tag-cloud for &ldquo;categories&rdquo;, on the right content region on Homepage</a></li>
+<li><a class=link href=https://github.com/vinceying/Vince-blog target=_blank rel=noopener>vinceying/Vince-blog-https://i.vince.pub/</a></li>
+<li><a class=link href=https://github.com/CaiJimmy/hugo-theme-stack/issues/300 target=_blank rel=noopener>“最后更新于”前面空格太长了</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hugo/>hugo</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/hugo-stack%e4%b8%bb%e9%a2%98%e9%85%8d%e7%bd%ae%e4%b8%8e%e4%bd%bf%e7%94%a8.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-08-14
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-papermod-theme/>
+<div class=article-details>
+<h2 class=article-title>Hugo Papermod主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hugo利用Github Actions自动构建博客</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-loveit-algolia/>
+<div class=article-details>
+<h2 class=article-title>Hugo添加Algolia</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#下载主题更新主题>下载主题&更新主题</a></li>
+<li><a href=#查看主题版本号>查看主题版本号</a></li>
+<li><a href=#configyaml配置文件><code>config.yaml</code>配置文件</a></li>
+<li><a href=#archetypes默认模板><code>archetypes</code>默认模板</a></li>
+<li><a href=#显示右侧工具栏分类目录>显示右侧工具栏分类目录</a></li>
+<li><a href=#文章底部添加在-github-上编辑此页>文章底部添加<code>在 GitHub 上编辑此页</code></a></li>
+<li><a href=#添加友情链接-shortcodes>添加友情链接 shortcodes</a></li>
+<li><a href=#更改分类标签页面显示中文>更改分类、标签、页面显示中文</a></li>
+<li><a href=#附使用git-submodule管理hugo主题>附：使用Git Submodule管理Hugo主题</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

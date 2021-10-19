@@ -1,202 +1,924 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>归档 | 汪洋的博客</title><meta name="keywords" content="个人博客,个人网站,hexo"><meta name="author" content="太和小学汪洋"><meta name="copyright" content="太和小学汪洋"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta property="og:type" content="website">
-<meta property="og:title" content="汪洋的博客">
-<meta property="og:url" content="https://iwyang.gitee.io/archives/index.html">
-<meta property="og:site_name" content="汪洋的博客">
-<meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg">
-<meta property="article:author" content="太和小学汪洋">
-<meta property="article:tag" content="个人博客,个人网站,hexo">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg"><link rel="shortcut icon" href="https://cdn.jsdelivr.net/gh/iwyang/pic/favicon.ico"><link rel="canonical" href="https://iwyang.gitee.io/archives/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
-  root: '/',
-  algolia: undefined,
-  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
-  translate: undefined,
-  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"距离上次更新已经过了","messageNext":"天，文章所描述的內容可能已经发生变化，请留意。"},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":200},
-  copy: {
-    success: '复制成功',
-    error: '复制错误',
-    noSupport: '浏览器不支持'
-  },
-  relativeDate: {
-    homepage: true,
-    post: false
-  },
-  runtime: '天',
-  date_suffix: {
-    just: '刚刚',
-    min: '分钟前',
-    hour: '小时前',
-    day: '天前',
-    month: '个月前'
-  },
-  copyright: undefined,
-  lightbox: 'fancybox',
-  Snackbar: undefined,
-  source: {
-    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
-    justifiedGallery: {
-      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
-    },
-    fancybox: {
-      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
-      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
-    }
-  },
-  isPhotoFigcaption: false,
-  islazyload: false,
-  isanchor: true
-}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
-  title: '归档',
-  isPost: false,
-  isHome: false,
-  isHighlightShrink: false,
-  isToc: false,
-  postUpdate: '2021-10-19 20:58:10'
-}</script><noscript><style type="text/css">
-  #nav {
-    opacity: 1
-  }
-  .justified-gallery img {
-    opacity: 1
-  }
-
-  #recent-posts time,
-  #post-meta time {
-    display: inline !important
-  }
-</style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
-        }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
-        }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
-
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
-        }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-      win.activateDarkMode = function () {
-        document.documentElement.setAttribute('data-theme', 'dark')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
-        }
-      }
-      win.activateLightMode = function () {
-        document.documentElement.setAttribute('data-theme', 'light')
-        if (document.querySelector('meta[name="theme-color"]') !== null) {
-          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
-        }
-      }
-      const t = saveToLocal.get('theme')
-    
-          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
-          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
-          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
-          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
-
-          if (t === undefined) {
-            if (isLightMode) activateLightMode()
-            else if (isDarkMode) activateDarkMode()
-            else if (isNotSpecified || hasNoSupport) {
-              const now = new Date()
-              const hour = now.getHours()
-              const isNight = hour <= 6 || hour >= 18
-              isNight ? activateDarkMode() : activateLightMode()
-            }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
-              if (saveToLocal.get('theme') === undefined) {
-                e.matches ? activateDarkMode() : activateLightMode()
-              }
-            })
-          } else if (t === 'light') activateLightMode()
-          else activateDarkMode()
-        
-      const asideStatus = saveToLocal.get('aside-status')
-      if (asideStatus !== undefined) {
-        if (asideStatus === 'hide') {
-          document.documentElement.classList.add('hide-aside')
-        } else {
-          document.documentElement.classList.remove('hide-aside')
-        }
-      }
-    
-    const detectApple = () => {
-      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
-      }
-    }
-    detectApple()
-    })(window)</script><link rel="stylesheet" href="/css/custom.css"><meta name="generator" content="Hexo 5.4.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/say/"><i class="fa-fw far fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="page" id="body-wrap"><header class="not-home-page" id="page-header"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">汪洋的博客</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 文章</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/say/"><i class="fa-fw far fa-comment-dots"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="/gallery/"><i class="fa-fw fas fa-image"></i><span> 相册</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="page-site-info"><h1 id="site-title">归档</h1></div></header><main class="layout" id="content-inner"><div id="archive"><div class="article-sort-title">文章总览 - 54</div><div class="article-sort"><div class="article-sort-item year">2021</div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-10-09T12:09:52.000Z" title="发表于 2021-10-09 20:09:52">2021-10-09</time></div><a class="article-sort-item-title" href="/archives/7273e00a/" title="三年级数学上册册第四单元《小树有多少棵》教学反思">三年级数学上册册第四单元《小树有多少棵》教学反思</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-10-02T12:38:51.000Z" title="发表于 2021-10-02 20:38:51">2021-10-02</time></div><a class="article-sort-item-title" href="/archives/fe24fa8e/" title="三年级数学上册册第四单元《小树有多少棵》教学设计">三年级数学上册册第四单元《小树有多少棵》教学设计</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-08-26T03:34:14.000Z" title="发表于 2021-08-26 11:34:14">2021-08-26</time></div><a class="article-sort-item-title" href="/archives/415c867f/" title="怎样才能把A3文档打印到A4纸上">怎样才能把A3文档打印到A4纸上</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-08-07T19:42:17.000Z" title="发表于 2021-08-08 03:42:17">2021-08-08</time></div><a class="article-sort-item-title" href="/archives/5f14ae6/" title="PS竖屏图片转横屏">PS竖屏图片转横屏</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-08-05T17:38:02.000Z" title="发表于 2021-08-06 01:38:02">2021-08-06</time></div><a class="article-sort-item-title" href="/archives/c327291f/" title="Ps2020更换照片底色">Ps2020更换照片底色</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-07-29T02:26:19.000Z" title="发表于 2021-07-29 10:26:19">2021-07-29</time></div><a class="article-sort-item-title" href="/archives/dec02429/" title="三年级数学上册知识点总结">三年级数学上册知识点总结</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-07-09T04:57:25.000Z" title="发表于 2021-07-09 12:57:25">2021-07-09</time></div><a class="article-sort-item-title" href="/archives/e6a5162e/" title="北师大三年级数学上册优质课">北师大三年级数学上册优质课</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-06-05T18:02:25.000Z" title="发表于 2021-06-06 02:02:25">2021-06-06</time></div><a class="article-sort-item-title" href="/archives/da5ef671/" title="AE学习笔记">AE学习笔记</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-06-02T06:27:25.000Z" title="发表于 2021-06-02 14:27:25">2021-06-02</time></div><a class="article-sort-item-title" href="/archives/68e07e4a/" title="用pr制作《2021年春季运动会》电子相册">用pr制作《2021年春季运动会》电子相册</a></div></div><div class="article-sort-item no-article-cover"><div class="article-sort-item-info"><div class="article-sort-item-time"><i class="far fa-calendar-alt"></i><time class="post-meta-date-created" datetime="2021-04-24T11:27:46.000Z" title="发表于 2021-04-24 19:27:46">2021-04-24</time></div><a class="article-sort-item-title" href="/archives/90a296ba/" title="二年级数学下册第五单元《小蝌蚪的成长》教学反思">二年级数学下册第五单元《小蝌蚪的成长》教学反思</a></div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/archives/page/6/">6</a><a class="extend next" rel="next" href="/archives/page/2/"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://cdn.jsdelivr.net/gh/iwyang/pic/enj.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">太和小学汪洋</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">54</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/iwyang"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/iwyang" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:iwyang@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎访问我的博客</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/7273e00a/" title="三年级数学上册册第四单元《小树有多少棵》教学反思">三年级数学上册册第四单元《小树有多少棵》教学反思</a><time datetime="2021-10-09T12:09:52.000Z" title="发表于 2021-10-09 20:09:52">2021-10-09</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/fe24fa8e/" title="三年级数学上册册第四单元《小树有多少棵》教学设计">三年级数学上册册第四单元《小树有多少棵》教学设计</a><time datetime="2021-10-02T12:38:51.000Z" title="发表于 2021-10-02 20:38:51">2021-10-02</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/415c867f/" title="怎样才能把A3文档打印到A4纸上">怎样才能把A3文档打印到A4纸上</a><time datetime="2021-08-26T03:34:14.000Z" title="发表于 2021-08-26 11:34:14">2021-08-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/5f14ae6/" title="PS竖屏图片转横屏">PS竖屏图片转横屏</a><time datetime="2021-08-07T19:42:17.000Z" title="发表于 2021-08-08 03:42:17">2021-08-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/archives/c327291f/" title="Ps2020更换照片底色">Ps2020更换照片底色</a><time datetime="2021-08-05T17:38:02.000Z" title="发表于 2021-08-06 01:38:02">2021-08-06</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
-            <i class="fas fa-folder-open"></i>
-            <span>分类</span>
-            
-            </div>
-            <ul class="card-category-list" id="aside-cat-list">
-            <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%8A%80%E6%9C%AF/"><span class="card-category-list-name">技术</span><span class="card-category-list-count">22</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%95%99%E5%AD%A6/"><span class="card-category-list-name">教学</span><span class="card-category-list-count">32</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E4%B8%80%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/" style="font-size: 1.45em; color: rgb(113, 63, 163)">一年级数学</a><a href="/tags/%E7%BB%83%E4%B9%A0%E9%A2%98/" style="font-size: 1.19em; color: rgb(151, 147, 168)">练习题</a><a href="/tags/AE/" style="font-size: 1.15em; color: rgb(51, 97, 129)">AE</a><a href="/tags/excel/" style="font-size: 1.28em; color: rgb(80, 142, 91)">excel</a><a href="/tags/flash/" style="font-size: 1.15em; color: rgb(97, 105, 184)">flash</a><a href="/tags/tips/" style="font-size: 1.41em; color: rgb(16, 166, 113)">tips</a><a href="/tags/ps/" style="font-size: 1.28em; color: rgb(103, 1, 69)">ps</a><a href="/tags/win10/" style="font-size: 1.24em; color: rgb(156, 16, 110)">win10</a><a href="/tags/%E9%94%99%E9%A2%98%E9%9B%86/" style="font-size: 1.32em; color: rgb(13, 161, 90)">错题集</a><a href="/tags/%E4%B8%89%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/" style="font-size: 1.28em; color: rgb(0, 156, 33)">三年级数学</a><a href="/tags/%E6%95%99%E5%AD%A6%E5%8F%8D%E6%80%9D/" style="font-size: 1.24em; color: rgb(192, 70, 59)">教学反思</a><a href="/tags/%E6%95%99%E5%AD%A6%E8%AE%BE%E8%AE%A1/" style="font-size: 1.24em; color: rgb(103, 6, 89)">教学设计</a><a href="/tags/%E4%BA%8C%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/" style="font-size: 1.36em; color: rgb(80, 155, 169)">二年级数学</a><a href="/tags/%E8%AE%BA%E6%96%87/" style="font-size: 1.19em; color: rgb(87, 165, 68)">论文</a><a href="/tags/%E8%A7%86%E9%A2%91/" style="font-size: 1.24em; color: rgb(58, 152, 137)">视频</a><a href="/tags/pr/" style="font-size: 1.15em; color: rgb(158, 115, 64)">pr</a><a href="/tags/%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C/" style="font-size: 1.15em; color: rgb(151, 25, 33)">电子相册</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/10/"><span class="card-archive-list-date">2021年10月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/08/"><span class="card-archive-list-date">2021年08月</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/07/"><span class="card-archive-list-date">2021年07月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/06/"><span class="card-archive-list-date">2021年06月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/04/"><span class="card-archive-list-date">2021年04月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/03/"><span class="card-archive-list-date">2021年03月</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2021/01/"><span class="card-archive-list-date">2021年01月</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2020/11/"><span class="card-archive-list-date">2020年11月</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">54</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2020-04-24T16:00:00.000Z"></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">30.8k</div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2021-10-19T12:58:10.004Z"></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By 太和小学汪洋</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script>function panguFn () {
-  if (typeof pangu === 'object') pangu.autoSpacingPage()
-  else {
-    getScript('https://cdn.jsdelivr.net/npm/pangu/dist/browser/pangu.min.js')
-      .then(() => {
-        pangu.autoSpacingPage()
-      })
-  }
-}
-
-function panguInit () {
-  if (false){
-    GLOBAL_CONFIG_SITE.isPost && panguFn()
-  } else {
-    panguFn()
-  }
-}
-
-document.addEventListener('DOMContentLoaded', panguInit)</script><script src="/js/search/local-search.js"></script><script>var preloader = {
-  endLoading: () => {
-    document.body.style.overflow = 'auto';
-    document.getElementById('loading-box').classList.add("loaded")
-  },
-  initLoading: () => {
-    document.body.style.overflow = '';
-    document.getElementById('loading-box').classList.remove("loaded")
-
-  }
-}
-window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script src="/js/custom.js"></script></div></body></html>
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content><title>归档</title>
+<link rel=canonical href=/archives/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="归档">
+<meta property="og:description" content>
+<meta property="og:url" content="/archives/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Page"><meta property="article:published_time" content="2020-04-25T00:00:00+00:00"><meta property="article:modified_time" content="2020-04-25T00:00:00+00:00">
+<meta name=twitter:title content="归档">
+<meta name=twitter:description content>
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class=template-archives>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
+<button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box>
+<span class=hamburger-inner></span>
+</span>
+</button>
+<header class=site-info>
+<h1 class=site-name><a href=/>Bore's Notes</a></h1>
+<h2 class=site-description>博观而约取，厚积而薄发</h2>
+</header>
+<ol class=menu id=main-menu>
+<li>
+<a href=/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>首页</span>
+</a>
+</li>
+<li class=current>
+<a href=/archives/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span>
+</a>
+</li>
+<li>
+<a href=/say/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-message-circle" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 20l1.3-3.9A9 8 0 117.7 19L3 20"/><line x1="12" y1="12" x2="12" y2="12.01"/><line x1="8" y1="12" x2="8" y2="12.01"/><line x1="16" y1="12" x2="16" y2="12.01"/></svg>
+<span>说说</span>
+</a>
+</li>
+<li>
+<a href=/about/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span>
+</a>
+</li>
+<li>
+<a href=/search/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span>
+</a>
+</li>
+<li>
+<a href=/links/><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>友链</span>
+</a>
+</li>
+<li id=dark-mode-toggle><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span>
+</li>
+</ol>
+</aside>
+<main class="main full-width">
+<h2 class=section-title>分类</h2>
+<div class=subsection-list>
+<div class=article-list--tile>
+<article class=has-image>
+<a href=/categories/%E6%95%99%E5%AD%A6/>
+<div class=article-image>
+<img src=/categories/%E6%95%99%E5%AD%A6/teaching.21d40d783e3f9d45ff2a7745fd312e9e_hu43b95e5307df107f0567fc4c6d48f4ee_8998_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key=teaching data-hash="md5-IdQNeD4/nUX/KndF/TEung==">
+</div>
+<div class=article-details>
+<h2 class=article-title>教学</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+<div class=article-image>
+<img src=/categories/%E6%8A%80%E6%9C%AF/tech.057f5ac381eddfede5efc08ce7672286_hu217f6df1154e1da13e4addd4b9efb00c_12814_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key=tech data-hash="md5-BX9aw4Ht3+3l78CM52cihg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>技术</h2>
+</div>
+</a>
+</article>
+<article class=has-image>
+<a href=/categories/%E8%AF%BB%E4%B9%A6/>
+<div class=article-image>
+<img src=/categories/%E8%AF%BB%E4%B9%A6/reading.cf580e257b8ac8871468f2898b9b52ce_hu5b26fc06350c4774c9dbc0af1c18be7b_9416_250x150_fill_q75_box_smart1.jpg width=250 height=150 loading=lazy data-key=reading data-hash="md5-z1gOJXuKyIcUaPKJi5tSzg==">
+</div>
+<div class=article-details>
+<h2 class=article-title>读书</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+<div class=archives-group id=2021>
+<h2 class="archives-date section-title"><a href=/archives/#2021>2021</a></h2>
+<div class=article-list--compact>
+<article>
+<a href=/archives/xiao-shu-you-duo-shao-ke-fs/>
+<div class=article-details>
+<h2 class=article-title>三年级数学上册册第四单元《小树有多少棵》教学反思</h2>
+<footer class=article-time>
+<time datetime=2021-10-10T20:38:29+08:00>2021-10-10</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/xiao-shu-you-duo-shao-ke/>
+<div class=article-details>
+<h2 class=article-title>三年级数学上册册第四单元《小树有多少棵》教学设计</h2>
+<footer class=article-time>
+<time datetime=2021-10-02T20:42:45+08:00>2021-10-02</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/a3-to-a4/>
+<div class=article-details>
+<h2 class=article-title>怎样才能把A3文档打印到A4纸上</h2>
+<footer class=article-time>
+<time datetime=2021-08-26T19:34:14+08:00>2021-08-26</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+<footer class=article-time>
+<time datetime=2021-08-18T11:56:29+08:00>2021-08-18</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+<footer class=article-time>
+<time datetime=2021-08-17T13:45:30+08:00>2021-08-17</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+<footer class=article-time>
+<time datetime=2021-08-17T12:06:13+08:00>2021-08-17</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+<footer class=article-time>
+<time datetime=2021-08-15T16:39:34+08:00>2021-08-15</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-papermod-theme/>
+<div class=article-details>
+<h2 class=article-title>Hugo Papermod主题配置与使用</h2>
+<footer class=article-time>
+<time datetime=2021-08-09T08:54:56+08:00>2021-08-09</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ps-change-shu-to-heng/>
+<div class=article-details>
+<h2 class=article-title>PS竖屏图片转横屏</h2>
+<footer class=article-time>
+<time datetime=2021-08-08T11:42:17+08:00>2021-08-08</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ps2020-change-pic-bg/>
+<div class=article-details>
+<h2 class=article-title>Ps2020更换照片底色</h2>
+<footer class=article-time>
+<time datetime=2021-08-06T09:38:02+08:00>2021-08-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/upptime-github-actions/>
+<div class=article-details>
+<h2 class=article-title>upptime-利用Github-Actions检测网站运行状态</h2>
+<footer class=article-time>
+<time datetime=2021-08-02T08:05:13+08:00>2021-08-02</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/three-grade-math-zong-jie/>
+<div class=article-details>
+<h2 class=article-title>三年级数学上册知识点总结</h2>
+<footer class=article-time>
+<time datetime=2021-07-29T18:26:19+08:00>2021-07-29</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-stack/>
+<div class=article-details>
+<h2 class=article-title>Hugo Stack主题配置与使用</h2>
+<footer class=article-time>
+<time datetime=2021-07-24T09:15:26+08:00>2021-07-24</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/how-to-read-a-book/>
+<div class=article-details>
+<h2 class=article-title>《如何阅读一本书》读书笔记</h2>
+<footer class=article-time>
+<time datetime=2021-07-20T17:02:25+08:00>2021-07-20</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/three-grade-math-shang-you-ke/>
+<div class=article-details>
+<h2 class=article-title>北师大三年级数学上册优质课</h2>
+<footer class=article-time>
+<time datetime=2021-07-09T20:57:25+08:00>2021-07-09</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ae-tips/>
+<div class=article-details>
+<h2 class=article-title>AE学习笔记</h2>
+<footer class=article-time>
+<time datetime=2021-06-06T10:02:25+08:00>2021-06-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/pr-2021-spring-games/>
+<div class=article-details>
+<h2 class=article-title>用pr制作《2021年春季运动会》电子相册</h2>
+<footer class=article-time>
+<time datetime=2021-06-02T22:27:25+08:00>2021-06-02</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ke-dou-cheng-zhang/>
+<div class=article-details>
+<h2 class=article-title>二年级数学下册第五单元《小蝌蚪的成长》教学设计</h2>
+<footer class=article-time>
+<time datetime=2021-04-23T22:49:25+08:00>2021-04-23</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ke-dou-cheng-zhang-fs/>
+<div class=article-details>
+<h2 class=article-title>二年级数学下册第五单元《小蝌蚪的成长》教学反思</h2>
+<footer class=article-time>
+<time datetime=2021-04-23T20:40:43+08:00>2021-04-23</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/how-long-the-pen-is-fs/>
+<div class=article-details>
+<h2 class=article-title>二年级数学下册第四单元《铅笔有多长》教学反思</h2>
+<footer class=article-time>
+<time datetime=2021-03-31T19:07:16+08:00>2021-03-31</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/how-long-the-pen-is/>
+<div class=article-details>
+<h2 class=article-title>二年级数学下册第四单元《铅笔有多长》教学设计</h2>
+<footer class=article-time>
+<time datetime=2021-03-30T11:03:25+08:00>2021-03-30</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/second-grade-xia-math-zong-jie/>
+<div class=article-details>
+<h2 class=article-title>二年级数学下册知识点总结</h2>
+<footer class=article-time>
+<time datetime=2021-03-27T21:12:25+08:00>2021-03-27</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/seewo-tips/>
+<div class=article-details>
+<h2 class=article-title>希沃电子白板学习笔记</h2>
+<footer class=article-time>
+<time datetime=2021-03-22T23:54:25+08:00>2021-03-22</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/dou-yin-ying-yue/>
+<div class=article-details>
+<h2 class=article-title>快手抖音视频中的背景音乐怎么提取下载</h2>
+<footer class=article-time>
+<time datetime=2021-01-16T22:28:25+08:00>2021-01-16</time>
+</footer>
+</div>
+</a>
+</article>
+</div>
+</div>
+<div class=archives-group id=2020>
+<h2 class="archives-date section-title"><a href=/archives/#2020>2020</a></h2>
+<div class=article-list--compact>
+<article>
+<a href=/archives/second-grade-math-zong-jie/>
+<div class=article-details>
+<h2 class=article-title>二年级数学上册知识点总结</h2>
+<footer class=article-time>
+<time datetime=2020-11-06T23:04:25+08:00>2020-11-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/second-grade-math-xia-you-ke/>
+<div class=article-details>
+<h2 class=article-title>北师大二年级数学下册优质课</h2>
+<footer class=article-time>
+<time datetime=2020-09-06T15:25:25+08:00>2020-09-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ps-compress-pics/>
+<div class=article-details>
+<h2 class=article-title>PS批量压缩&重命名图片</h2>
+<footer class=article-time>
+<time datetime=2020-08-11T09:59:25+08:00>2020-08-11</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/linux-crontab/>
+<div class=article-details>
+<h2 class=article-title>linux利用crontab设置定时任务</h2>
+<footer class=article-time>
+<time datetime=2020-08-10T18:52:25+08:00>2020-08-10</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/halo-backup/>
+<div class=article-details>
+<h2 class=article-title>halo定时备份的方法</h2>
+<footer class=article-time>
+<time datetime=2020-07-26T21:49:25+08:00>2020-07-26</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos-halo/>
+<div class=article-details>
+<h2 class=article-title>在Centos服务器部署Halo</h2>
+<footer class=article-time>
+<time datetime=2020-07-24T10:21:25+08:00>2020-07-24</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-jsdelivr-picgo-typecho/>
+<div class=article-details>
+<h2 class=article-title>GitHub+jsDelivr+PicGo+typecho打造免费高速图床</h2>
+<footer class=article-time>
+<time datetime=2020-07-21T16:32:25+08:00>2020-07-21</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/one-plus-5t-jiu-zhuan/>
+<div class=article-details>
+<h2 class=article-title>一加5T救砖备忘</h2>
+<footer class=article-time>
+<time datetime=2020-07-18T14:27:25+08:00>2020-07-18</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/install-ico-plugin-in-photoshop-cc/>
+<div class=article-details>
+<h2 class=article-title>让PS支持.ico&webp格式</h2>
+<footer class=article-time>
+<time datetime=2020-07-14T00:43:25+08:00>2020-07-14</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/pc-logo-wu-huan/>
+<div class=article-details>
+<h2 class=article-title>用PC Logo画五环</h2>
+<footer class=article-time>
+<time datetime=2020-07-12T09:16:25+08:00>2020-07-12</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/one-plus-5t-root/>
+<div class=article-details>
+<h2 class=article-title>一加5T(安卓10)root&EdXposed框架</h2>
+<footer class=article-time>
+<time datetime=2020-07-10T18:34:25+08:00>2020-07-10</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/zfx-si-fen/>
+<div class=article-details>
+<h2 class=article-title>把一个正方形平分成四份</h2>
+<footer class=article-time>
+<time datetime=2020-07-09T10:15:25+08:00>2020-07-09</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hexo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hexo利用Github Actions自动构建博客</h2>
+<footer class=article-time>
+<time datetime=2020-07-07T19:11:25+08:00>2020-07-07</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hugo利用Github Actions自动构建博客</h2>
+<footer class=article-time>
+<time datetime=2020-07-06T17:19:19+08:00>2020-07-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-shu-tu-xing/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册数图形有几个</h2>
+<footer class=article-time>
+<time datetime=2020-06-29T14:10:25+08:00>2020-06-29</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/excel-find-repeat/>
+<div class=article-details>
+<h2 class=article-title>Excel查找重复项</h2>
+<footer class=article-time>
+<time datetime=2020-06-29T13:54:25+08:00>2020-06-29</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/xue-lian-you-shi-juan/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册学练优单元测评卷</h2>
+<footer class=article-time>
+<time datetime=2020-06-17T14:50:25+08:00>2020-06-17</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/usb3-ying-pan/>
+<div class=article-details>
+<h2 class=article-title>笔记本硬盘改移动硬盘&分区安装PE</h2>
+<footer class=article-time>
+<time datetime=2020-06-16T13:51:25+08:00>2020-06-16</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/ren-sheng-fen-li/>
+<div class=article-details>
+<h2 class=article-title>人声伴奏分离分离神器：Spleeter GUI_v2.5</h2>
+<footer class=article-time>
+<time datetime=2020-06-15T13:09:25+08:00>2020-06-15</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-xia-unit6/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册第六单元《加与减(三)》试卷错题集</h2>
+<footer class=article-time>
+<time datetime=2020-06-11T22:05:25+08:00>2020-06-11</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-xia-unit5/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册第五单元《加与减(二)》试卷错题集</h2>
+<footer class=article-time>
+<time datetime=2020-06-10T22:41:25+08:00>2020-06-10</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-pai-dui/>
+<div class=article-details>
+<h2 class=article-title>一年级数学排队问题总结</h2>
+<footer class=article-time>
+<time datetime=2020-06-10T12:07:36+08:00>2020-06-10</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-xia-unit4/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册第四单元《有趣的图形》试卷错题集</h2>
+<footer class=article-time>
+<time datetime=2020-06-09T21:52:25+08:00>2020-06-09</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-xia-unit3/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册第三单元《生活中的数》试卷错题集</h2>
+<footer class=article-time>
+<time datetime=2020-06-08T21:39:25+08:00>2020-06-08</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/100-jia-jian-fa/>
+<div class=article-details>
+<h2 class=article-title>100以内加减法计算题</h2>
+<footer class=article-time>
+<time datetime=2020-06-07T20:24:25+08:00>2020-06-07</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos8-enable-ftp/>
+<div class=article-details>
+<h2 class=article-title>centos8搭建ftp服务器</h2>
+<footer class=article-time>
+<time datetime=2020-06-06T19:34:25+08:00>2020-06-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/gitee-picgo-typecho/>
+<div class=article-details>
+<h2 class=article-title>Gitee+Picgo+Typecho搭建图床</h2>
+<footer class=article-time>
+<time datetime=2020-06-06T08:59:25+08:00>2020-06-06</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-xia-unit2/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册第二单元《观察物体》试卷错题集</h2>
+<footer class=article-time>
+<time datetime=2020-06-05T20:07:25+08:00>2020-06-05</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-po-shi-and-ping-shi/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册破十法和平十法</h2>
+<footer class=article-time>
+<time datetime=2020-06-04T22:33:25+08:00>2020-06-04</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-xia-unit1/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册第一单元《加与减(一)》试卷错题集</h2>
+<footer class=article-time>
+<time datetime=2020-06-04T20:29:25+08:00>2020-06-04</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-loveit-algolia/>
+<div class=article-details>
+<h2 class=article-title>Hugo添加Algolia</h2>
+<footer class=article-time>
+<time datetime=2020-06-03T23:17:25+08:00>2020-06-03</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-loveit/>
+<div class=article-details>
+<h2 class=article-title>Hugo LoveIt&CodeIT&DoIt主题配置与使用</h2>
+<footer class=article-time>
+<time datetime=2020-06-03T22:44:25+08:00>2020-06-03</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-he-cha/>
+<div class=article-details>
+<h2 class=article-title>一年级数学和差问题</h2>
+<footer class=article-time>
+<time datetime=2020-06-03T10:34:25+08:00>2020-06-03</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-zui-da/>
+<div class=article-details>
+<h2 class=article-title>一年级数学括号最大能填几</h2>
+<footer class=article-time>
+<time datetime=2020-06-02T10:02:25+08:00>2020-06-02</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-yi-tu-si-shi/>
+<div class=article-details>
+<h2 class=article-title>一年级数学一图四式问题</h2>
+<footer class=article-time>
+<time datetime=2020-05-28T15:20:25+08:00>2020-05-28</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/search-tips/>
+<div class=article-details>
+<h2 class=article-title>提高搜索效率的7个小技巧</h2>
+<footer class=article-time>
+<time datetime=2020-05-27T16:54:25+08:00>2020-05-27</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/lenovo-update-bios/>
+<div class=article-details>
+<h2 class=article-title>联想笔记本电脑升级bios</h2>
+<footer class=article-time>
+<time datetime=2020-05-26T18:25:25+08:00>2020-05-26</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/nginx-mu-lu/>
+<div class=article-details>
+<h2 class=article-title>Nginx开启目录浏览</h2>
+<footer class=article-time>
+<time datetime=2020-05-24T19:51:25+08:00>2020-05-24</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/win10-reinstall-system/>
+<div class=article-details>
+<h2 class=article-title>Win10重装系统&清灰记录</h2>
+<footer class=article-time>
+<time datetime=2020-05-24T14:36:25+08:00>2020-05-24</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-da-kuo-hao/>
+<div class=article-details>
+<h2 class=article-title>一年级数学上册大括号问题</h2>
+<footer class=article-time>
+<time datetime=2020-05-23T22:49:25+08:00>2020-05-23</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/excel-rank-random/>
+<div class=article-details>
+<h2 class=article-title>Excel如何随机排</h2>
+<footer class=article-time>
+<time datetime=2020-05-23T11:38:25+08:00>2020-05-23</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-gu-suan/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册估算问题</h2>
+<footer class=article-time>
+<time datetime=2020-05-20T17:32:25+08:00>2020-05-20</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/excel-fen-ye/>
+<div class=article-details>
+<h2 class=article-title>Excel表格调整分页打印内容</h2>
+<footer class=article-time>
+<time datetime=2020-05-18T21:31:25+08:00>2020-05-18</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos8-gua-ji/>
+<div class=article-details>
+<h2 class=article-title>Centos8挂机笔记</h2>
+<footer class=article-time>
+<time datetime=2020-05-18T15:33:25+08:00>2020-05-18</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/centos8-xfce-vnc/>
+<div class=article-details>
+<h2 class=article-title>Centos8安装xfce&vnc</h2>
+<footer class=article-time>
+<time datetime=2020-05-18T14:06:25+08:00>2020-05-18</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/flash-tips/>
+<div class=article-details>
+<h2 class=article-title>Flash小技巧</h2>
+<footer class=article-time>
+<time datetime=2020-05-17T12:32:25+08:00>2020-05-17</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-duo-shao/>
+<div class=article-details>
+<h2 class=article-title>一年级数学比多比少类问题</h2>
+<footer class=article-time>
+<time datetime=2020-05-17T10:20:25+08:00>2020-05-17</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/first-grade-math-lie-shi/>
+<div class=article-details>
+<h2 class=article-title>一年级数学下册列式计算(加数、被减数、比多比少)</h2>
+<footer class=article-time>
+<time datetime=2020-05-16T09:10:25+08:00>2020-05-16</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/win10-change-host/>
+<div class=article-details>
+<h2 class=article-title>Win10 修改host文件的方法</h2>
+<footer class=article-time>
+<time datetime=2020-05-16T01:04:25+08:00>2020-05-16</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-qian-yi/>
+<div class=article-details>
+<h2 class=article-title>Hugo迁移笔记</h2>
+<footer class=article-time>
+<time datetime=2020-05-15T00:19:25+08:00>2020-05-15</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/enable-ssl-on-nginx/>
+<div class=article-details>
+<h2 class=article-title>Nginx配置ssl证书</h2>
+<footer class=article-time>
+<time datetime=2020-05-14T10:07:25+08:00>2020-05-14</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-install-on-centos/>
+<div class=article-details>
+<h2 class=article-title>Hugo部署到centos服务器</h2>
+<footer class=article-time>
+<time datetime=2020-05-13T18:05:25+08:00>2020-05-13</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-install-on-coding/>
+<div class=article-details>
+<h2 class=article-title>hugo部署到coding&备份源码</h2>
+<footer class=article-time>
+<time datetime=2020-05-13T09:42:25+08:00>2020-05-13</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hexo-backup/>
+<div class=article-details>
+<h2 class=article-title>hexo通过git备份&还原源码</h2>
+<footer class=article-time>
+<time datetime=2020-05-10T23:09:25+08:00>2020-05-10</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hexo-install-on-centos/>
+<div class=article-details>
+<h2 class=article-title>hexo部署到centos服务器</h2>
+<footer class=article-time>
+<time datetime=2020-04-25T18:37:25+08:00>2020-04-25</time>
+</footer>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hexo-install-on-github-coding-and-gitee/>
+<div class=article-details>
+<h2 class=article-title>hexo部署到github&coding&gitee</h2>
+<footer class=article-time>
+<time datetime=2020-04-25T11:19:25+08:00>2020-04-25</time>
+</footer>
+</div>
+</a>
+</article>
+</div>
+</div>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+</main>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

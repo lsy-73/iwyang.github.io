@@ -1,0 +1,228 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="配置github 新建公共仓库 新建一个公共仓库，例如我建的仓库地址：https://github.com/iwyang/pic，注意一定要勾选"><title>GitHub+jsDelivr+PicGo+typecho打造免费高速图床</title>
+<link rel=canonical href=/archives/github-jsdelivr-picgo-typecho/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="GitHub+jsDelivr+PicGo+typecho打造免费高速图床">
+<meta property="og:description" content="配置github 新建公共仓库 新建一个公共仓库，例如我建的仓库地址：https://github.com/iwyang/pic，注意一定要勾选">
+<meta property="og:url" content="/archives/github-jsdelivr-picgo-typecho/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="图床"><meta property="article:published_time" content="2020-07-21T16:32:25+08:00"><meta property="article:modified_time" content="2020-07-21T16:32:25+08:00">
+<meta name=twitter:title content="GitHub+jsDelivr+PicGo+typecho打造免费高速图床">
+<meta name=twitter:description content="配置github 新建公共仓库 新建一个公共仓库，例如我建的仓库地址：https://github.com/iwyang/pic，注意一定要勾选">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/github-jsdelivr-picgo-typecho/>GitHub+jsDelivr+PicGo+typecho打造免费高速图床</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-07-21</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=配置github>配置github</h2>
+<h3 id=新建公共仓库>新建公共仓库</h3>
+<p>新建一个公共仓库，例如我建的仓库地址：<code>https://github.com/iwyang/pic</code>，注意一定要勾选<strong>使用Readme文件初始化这个仓库</strong>，否则后面会无法上传图片。</p>
+<h3 id=获取私人令牌>获取私人令牌</h3>
+<p><a class=link href=https://github.com/settings/tokens target=_blank rel=noopener>前往设置</a>，作用：授权仓库的操作权限，通过API实现自动化。然后填写 <code>Token</code> 描述，勾选 repo、write、read然后点击 <code>Generate token</code> 生成一个 <code>Token</code>。因为 Token 只会显示一次，所以先保存笔记本等。</p>
+<h2 id=安装配置picgo>安装&配置PicGo</h2>
+<h3 id=安装picgo>安装PicGo</h3>
+<p>访问<a class=link href=https://github.com/Molunerfinn/PicGo/releases target=_blank rel=noopener>PicGo Releases</a>直接下载你的操作系统对应的安装包并完成安装。</p>
+<blockquote>
+<p>注：在安装的时候安装目录千万不能选C:\Program Files\下的任何地方，因为PicGo无法解析这一路径，如果你不知道安装在哪里的话，选择仅为我安装，否则在设置Typora时会出现错误。</p>
+</blockquote>
+<h3 id=配置picgo>配置PicGo</h3>
+<p>在PicGo设置里作如下修改：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>
+设置日志文件：日志记录等级选择<span class=s2>&#34;错误-Error&#34;</span>和<span class=s2>&#34;提醒-Warn&#34;</span>
+时间戳重命名：开
+开启上传提示：开
+上传后自动复制URL：开
+选择显示的图床：只勾选Github图床
+</code></pre></div><h3 id=配置github插件>配置<code>GitHub</code>插件</h3>
+<p>安装好后开始配置<code>GitHub</code>图床</p>
+<ol>
+<li>设定仓库名：按照 用户名/仓库名 的格式填写（iwyang/pic）</li>
+<li>设定分支名：master</li>
+<li>设定 Token：粘贴之前叫你保存的Token。</li>
+<li>设定自定义域名：它的的作用是，在图片上传后，PicGo 会按照自定义域名+上传的图片名的方式生成访问链接，放到粘贴板上。 <code>https://cdn.jsdelivr.net/gh/用户名/仓库名</code>（<code>https://cdn.jsdelivr.net/gh/iwyang/pic</code>）</li>
+</ol>
+<p><figure>
+<a href=https://cdn.jsdelivr.net/gh/iwyang/pic/20200721164458.jpg>
+<img src=https://cdn.jsdelivr.net/gh/iwyang/pic/20200721164458.jpg loading=lazy>
+</a>
+</figure></p>
+<h3 id=上传和管理图片>上传和管理图片</h3>
+<ul>
+<li>单击上传区，选择链接格式，使用点击上传或剪贴板图片上传，PicGo会自动上传图片并将符合链接格式的链接复制到剪贴板，你只要按下Ctrl+v即可粘贴图片的链接。</li>
+<li>单击相册，你可以看到你上传的所有图片，你可以对所有图片进行复制链接，修改图片URL与删除操作，并可以批量复制或批量删除。</li>
+</ul>
+<h2 id=配置typora>配置Typora</h2>
+<ul>
+<li>点击Typora左上角的文件->偏好设置</li>
+<li>在弹出的界面中点击图像，选择插入图片时选项为<code>上传图片</code>，并勾选<code>对本地位置的图片应用上述规则</code>和<code>对网络位置的图片应用上述规则</code>。</li>
+<li><code>上传服务</code>选项里选择<code>PicGo(app)</code>，<code>PicGo路径</code>选择<code>PicGo.exe</code>的绝对路径。</li>
+</ul>
+<p>以后在Typora里插入本地图片时，它会利用PicGo自动帮你上传到github，并替换本地图片地址为github地址。</p>
+<h2 id=参考链接>参考链接</h2>
+<ul>
+<li><a class=link href=https://my.oschina.net/u/3990666/blog/4371252 target=_blank rel=noopener>1.GitHub + jsDelivr + PicGo 打造稳定快速、高效免费图床</a></li>
+<li><a class=link href=https://blog.csdn.net/disILLL/article/details/104944710 target=_blank rel=noopener>2.手把手教你用Typora自动上传到picgo图床</a></li>
+</ul>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/%E5%9B%BE%E5%BA%8A/>图床</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/GitHub+jsDelivr+PicGo+typecho%e6%89%93%e9%80%a0%e5%85%8d%e8%b4%b9%e9%ab%98%e9%80%9f%e5%9b%be%e5%ba%8a.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+</footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/gitee-picgo-typecho/>
+<div class=article-details>
+<h2 class=article-title>Gitee+Picgo+Typecho搭建图床</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/a3-to-a4/>
+<div class=article-details>
+<h2 class=article-title>怎样才能把A3文档打印到A4纸上</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#配置github>配置github</a>
+<ol>
+<li><a href=#新建公共仓库>新建公共仓库</a></li>
+<li><a href=#获取私人令牌>获取私人令牌</a></li>
+</ol>
+</li>
+<li><a href=#安装配置picgo>安装&配置PicGo</a>
+<ol>
+<li><a href=#安装picgo>安装PicGo</a></li>
+<li><a href=#配置picgo>配置PicGo</a></li>
+<li><a href=#配置github插件>配置<code>GitHub</code>插件</a></li>
+<li><a href=#上传和管理图片>上传和管理图片</a></li>
+</ol>
+</li>
+<li><a href=#配置typora>配置Typora</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

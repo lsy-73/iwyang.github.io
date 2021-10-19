@@ -1,0 +1,352 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="服务部署 1.首先保证成功激活腾讯云开发. 2.点击一键部署至云开发 推荐创建上海环境。如选择广州环境，需要在 twikoo.init() 时额外指定环境 region: “ap-guang"><title>hugo配置哔哔点啥</title>
+<link rel=canonical href=/archives/hugo-bber/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="hugo配置哔哔点啥">
+<meta property="og:description" content="服务部署 1.首先保证成功激活腾讯云开发. 2.点击一键部署至云开发 推荐创建上海环境。如选择广州环境，需要在 twikoo.init() 时额外指定环境 region: “ap-guang">
+<meta property="og:url" content="/archives/hugo-bber/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:published_time" content="2021-08-17T13:45:30+08:00"><meta property="article:modified_time" content="2021-09-12T13:45:30+08:00">
+<meta name=twitter:title content="hugo配置哔哔点啥">
+<meta name=twitter:description content="服务部署 1.首先保证成功激活腾讯云开发. 2.点击一键部署至云开发 推荐创建上海环境。如选择广州环境，需要在 twikoo.init() 时额外指定环境 region: “ap-guang">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/hugo-bber/>hugo配置哔哔点啥</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2021-08-17</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<h2 id=服务部署>服务部署</h2>
+<p>1.首先保证成功激活腾讯云开发.</p>
+<p>2.<a class=link href="https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https://github.com/lmm214/bber&branch=main" target=_blank rel=noopener>点击一键部署至云开发</a></p>
+<blockquote>
+<p>推荐创建上海环境。如选择广州环境，需要在 twikoo.init() 时额外指定环境 region: “ap-guangzhou”</p>
+</blockquote>
+<p>3.进入环境-登录授权，启用“匿名登录”</p>
+<p>4.进入<a class=link href=https://console.cloud.tencent.com/tcb/env/safety target=_blank rel=noopener>环境-安全配置</a>，将博客网址添加到“WEB安全域名”</p>
+<p>5.进入<a class=link href=https://console.cloud.tencent.com/tcb/env/access target=_blank rel=noopener>环境-HTTP访问服务</a>，复制链接备用。</p>
+<p>进入<a class=link href=https://console.cloud.tencent.com/tcb/scf/index target=_blank rel=noopener>云函数</a>，修改自定义serverkey <code>bber</code> 并保存备用。</p>
+<p>6.进入云函数，修改自定义serverkey bber 并保存备用。</p>
+<p>7.扫码进入公众号，输入命名绑定。</p>
+<p><figure>
+<a href=https://cdn.jsdelivr.net/gh/iwyang/pic/202108171354632.jpg>
+<img src=https://cdn.jsdelivr.net/gh/iwyang/pic/202108171354632.jpg loading=lazy alt=bibi-0>
+</a>
+<figcaption>bibi-0</figcaption>
+</figure></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>/bber 你刚刚设置的key,https://你的云函数HTTP访问地址/bber
+
+比如: /bber mykey,https://balabala.ap-shanghai.app.tcloudbase.com/bber
+</code></pre></div><p><strong>8. 手动添加一条哔哔 <em>必须要有</em></strong></p>
+<p>进入腾讯云数据库->talks->文档列表->添加文档</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>字段: content
+类型: string
+值: 随便
+</code></pre></div><p>点击确定</p>
+<p>验证微信发送</p>
+<p>9.微信发送一条文字，返回哔哔成功，talks文档列表里多出来一条，即为服务部署成功。</p>
+<h2 id=前端部署>前端部署</h2>
+<p>1.打开Hugo的unsafe</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>markup</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>tableOfContents</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>endLevel</span><span class=p>:</span><span class=w> </span><span class=m>4</span><span class=w>
+</span><span class=w>        </span><span class=nt>ordered</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>        </span><span class=nt>startLevel</span><span class=p>:</span><span class=w> </span><span class=m>2</span><span class=w>
+</span><span class=w>    </span><span class=nt>highlight</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>noClasses</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>    </span><span class=nt>goldmark</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>renderer</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>unsafe</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span></code></pre></div><p>2.新建一个<em>markdown</em>文件</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-markdown data-lang=markdown><span class=p>&lt;</span><span class=nt>div</span> <span class=na>id</span><span class=o>=</span><span class=s>&#39;speak&#39;</span><span class=p>&gt;&lt;/</span><span class=nt>speak</span><span class=p>&gt;</span>
+<span class=c>&lt;!-- 使用markdown渲染 --&gt;</span>
+<span class=c>&lt;!-- 使用markdown渲染 --&gt;</span>
+<span class=c>&lt;!-- &lt;script type=&#34;text/javascript&#34; src=&#34;https://cdn.jsdelivr.net/npm/ispeak-bber/ispeak-bber-md.min.js&#34; charset=&#34;utf-8&#34; &gt;&lt;/script&gt; --&gt;</span>
+<span class=c>&lt;!-- 不使用markdown渲染 --&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span> <span class=na>type</span><span class=o>=</span><span class=s>&#34;text/javascript&#34;</span> <span class=na>src</span><span class=o>=</span><span class=s>&#34;https://cdn.jsdelivr.net/npm/ispeak-bber/ispeak-bber.min.js&#34;</span> <span class=na>charset</span><span class=o>=</span><span class=s>&#34;utf-8&#34;</span> <span class=p>&gt;&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=c>&lt;!-- 解析微信表情（参考：https://github.com/buddys/qq-wechat-emotion-parser） --&gt;</span>
+<span class=c>&lt;!-- &lt;script src=&#34;https://cdn.jsdelivr.net/gh/buddys/qq-wechat-emotion-parser@master/dist/qq-wechat-emotion-parser.min.js&#34;&gt;&lt;/script&gt; --&gt;</span>
+<span class=p>&lt;</span><span class=nt>script</span><span class=p>&gt;</span>
+<span class=nx>ispeakBber</span>
+    <span class=p>.</span><span class=nx>init</span><span class=p>({</span>
+      <span class=nx>el</span><span class=o>:</span> <span class=s1>&#39;#speak&#39;</span><span class=p>,</span> <span class=c1>// 容器选择器
+</span><span class=c1></span>      <span class=nx>name</span><span class=o>:</span> <span class=s1>&#39;bore&#39;</span><span class=p>,</span> <span class=c1>// 显示的昵称
+</span><span class=c1></span>      <span class=nx>envId</span><span class=o>:</span> <span class=s1>&#39;腾讯云开发环境id&#39;</span><span class=p>,</span> <span class=c1>// 环境id
+</span><span class=c1></span>      <span class=nx>region</span><span class=o>:</span> <span class=s1>&#39;ap-shanghai&#39;</span><span class=p>,</span> <span class=c1>// 腾讯云地址，默认为上海
+</span><span class=c1></span>      <span class=nx>limit</span><span class=o>:</span> <span class=mi>10</span><span class=p>,</span> <span class=c1>// 每次加载的条数，默认为5
+</span><span class=c1></span>      <span class=nx>avatar</span><span class=o>:</span> <span class=s1>&#39;https://cdn.jsdelivr.net/gh/iwyang/pic/avatar.jpg&#39;</span><span class=p>,</span>
+      <span class=nx>fromColor</span><span class=o>:</span><span class=s1>&#39;rgb(245, 150, 170)&#39;</span><span class=p>,</span> <span class=c1>// 下方标签背景颜色 默认 rgb(245, 150, 170)
+</span><span class=c1></span>      <span class=nx>loadingImg</span><span class=o>:</span> <span class=s1>&#39;https://7.dusays.com/2021/03/04/d2d5e983e2961.gif&#39;</span><span class=p>,</span> <span class=c1>// 自定义loading的图片，示例值为默认值
+</span><span class=c1></span>      <span class=nx>dbName</span><span class=o>:</span><span class=s1>&#39;talks&#39;</span> <span class=c1>// 数据的名称，默认talks，避免有人的命名不是这个，所以加入此配置字段。
+</span><span class=c1></span>    <span class=p>})</span>
+    <span class=p>.</span><span class=nx>then</span><span class=p>(</span><span class=kd>function</span><span class=p>()</span> <span class=p>{</span>
+      <span class=c1>// 哔哔加载完成后的回调函数，你可以写你自己的功能
+</span><span class=c1></span>      <span class=nx>console</span><span class=p>.</span><span class=nx>log</span><span class=p>(</span><span class=s1>&#39;哔哔 加载完成&#39;</span><span class=p>)</span>
+    <span class=p>})</span>
+<span class=p>&lt;/</span><span class=nt>script</span><span class=p>&gt;</span>
+</code></pre></div><h2 id=部署bber-weixin公众号>部署BBer-weixin公众号</h2>
+<p>点击<a class=link href="https://console.cloud.tencent.com/tcb/env/index?action=CreateAndDeployCloudBaseProject&appUrl=https%3A%2F%2Fgithub.com%2Flmm214%2Fbber-weixin&branch=main" target=_blank rel=noopener>部署到云开发</a>将 BBer-weixin 微信公众号后端，一键部署到云开发。</p>
+<p>对接的微信公众号简要流程：</p>
+<p>1.点击 <a class=link href=https://console.cloud.tencent.com/tcb/scf/index target=_blank rel=noopener>bber-weixin</a> 云函数，右上角**【编辑】**，开启**【固定IP】**，留存**公网固定IP**。</p>
+<blockquote>
+<p>我将from <code>微信公众号</code>改成了<code>💎 WeChat</code></p>
+</blockquote>
+<p>2.进入<a class=link href=https://console.cloud.tencent.com/tcb/env/access target=_blank rel=noopener>环境-HTTP访问服务</a>，获取<code>触发路径链接</code>并留存，如以下格式：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>https://bb-f5c0f-222222.ap-shanghai.app.tcloudbase.com/bber-weixin
+</code></pre></div><p>3.打开 <a class=link href=https://mp.weixin.qq.com/ target=_blank rel=noopener>微信公众平台</a>，进入开发-基本配置，获取<code>AppID</code>和<code>AppSecret</code>留存，修改<code>IP白名单</code>为上一步的公网固定IP。继续服务器配置：</p>
+<blockquote>
+<p>消息加密方式选择<code>兼容模式</code></p>
+</blockquote>
+<p>一个<code>URL</code>，即第2步留存的触发链接；</p>
+<p>一个<code>Token</code>，预设为 <code>weixin</code></p>
+<p><strong>!!!先不点，不点，不点，不点提交！！！</strong></p>
+<p>4.回 <a class=link href=https://console.cloud.tencent.com/tcb/scf/index target=_blank rel=noopener>bber-weixin</a> 云函数，填入<code>微信公众号appid</code>、<code>微信公众号appsecret</code> 保存。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>const <span class=nv>token</span> <span class=o>=</span> <span class=s1>&#39;weixin&#39;</span> // 微信公众号的服务器验证用的令牌 token
+//填入自己的微信公众号appid和appsecret
+var <span class=nv>wxappid</span> <span class=o>=</span> <span class=s1>&#39;微信公众号appid&#39;</span>,
+    <span class=nv>wxappsecret</span> <span class=o>=</span> <span class=s1>&#39;微信公众号appsecret&#39;</span>,
+</code></pre></div><p>5.回 <a class=link href=https://mp.weixin.qq.com/ target=_blank rel=noopener>微信公众平台</a>，提交，验证成功！</p>
+<p>6.回 <a class=link href=https://console.cloud.tencent.com/tcb/scf/index target=_blank rel=noopener>bber-weixin</a> 云函数，注释第44行代码，保存。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>   <span class=k>if</span><span class=o>(</span><span class=nv>tmpStr</span> <span class=o>==</span> signature<span class=o>){</span>
+        //请求来源鉴权
+        //成功后注释下行代码
+        //return event.queryStringParameters.echostr //成功后注释本行代码
+        //成功后注释上行代码
+</code></pre></div><p>7.手动配置或更新代码： <a class=link href=https://github.com/lmm214/bber-weixin/tree/main/bber-weixin target=_blank rel=noopener>https://github.com/lmm214/bber-weixin/tree/main/bber-weixin</a></p>
+<h2 id=公众号发布说说>公众号发布说说</h2>
+<p><del>接上面，部署好自己的公众号就可以用公众号发布了。这里注意利用公众号发图片。</del></p>
+<p>1.先在公众号发一张图片</p>
+<p>2.接着输入<code>/a &lt;br>文字说明</code></p>
+<p>(输入<code>&lt;br></code>是为了使图片和文字不处于同一行)</p>
+<p>注意：用公众号发图片会一连发几张，不知道是什么原因，以后就用浏览器插件发图片，注意<strong>比例 16:9，长度568px</strong></p>
+<h2 id=chrome--edge-发布说说>Chrome + Edge 发布说说</h2>
+<h3 id=安装本地插件>安装本地插件</h3>
+<p><a class=link href=https://cdn.guole.fun/others/bber%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8F%91%E5%B8%83%E6%8F%92%E4%BB%B6.zip target=_blank rel=noopener>点此下载我提取并修改的浏览器插件包</a></p>
+<p>Chrome 安装本地插件：</p>
+<p>访问 Chrome——更多工具——扩展程序——左上角“加载已解压的扩展程序”，选择我提供的附件，解压缩后的文件夹 1.0.0_0_Chrome，然后回到 Chrome，点开右上角<code>扩展程序</code>来固定插件。</p>
+<p>注意：插件文件移动或丢失后，浏览器扩展失效，因为不是云端的，所以要保存在可靠路径。</p>
+<h3 id=应用商店安装插件>应用商店安装插件</h3>
+<p>下载地址：<a class=link href=https://chrome.google.com/webstore/detail/ispeak-bber%E6%97%B6%E5%85%89%E6%9C%BA/mmehomnjakoijcfmmofbmkaigcdkkbke/related target=_blank rel=noopener>iSpeak-bber时光机</a></p>
+<p>本地插件<code>from</code>默认为<code>🌈 Chrome</code></p>
+<h2 id=android-捷径发布说说>Android 捷径发布说说</h2>
+<p>从 Github 下载安装这款 “HTTP 快捷方式” apk，安装后继续下文操作。</p>
+<p>下载地址：<a class=link href=https://github.com/Waboodoo/HTTP-Shortcuts/releases target=_blank rel=noopener>HTTP-Shortcuts</a></p>
+<p>打开 HTTP 快捷方式 App，选择新建快捷方式，自定义名称、描述，在 “基本设置” 中，设置方法为 “POST” 或 “GET”，URL 为</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key<span class=o>=</span>
+</code></pre></div><p>至于 key、from，我们设置为常量，text 则设置为变量 content，每次发布的时候填写说说内容。</p>
+<p>点击 URL 右侧的 {}，选择添加变量。常量 key 为你云函数里的 key，如果没有特别设置就是 bber。from 我们设置一个好玩的如<code>📱 Android 11</code>。添加一个变量 content。（个人觉得from直接设置为<code>Android</code>就行，不然免得以后安卓升级版本，还要跟着修改。）</p>
+<p>接着回到 URL 页面，补充完刚才添加的常量和变量，如以下格式：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>https://你后台显示的.ap-shanghai.app.tcloudbase.com/bber?key<span class=o>={</span>key<span class=o>}</span><span class=p>&amp;</span><span class=nv>from</span><span class=o>={</span>from<span class=o>}</span><span class=p>&amp;</span><span class=nv>text</span><span class=o>={</span>content<span class=o>}</span>
+</code></pre></div><p>右上角，保存这个快捷方式，然后长按发送到桌面，搞定！</p>
+<h2 id=修改ispeak-bber样式>修改<code>ispeak-bber</code>样式</h2>
+<h3 id=隐藏页面标题>隐藏页面标题</h3>
+<p>将以下代码放在文章正文最上方。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-css data-lang=css><span class=o>&lt;</span><span class=nt>style</span><span class=o>&gt;</span>
+<span class=p>.</span><span class=nc>article-header</span> <span class=p>{</span>
+    <span class=k>display</span><span class=p>:</span> <span class=kc>none</span><span class=p>;</span>
+  <span class=p>}</span>
+<span class=o>&lt;/</span><span class=nt>style</span><span class=o>&gt;</span>
+</code></pre></div><h3 id=修改顶部文字>修改顶部文字</h3>
+<p>自己胡乱改的，居然起了作用。不管了先用再说。</p>
+<p>1.首先下载：<a class=link href=https://cdn.jsdelivr.net/npm/ispeak-bber/ispeak-bber-md.min.js target=_blank rel=noopener>ispeak-bber-md.min.js</a></p>
+<p>2.用<code>Notepad++</code>打开，搜索<code>My BiBi</code>改成<code>我的说说</code>。</p>
+<p>3.按F12，打开浏览器控制台，定位标题。可以发现<code>color: #49b1f5</code>前面就是标题字体大小，搜索<code>color: #49b1f5</code>，将前面的字体改成22px：<code>font-size: 22px</code></p>
+<p>4.接着改图标大小，一样方法定位图标，可以发现<code>color: black</code>后面就是图标大小，搜索<code>color: black</code>，将后面图标大小改成22px：<code>font-size: 22px</code></p>
+<h3 id=修复说说出现图片时顶部空白过大问题>修复说说出现图片时，顶部空白过大问题</h3>
+<p>搜索<code>white-space</code>作如下修改</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-diff data-lang=diff><span class=gd>- {\n  padding: 10px 0;\n  white-space: pre-wrap;\n}
+</span><span class=gd></span><span class=gi>+ {\n  padding: 0.8rem 0;\n}
+</span></code></pre></div><p><del>注意：利用微信公众号发图片后追加文字说明，前面要加个换行符，要不然图片和文字处在同一行。</del></p>
+<p>注意：用公众号发图片会一连发几张，不知道是什么原因，以后就用浏览器插件发图片，注意<strong>比例 16:9，长度568px</strong></p>
+<h3 id=解决公众号连续发多张图片>解决公众号连续发多张图片</h3>
+<p>云函数代码问题，改成下面这样即可（<strong>还未测试</strong>）：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>104行
+<span class=nb>let</span> <span class=nv>res</span> <span class=o>=</span> await cloudRequest<span class=o>(</span>cloudHttpUrl,cloudKey,createTime,content<span class=o>)</span>
+
+124行
+<span class=nb>let</span> <span class=nv>res</span> <span class=o>=</span> await cloudRequest<span class=o>(</span>cloudHttpUrl,cloudKey,createTime,content<span class=o>)</span>
+
+160行
+<span class=k>function</span> cloudRequest<span class=o>(</span>cloudHttpUrl,cloudKey,createTime,content<span class=o>){</span>
+</code></pre></div><p>中，删掉 “createTime,”，接着</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>162行
+var <span class=nv>param1</span> <span class=o>=</span> <span class=o>{</span><span class=s1>&#39;key&#39;</span>: cloudKey,<span class=s1>&#39;time&#39;</span>: createTime,<span class=s1>&#39;text&#39;</span>: content,<span class=s1>&#39;from&#39;</span>:<span class=s1>&#39;微信公众号&#39;</span><span class=o>}</span>
+</code></pre></div><p>删掉 “’time’: createTime,” 就解决了。</p>
+<h2 id=参考链接>参考链接</h2>
+<p><a class=link href=https://immmmm.com/bb-by-wechat-pro/ target=_blank rel=noopener>「哔哔点啥」微信公众号 2.0</a></p>
+<p><a class=link href=https://immmmm.com/bb-talks-json/ target=_blank rel=noopener>熟悉的味道，不一样配方</a></p>
+<p><a class=link href=https://www.fanziqi.site/posts/af935eab.html target=_blank rel=noopener>手把手教你配置哔哔点啥</a></p>
+<p><a class=link href=https://guole.fun/posts/bber-caikeng/ target=_blank rel=noopener>Android “捷径”・木木 bber 踩坑记录 + 电脑 or 手机 4 种方式直发说说</a></p>
+<p><a class=link href=https://www.antmoe.com/posts/7ec820ee/ target=_blank rel=noopener>给 bber 换个皮肤</a></p>
+<p><a class=link href=https://blog.zhheo.com/p/a6947667.html target=_blank rel=noopener>Hexo-Butterfly说说朋友圈适配（哔哔 for 腾讯云）自用</a></p>
+<p><a class=link href=https://iamlm.com/archives/keep-learning-hugo/ target=_blank rel=noopener>继续折腾Hugo—看评论</a></p>
+<p><a class=link href=https://gitlab.com/DreamyTZK/ispeak-bber target=_blank rel=noopener>ispeak-bber</a></p>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hugo/>hugo</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/hugo%e9%85%8d%e7%bd%ae%e5%93%94%e5%93%94%e7%82%b9%e5%95%a5.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-09-12
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/ftp-deploy-github-actions-hugo/>
+<div class=article-details>
+<h2 class=article-title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-papermod-theme/>
+<div class=article-details>
+<h2 class=article-title>Hugo Papermod主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-stack/>
+<div class=article-details>
+<h2 class=article-title>Hugo Stack主题配置与使用</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hugo利用Github Actions自动构建博客</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-theme-loveit-algolia/>
+<div class=article-details>
+<h2 class=article-title>Hugo添加Algolia</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#服务部署>服务部署</a></li>
+<li><a href=#前端部署>前端部署</a></li>
+<li><a href=#部署bber-weixin公众号>部署BBer-weixin公众号</a></li>
+<li><a href=#公众号发布说说>公众号发布说说</a></li>
+<li><a href=#chrome--edge-发布说说>Chrome + Edge 发布说说</a>
+<ol>
+<li><a href=#安装本地插件>安装本地插件</a></li>
+<li><a href=#应用商店安装插件>应用商店安装插件</a></li>
+</ol>
+</li>
+<li><a href=#android-捷径发布说说>Android 捷径发布说说</a></li>
+<li><a href=#修改ispeak-bber样式>修改<code>ispeak-bber</code>样式</a>
+<ol>
+<li><a href=#隐藏页面标题>隐藏页面标题</a></li>
+<li><a href=#修改顶部文字>修改顶部文字</a></li>
+<li><a href=#修复说说出现图片时顶部空白过大问题>修复说说出现图片时，顶部空白过大问题</a></li>
+<li><a href=#解决公众号连续发多张图片>解决公众号连续发多张图片</a></li>
+</ol>
+</li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>

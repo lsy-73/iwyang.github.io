@@ -1,0 +1,623 @@
+<!doctype html><html lang=zh-cn>
+<head><meta charset=utf-8>
+<meta name=viewport content="width=device-width,initial-scale=1"><meta name=description content="部署hugo到服务器，网上一般方法是利用git hook。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服"><title>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</title>
+<link rel=canonical href=/archives/ftp-deploy-github-actions-hugo/>
+<link rel=stylesheet href=/scss/style.min.css><meta property="og:title" content="GitHub Actions利用FTP自动部署hugo-hexo到Centos 8">
+<meta property="og:description" content="部署hugo到服务器，网上一般方法是利用git hook。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服">
+<meta property="og:url" content="/archives/ftp-deploy-github-actions-hugo/">
+<meta property="og:site_name" content="Bore's Notes">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:tag" content="github"><meta property="article:tag" content="服务器"><meta property="article:published_time" content="2021-08-15T16:39:34+08:00"><meta property="article:modified_time" content="2021-08-16T16:39:34+08:00">
+<meta name=twitter:title content="GitHub Actions利用FTP自动部署hugo-hexo到Centos 8">
+<meta name=twitter:description content="部署hugo到服务器，网上一般方法是利用git hook。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服">
+<link rel="shortcut icon" href=/img/favicon.png>
+</head>
+<body class="article-page has-toc">
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<div class="container main-container flex
+extended">
+<div id=article-toolbar>
+<a href=/ class=back-home><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="15 6 9 12 15 18"/></svg>
+<span>返回</span>
+</a>
+</div>
+<main class="main full-width">
+<article class=main-article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/ftp-deploy-github-actions-hugo/>GitHub Actions利用FTP自动部署hugo-hexo到Centos 8</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2021-08-15</time>
+</div>
+</footer>
+</div>
+</header>
+<section class=article-content>
+<p>部署hugo到服务器，网上一般方法是利用<code>git hook</code>。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服务器。今后只要提交源码到<code>github</code>仓库，剩下的事就交给<code>GitHub Actions</code>了。</p>
+<h2 id=本地操作>本地操作</h2>
+<p>参考：<a class=link href=/archives/hugo-install-on-coding-and-gitee/#%e6%9c%ac%e5%9c%b0%e6%93%8d%e4%bd%9c>hugo部署到coding&gitee&备份源码-本地操作</a></p>
+<h2 id=服务器操作>服务器操作</h2>
+<h3 id=安装-nginx>安装 Nginx</h3>
+<p>准备工作：如果服务器端口不是22，先要更改SSH端口：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/ssh/sshd_config
+port <span class=m>22</span>
+</code></pre></div><p>然后重启生效。</p>
+<p>首先，在服务器上安装<code>nginx</code>。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum update -y
+yum install nginx -y
+</code></pre></div><p>如果是centos 7，先要安装安装epel：<code>yum install epel-release</code>，才能安装nginx。</p>
+<h3 id=启动-nginx>启动 Nginx</h3>
+<p>Nginx 安装完成后需要手动启动，启动Nginx并设置开机自启：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl start nginx
+systemctl <span class=nb>enable</span> nginx
+</code></pre></div><p>关闭防火墙：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl stop firewalld.service
+systemctl disable firewalld.service 
+</code></pre></div><p>配置完成后，访问使用浏览器服务器 ip ，如果能看到以下界面，表示运行成功。</p>
+<h3 id=创建新的网站目录>创建新的网站目录</h3>
+<p><strong>为了图方便，可以直接将网站目录改为FTP家目录。</strong></p>
+<p>Nginx 默认把网页文件存在 <code>/var/www/html</code> 目录。为了方便期间，我们在 <code>/var/www/</code> 目录下为每个站点创建一个文件夹。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo mkdir -p /var/www/blog
+sudo chown -R <span class=nv>$USER</span>:<span class=nv>$USER</span> /var/www/blog
+sudo chmod -R <span class=m>755</span> /var/www
+</code></pre></div><h3 id=配置-nginx>配置 nginx</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/nginx/conf.d/blog.conf
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+  listen  <span class=m>80</span> <span class=p>;</span>
+  listen <span class=o>[</span>::<span class=o>]</span>:80<span class=p>;</span>
+  root /var/www/blog<span class=p>;</span>
+  server_name bore.vip www.bore.vip<span class=p>;</span>
+  access_log  /var/log/nginx/hexo_access.log<span class=p>;</span>
+  error_log   /var/log/nginx/hexo_error.log<span class=p>;</span>
+  error_page <span class=nv>404</span> <span class=o>=</span>  /404.html<span class=p>;</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>ico<span class=p>|</span>gif<span class=p>|</span>jpg<span class=p>|</span>jpeg<span class=p>|</span>png<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/blog<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      1d<span class=p>;</span>
+  <span class=o>}</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>css<span class=p>|</span>js<span class=p>|</span>txt<span class=p>|</span>xml<span class=p>|</span>swf<span class=p>|</span>wav<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/blog<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      10m<span class=p>;</span>
+  <span class=o>}</span>
+  location / <span class=o>{</span>
+    root /var/www/blog<span class=p>;</span>
+    <span class=k>if</span> <span class=o>(</span>-f <span class=nv>$request_filename</span><span class=o>)</span> <span class=o>{</span>
+    rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$  /<span class=nv>$1</span> break<span class=p>;</span>
+    <span class=o>}</span>
+  <span class=o>}</span>
+  location /nginx_status <span class=o>{</span>
+    stub_status on<span class=p>;</span>
+    access_log off<span class=p>;</span>
+ <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>重启 Nginx 服务器，使服务器设定生效：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl restart nginx
+</code></pre></div><h3 id=配置ssl证书>配置ssl证书</h3>
+<p>这里记下怎样添加 Let’s Encrypt 免费证书。（貌似只有上传了文件到网站目录，才能申请证书成功。）如果想启用阿里证书，可查看：<a class=link href=/archives/enable-ssl-on-nginx/#%e5%90%af%e7%94%a8%e9%98%bf%e9%87%8c%e5%85%8d%e8%b4%b9%e8%af%81%e4%b9%a6>启用阿里免费证书</a></p>
+<h4 id=安装certbot>安装Certbot</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>yum install epel-release -y
+yum install certbot -y
+</code></pre></div><p>然后执行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>certbot certonly --webroot -w /var/www/blog -d bore.vip -m 455343442@qq.com --agree-tos
+</code></pre></div><h4 id=配置nginx>配置Nginx</h4>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/nginx/conf.d/blog.conf
+</code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>server <span class=o>{</span>
+    listen 80<span class=p>;</span>
+    server_name bore.vip www.bore.vip<span class=p>;</span>
+    rewrite ^<span class=o>(</span>.*<span class=o>)</span>$ https://<span class=nv>$server_name$1</span> permanent<span class=p>;</span>
+<span class=o>}</span>
+server <span class=o>{</span>
+  listen 443<span class=p>;</span>
+  root /var/www/blog<span class=p>;</span>
+  server_name bore.vip www.bore.vip<span class=p>;</span>
+  ssl on<span class=p>;</span>
+  ssl_certificate /etc/letsencrypt/live/bore.vip/fullchain.pem<span class=p>;</span>
+  ssl_certificate_key /etc/letsencrypt/live/bore.vip/privkey.pem<span class=p>;</span>
+  ssl_session_timeout 5m<span class=p>;</span>
+  ssl_protocols TLSv1 TLSv1.1 TLSv1.2<span class=p>;</span>
+  ssl_ciphers ALL:!ADH:!EXPORT56:RC4+RSA:+HIGH:+MEDIUM:+LOW:+SSLv2:+EXP<span class=p>;</span>
+  ssl_prefer_server_ciphers on<span class=p>;</span>
+  access_log  /var/log/nginx/hexo_access.log<span class=p>;</span>
+  error_log   /var/log/nginx/hexo_error.log<span class=p>;</span>
+  error_page <span class=nv>404</span> <span class=o>=</span>  /404.html<span class=p>;</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>ico<span class=p>|</span>gif<span class=p>|</span>jpg<span class=p>|</span>jpeg<span class=p>|</span>png<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/blog<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      1d<span class=p>;</span>
+  <span class=o>}</span>
+  location ~* ^.+<span class=se>\.</span><span class=o>(</span>css<span class=p>|</span>js<span class=p>|</span>txt<span class=p>|</span>xml<span class=p>|</span>swf<span class=p>|</span>wav<span class=o>)</span>$ <span class=o>{</span>
+    root /var/www/blog<span class=p>;</span>
+    access_log   off<span class=p>;</span>
+    expires      10m<span class=p>;</span>
+  <span class=o>}</span>
+  location / <span class=o>{</span>
+    root /var/www/blog<span class=p>;</span>
+    <span class=k>if</span> <span class=o>(</span>-f <span class=nv>$request_filename</span><span class=o>)</span> <span class=o>{</span>
+    rewrite ^/<span class=o>(</span>.*<span class=o>)</span>$  /<span class=nv>$1</span> break<span class=p>;</span>
+    <span class=o>}</span>
+  <span class=o>}</span>
+  location /nginx_status <span class=o>{</span>
+    stub_status on<span class=p>;</span>
+    access_log off<span class=p>;</span>
+ <span class=o>}</span>
+<span class=o>}</span>
+</code></pre></div><p>重启Nginx生效：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl restart nginx
+</code></pre></div><h4 id=证书自动更新>证书自动更新</h4>
+<p>由于这个证书的时效只有 90 天，我们需要设置自动更新的功能，帮我们自动更新证书的时效。首先先在命令行模拟证书更新：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>certbot renew --dry-run
+</code></pre></div><p>模拟更新成功的效果如下(略)</p>
+<p>在无法确认你的 nginx 配置是否正确时，一定要运行模拟更新命令，确保certbot和服务器通讯正常。使用 crontab -e 的命令来启用自动任务，命令行：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>crontab -e
+</code></pre></div><p>添加配置：（每隔两个月凌晨2:30自动执行证书更新操作）后保存退出。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=m>30</span> <span class=m>2</span> * */2 * /usr/bin/certbot renew --quiet <span class=o>&amp;&amp;</span> /bin/systemctl restart nginx
+</code></pre></div><p>查看证书有效期的命令：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>openssl x509 -noout -dates -in /etc/letsencrypt/live/bore.vip/cert.pem
+</code></pre></div><h3 id=安装vsftpd>安装vsftpd</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo yum install vsftpd -y
+</code></pre></div><p>安装软件包后，启动vsftpd，并使其能够在引导时自动启动：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl start vsftpd
+sudo systemctl <span class=nb>enable</span> vsftpd
+</code></pre></div><h3 id=配置vsftpd>配置vsftpd</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>vi /etc/vsftpd/vsftpd.conf
+</code></pre></div><p>在<code>userlist_enable=YES</code>下面，加上：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nv>userlist_file</span><span class=o>=</span>/etc/vsftpd/user_list
+<span class=nv>userlist_deny</span><span class=o>=</span>NO
+</code></pre></div><h3 id=创建ftp用户>创建FTP用户</h3>
+<p>创建一个新用户，名为admin:</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo adduser admin
+sudo passwd admin
+</code></pre></div><p>将用户添加到允许的FTP用户列表中：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=nb>echo</span> <span class=s2>&#34;admin&#34;</span> <span class=p>|</span> sudo tee -a /etc/vsftpd/user_list
+</code></pre></div><p>设置正确的权限（使ftp用户可以上传网站文件到相应目录）：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo chmod <span class=m>755</span> /var/www/blog
+sudo chown -R admin: /var/www/blog
+</code></pre></div><h3 id=关闭防火墙>关闭防火墙</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>systemctl stop firewalld.service
+systemctl disable firewalld.service 
+</code></pre></div><h3 id=重启vsftpd服务>重启vsftpd服务</h3>
+<p>保存文件并重新启动vsftpd服务，以使更改生效：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>sudo systemctl restart vsftpd
+</code></pre></div><p>更多有关ftp部分可查看：<a class=link href=/archives/centos8-enable-ftp/>centos8搭建ftp服务器</a></p>
+<h2 id=github操作>Github操作</h2>
+<h3 id=配置ftp_mirror_password>配置<code>FTP_MIRROR_PASSWORD</code></h3>
+<p>点击博客仓库的Settings->Secrets->Add a new secret，Name填写<code>FTP_MIRROR_PASSWORD</code>，Value填写用户密码。</p>
+<h3 id=配置-github-actions>配置 Github actions</h3>
+<p>在博客根目录新建<code>.github/workflows/gh_pages.yml</code>文件。代码如下：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>name: GitHub Page Deploy
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2.3.4
+        with:
+          submodules: <span class=nb>true</span>  <span class=c1># Fetch Hugo themes (true OR recursive)</span>
+          fetch-depth: <span class=m>0</span>    <span class=c1># Fetch all history for .GitInfo and .Lastmod</span>
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.5.0
+        with:
+          hugo-version: <span class=s1>&#39;latest&#39;</span>
+          extended: <span class=nb>true</span>
+
+      - name: Build Hugo
+        run: hugo --minify
+
+      - name: Deploy Hugo to gh-pages
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          github_token: <span class=si>${</span><span class=p>{ secrets.GITHUB_TOKEN </span><span class=si>}</span><span class=o>}</span>
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
+        <span class=c1># cname:</span>
+        
+      - name: Deploy Hugo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: 104.224.191.88
+          username: admin
+          password: <span class=si>${</span><span class=p>{ secrets.FTP_MIRROR_PASSWORD </span><span class=si>}</span><span class=o>}</span>
+          local-dir: ./public/
+          server-dir: /var/www/blog/
+</code></pre></div><h2 id=提交源码>提交源码</h2>
+<p>初始化git，新建并切换到<code>develop</code>分支，将源码提交到<code>develop</code>分支。稍等片刻，github action会自动部署blog到<code>master</code>分支和服务器。</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git init
+git checkout -b develop
+git remote add origin git@github.com:iwyang/iwyang.github.io.git
+git add .
+git commit -m <span class=s2>&#34;备份源码&#34;</span>
+git push --force origin develop
+</code></pre></div><p>最终部署脚本：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=cp>#!/bin/bash
+</span><span class=cp></span>
+<span class=nb>echo</span> -e <span class=s2>&#34;\033[0;32mDeploying updates to gitee...\033[0m&#34;</span>
+
+<span class=c1># backup</span>
+git config --global core.autocrlf <span class=nb>false</span>
+git add .
+git commit -m <span class=s2>&#34;site backup&#34;</span>
+git push origin develop --force
+</code></pre></div><h2 id=克隆源码到本地>克隆源码到本地</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git clone -b develop git@github.com:iwyang/iwyang.github.io.git blog --recursive
+</code></pre></div><p>因为使用<code>Submodule</code>管理主题，所以最后要加上 <code>--recursive</code>，因为使用 git clone 命令默认不会拉取项目中的子模块，你会发现主题文件是空的。（另外一种方法：<code>git submodule init && git submodule update</code>）</p>
+<h3 id=同步更新源文件>同步更新源文件</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git pull
+</code></pre></div><h3 id=同步主题文件>同步主题文件</h3>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>git submodule update --remote
+</code></pre></div><p>运行此命令后， Git 将会自动进入子模块然后抓取并更新，更新后重新提交一遍，子模块新的跟踪信息便也会记录到仓库中。这样就保证仓库主题是最新的。</p>
+<h2 id=githubgitee服务器三线部署hexo>github、gitee、服务器三线部署hexo</h2>
+<p>将hexo三线部署（由于部署hexo较慢，如果单独为<code>gitee</code>建立一个<code>workflows</code>，gitee会先部署完成，这样无法同步；hugo可以单独为<code>gitee</code>建立一个<code>workflows</code>，因为<code>hugo</code>部署到服务器会先于部署到<code>gitee</code>）：</p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Hexo Deploy</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 只监听 source 分支的改动</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=l>develop</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># 自定义环境变量</span><span class=w>
+</span><span class=w></span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>POST_ASSET_IMAGE_CDN</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build-and-deploy</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span><span class=c># 获取博客源码和主题</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Checkout theme repo</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/checkout@v2.3.4</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>repository</span><span class=p>:</span><span class=w> </span><span class=l>jerryc127/hexo-theme-butterfly</span><span class=w>
+</span><span class=w>          </span><span class=nt>ref</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>themes/butterfly</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 这里用的是 Node.js 14.x</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up Node.js</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/setup-node@v2</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>node-version</span><span class=p>:</span><span class=w> </span><span class=s1>&#39;14&#39;</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 设置 yarn 缓存，npm 的话可以看 actions/cache@v2 的文档示例</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Get yarn cache directory path</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>yarn-cache-dir-path</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=l>echo &#34;::set-output name=dir::$(yarn cache dir)&#34;</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Use yarn cache</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>actions/cache@v2.1.6</span><span class=w>
+</span><span class=w>        </span><span class=nt>id</span><span class=p>:</span><span class=w> </span><span class=l>yarn-cache</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>path</span><span class=p>:</span><span class=w> </span><span class=l>${{ steps.yarn-cache-dir-path.outputs.dir }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>key</span><span class=p>:</span><span class=w> </span><span class=l>${{ runner.os }}-yarn-${{ hashFiles(&#39;**/yarn.lock&#39;) }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>restore-keys</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>            </span><span class=w>            </span><span class=l>${{ runner.os }}-yarn-</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 安装依赖</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Install dependencies</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          </span><span class=w>          </span><span class=l>yarn install --prefer-offline --frozen-lockfile</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 从之前设置的 secret 获取部署私钥</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Set up environment</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>DEPLOY_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.DEPLOY_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          sudo timedatectl set-timezone &#34;Asia/Shanghai&#34;
+</span><span class=sd>          mkdir -p ~/.ssh
+</span><span class=sd>          echo &#34;$DEPLOY_KEY&#34; &gt; ~/.ssh/id_rsa
+</span><span class=sd>          chmod 600 ~/.ssh/id_rsa
+</span><span class=sd>          ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts</span><span class=w>          
+</span><span class=w>
+</span><span class=w>      </span><span class=c># 生成并部署</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy</span><span class=w>
+</span><span class=w>        </span><span class=nt>run</span><span class=p>:</span><span class=w> </span><span class=p>|</span><span class=sd>
+</span><span class=sd>          npx hexo deploy --generate
+</span><span class=sd>          </span><span class=w>          
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Deploy Hexo to Server</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>SamKirkland/FTP-Deploy-Action@4.1.0</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=nt>server</span><span class=p>:</span><span class=w> </span><span class=m>104.224.191.88</span><span class=w>
+</span><span class=w>          </span><span class=nt>username</span><span class=p>:</span><span class=w> </span><span class=l>admin</span><span class=w>
+</span><span class=w>          </span><span class=nt>password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.FTP_MIRROR_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=nt>local-dir</span><span class=p>:</span><span class=w> </span><span class=l>./public/</span><span class=w>
+</span><span class=w>          </span><span class=nt>server-dir</span><span class=p>:</span><span class=w> </span><span class=l>/var/www/blog/</span><span class=w>
+</span><span class=w>          
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Sync to Gitee</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>wearerequired/git-mirror-action@master</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意在 Settings-&gt;Secrets 配置 GITEE_RSA_PRIVATE_KEY</span><span class=w>
+</span><span class=w>          </span><span class=nt>SSH_PRIVATE_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITEE_RSA_PRIVATE_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 GitHub 源仓库地址</span><span class=w>
+</span><span class=w>          </span><span class=nt>source-repo</span><span class=p>:</span><span class=w> </span><span class=l>git@github.com:iwyang/iwyang.github.io.git</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 目标仓库地址</span><span class=w>
+</span><span class=w>          </span><span class=nt>destination-repo</span><span class=p>:</span><span class=w> </span><span class=l>git@gitee.com:iwyang/iwyang.git</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build Gitee Pages</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>yanglbme/gitee-pages-action@main</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 用户名</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-username</span><span class=p>:</span><span class=w> </span><span class=l>iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意在 Settings-&gt;Secrets 配置 GITEE_PASSWORD</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITEE_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-repo</span><span class=p>:</span><span class=w> </span><span class=l>iwyang/iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）</span><span class=w>
+</span><span class=w>          </span><span class=nt>branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span></code></pre></div><h2 id=githubgitee服务器三线部署hugo>github、gitee、服务器三线部署hugo</h2>
+<p>由于部署到<code>github</code>和服务器先于<code>gitee</code>，所有可以建立两个<code>workflows</code>。</p>
+<ol>
+<li>根目录新建<code>.github/workflows/deploy.yml</code>（用于部署到<code>github</code>和服务器）</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash>name: GitHub Page Deploy
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout master
+        uses: actions/checkout@v2.3.4
+        with:
+          submodules: <span class=nb>true</span>  <span class=c1># Fetch Hugo themes (true OR recursive)</span>
+          fetch-depth: <span class=m>0</span>    <span class=c1># Fetch all history for .GitInfo and .Lastmod</span>
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.5.0
+        with:
+          hugo-version: <span class=s1>&#39;latest&#39;</span>
+          extended: <span class=nb>true</span>
+
+      - name: Build Hugo
+        run: hugo --minify
+
+      - name: Deploy Hugo to gh-pages
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          github_token: <span class=si>${</span><span class=p>{ secrets.GITHUB_TOKEN </span><span class=si>}</span><span class=o>}</span>
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
+        <span class=c1># cname:</span>
+        
+      - name: Deploy Hugo to Server
+        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        with:
+          server: 104.224.191.88
+          username: admin
+          password: <span class=si>${</span><span class=p>{ secrets.FTP_MIRROR_PASSWORD </span><span class=si>}</span><span class=o>}</span>
+          local-dir: ./public/
+          server-dir: /var/www/blog/
+</code></pre></div><ol start=2>
+<li>根目录新建<code>.github/workflows/Sync to Gitee.yml</code>（用于部署到<code>gitee</code>）</li>
+</ol>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Sync to Gitee</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>on</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>push</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>branches</span><span class=p>:</span><span class=w> </span><span class=l>develop</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=nt>jobs</span><span class=p>:</span><span class=w>
+</span><span class=w>  </span><span class=nt>build</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>runs-on</span><span class=p>:</span><span class=w> </span><span class=l>ubuntu-latest</span><span class=w>
+</span><span class=w>    </span><span class=nt>steps</span><span class=p>:</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Sync to Gitee</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>wearerequired/git-mirror-action@master</span><span class=w>
+</span><span class=w>        </span><span class=nt>env</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意在 Settings-&gt;Secrets 配置 GITEE_RSA_PRIVATE_KEY</span><span class=w>
+</span><span class=w>          </span><span class=nt>SSH_PRIVATE_KEY</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITEE_RSA_PRIVATE_KEY }}</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 GitHub 源仓库地址</span><span class=w>
+</span><span class=w>          </span><span class=nt>source-repo</span><span class=p>:</span><span class=w> </span><span class=l>git@github.com:iwyang/iwyang.github.io.git</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 目标仓库地址</span><span class=w>
+</span><span class=w>          </span><span class=nt>destination-repo</span><span class=p>:</span><span class=w> </span><span class=l>git@gitee.com:iwyang/iwyang.git</span><span class=w>
+</span><span class=w>
+</span><span class=w>      </span>- <span class=nt>name</span><span class=p>:</span><span class=w> </span><span class=l>Build Gitee Pages</span><span class=w>
+</span><span class=w>        </span><span class=nt>uses</span><span class=p>:</span><span class=w> </span><span class=l>yanglbme/gitee-pages-action@main</span><span class=w>
+</span><span class=w>        </span><span class=nt>with</span><span class=p>:</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 用户名</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-username</span><span class=p>:</span><span class=w> </span><span class=l>iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意在 Settings-&gt;Secrets 配置 GITEE_PASSWORD</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-password</span><span class=p>:</span><span class=w> </span><span class=l>${{ secrets.GITEE_PASSWORD }}</span><span class=w>
+</span><span class=w>          </span><span class=c># 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错</span><span class=w>
+</span><span class=w>          </span><span class=nt>gitee-repo</span><span class=p>:</span><span class=w> </span><span class=l>iwyang/iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）</span><span class=w>
+</span><span class=w>          </span><span class=nt>branch</span><span class=p>:</span><span class=w> </span><span class=l>master</span><span class=w>
+</span></code></pre></div><h2 id=解决问题>解决问题</h2>
+<p>1.<strong>Error: FTPError: 550 Remove directory operation failed</strong></p>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=l>rm -rf /var/www/blog</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=l>sudo mkdir -p /var/www/blog</span><span class=w>
+</span><span class=w></span><span class=l>sudo chown -R $USER:$USER /var/www/blog</span><span class=w>
+</span><span class=w></span><span class=l>sudo chmod -R 755 /var/www</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=l>sudo chmod 755 /var/www/blog</span><span class=w>
+</span><span class=w></span><span class=nt>sudo chown -R admin</span><span class=p>:</span><span class=w> </span><span class=l>/var/www/blog</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=l>sudo systemctl restart vsftpd</span><span class=w>
+</span></code></pre></div><h2 id=参考链接>参考链接</h2>
+<p><a class=link href=https://eliyar.biz/how_to_build_hexo_blog/ target=_blank rel=noopener>1.从 0 开始搭建 hexo 博客</a></p>
+<p><a class=link href=https://blog.yizhilee.com/post/letsencrypt-certificate/ target=_blank rel=noopener>2.为博客添加 Let’s Encrypt 免费证书</a></p>
+<p><a class=link href=https://github.com/SamKirkland target=_blank rel=noopener>3.SamKirkland</a>/<a class=link href=https://github.com/SamKirkland/FTP-Deploy-Action target=_blank rel=noopener>FTP-Deploy-Action</a></p>
+</section>
+<footer class=article-footer>
+<section class=article-tags>
+<a href=/tags/hugo/>hugo</a>
+<a href=/tags/github/>github</a>
+<a href=/tags/%E6%9C%8D%E5%8A%A1%E5%99%A8/>服务器</a>
+</section>
+<section class=article-edit><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-external-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M11 7H6A2 2 0 004 9v9a2 2 0 002 2h9a2 2 0 002-2v-5"/><line x1="10" y1="14" x2="20" y2="4"/><polyline points="15 4 20 4 20 9"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/GitHub%20Actions%e5%88%a9%e7%94%a8FTP%e8%87%aa%e5%8a%a8%e9%83%a8%e7%bd%b2hugo-hexo%e5%88%b0Centos%208.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span>
+</section>
+<section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>
+最后更新于 2021-08-16
+</span>
+</section></footer>
+</article>
+<aside class=related-contents--wrapper>
+<h2 class=section-title>相关文章</h2>
+<div class=related-contents>
+<div class="flex article-list--tile">
+<article>
+<a href=/archives/hugo-github-actions/>
+<div class=article-details>
+<h2 class=article-title>hugo利用Github Actions自动构建博客</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-install-on-centos/>
+<div class=article-details>
+<h2 class=article-title>Hugo部署到centos服务器</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-port-443-and-22/>
+<div class=article-details>
+<h2 class=article-title>解决Github Port 443以及Port 22问题</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/hugo-bber/>
+<div class=article-details>
+<h2 class=article-title>hugo配置哔哔点啥</h2>
+</div>
+</a>
+</article>
+<article>
+<a href=/archives/github-actions-sync-to-gitee/>
+<div class=article-details>
+<h2 class=article-title>利用github Actions自动同步项目到gitee并自动部署Gitee Pages</h2>
+</div>
+</a>
+</article>
+</div>
+</div>
+</aside>
+<script src=//cdn.jsdelivr.net/npm/@waline/client/dist/Waline.min.js></script>
+<div id=waline class=waline-container></div>
+<style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding)}.waline-container .vcount{color:var(--card-text-color-main)}</style><script>new Waline({avatar:"mp",dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],lang:"zh-CN",locale:{admin:"博主"},placeholder:"欢迎评论（昵称、邮箱必填，网址选填）",requiredMeta:["nick","mail"],serverURL:"https://m.bore.vip/"})</script>
+<footer class=site-footer>
+<section class=copyright>
+&copy;
+2020 -
+2021 Bore's Notes
+</section>
+<section class=powerby>
+Built with <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> <br>
+Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.2.0>Stack</a></b> designed by <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a>
+</section>
+</footer>
+<div class=pswp tabindex=-1 role=dialog aria-hidden=true>
+<div class=pswp__bg></div>
+<div class=pswp__scroll-wrap>
+<div class=pswp__container>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+<div class=pswp__item></div>
+</div>
+<div class="pswp__ui pswp__ui--hidden">
+<div class=pswp__top-bar>
+<div class=pswp__counter></div>
+<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+<div class=pswp__preloader>
+<div class=pswp__preloader__icn>
+<div class=pswp__preloader__cut>
+<div class=pswp__preloader__donut></div>
+</div>
+</div>
+</div>
+</div>
+<div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+<div class=pswp__share-tooltip></div>
+</div>
+<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+</button>
+<div class=pswp__caption>
+<div class=pswp__caption__center></div>
+</div>
+</div>
+</div>
+</div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE=" crossorigin=anonymous>
+</main>
+<aside class="sidebar right-sidebar sticky">
+<section class="widget archives">
+<div class=widget-icon><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg>
+</div>
+<h2 class="widget-title section-title">目录</h2>
+<div class=widget--toc>
+<nav id=TableOfContents>
+<ol>
+<li><a href=#本地操作>本地操作</a></li>
+<li><a href=#服务器操作>服务器操作</a>
+<ol>
+<li><a href=#安装-nginx>安装 Nginx</a></li>
+<li><a href=#启动-nginx>启动 Nginx</a></li>
+<li><a href=#创建新的网站目录>创建新的网站目录</a></li>
+<li><a href=#配置-nginx>配置 nginx</a></li>
+<li><a href=#配置ssl证书>配置ssl证书</a>
+<ol>
+<li><a href=#安装certbot>安装Certbot</a></li>
+<li><a href=#配置nginx>配置Nginx</a></li>
+<li><a href=#证书自动更新>证书自动更新</a></li>
+</ol>
+</li>
+<li><a href=#安装vsftpd>安装vsftpd</a></li>
+<li><a href=#配置vsftpd>配置vsftpd</a></li>
+<li><a href=#创建ftp用户>创建FTP用户</a></li>
+<li><a href=#关闭防火墙>关闭防火墙</a></li>
+<li><a href=#重启vsftpd服务>重启vsftpd服务</a></li>
+</ol>
+</li>
+<li><a href=#github操作>Github操作</a>
+<ol>
+<li><a href=#配置ftp_mirror_password>配置<code>FTP_MIRROR_PASSWORD</code></a></li>
+<li><a href=#配置-github-actions>配置 Github actions</a></li>
+</ol>
+</li>
+<li><a href=#提交源码>提交源码</a></li>
+<li><a href=#克隆源码到本地>克隆源码到本地</a>
+<ol>
+<li><a href=#同步更新源文件>同步更新源文件</a></li>
+<li><a href=#同步主题文件>同步主题文件</a></li>
+</ol>
+</li>
+<li><a href=#githubgitee服务器三线部署hexo>github、gitee、服务器三线部署hexo</a></li>
+<li><a href=#githubgitee服务器三线部署hugo>github、gitee、服务器三线部署hugo</a></li>
+<li><a href=#解决问题>解决问题</a></li>
+<li><a href=#参考链接>参考链接</a></li>
+</ol>
+</nav>
+</div>
+</section>
+</aside>
+</div>
+<script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g=" crossorigin=anonymous defer></script><script type=text/javascript src=/ts/main.js defer></script>
+<script>(function(){const a=document.createElement('link');a.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",a.type="text/css",a.rel="stylesheet",document.head.appendChild(a)})()</script>
+</body>
+</html>
