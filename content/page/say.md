@@ -6,7 +6,8 @@ menu:
     main:
         name: 说说 
         weight: -80
-        pre: say
+        params: 
+            icon: say
 edit: false
 comments: false
 ---

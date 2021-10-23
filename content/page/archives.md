@@ -6,5 +6,6 @@ layout: "archives"
 menu:
     main:
         weight: -90
-        pre: archives
+        params: 
+            icon: archives
 ---

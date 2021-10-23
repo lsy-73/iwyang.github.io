@@ -5,7 +5,8 @@ layout: links
 menu: 
     main:
         name: 友链
-        pre: link
+        params: 
+            icon: link
         weight: -50
 edit: false
 comment: true

@@ -7,7 +7,8 @@ toc: false
 menu:
     main: 
         weight: -70
-        pre: user
+        params:
+            icon: user
 edit: true
 ---
 
