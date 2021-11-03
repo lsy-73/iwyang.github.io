@@ -165,7 +165,7 @@ alt="bibi-0">
 >部署到云开发&lt;/a>将 BBer-weixin 微信公众号后端，一键部署到云开发。&lt;/p>
 &lt;p>对接的微信公众号简要流程：&lt;/p>
 &lt;p>1.点击 &lt;a class="link" href="https://console.cloud.tencent.com/tcb/scf/index" target="_blank" rel="noopener"
->bber-weixin&lt;/a> 云函数，右上角**【编辑】**，开启**【固定IP】**，留存**公网固定IP**。&lt;/p>
+>bber-weixin&lt;/a> 云函数，右上角**【编辑】&lt;strong>，开启&lt;/strong>【固定IP】&lt;strong>，留存&lt;/strong>公网固定IP**。&lt;/p>
 &lt;blockquote>
 &lt;p>我将from &lt;code>微信公众号&lt;/code>改成了&lt;code>💎 WeChat&lt;/code>&lt;/p>
 &lt;/blockquote>
@@ -2932,7 +2932,7 @@ repeat 36&lt;span class="o">[&lt;/span>rt &lt;span class="m">5&lt;/span> fd &lt;
 &lt;div class="note info">可在TWRP下对Magisk模块进行管理、卸载。一定要先安装这个，再安装EdXposed的两个模块，防止安装模块后手机变砖无法开机，这时就可以通过MM管理器来删除安装的模块，使用方法：在第三方rec下，点击高级→终端，输入/data/media/mm，然后回车，就可以禁用该模块了。&lt;/div>
 &lt;ol start="5">
 &lt;li>
-&lt;p>Riru_(Riru_-_Core)-v21.2(35).zip和Riru_-_EdXposed-v0.4.6.1_(4510)_(YAHFA)(4510).zip （EdXposed两个模块包）&lt;/p>
+&lt;p>Riru_(Riru_-&lt;em>Core)-v21.2(35).zip和Riru&lt;/em>-&lt;em>EdXposed-v0.4.6.1&lt;/em>(4510)_(YAHFA)(4510).zip （EdXposed两个模块包）&lt;/p>
 &lt;/li>
 &lt;li>
 &lt;p>EdXposedManager.apk （EdXposed管理器）&lt;/p>
