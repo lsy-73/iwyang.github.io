@@ -543,7 +543,7 @@ widget:
 
 2.添加歌曲列表（注意：去掉注释/*  */）
 
-```yaml
+```markdown
 {{/* < music auto="https://music.163.com/#/playlist?id=60198"> */}}
 ```
 
