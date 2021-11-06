@@ -544,15 +544,15 @@ widget:
 2.添加歌曲列表
 
 ```yaml
-{{< music auto="https://music.163.com/#/playlist?id=60198">}}
+{{/* < music auto="https://music.163.com/#/playlist?id=60198"> */}}
 ```
 
 3.添加单曲
 
 ```
-{{< music server="netease" type="song" id="1868553" >}}
+{{/* < music server="netease" type="song" id="1868553" > */}}
 或者
-{{< music netease song 1868553 >}}
+{{/* < music netease song 1868553 > */}}
 ```
 
 4.其它参数
@@ -630,6 +630,12 @@ git submodule update --recursive --remote
 
 + 其他命令：在主仓库更新所有子模块：`git submodule foreach git pull origin master`
 
+## 附：hugo注释
+
+```yaml
+{{/* comment */}}
+```
+
 ## 参考链接
 
 + [Hugo 主题 Stack文档](https://docs.stack.jimmycai.com/zh/)
@@ -638,6 +644,6 @@ git submodule update --recursive --remote
 + [Adding the widget tag-cloud for "categories", on the right content region on Homepage](https://github.com/CaiJimmy/hugo-theme-stack/issues/169)
 + [vinceying/Vince-blog-https://i.vince.pub/](https://github.com/vinceying/Vince-blog)
 + [hugo音乐短代码](https://immmmm.com/hugo-shortcodes-music/)
-
 + [主题文档 - 扩展 Shortcodes-music](https://hugodoit.pages.dev/zh-cn/theme-documentation-extended-shortcodes/#8-music)
++ [Hugo模板的基本语法-注释](https://hugo.aiaide.com/post/hugo%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/#%E6%B3%A8%E9%87%8A)
 
