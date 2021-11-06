@@ -541,13 +541,13 @@ widget:
 {{- $scratch.Set "music" true -}}
 ```
 
-2.添加歌曲列表
+2.添加歌曲列表（注意：去掉注释/*  */）
 
 ```yaml
 {{/* < music auto="https://music.163.com/#/playlist?id=60198"> */}}
 ```
 
-3.添加单曲
+3.添加单曲（注意：去掉注释/*  */）
 
 ```
 {{/* < music server="netease" type="song" id="1868553" > */}}
