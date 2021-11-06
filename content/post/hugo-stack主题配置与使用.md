@@ -3,7 +3,7 @@ title: "Hugo Stack主题配置与使用"
 slug: "hugo-theme-stack"
 description: ""
 date: 2021-07-24T09:15:26+08:00
-lastmod: 2021-08-14T09:15:26+08:00
+lastmod: 2021-11-07T09:15:26+08:00
 draft: false
 toc: true
 weight: false
@@ -486,6 +486,83 @@ widget:
    ]
    ```
 
+## 添加音乐短代码
+
+1.网站根目录新建文件`layouts\shortcodes\music.html`
+
+```html
+{{- $scratch := .Page.Scratch.Get "scratch" -}}
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<style type="text/css">.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:linear-gradient(to bottom, #212121 0%, rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:-webkit-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121', endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}</style>
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script>
+
+{{- if .IsNamedParams -}}
+    {{- if .Get "url" -}}
+        <meting-js url="{{ .Get `url` }}" name="{{ .Get `name` }}" artist="{{ .Get `artist` }}" cover="{{ .Get `cover` }}" theme="{{ .Get `theme` | default `#2980b9` }}"
+        {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
+        {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
+        {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
+        {{- with .Get "volume" }} volume="{{ . }}"{{ end -}}
+        {{- with .Get "mutex" }} mutex="{{ . }}"{{ end -}}
+        ></meting-js>
+    {{- else if .Get "auto" -}}
+        <meting-js auto="{{ .Get `auto` }}" theme="{{ .Get `theme` | default `#2980b9` }}"
+        {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
+        {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
+        {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
+        {{- with .Get "loop" }} loop="{{ . }}"{{ end -}}
+        {{- with .Get "order" }} order="{{ . }}"{{ end -}}
+        {{- with .Get "volume" }} volume="{{ . }}"{{ end -}}
+        {{- with .Get "mutex" }} mutex="{{ . }}"{{ end -}}
+        {{- with .Get "list-folded" }} list-folded="{{ . }}"{{ end -}}
+        {{- with .Get "list-max-height" }} list-max-height="{{ . }}"{{ end -}}
+        ></meting-js>
+    {{- else -}}
+        <meting-js server="{{ .Get `server` }}" type="{{ .Get `type` }}" id="{{ .Get `id` }}" theme="{{ .Get `theme` | default `#2980b9` }}"
+        {{- with .Get "fixed" }} fixed="{{ . }}"{{ end -}}
+        {{- with .Get "mini" }} mini="{{ . }}"{{ end -}}
+        {{- with .Get "autoplay" }} autoplay="{{ . }}"{{ end -}}
+        {{- with .Get "loop" }} loop="{{ . }}"{{ end -}}
+        {{- with .Get "order" }} order="{{ . }}"{{ end -}}
+        {{- with .Get "volume" }} volume="{{ . }}"{{ end -}}
+        {{- with .Get "mutex" }} mutex="{{ . }}"{{ end -}}
+        {{- with .Get "list-folded" }} list-folded="{{ . }}"{{ end -}}
+        {{- with .Get "list-max-height" }} list-max-height="{{ . }}"{{ end -}}
+        ></meting-js>
+    {{- end -}}
+{{- else if strings.HasSuffix (.Get 0) "http" -}}
+    <meting-js auto="{{ .Get 0 }}" theme="#2980b9"></meting-js>
+{{- else -}}
+    <meting-js server="{{ .Get 0 }}" type="{{ .Get 1 }}" id="{{ .Get 2 }}" theme="#2980b9"></meting-js>
+{{- end -}}
+{{- $scratch.Set "music" true -}}
+```
+
+2.添加歌曲列表
+
+```yaml
+{{< music auto="https://music.163.com/#/playlist?id=60198">}}
+```
+
+3.添加单曲
+
+```
+{{< music server="netease" type="song" id="1868553" >}}
+或者
+{{< music netease song 1868553 >}}
+```
+
+4.其它参数
+
+`music` shortcode 有一些可以应用于以上三种方式的其它命名参数:
+
+- **autoplay** *[可选]*
+
+  是否自动播放音乐, 默认值是 `false`.
+
 ## 更改分类、标签、页面显示中文
 
 1. `content`目录下新建`categories\_index.md`:
@@ -560,5 +637,7 @@ git submodule update --recursive --remote
 + [树洞](https://blog.jimmycai.com/links/)
 + [Adding the widget tag-cloud for "categories", on the right content region on Homepage](https://github.com/CaiJimmy/hugo-theme-stack/issues/169)
 + [vinceying/Vince-blog-https://i.vince.pub/](https://github.com/vinceying/Vince-blog)
-+ [“最后更新于”前面空格太长了](https://github.com/CaiJimmy/hugo-theme-stack/issues/300)
++ [hugo音乐短代码](https://immmmm.com/hugo-shortcodes-music/)
+
++ [主题文档 - 扩展 Shortcodes-music](https://hugodoit.pages.dev/zh-cn/theme-documentation-extended-shortcodes/#8-music)
 
