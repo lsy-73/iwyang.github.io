@@ -1770,9 +1770,9 @@ git checkout　+某版本号　&lt;span class="o">(&lt;/span>你当前文件夹�
 &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meting-js&lt;/span> &lt;span class="na">server&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Get 0 }}&amp;#34;&lt;/span> &lt;span class="na">type&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Get 1 }}&amp;#34;&lt;/span> &lt;span class="na">id&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;{{ .Get 2 }}&amp;#34;&lt;/span> &lt;span class="na">theme&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;#2980b9&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&amp;lt;/&lt;/span>&lt;span class="nt">meting-js&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 {{- end -}}
 {{- $scratch.Set &amp;#34;music&amp;#34; true -}}
-&lt;/code>&lt;/pre>&lt;/div>&lt;p>2.添加歌曲列表&lt;/p>
+&lt;/code>&lt;/pre>&lt;/div>&lt;p>2.添加歌曲列表（注意：去掉注释/* */）&lt;/p>
 &lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">{{&lt;span class="l">/* &amp;lt; music auto=&amp;#34;https://music.163.com/#/playlist?id=60198&amp;#34;&amp;gt; */}}&lt;/span>&lt;span class="w">
-&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.添加单曲&lt;/p>
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.添加单曲（注意：去掉注释/* */）&lt;/p>
 &lt;pre tabindex="0">&lt;code>{{/* &amp;lt; music server=&amp;quot;netease&amp;quot; type=&amp;quot;song&amp;quot; id=&amp;quot;1868553&amp;quot; &amp;gt; */}}
 或者
 {{/* &amp;lt; music netease song 1868553 &amp;gt; */}}
