@@ -531,26 +531,11 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 {{- end -}}
 {{- $scratch.Set &#34;music&#34; true -}}
 </code></pre></div><p>2.添加歌曲列表</p>
-<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml><span class=l>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css>
-<style type=text/css>.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top,#212121 0%,rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top,#212121 0%,rgba(33,33,33,0) 100%);background:linear-gradient(to bottom,#212121 0%,rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121',endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);background:-webkit-linear-gradient(top,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);background:linear-gradient(to bottom,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121',endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}</style>
-<script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script>
-
-<script src=https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js></script><meting-js auto="https://music.163.com/#/playlist?id=60198" theme=#2980b9></meting-js></span><span class=w>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml>{{<span class=l>/* &lt; music auto=&#34;https://music.163.com/#/playlist?id=60198&#34;&gt; */}}</span><span class=w>
 </span></code></pre></div><p>3.添加单曲</p>
-<pre tabindex=0><code>
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css>
-<style type=text/css>.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top,#212121 0%,rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top,#212121 0%,rgba(33,33,33,0) 100%);background:linear-gradient(to bottom,#212121 0%,rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121',endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);background:-webkit-linear-gradient(top,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);background:linear-gradient(to bottom,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121',endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}</style>
-<script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script>
-
-<script src=https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js></script><meting-js server=netease type=song id=1868553 theme=#2980b9></meting-js>
+<pre tabindex=0><code>{{/* &lt; music server=&quot;netease&quot; type=&quot;song&quot; id=&quot;1868553&quot; &gt; */}}
 或者
-
-<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css>
-<style type=text/css>.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top,#212121 0%,rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top,#212121 0%,rgba(33,33,33,0) 100%);background:linear-gradient(to bottom,#212121 0%,rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121',endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);background:-webkit-linear-gradient(top,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);background:linear-gradient(to bottom,rgba(33,33,33,0) 0%,rgba(33,33,33,.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121',endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}</style>
-<script src=https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js></script>
-
-<script src=https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js></script><meting-js server=netease type=song id=1868553 theme=#2980b9></meting-js>
+{{/* &lt; music netease song 1868553 &gt; */}}
 </code></pre><p>4.其它参数</p>
 <p><code>music</code> shortcode 有一些可以应用于以上三种方式的其它命名参数:</p>
 <ul>
@@ -607,29 +592,18 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 <ul>
 <li>其他命令：在主仓库更新所有子模块：<code>git submodule foreach git pull origin master</code></li>
 </ul>
-<h2 id=参考链接>参考链接</h2>
+<h2 id=附hugo注释>附：hugo注释</h2>
+<div class=highlight><pre tabindex=0 class=chroma><code class=language-yaml data-lang=yaml>{{<span class=l>/* comment */}}</span><span class=w>
+</span></code></pre></div><h2 id=参考链接>参考链接</h2>
 <ul>
-<li>
-<p><a class=link href=https://docs.stack.jimmycai.com/zh/ target=_blank rel=noopener>Hugo 主题 Stack文档</a></p>
-</li>
-<li>
-<p><a class=link href=https://yinhe.co/archives/20210401_hugo_theme_stack.html target=_blank rel=noopener>hugo主题stack - 银河小筑</a></p>
-</li>
-<li>
-<p><a class=link href=https://blog.jimmycai.com/links/ target=_blank rel=noopener>树洞</a></p>
-</li>
-<li>
-<p><a class=link href=https://github.com/CaiJimmy/hugo-theme-stack/issues/169 target=_blank rel=noopener>Adding the widget tag-cloud for &ldquo;categories&rdquo;, on the right content region on Homepage</a></p>
-</li>
-<li>
-<p><a class=link href=https://github.com/vinceying/Vince-blog target=_blank rel=noopener>vinceying/Vince-blog-https://i.vince.pub/</a></p>
-</li>
-<li>
-<p><a class=link href=https://immmmm.com/hugo-shortcodes-music/ target=_blank rel=noopener>hugo音乐短代码</a></p>
-</li>
-<li>
-<p><a class=link href=https://hugodoit.pages.dev/zh-cn/theme-documentation-extended-shortcodes/#8-music target=_blank rel=noopener>主题文档 - 扩展 Shortcodes-music</a></p>
-</li>
+<li><a class=link href=https://docs.stack.jimmycai.com/zh/ target=_blank rel=noopener>Hugo 主题 Stack文档</a></li>
+<li><a class=link href=https://yinhe.co/archives/20210401_hugo_theme_stack.html target=_blank rel=noopener>hugo主题stack - 银河小筑</a></li>
+<li><a class=link href=https://blog.jimmycai.com/links/ target=_blank rel=noopener>树洞</a></li>
+<li><a class=link href=https://github.com/CaiJimmy/hugo-theme-stack/issues/169 target=_blank rel=noopener>Adding the widget tag-cloud for &ldquo;categories&rdquo;, on the right content region on Homepage</a></li>
+<li><a class=link href=https://github.com/vinceying/Vince-blog target=_blank rel=noopener>vinceying/Vince-blog-https://i.vince.pub/</a></li>
+<li><a class=link href=https://immmmm.com/hugo-shortcodes-music/ target=_blank rel=noopener>hugo音乐短代码</a></li>
+<li><a class=link href=https://hugodoit.pages.dev/zh-cn/theme-documentation-extended-shortcodes/#8-music target=_blank rel=noopener>主题文档 - 扩展 Shortcodes-music</a></li>
+<li><a class=link href=https://hugo.aiaide.com/post/hugo%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/#%E6%B3%A8%E9%87%8A target=_blank rel=noopener>Hugo模板的基本语法-注释</a></li>
 </ul>
 </section>
 <footer class=article-footer>
@@ -756,6 +730,7 @@ Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=
 <li><a href=#添加音乐短代码>添加音乐短代码</a></li>
 <li><a href=#更改分类标签页面显示中文>更改分类、标签、页面显示中文</a></li>
 <li><a href=#附使用git-submodule管理hugo主题>附：使用Git Submodule管理Hugo主题</a></li>
+<li><a href=#附hugo注释>附：hugo注释</a></li>
 <li><a href=#参考链接>参考链接</a></li>
 </ol>
 </nav>

@@ -1771,22 +1771,11 @@ git checkout　+某版本号　&lt;span class="o">(&lt;/span>你当前文件夹�
 {{- end -}}
 {{- $scratch.Set &amp;#34;music&amp;#34; true -}}
 &lt;/code>&lt;/pre>&lt;/div>&lt;p>2.添加歌曲列表&lt;/p>
-&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="l">
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-&lt;style type="text/css">.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:linear-gradient(to bottom, #212121 0%, rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:-webkit-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121', endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}&lt;/style>
-&lt;script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js">&lt;/script>
-&lt;script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js">&lt;/script>&lt;meting-js auto="https://music.163.com/#/playlist?id=60198" theme="#2980b9">&lt;/meting-js>&lt;/span>&lt;span class="w">
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">{{&lt;span class="l">/* &amp;lt; music auto=&amp;#34;https://music.163.com/#/playlist?id=60198&amp;#34;&amp;gt; */}}&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>3.添加单曲&lt;/p>
-&lt;pre tabindex="0">&lt;code>
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-&lt;style type="text/css">.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:linear-gradient(to bottom, #212121 0%, rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:-webkit-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121', endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}&lt;/style>
-&lt;script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js">&lt;/script>
-&lt;script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js">&lt;/script>&lt;meting-js server="netease" type="song" id="1868553" theme="#2980b9">&lt;/meting-js>
+&lt;pre tabindex="0">&lt;code>{{/* &amp;lt; music server=&amp;quot;netease&amp;quot; type=&amp;quot;song&amp;quot; id=&amp;quot;1868553&amp;quot; &amp;gt; */}}
 或者
-&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-&lt;style type="text/css">.dark-theme .aplayer{background:#212121}.dark-theme .aplayer.aplayer-withlist .aplayer-info{border-bottom-color:#5c5c5c}.dark-theme .aplayer.aplayer-fixed .aplayer-list{border-color:#5c5c5c}.dark-theme .aplayer .aplayer-body{background-color:#212121}.dark-theme .aplayer .aplayer-info{border-top-color:#212121}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-title{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-music .aplayer-author{color:#fff}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time{color:#eee}.dark-theme .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path{fill:#eee}.dark-theme .aplayer .aplayer-list{background-color:#212121}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb{background-color:#999}.dark-theme .aplayer .aplayer-list::-webkit-scrollbar-thumb:hover{background-color:#bbb}.dark-theme .aplayer .aplayer-list li{color:#fff;border-top-color:#666}.dark-theme .aplayer .aplayer-list li:hover{background:#4e4e4e}.dark-theme .aplayer .aplayer-list li.aplayer-list-light{background:#6c6c6c}.dark-theme .aplayer .aplayer-list li .aplayer-list-index{color:#ddd}.dark-theme .aplayer .aplayer-list li .aplayer-list-author{color:#ddd}.dark-theme .aplayer .aplayer-lrc{text-shadow:-1px -1px 0 #666}.dark-theme .aplayer .aplayer-lrc:before{background:-moz-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:-webkit-linear-gradient(top, #212121 0%, rgba(33,33,33,0) 100%);background:linear-gradient(to bottom, #212121 0%, rgba(33,33,33,0) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#212121', endColorstr='#00212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc:after{background:-moz-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:-webkit-linear-gradient(top, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);background:linear-gradient(to bottom, rgba(33,33,33,0) 0%, rgba(33,33,33,0.8) 100%);filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#00212121', endColorstr='#cc212121',GradientType=0 )}.dark-theme .aplayer .aplayer-lrc p{color:#fff}.dark-theme .aplayer .aplayer-miniswitcher{background:#484848}.dark-theme .aplayer .aplayer-miniswitcher .aplayer-icon path{fill:#eee}&lt;/style>
-&lt;script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js">&lt;/script>
-&lt;script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js">&lt;/script>&lt;meting-js server="netease" type="song" id="1868553" theme="#2980b9">&lt;/meting-js>
+{{/* &amp;lt; music netease song 1868553 &amp;gt; */}}
 &lt;/code>&lt;/pre>&lt;p>4.其它参数&lt;/p>
 &lt;p>&lt;code>music&lt;/code> shortcode 有一些可以应用于以上三种方式的其它命名参数:&lt;/p>
 &lt;ul>
@@ -1843,36 +1832,26 @@ git checkout　+某版本号　&lt;span class="o">(&lt;/span>你当前文件夹�
 &lt;ul>
 &lt;li>其他命令：在主仓库更新所有子模块：&lt;code>git submodule foreach git pull origin master&lt;/code>&lt;/li>
 &lt;/ul>
-&lt;h2 id="参考链接">参考链接&lt;/h2>
+&lt;h2 id="附hugo注释">附：hugo注释&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">{{&lt;span class="l">/* comment */}}&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="参考链接">参考链接&lt;/h2>
 &lt;ul>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://docs.stack.jimmycai.com/zh/" target="_blank" rel="noopener"
->Hugo 主题 Stack文档&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://yinhe.co/archives/20210401_hugo_theme_stack.html" target="_blank" rel="noopener"
->hugo主题stack - 银河小筑&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://blog.jimmycai.com/links/" target="_blank" rel="noopener"
->树洞&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack/issues/169" target="_blank" rel="noopener"
->Adding the widget tag-cloud for &amp;ldquo;categories&amp;rdquo;, on the right content region on Homepage&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://github.com/vinceying/Vince-blog" target="_blank" rel="noopener"
->vinceying/Vince-blog-https://i.vince.pub/&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://immmmm.com/hugo-shortcodes-music/" target="_blank" rel="noopener"
->hugo音乐短代码&lt;/a>&lt;/p>
-&lt;/li>
-&lt;li>
-&lt;p>&lt;a class="link" href="https://hugodoit.pages.dev/zh-cn/theme-documentation-extended-shortcodes/#8-music" target="_blank" rel="noopener"
->主题文档 - 扩展 Shortcodes-music&lt;/a>&lt;/p>
-&lt;/li>
+&lt;li>&lt;a class="link" href="https://docs.stack.jimmycai.com/zh/" target="_blank" rel="noopener"
+>Hugo 主题 Stack文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://yinhe.co/archives/20210401_hugo_theme_stack.html" target="_blank" rel="noopener"
+>hugo主题stack - 银河小筑&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://blog.jimmycai.com/links/" target="_blank" rel="noopener"
+>树洞&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack/issues/169" target="_blank" rel="noopener"
+>Adding the widget tag-cloud for &amp;ldquo;categories&amp;rdquo;, on the right content region on Homepage&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/vinceying/Vince-blog" target="_blank" rel="noopener"
+>vinceying/Vince-blog-https://i.vince.pub/&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://immmmm.com/hugo-shortcodes-music/" target="_blank" rel="noopener"
+>hugo音乐短代码&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://hugodoit.pages.dev/zh-cn/theme-documentation-extended-shortcodes/#8-music" target="_blank" rel="noopener"
+>主题文档 - 扩展 Shortcodes-music&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://hugo.aiaide.com/post/hugo%E6%A8%A1%E6%9D%BF%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/#%E6%B3%A8%E9%87%8A" target="_blank" rel="noopener"
+>Hugo模板的基本语法-注释&lt;/a>&lt;/li>
 &lt;/ul></description></item><item><title>《如何阅读一本书》读书笔记</title><link>/archives/how-to-read-a-book/</link><pubDate>Tue, 20 Jul 2021 17:02:25 +0800</pubDate><guid>/archives/how-to-read-a-book/</guid><description>&lt;p>1.阅读就是学习：指导型的学习，以及自我发现型的学习之间的差异。&lt;/p>
 &lt;p>2.一共有四种层次的阅读。第一个层次的阅读，我们称之为&lt;code>基础阅读（elementary reading）&lt;/code>。在熟练这个层次的过程中，一个人可以学习到阅读的艺术，接受基础的阅读熟练，获得初步的阅读技巧。这个阅读层次通常是在小学时完成的。&lt;/p>
 &lt;p>3.第二个层次的阅读我们称之为&lt;code>检视阅读（inspectional reading）&lt;/code>。特点在强调时间。在这个阅读层次，学生必须在规定时间内完成一项阅读的功课。譬如他可能要用十五分钟读完一本书，或是同样时间内读完两本厚的书。&lt;/p>
