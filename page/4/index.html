@@ -7,13 +7,13 @@
 <meta property="og:description" content="博观而约取，厚积而薄发">
 <meta property="og:url" content="/">
 <meta property="og:site_name" content="Bore's Notes">
-<meta property="og:type" content="website"><meta property="og:updated_time" content=" 2021-11-07T09:15:26+08:00 ">
+<meta property="og:type" content="website"><meta property="og:updated_time" content=" 2021-11-13T22:27:25+08:00 ">
 <meta name=twitter:title content="Bore's Notes">
 <meta name=twitter:description content="博观而约取，厚积而薄发"><link rel=alternate type=application/rss+xml href=/index.xml>
 <link rel="shortcut icon" href=/img/favicon.png>
 </head>
 <body>
-<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"dark")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
+<script>(function(){const a='StackColorScheme';localStorage.getItem(a)||localStorage.setItem(a,"auto")})()</script><script>(function(){const b='StackColorScheme',a=localStorage.getItem(b),c=window.matchMedia('(prefers-color-scheme: dark)').matches===!0;a=='dark'||a==='auto'&&c?document.documentElement.dataset.scheme='dark':document.documentElement.dataset.scheme='light'})()</script>
 <div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky">
 <button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
 <span class=hamburger-box>
@@ -61,6 +61,25 @@
 </aside>
 <main class="main full-width">
 <section class=article-list>
+<article>
+<header class=article-header>
+<div class=article-details>
+<header class=article-category>
+<a href=/categories/%E6%8A%80%E6%9C%AF/>
+技术
+</a>
+</header>
+<h2 class=article-title>
+<a href=/archives/centos-halo/>在Centos服务器部署Halo</a>
+</h2>
+<footer class=article-time>
+<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2020-07-24</time>
+</div>
+</footer>
+</div>
+</header>
+</article>
 <article>
 <header class=article-header>
 <div class=article-details>
@@ -232,25 +251,6 @@
 </div>
 </header>
 </article>
-<article>
-<header class=article-header>
-<div class=article-details>
-<header class=article-category>
-<a href=/categories/%E6%8A%80%E6%9C%AF/>
-技术
-</a>
-</header>
-<h2 class=article-title>
-<a href=/archives/excel-find-repeat/>Excel查找重复项</a>
-</h2>
-<footer class=article-time>
-<div><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
-<time class=article-time--published>2020-06-29</time>
-</div>
-</footer>
-</div>
-</header>
-</article>
 </section>
 <nav class=pagination>
 <a class=page-link href=/>1</a>
@@ -259,7 +259,7 @@
 <span class="page-link current">4</span>
 <a class=page-link href=/page/5/>5</a>
 <span class="page-link dots">&mldr;</span>
-<a class=page-link href=/page/8/>8</a>
+<a class=page-link href=/page/9/>9</a>
 </nav>
 <footer class=site-footer>
 <section class=copyright>
@@ -285,7 +285,7 @@ Theme <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=
 <section class="widget tagCloud">
 <h2 class="widget-title section-title">分类</h2>
 <div class=tagCloud-tags>
-<a href=/categories/%E6%8A%80%E6%9C%AF/ class=font_size_49>
+<a href=/categories/%E6%8A%80%E6%9C%AF/ class=font_size_50>
 技术
 </a>
 <a href=/categories/%E6%95%99%E5%AD%A6/ class=font_size_30>
@@ -332,6 +332,9 @@ ps
 <a href=/tags/%E4%B8%89%E5%B9%B4%E7%BA%A7%E6%95%B0%E5%AD%A6/ class=font_size_4>
 三年级数学
 </a>
+<a href=/tags/%E8%A7%86%E9%A2%91/ class=font_size_4>
+视频
+</a>
 <a href=/tags/win10/ class=font_size_3>
 win10
 </a>
@@ -341,17 +344,20 @@ win10
 <a href=/tags/%E6%95%99%E5%AD%A6%E8%AE%BE%E8%AE%A1/ class=font_size_3>
 教学设计
 </a>
-<a href=/tags/%E8%A7%86%E9%A2%91/ class=font_size_3>
-视频
-</a>
 <a href=/tags/halo/ class=font_size_2>
 halo
 </a>
 <a href=/tags/nginx/ class=font_size_2>
 nginx
 </a>
+<a href=/tags/pr/ class=font_size_2>
+pr
+</a>
 <a href=/tags/%E5%9B%BE%E5%BA%8A/ class=font_size_2>
 图床
+</a>
+<a href=/tags/%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C/ class=font_size_2>
+电子相册
 </a>
 <a href=/tags/%E7%BB%83%E4%B9%A0%E9%A2%98/ class=font_size_2>
 练习题
@@ -365,14 +371,8 @@ flash
 <a href=/tags/linux/ class=font_size_1>
 linux
 </a>
-<a href=/tags/pr/ class=font_size_1>
-pr
-</a>
 <a href=/tags/%E6%91%98%E5%BD%95/ class=font_size_1>
 摘录
-</a>
-<a href=/tags/%E7%94%B5%E5%AD%90%E7%9B%B8%E5%86%8C/ class=font_size_1>
-电子相册
 </a>
 </div>
 </section>
@@ -382,7 +382,7 @@ pr
 <div class=archives-year>
 <a href=/archives/#2021>
 <span class=year>2021</span>
-<span class=count>24</span>
+<span class=count>25</span>
 </a>
 </div>
 <div class=archives-year>
