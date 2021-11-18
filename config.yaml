@@ -99,7 +99,7 @@ params:
             requiredMeta:
                 - nick
                 - mail
-            placeholder: 欢迎评论（昵称、邮箱必填，网址选填）
+            placeholder: 欢迎评论
             locale:
                 admin: 博主
    
