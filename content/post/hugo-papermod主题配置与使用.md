@@ -272,7 +272,7 @@ tags: [""]
 <script>
   new Waline({
     el: '#waline',
-    serverURL: 'https://m.bore.vip/',
+    serverURL: 'https://your-domain.vercel.app',
     copyright: true,
     login: 'enable',
     placeholder: '欢迎评论',

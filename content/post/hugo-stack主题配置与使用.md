@@ -54,8 +54,12 @@ title: Bore's Notes
 googleAnalytics:
 
 # Theme i18n support
-# Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it
+# Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk
 DefaultContentLanguage: zh-cn
+
+# Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]
+# This will make .Summary and .WordCount behave correctly for CJK languages.
+hasCJKLanguage: true
 
 permalinks:
     post: /archives/:slug/
@@ -100,9 +104,16 @@ params:
     comments:
         enabled: true
         provider: waline
+        
+        disqusjs:
+            shortname:
+            apiUrl:
+            apiKey:
+            admin:
+            adminLabel:
 
         utterances:
-            repo: iwyang/comments
+            repo: 
             issueTerm: title
             label: utterances
             theme: dark-orange
@@ -122,7 +133,7 @@ params:
 
         # Waline client configuration see: https://waline.js.org/en/reference/client.html
         waline:
-            serverURL: https://m.bore.vip/
+            serverURL: https://your-domain.vercel.app
             lang: zh-CN
             visitor: false
             avatar: mp
@@ -131,7 +142,7 @@ params:
             requiredMeta:
                 - nick
                 - mail
-            placeholder: 欢迎评论（昵称、邮箱必填，网址选填）
+            placeholder: 欢迎评论
             locale:
                 admin: 博主
    
@@ -140,6 +151,28 @@ params:
             region:
             path:
             lang:
+            
+        giscus:
+            repo:
+            repoID:
+            category:
+            categoryID:
+            mapping:
+            lightTheme:
+            darkTheme:
+            reactionsEnabled: 1
+            emitMetadata: 0
+            
+        gitalk:
+            owner: 
+            admin:  
+            repo: 
+            clientID: 
+            clientSecret: 
+            
+        cusdis:
+            host: 
+            id: 
 
     widgets:
         enabled:
@@ -185,7 +218,7 @@ params:
             enabled: true
 
 ### Custom menu
-### See https://docs.stack.jimmycai.com/configuration/custom-menu
+### See https://docs.stack.jimmycai.com/configuration/custom-menu.html
 ### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter
 menu:
     main:
@@ -195,8 +228,21 @@ menu:
           weight: -100
           pre: home
           params:
-            ### For demonstration purpose, the home link will be open in a new tab
-            newTab: false
+              ### For demonstration purpose, the home link will be open in a new tab
+              newTab: false
+              icon: home
+    # social:
+        # - identifier: github
+          # name: GitHub
+          # url: https://github.com/iwyang
+          # params:
+            # icon: brand-github
+            
+        # - identifier: twitter
+          # name: Twitter
+          # url: https://twitter.com
+          # params:
+            # icon: brand-twitter
 
 related:
     includeNewer: true
@@ -210,6 +256,10 @@ related:
           weight: 200
 
 markup:
+    goldmark:
+        renderer:
+            ## Set to true if you have HTML content inside Markdown
+            unsafe: true
     tableOfContents:
         endLevel: 4
         ordered: true
