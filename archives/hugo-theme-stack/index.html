@@ -70,8 +70,12 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w></span><span class=nt>googleAnalytics</span><span class=p>:</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=c># Theme i18n support</span><span class=w>
-</span><span class=w></span><span class=c># Available values: en, fr, id, ja, ko, pt-br, zh-cn, es, de, nl, it</span><span class=w>
+</span><span class=w></span><span class=c># Available values: en, fr, id, ja, ko, pt-br, zh-cn, zh-tw, es, de, nl, it, th, el, uk</span><span class=w>
 </span><span class=w></span><span class=nt>DefaultContentLanguage</span><span class=p>:</span><span class=w> </span><span class=l>zh-cn</span><span class=w>
+</span><span class=w>
+</span><span class=w></span><span class=c># Set hasCJKLanguage to true if DefaultContentLanguage is in [zh-cn ja ko]</span><span class=w>
+</span><span class=w></span><span class=c># This will make .Summary and .WordCount behave correctly for CJK languages.</span><span class=w>
+</span><span class=w></span><span class=nt>hasCJKLanguage</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=nt>permalinks</span><span class=p>:</span><span class=w>
 </span><span class=w>    </span><span class=nt>post</span><span class=p>:</span><span class=w> </span><span class=l>/archives/:slug/</span><span class=w>
@@ -116,9 +120,16 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>    </span><span class=nt>comments</span><span class=p>:</span><span class=w>
 </span><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
 </span><span class=w>        </span><span class=nt>provider</span><span class=p>:</span><span class=w> </span><span class=l>waline</span><span class=w>
+</span><span class=w>        
+</span><span class=w>        </span><span class=nt>disqusjs</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>shortname</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>apiUrl</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>apiKey</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>admin</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>adminLabel</span><span class=p>:</span><span class=w>
 </span><span class=w>
 </span><span class=w>        </span><span class=nt>utterances</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>repo</span><span class=p>:</span><span class=w> </span><span class=l>iwyang/comments</span><span class=w>
+</span><span class=w>            </span><span class=nt>repo</span><span class=p>:</span><span class=w> 
 </span><span class=w>            </span><span class=nt>issueTerm</span><span class=p>:</span><span class=w> </span><span class=l>title</span><span class=w>
 </span><span class=w>            </span><span class=nt>label</span><span class=p>:</span><span class=w> </span><span class=l>utterances</span><span class=w>
 </span><span class=w>            </span><span class=nt>theme</span><span class=p>:</span><span class=w> </span><span class=l>dark-orange</span><span class=w>
@@ -138,7 +149,7 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>
 </span><span class=w>        </span><span class=c># Waline client configuration see: https://waline.js.org/en/reference/client.html</span><span class=w>
 </span><span class=w>        </span><span class=nt>waline</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=nt>serverURL</span><span class=p>:</span><span class=w> </span><span class=l>https://m.bore.vip/</span><span class=w>
+</span><span class=w>            </span><span class=nt>serverURL</span><span class=p>:</span><span class=w> </span><span class=l>https://your-domain.vercel.app</span><span class=w>
 </span><span class=w>            </span><span class=nt>lang</span><span class=p>:</span><span class=w> </span><span class=l>zh-CN</span><span class=w>
 </span><span class=w>            </span><span class=nt>visitor</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
 </span><span class=w>            </span><span class=nt>avatar</span><span class=p>:</span><span class=w> </span><span class=l>mp</span><span class=w>
@@ -147,7 +158,7 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>            </span><span class=nt>requiredMeta</span><span class=p>:</span><span class=w>
 </span><span class=w>                </span>- <span class=l>nick</span><span class=w>
 </span><span class=w>                </span>- <span class=l>mail</span><span class=w>
-</span><span class=w>            </span><span class=nt>placeholder</span><span class=p>:</span><span class=w> </span><span class=l>欢迎评论（昵称、邮箱必填，网址选填）</span><span class=w>
+</span><span class=w>            </span><span class=nt>placeholder</span><span class=p>:</span><span class=w> </span><span class=l>欢迎评论</span><span class=w>
 </span><span class=w>            </span><span class=nt>locale</span><span class=p>:</span><span class=w>
 </span><span class=w>                </span><span class=nt>admin</span><span class=p>:</span><span class=w> </span><span class=l>博主</span><span class=w>
 </span><span class=w>   
@@ -156,6 +167,28 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>            </span><span class=nt>region</span><span class=p>:</span><span class=w>
 </span><span class=w>            </span><span class=nt>path</span><span class=p>:</span><span class=w>
 </span><span class=w>            </span><span class=nt>lang</span><span class=p>:</span><span class=w>
+</span><span class=w>            
+</span><span class=w>        </span><span class=nt>giscus</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>repo</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>repoID</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>category</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>categoryID</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>mapping</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>lightTheme</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>darkTheme</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>reactionsEnabled</span><span class=p>:</span><span class=w> </span><span class=m>1</span><span class=w>
+</span><span class=w>            </span><span class=nt>emitMetadata</span><span class=p>:</span><span class=w> </span><span class=m>0</span><span class=w>
+</span><span class=w>            
+</span><span class=w>        </span><span class=nt>gitalk</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>owner</span><span class=p>:</span><span class=w> 
+</span><span class=w>            </span><span class=nt>admin</span><span class=p>:</span><span class=w>  
+</span><span class=w>            </span><span class=nt>repo</span><span class=p>:</span><span class=w> 
+</span><span class=w>            </span><span class=nt>clientID</span><span class=p>:</span><span class=w> 
+</span><span class=w>            </span><span class=nt>clientSecret</span><span class=p>:</span><span class=w> 
+</span><span class=w>            
+</span><span class=w>        </span><span class=nt>cusdis</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=nt>host</span><span class=p>:</span><span class=w> 
+</span><span class=w>            </span><span class=nt>id</span><span class=p>:</span><span class=w> 
 </span><span class=w>
 </span><span class=w>    </span><span class=nt>widgets</span><span class=p>:</span><span class=w>
 </span><span class=w>        </span><span class=nt>enabled</span><span class=p>:</span><span class=w>
@@ -201,7 +234,7 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>            </span><span class=nt>enabled</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=c>### Custom menu</span><span class=w>
-</span><span class=w></span><span class=c>### See https://docs.stack.jimmycai.com/configuration/custom-menu</span><span class=w>
+</span><span class=w></span><span class=c>### See https://docs.stack.jimmycai.com/configuration/custom-menu.html</span><span class=w>
 </span><span class=w></span><span class=c>### To remove about, archive and search page menu item, remove `menu` field from their FrontMatter</span><span class=w>
 </span><span class=w></span><span class=nt>menu</span><span class=p>:</span><span class=w>
 </span><span class=w>    </span><span class=nt>main</span><span class=p>:</span><span class=w>
@@ -211,8 +244,21 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>          </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span>-<span class=m>100</span><span class=w>
 </span><span class=w>          </span><span class=nt>pre</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
 </span><span class=w>          </span><span class=nt>params</span><span class=p>:</span><span class=w>
-</span><span class=w>            </span><span class=c>### For demonstration purpose, the home link will be open in a new tab</span><span class=w>
-</span><span class=w>            </span><span class=nt>newTab</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>              </span><span class=c>### For demonstration purpose, the home link will be open in a new tab</span><span class=w>
+</span><span class=w>              </span><span class=nt>newTab</span><span class=p>:</span><span class=w> </span><span class=kc>false</span><span class=w>
+</span><span class=w>              </span><span class=nt>icon</span><span class=p>:</span><span class=w> </span><span class=l>home</span><span class=w>
+</span><span class=w>    </span><span class=c># social:</span><span class=w>
+</span><span class=w>        </span><span class=c># - identifier: github</span><span class=w>
+</span><span class=w>          </span><span class=c># name: GitHub</span><span class=w>
+</span><span class=w>          </span><span class=c># url: https://github.com/iwyang</span><span class=w>
+</span><span class=w>          </span><span class=c># params:</span><span class=w>
+</span><span class=w>            </span><span class=c># icon: brand-github</span><span class=w>
+</span><span class=w>            
+</span><span class=w>        </span><span class=c># - identifier: twitter</span><span class=w>
+</span><span class=w>          </span><span class=c># name: Twitter</span><span class=w>
+</span><span class=w>          </span><span class=c># url: https://twitter.com</span><span class=w>
+</span><span class=w>          </span><span class=c># params:</span><span class=w>
+</span><span class=w>            </span><span class=c># icon: brand-twitter</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=nt>related</span><span class=p>:</span><span class=w>
 </span><span class=w>    </span><span class=nt>includeNewer</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
@@ -226,6 +272,10 @@ git checkout　+某版本号　<span class=o>(</span>你当前文件夹下的源
 </span><span class=w>          </span><span class=nt>weight</span><span class=p>:</span><span class=w> </span><span class=m>200</span><span class=w>
 </span><span class=w>
 </span><span class=w></span><span class=nt>markup</span><span class=p>:</span><span class=w>
+</span><span class=w>    </span><span class=nt>goldmark</span><span class=p>:</span><span class=w>
+</span><span class=w>        </span><span class=nt>renderer</span><span class=p>:</span><span class=w>
+</span><span class=w>            </span><span class=c>## Set to true if you have HTML content inside Markdown</span><span class=w>
+</span><span class=w>            </span><span class=nt>unsafe</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
 </span><span class=w>    </span><span class=nt>tableOfContents</span><span class=p>:</span><span class=w>
 </span><span class=w>        </span><span class=nt>endLevel</span><span class=p>:</span><span class=w> </span><span class=m>4</span><span class=w>
 </span><span class=w>        </span><span class=nt>ordered</span><span class=p>:</span><span class=w> </span><span class=kc>true</span><span class=w>
