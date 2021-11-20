@@ -1298,7 +1298,18 @@ loading="lazy"
 &lt;h2 id="第二单元-观察物体">第二单元 观察物体&lt;/h2>
 &lt;p>1.观察的位置是相对，观察的画面就是相反的。&lt;/p>
 &lt;h2 id="第三单元-加与减">第三单元 加与减&lt;/h2>
-&lt;p>1.连续减出两个数等于减出这两个数的和。&lt;/p></description></item><item><title>Hugo Stack主题配置与使用</title><link>/archives/hugo-theme-stack/</link><pubDate>Sat, 24 Jul 2021 09:15:26 +0800</pubDate><guid>/archives/hugo-theme-stack/</guid><description>&lt;p>又换主题了，这回使用的是&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+&lt;p>1.连续减出两个数等于减出这两个数的和。&lt;/p>
+&lt;h2 id="第三单元-周长">第三单元 周长&lt;/h2>
+&lt;p>1.把一个长方形平均分成两个形状相同、大小相等的小长方形，小长方形的周长是原来长方形周长的一半．（×）&lt;/p>
+&lt;p>解析：如图：长方形平均分成两个小长方形后，周长比原来增加了两条原长方形的长或者是宽，所以小长方形的周长等于原来的长方形的周长的一半与一条长（或宽）的和，原题说法错误．
+&lt;figure
+>
+&lt;a href="https://cdn.jsdelivr.net/gh/iwyang/pic/202111201424614.png" >
+&lt;img src="https://cdn.jsdelivr.net/gh/iwyang/pic/202111201424614.png"
+loading="lazy"
+>
+&lt;/a>
+&lt;/figure>&lt;/p></description></item><item><title>Hugo Stack主题配置与使用</title><link>/archives/hugo-theme-stack/</link><pubDate>Sat, 24 Jul 2021 09:15:26 +0800</pubDate><guid>/archives/hugo-theme-stack/</guid><description>&lt;p>又换主题了，这回使用的是&lt;a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
 >hugo-theme-stack&lt;/a>，无意发现这款主题，正合我意，够简单，最重要的是支持本地搜索，再不用弄哪个&lt;code>Alogia&lt;/code>了。&lt;/p>
 &lt;h2 id="下载主题更新主题">下载主题&amp;amp;更新主题&lt;/h2>
 &lt;ol>
