@@ -76,5 +76,11 @@
         "website": "https://guole.fun/",
         "image": "guo.png",
 		"description": "保持理智，相信明天。"
-    }
+    },
+		{
+        "title": "cywhat’s blog",
+        "website": "https://cywhat.cn",
+        "image": "cywhat.jpg",
+		"description": "一位摸爬滚打的测开Dog."
+    }	
 ]
