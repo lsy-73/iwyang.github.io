@@ -526,7 +526,7 @@ PUBLISH_BRANCH: master
 PUBLISH_DIR: ./public
 &lt;span class="c1"># cname:&lt;/span>
 - name: Deploy Hugo to Server
-uses: SamKirkland/FTP-Deploy-Action@4.1.0
+uses: SamKirkland/FTP-Deploy-Action@4.2.0
 with:
 server: 104.224.191.88
 username: admin

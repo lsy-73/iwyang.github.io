@@ -6,7 +6,7 @@
 <meta property="og:description" content="部署hugo到服务器，网上一般方法是利用git hook。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服">
 <meta property="og:url" content="/archives/ftp-deploy-github-actions-hugo/">
 <meta property="og:site_name" content="Bore's Notes">
-<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:tag" content="github"><meta property="article:tag" content="服务器"><meta property="article:published_time" content="2021-08-15T16:39:34+08:00"><meta property="article:modified_time" content="2021-08-16T16:39:34+08:00">
+<meta property="og:type" content="article"><meta property="article:section" content="Post"><meta property="article:tag" content="hugo"><meta property="article:tag" content="github"><meta property="article:tag" content="服务器"><meta property="article:published_time" content="2021-08-15T16:39:34+08:00"><meta property="article:modified_time" content="2021-12-11T16:39:34+08:00">
 <meta name=twitter:title content="GitHub Actions利用FTP自动部署hugo-hexo到Centos 8">
 <meta name=twitter:description content="部署hugo到服务器，网上一般方法是利用git hook。这里记录一种新的方法：利用FTP Deploy GitHub Actions自动部署hugo到Centos8服">
 <link rel="shortcut icon" href=/img/favicon.png>
@@ -225,7 +225,7 @@ jobs:
         <span class=c1># cname:</span>
         
       - name: Deploy Hugo to Server
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: 104.224.191.88
           username: admin
@@ -468,7 +468,7 @@ jobs:
 </section>
 <section class=article-lastmod><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
 <span>
-最后更新于 2021-08-16
+最后更新于 2021-12-11
 </span>
 </section></footer>
 </article>
