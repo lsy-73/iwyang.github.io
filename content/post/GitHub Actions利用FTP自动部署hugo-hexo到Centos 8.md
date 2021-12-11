@@ -3,7 +3,7 @@ title: "GitHub Actions利用FTP自动部署hugo-hexo到Centos 8"
 slug: "FTP-Deploy-GitHub-Actions-hugo"
 description: ""
 date: 2021-08-15T16:39:34+08:00
-lastmod: 2021-08-16T16:39:34+08:00
+lastmod: 2021-12-11T16:39:34+08:00
 draft: false
 toc: true
 weight: false
@@ -323,7 +323,7 @@ jobs:
         # cname:
         
       - name: Deploy Hugo to Server
-        uses: SamKirkland/FTP-Deploy-Action@4.1.0
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: 104.224.191.88
           username: admin
