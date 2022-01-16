@@ -1,4 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bore's Notes</title><link>/</link><description>Recent content on Bore's Notes</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 17 Nov 2021 19:08:52 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>怎样提取PPT里的背景音乐</title><link>/archives/ppt-to-mps/</link><pubDate>Wed, 17 Nov 2021 19:08:52 +0800</pubDate><guid>/archives/ppt-to-mps/</guid><description>&lt;p>1.确保PPT扩展名为&lt;code>.pptx&lt;/code>&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bore's Notes</title><link>/</link><description>Recent content on Bore's Notes</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 16 Jan 2022 14:25:10 +0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml"/><item><title>北师大三年级数学下册优质课</title><link>/archives/three-grade-math-xia-you-ke/</link><pubDate>Sun, 16 Jan 2022 14:25:10 +0800</pubDate><guid>/archives/three-grade-math-xia-you-ke/</guid><description>&lt;p>北师大三年级数学上册优质课，来源于一师一优课，基本上都是部级优课，&lt;a class="link" href="https://www.bilibili.com/video/BV1TP4y177xe/" target="_blank" rel="noopener"
+>点击前往bilibili&lt;/a>可选集观看。&lt;/p>
+&lt;div class="video-wrapper">
+&lt;iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1TP4y177xe"
+scrolling="no"
+frameborder="no"
+framespacing="0"
+allowfullscreen="true"
+>
+&lt;/iframe>
+&lt;/div></description></item><item><title>怎样提取PPT里的背景音乐</title><link>/archives/ppt-to-mps/</link><pubDate>Wed, 17 Nov 2021 19:08:52 +0800</pubDate><guid>/archives/ppt-to-mps/</guid><description>&lt;p>1.确保PPT扩展名为&lt;code>.pptx&lt;/code>&lt;/p>
 &lt;p>2.将PPT扩展名改为&lt;code>.rar&lt;/code>&lt;/p>
 &lt;p>3.用压缩软件打开，音乐文件在&lt;code>/ppt/media&lt;/code>文件夹下。&lt;/p></description></item><item><title>2021年秋季运动会</title><link>/archives/pr-2021-autumn-games/</link><pubDate>Fri, 12 Nov 2021 22:27:25 +0800</pubDate><guid>/archives/pr-2021-autumn-games/</guid><description>&lt;p>用pr做了一个电子相册，参考： &lt;a class="link" href="https://www.bilibili.com/video/BV1Wx41177ps" target="_blank" rel="noopener"
 >使用 Premiere 把照片变成唯美动画效果。&lt;/a>&lt;/p>
